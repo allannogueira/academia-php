@@ -1,0 +1,1 @@
+<?phpnamespace Application\Entity;use Doctrine\ORM\Mapping as ORM;use Symfony\Component\Validation\Constraints AS Assert;class User{	private $id;	private $email;	}?>

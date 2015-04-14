@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Alunos</div>
+
+  <!-- Table -->
+  <table class="table">
+      <thead>
+      <tr>
+          <th>Nome</th>
+          <th>RG</th>
+          <th>CPF</th>
+          <th>Email</th>
+          <th>Objetivo</th>
+      </tr>
+      </thead>
+      <tbody
+<?php foreach ($this->lista as $aluno): ?>
+      <tr> 
+        <td><?php echo $aluno->getNome(); ?></td>
+        <td><?php echo $aluno->getRg(); ?></td>
+        <td><?php echo $aluno->getCpf(); ?></td>
+        <td><?php echo $aluno->getEmail(); ?></td>
+        <td><?php echo $aluno->getObjetivo(); ?></td>      
+        <td>
+            <input type="button" class="btn btn-primary" value="Visualizar">
+            <input type="button" class="btn btn-warning" value="Editar">
+            <input type="button" onclick="javascript:window.location.href = '<?php echo $this->url('cadastrarAluno', ['action' => 'excluir', 'id' => $aluno->getId()]); ?>'" class="btn btn-danger" value="Excluir">
+        </td>      
+      </tr>
+<?php endforeach; ?>
+      </tbody>
+   </table>
+</div>

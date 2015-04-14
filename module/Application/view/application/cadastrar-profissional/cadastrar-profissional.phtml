@@ -1,0 +1,14 @@
+<?php
+
+ $title = 'Cadastrar Profissional';
+ $this->headTitle($title);
+
+ ?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php 
+
+$form->prepare();
+echo $this->form($this->form); 
+echo $this->form()->closeTag();
+
+?>
