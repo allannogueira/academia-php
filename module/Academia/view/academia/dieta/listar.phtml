@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Dietas</div>
+
+  <!-- Table -->
+  <table class="table">
+      <thead>
+      <tr>
+          <th>Nome</th>
+          <th>Finalidade</th>
+          <th>Data Inicio</th>
+          <th>Data Fim</th>
+          <th>Objetivo</th>
+      </tr>
+      </thead>
+      <tbody
+<?php foreach ($this->data as $data): ?>
+      <tr> 
+        <td><?php echo $data->getNome(); ?></td>
+        <td><?php echo $data->getFinalidade(); ?></td>
+        <td><?php echo $data->getDataInicio()->format('Y-m-d'); ?></td>
+        <td><?php echo $data->getDataFim(); ?></td>   
+         <td>
+            <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('cadastrarDieta', ['action' => 'editar', 'id' => $data->getId()]); ?>'"class="btn btn-default" aria-label="Left Align">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </button>
+             <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('cadastrarDieta', ['action' => 'excluir', 'id' => $data->getId()]); ?>'" class="btn btn-default" aria-label="Left Align">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </td>     
+      </tr>
+<?php endforeach; ?>
+      </tbody>
+   </table>
+</div>

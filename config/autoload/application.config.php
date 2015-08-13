@@ -5,8 +5,9 @@ return array(
 		'ZendDeveloperTools',
 		'DoctrineModule',
 		'DoctrineORMModule',
-        'Application',
-        'TwbBundle',
+                'Academia',
+                'Base',
+                'TwbBundle',
 		
     ),
 

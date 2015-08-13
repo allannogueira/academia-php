@@ -1,0 +1,70 @@
+<?php
+
+namespace Academia\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Aluno
+ *
+ * @ORM\Table(name="aluno", indexes={@ORM\Index(name="fk_aluno_endereco1_idx", columns={"endereco_id"})})
+ * @ORM\Entity
+ */
+class Aluno
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nome", type="string", length=45, nullable=true)
+     */
+    private $nome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cpf", type="string", length=15, nullable=true)
+     */
+    private $cpf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rg", type="string", length=15, nullable=true)
+     */
+    private $rg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="objetivo", type="string", length=500, nullable=true)
+     */
+    private $objetivo;
+
+    /**
+     * @var \Academia\Entity\Endereco
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Endereco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="endereco_id", referencedColumnName="id")
+     * })
+     */
+    private $endereco;
+
+
+}
