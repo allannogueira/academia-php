@@ -14,9 +14,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Authentication\Result;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Adapter\DbTable;
-use Zend\Permissions\Acl\Acl;
-use Zend\Permissions\Acl\Role\GenericRole as Role;
-use Zend\Permissions\Acl\Resource\GenericResource as Resource;
+
 
 
 class LoginController extends AbstractController
@@ -41,11 +39,12 @@ class LoginController extends AbstractController
     
     public function loginAction()
     {
+        
         $data = $this->getRequest()->getPost();
 
         // If you used another name for the authentication service, change it here
         $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-
+        
         $adapter = $authService->getAdapter();
         $adapter->setIdentityValue($data['academia']);
         $adapter->setCredentialValue($data['senha']);
@@ -54,6 +53,7 @@ class LoginController extends AbstractController
        
         if ($authResult->isValid()) {
             /*Define quem vai ter autorização do que no sistema*/
+            
             $this->setAutorizacao();
             /*redireciona para home*/
             return $this->redirect()->toRoute('home');
@@ -72,17 +72,5 @@ class LoginController extends AbstractController
     }
     
     
-    public function setAutorizacao(){
-        $acl = new Acl();
-        
-        $acl->addRole(new Role('academia'));
-
-        $acl->addResource(new Resource('editar'));
-        $acl->addResource(new Resource('listar'));
-        $acl->addResource(new Resource('index'));
-
-        $acl->allow('academia', 'editar');
-        /*fim autorizacao*/
-        echo $acl->isAllowed('academia', 'editar') ? 'allowed' : 'denied';die("LoginController")   ;
-    }
+    
 }

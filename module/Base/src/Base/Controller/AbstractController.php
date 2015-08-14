@@ -9,6 +9,9 @@ use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Academia\Entity\Aluno;
 use Academia\Entity\Endereco;
+use Zend\Permissions\Acl\Acl;
+use Zend\Permissions\Acl\Role\GenericRole as Role;
+use Zend\Permissions\Acl\Resource\GenericResource as Resource;
 
 abstract class AbstractController extends AbstractActionController
 {
@@ -18,9 +21,9 @@ abstract class AbstractController extends AbstractActionController
     protected $route;
     protected $service;
     protected $form;
+    protected $acl;
     
     abstract function __construct();
-    
     /**
      * Lista Resultados
      * @return array|void
@@ -46,6 +49,14 @@ abstract class AbstractController extends AbstractActionController
      /*   echo "<pre>";
         print_r($this);
         echo "</pre>";*/
+       $this->setAutorizacao();
+       if (!$this->acl->isAllowed('aluno', 'inserir') && !$this->acl->isAllowed('academia', 'inserir')) 
+       {
+           echo "Sem permissão";
+           return false;//sem permissao
+        }
+        
+       // echo var_dump($this->getIdentity);
         if(is_string($this->form)){
         
            // $formManager = $this->serviceLocator->get('FormElementManager');
@@ -121,7 +132,12 @@ abstract class AbstractController extends AbstractActionController
      * Edita um registro
      */
     public function editarAction(){
-        
+       $this->setAutorizacao();
+       if (!$this->acl->isAllowed('aluno', 'editar') && !$this->acl->isAllowed('academia', 'editar')) 
+       {
+           echo "Sem permissão";
+           return false;//sem permissao
+        }
      /*   if(is_string($this->form))//formulario´é uma string
             $form = new $this->from;//instancia um novo formulario
         else
@@ -219,6 +235,13 @@ abstract class AbstractController extends AbstractActionController
      * Exclui um registro
      */
     public function excluirAction(){
+        $this->setAutorizacao();
+       if (!$this->acl->isAllowed('aluno', 'excluir') && !$this->acl->isAllowed('academia', 'excluir')) 
+       {
+           echo "Sem permissão";
+           return false;//sem permissao
+        }
+        
         $service = $this->getServiceLocator()->get($this->service);
         $id = (int) $this->params()->fromRoute('id',0);
         
@@ -243,6 +266,38 @@ abstract class AbstractController extends AbstractActionController
         return $this->em;
     }
     
+    public function setAutorizacao(){
+        $acl = new Acl();
+        $this->setAcl($acl);
+        
+        $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        
+        $this->acl->addRole(new Role('academia'));
+        $this->acl->addRole(new Role('aluno'));
+        
+        $this->acl->addResource(new Resource('inserir'));
+        $this->acl->addResource(new Resource('listar'));
+        $this->acl->addResource(new Resource('index'));
+        $this->acl->addResource(new Resource('excluir'));
+            
+        if ($authService->getIdentity() instanceof \Academia\Entity\Academia){
+             $this->acl->allow('academia', array('index','inserir','listar','excluir'));
+          // $this->layout('layout/layoutAjax');//muda para um layout sem menu e rodape
+            /*fim autorizacao*/
+        }else if($authService->getIdentity() instanceof \Academia\Entity\Aluno){
+            $this->acl->allow('aluno', array('index','listar'));
+            
+        }
+        
+        //echo ($acl->isAllowed('aluno', 'editar') || $acl->isAllowed('academia', 'editar')) ? 'allowed' : 'denied';die("LoginController")   ;
+    }
     
+    public function getAcl(){
+        return $this->acl;
+    }
+    
+    public function setAcl($acl){
+        $this->acl = $acl;
+    }
     
 }

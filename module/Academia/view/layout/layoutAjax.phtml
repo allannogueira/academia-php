@@ -56,6 +56,8 @@
                                             <li><a href="<?php echo $this->url('cadastrarMedida') ?>"><?php echo $this->translate('Medida') ?></a></li>
                                             <li><a href="<?php echo $this->url('cadastrarAlimento') ?>"><?php echo $this->translate('Alimento') ?></a></li>
                                             <li><a href="<?php echo $this->url('cadastrarInformativo') ?>"><?php echo $this->translate('Informativo') ?></a></li>
+                                            <li><a href="<?php echo $this->url('cadastrarFrequencia') ?>"><?php echo $this->translate('Frequência Alunos') ?></a></li>
+                                            <li><a href="<?php echo $this->url('cadastrarAparelho') ?>"><?php echo $this->translate('Equipamentos') ?></a></li>
                                     </ul>
                             </li>
                               <li role="presentation" class="dropdown">
@@ -68,7 +70,8 @@
                                             <li><a href="<?php echo $this->url('cadastrarDieta',array('action' => 'listar')) ?>"><?php echo $this->translate('Dieta') ?></a></li>
                                             <li><a href="<?php echo $this->url('cadastrarMedida',array('action' => 'listar')) ?>"><?php echo $this->translate('Medida') ?></a></li>
                                             <li><a href="<?php echo $this->url('cadastrarAlimento',array('action' => 'listar')) ?>"><?php echo $this->translate('Alimento') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarInformativo',array('action' => 'listar')) ?>"><?php echo $this->translate('Aviso') ?></a></li>
+                                            <li><a href="<?php echo $this->url('cadastrarInformativo',array('action' => 'listar')) ?>"><?php echo $this->translate('Informativo') ?></a></li>
+                                            
                                     </ul>
                             </li>
                              <li role="presentation" class="dropdown">
@@ -83,16 +86,21 @@
                                             
                                     </ul>
                             </li>
-                        <li><a href="<?php echo $this->url('cadastrarFrequencia') ?>"><?php echo $this->translate('Frequência Alunos') ?></a></li>
-                        <li><a href="<?php echo $this->url('cadastrarFrequencia') ?>"><?php echo $this->translate('Equipamentos') ?></a></li>
-                        <li><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Acesso Restrito') ?></a></li>
-                        <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Sair') ?></a></li>
+                        
+                      
+                        <li><a href="<?php echo $this->url('login',array('action' => 'logout')) ?>"><?php echo $this->translate('Sair') ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
 			
         </nav>
-       
+        <div class="container">
+            <?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>&copy; 2015 - <?php echo date('Y') ?> by Workout. <?php echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+        </div> <!-- /container -->
         <?php 
             echo $this->inlineScript();
         ?>
