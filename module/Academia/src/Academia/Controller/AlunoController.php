@@ -16,6 +16,7 @@ class AlunoController extends AbstractController
 {
     
     public function __construct(){        
+        
         $this->form = 'Academia\Form\AlunoForm';
         $this->controller = 'AlunoController';
         $this->route = 'cadastrarAluno';

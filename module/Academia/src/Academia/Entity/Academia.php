@@ -61,6 +61,12 @@ class Academia extends AbstractEntity
      * @ORM\Column(name="senha", type="string", length=45)
      */
     private $senha;
+    /**
+    * @var string
+     *
+     * @ORM\Column(name="usuario", type="string", length=45)
+     */
+    private $usuario;
 
 
     /**
@@ -180,5 +186,22 @@ class Academia extends AbstractEntity
     public function getSenha()
     {
         return $this->senha;
+    }
+    
+     /**
+     * Get usuario
+     *
+     * @return string 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+    
+     public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+    
+        return $this;
     }
 }

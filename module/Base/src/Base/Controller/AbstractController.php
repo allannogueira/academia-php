@@ -12,6 +12,7 @@ use Academia\Entity\Endereco;
 use Zend\Permissions\Acl\Acl;
 use Zend\Permissions\Acl\Role\GenericRole as Role;
 use Zend\Permissions\Acl\Resource\GenericResource as Resource;
+use Zend\Session\Container;
 
 abstract class AbstractController extends AbstractActionController
 {
@@ -22,8 +23,21 @@ abstract class AbstractController extends AbstractActionController
     protected $service;
     protected $form;
     protected $acl;
+    public $layout;
     
     abstract function __construct();
+    
+     public function onDispatch( \Zend\Mvc\MvcEvent $e )
+  {
+   $sessao = new Container();
+        $this->layout($sessao->layout);//muda para o layout definido ao fazer login
+     //   echo var_dump($this->layout);exit;
+        return parent::onDispatch( $e );
+  }
+
+      
+        
+        
     /**
      * Lista Resultados
      * @return array|void
@@ -46,11 +60,11 @@ abstract class AbstractController extends AbstractActionController
      * Inserir Registro
      */
     public function inserirAction(){
+        $sessao = new Container();
      /*   echo "<pre>";
         print_r($this);
         echo "</pre>";*/
-       $this->setAutorizacao();
-       if (!$this->acl->isAllowed('aluno', 'inserir') && !$this->acl->isAllowed('academia', 'inserir')) 
+       if (!$sessao->acl->isAllowed('aluno', 'inserir') && !$sessao->acl->isAllowed('academia', 'inserir')) 
        {
            echo "Sem permissão";
            return false;//sem permissao
@@ -132,8 +146,9 @@ abstract class AbstractController extends AbstractActionController
      * Edita um registro
      */
     public function editarAction(){
-       $this->setAutorizacao();
-       if (!$this->acl->isAllowed('aluno', 'editar') && !$this->acl->isAllowed('academia', 'editar')) 
+         $sessao = new Container();
+         
+       if (!$sessao->acl->isAllowed('aluno', 'editar') && !$sessao->acl->isAllowed('academia', 'editar')) 
        {
            echo "Sem permissão";
            return false;//sem permissao
@@ -235,8 +250,8 @@ abstract class AbstractController extends AbstractActionController
      * Exclui um registro
      */
     public function excluirAction(){
-        $this->setAutorizacao();
-       if (!$this->acl->isAllowed('aluno', 'excluir') && !$this->acl->isAllowed('academia', 'excluir')) 
+        $sessao = new Container();
+       if (!$sessao->acl->isAllowed('aluno', 'excluir') && !$sessao->acl->isAllowed('academia', 'excluir')) 
        {
            echo "Sem permissão";
            return false;//sem permissao
@@ -253,7 +268,8 @@ abstract class AbstractController extends AbstractActionController
         return $this->redirect()->toRoute($this->route, array('controller' => $this->controller, 'action' => 'listar'));
     }
     
-    public function viewAction(){
+    public function indexAction(){
+        $this->layout($this->layout);
         //retorna view sem nenhum template
     }
     /*
@@ -267,37 +283,37 @@ abstract class AbstractController extends AbstractActionController
     }
     
     public function setAutorizacao(){
-        $acl = new Acl();
-        $this->setAcl($acl);
+       
+        $sessao = new Container();
+        $sessao->acl = new Acl();  
+       
         
         $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
         
-        $this->acl->addRole(new Role('academia'));
-        $this->acl->addRole(new Role('aluno'));
+        $sessao->acl->addRole(new Role('academia'));
+        $sessao->acl->addRole(new Role('aluno'));
         
-        $this->acl->addResource(new Resource('inserir'));
-        $this->acl->addResource(new Resource('listar'));
-        $this->acl->addResource(new Resource('index'));
-        $this->acl->addResource(new Resource('excluir'));
-            
-        if ($authService->getIdentity() instanceof \Academia\Entity\Academia){
-             $this->acl->allow('academia', array('index','inserir','listar','excluir'));
-          // $this->layout('layout/layoutAjax');//muda para um layout sem menu e rodape
+        $sessao->acl->addResource(new Resource('inserir'));
+        $sessao->acl->addResource(new Resource('editar'));
+        $sessao->acl->addResource(new Resource('listar'));
+        $sessao->acl->addResource(new Resource('index'));
+        $sessao->acl->addResource(new Resource('excluir'));
+           //echo var_dump($this->identity());exit;
+        if ($this->identity() instanceof \Academia\Entity\Academia){
+             $sessao->acl->allow('academia', array('index','inserir','editar','listar','excluir'));
+             $this->layout = 'layout/layoutAcademia';
+           //  echo var_dump( $this->acl->isAllowed('academia', 'editar'));exit;
             /*fim autorizacao*/
-        }else if($authService->getIdentity() instanceof \Academia\Entity\Aluno){
-            $this->acl->allow('aluno', array('index','listar'));
-            
+        }else if($this->identity() instanceof \Academia\Entity\Aluno){
+            $sessao->acl->allow('aluno', array('index','listar'));
+            $this->layout = 'layout/layoutAluno';//muda para um layout com menu diferente
+             
         }
-        
+        $sessao = new Container();
+        $sessao->layout = $this->layout;
+         $this->layout()->setTemplate($this->layout);//muda para um layout com menu diferente
         //echo ($acl->isAllowed('aluno', 'editar') || $acl->isAllowed('academia', 'editar')) ? 'allowed' : 'denied';die("LoginController")   ;
     }
     
-    public function getAcl(){
-        return $this->acl;
-    }
-    
-    public function setAcl($acl){
-        $this->acl = $acl;
-    }
     
 }

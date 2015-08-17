@@ -68,6 +68,22 @@ class AlunoForm extends Form
            ]
        ]);
        
+       $this->add([
+           'name' => 'usuario',
+           'type' => 'text',
+           'options' => [
+               'label' => 'Usuario',
+           ]
+       ]);
+       
+       $this->add([
+           'name' => 'senha',
+           'type' => 'password',
+           'options' => [
+               'label' => 'Senha',
+           ]
+       ]);
+       
        $this->add(array(
              'type' => 'Academia\Form\EnderecoFieldset',
              'options' => array(

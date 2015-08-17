@@ -22,6 +22,7 @@ use Academia\Form\MedidaForm;
 use Academia\Form\FrequenciaForm;
 use Academia\Form\AparelhoForm;
 use Academia\Form\LoginForm;
+use DoctrineModule\Authentication\Adapter\ObjectRepository;
 
 class Module
 {
@@ -43,13 +44,12 @@ class Module
             //se estiver na index, não devo barrar
          //   echo $ev->getRouteMatch()->getParam('action');
             $action = $ev->getRouteMatch()->getParam('action');
-            if($action == "login" || $action == "index"){
+            if($action == "login" || $action == "index" || $action == "logout"){
                 return;
             }
-
             $t = $ev->getTarget();
             //acesso negado é redirecionado para login
-            return $t->redirect()->toRoute('login');//login inválido
+           echo "Acesso Negado.";
             //se nao estiver logado
         },99);
        
@@ -77,8 +77,19 @@ class Module
             'factories' => array(
                 'Zend\Authentication\AuthenticationService' => function($em) {
                         // If you are using DoctrineORMModule:
-                        return $em->get('doctrine.authenticationservice.orm_default');
+                        $service = $em->get('doctrine.authenticationservice.orm_default');
+                   //     $service->setAdapter($em->get('AuthAdapterAcademia'));
+                        return $service;
+                        
                 },
+          /*      'AuthAdapterAcademia' => function($sm) {
+                    return new ObjectRepository(array(
+                        'object_manager'      => 'Doctrine\ORM\EntityManager',
+                        'identity_class'      => 'Application\Entity\Agent',
+                        'identity_property'   => 'usuario',
+                        'credential_property' => 'senha'
+                    ));
+                },*/
         
                 'Academia\Service\AlunoService' => function($em){
                     return new AlunoService($em->get("Doctrine\ORM\EntityManager"));

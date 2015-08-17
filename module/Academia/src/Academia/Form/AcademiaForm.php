@@ -35,6 +35,14 @@ class AcademiaForm extends Form
        ]);
        
        $this->add([
+           'name' => 'usuario',
+           'type' => 'text',
+           'options' => [
+               'label' => 'Usuario',
+           ]
+       ]);
+       
+       $this->add([
            'name' => 'senha',
            'type' => 'password',
            'options' => [

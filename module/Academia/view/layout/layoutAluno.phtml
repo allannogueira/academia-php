@@ -45,30 +45,19 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navigation">
                         <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                            <li role="presentation" class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" href="<?php echo $this->url('cadastrarAluno') ?>">Cadastrar <span class="caret"></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                            <li><a href="<?php echo $this->url('cadastrarAluno') ?>"><?php echo $this->translate('Aluno') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarProfissional') ?>"><?php echo $this->translate('Profissional') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarAcademia') ?>"><?php echo $this->translate('Academia') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarTreino') ?>"><?php echo $this->translate('Treino') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarDieta') ?>"><?php echo $this->translate('Dieta') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarMedida') ?>"><?php echo $this->translate('Medida') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarAlimento') ?>"><?php echo $this->translate('Alimento') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarInformativo') ?>"><?php echo $this->translate('Informativo') ?></a></li>
-                                    </ul>
-                            </li>
+                            
+                        <li><a href="<?php echo $this->url('cadastrarAluno') ?>"><?php echo $this->translate('Perfil') ?></a></li>
+                        
                               <li role="presentation" class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" href="<?php echo $this->url('cadastrarAluno') ?>">Consultar <span class="caret"></a>
                                     <ul class="dropdown-menu" role="menu">
                                             <li><a href="<?php echo $this->url('cadastrarAluno',array('action' => 'listar')) ?>"><?php echo $this->translate('Aluno') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarProfissional',array('action' => 'listar')) ?>"><?php echo $this->translate('Profissional') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarAcademia',array('action' => 'listar')) ?>"><?php echo $this->translate('Academia') ?></a></li>
                                             <li><a href="<?php echo $this->url('cadastrarTreino',array('action' => 'listar')) ?>"><?php echo $this->translate('Treino') ?></a></li>
                                             <li><a href="<?php echo $this->url('cadastrarDieta',array('action' => 'listar')) ?>"><?php echo $this->translate('Dieta') ?></a></li>
                                             <li><a href="<?php echo $this->url('cadastrarMedida',array('action' => 'listar')) ?>"><?php echo $this->translate('Medida') ?></a></li>
                                             <li><a href="<?php echo $this->url('cadastrarAlimento',array('action' => 'listar')) ?>"><?php echo $this->translate('Alimento') ?></a></li>
-                                            <li><a href="<?php echo $this->url('cadastrarInformativo',array('action' => 'listar')) ?>"><?php echo $this->translate('Aviso') ?></a></li>
+                                            <li><a href="<?php echo $this->url('cadastrarInformativo',array('action' => 'listar')) ?>"><?php echo $this->translate('Informativo') ?></a></li>
+                                            
                                     </ul>
                             </li>
                              <li role="presentation" class="dropdown">
@@ -83,16 +72,20 @@
                                             
                                     </ul>
                             </li>
-                        <li><a href="<?php echo $this->url('cadastrarFrequencia') ?>"><?php echo $this->translate('Frequência Alunos') ?></a></li>
-                        <li><a href="<?php echo $this->url('cadastrarFrequencia') ?>"><?php echo $this->translate('Equipamentos') ?></a></li>
-                        <li><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Acesso Restrito') ?></a></li>
-                        <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Sair') ?></a></li>
+                        
+                        <li><a href="<?php echo $this->url('login',array('action' => 'logout')) ?>"><?php echo $this->translate('Sair') ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
 			
         </nav>
-       
+        <div class="container">
+            <?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>&copy; 2015 - <?php echo date('Y') ?> by Workout. <?php echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+        </div> <!-- /container -->
         <?php 
             echo $this->inlineScript();
         ?>

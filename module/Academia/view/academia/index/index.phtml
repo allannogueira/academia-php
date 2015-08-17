@@ -1,3 +1,4 @@
+
 <img width="100%" style="position: relative; top: -10px;" src="<?php echo $this->basePath('img/banner.png'); ?>">
 <!--
 <div class="jumbotron">
@@ -5,12 +6,12 @@
     Tenha relatórios de desempenho de seus alunos, dispare avisos para cada um deles, cadastre os treinos e dietas para cada um. Saiba o quanto seu aluno está desenvolvendo através de relatórios e muito mais.
 </div>
 -->
-<div class="row">
+<div class="row ">
 
-    <div class="col-md-4">
-        <div class="panel panel-default">
+    <div class="col-md-8">
+        <div class="panel panel-default minHeight200">
             <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Aplicativo - Play Store') ?></h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp; <?php echo $this->translate('Android') ?></h3>
             </div>
             <div class="panel-body">
                 <p><?php echo sprintf($this->translate('Faça o download do aplicativo Workout e acompanhe seus treinos, receba dicas de dietas e treinos, pratique atividades físicas e seja acompanhado por esse incrível aplicativo!')); ?></p>
@@ -20,26 +21,26 @@
     </div>
 
     <div class="col-md-4">
-        <div class="panel panel-default">
+        <div class="panel panel-default minHeight200">
             <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Cadastre-se') ?></h3>
+                
+                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<?php echo $this->translate('Login') ?></h3>
             </div>
             <div class="panel-body">
-                <p><?php echo sprintf($this->translate('É dono de uma academia? Cadastre-se agora mesmo e acompanhe de perto seus alunos!')); ?></p>
-                <p><a class="btn btn-default pull-right" href="http://modules.zendframework.com/" target="_blank"><?php echo $this->translate('Cadastrar') ?> &raquo;</a></p>
+                <form id="login-form" action="<?php echo $this->url('login',array('action' => 'login')) ?>" method="post" role="form" style="display: block;">
+                    <div class="form-group "><input type="text" name="usuario" placeholder="usuario" class="form-control" value=""></div>
+                    <div class="form-group "><input type="password" name="senha" placeholder="senha" class="form-control" value=""></div>
+                    <div class="form-group">
+                        <div class="row">
+                                <div class="col-sm-4 pull-right">
+                                        <input type="submit" name="login-submit"  tabindex="4" class="form-control btn btn-primary " value="Entrar">
+                                </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Fale Conosco') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('Para maiores dúvidas ou esclarecimentos entre em contato através do telefone 0800-01010101')) ?></p>
-                <p><a class="btn btn-default pull-right" href="http://webchat.freenode.net?channels=zftalk" target="_blank"><?php echo $this->translate('Fale Conosco') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
+   
 </div>

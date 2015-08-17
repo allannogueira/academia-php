@@ -25,11 +25,19 @@ return array(
         'authentication' => array(
             'orm_default' => array(
                 'object_manager' => 'Doctrine\ORM\EntityManager',
+                'identity_class' => 'Academia\Entity\Aluno',
+                'identity_property' => 'usuario',
+                'credential_property' => 'senha',
+            ),        
+        ),/*
+        'authenticationAluno' => array(
+            'orm_default' => array(
+                'object_manager' => 'Doctrine\ORM\EntityManager',
                 'identity_class' => 'Academia\Entity\Academia',
                 'identity_property' => 'id',
                 'credential_property' => 'senha',
-            ),
-        )
+            ),        
+        )*/
     ),
     
     'service_manager' => array(
@@ -77,7 +85,9 @@ return array(
         'exception_template'       => 'error/index',
         'template_map' => array(
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'layout/layoutAjax'           => __DIR__ . '/../view/layout/layoutAjax.phtml',
+            'layout/layoutAjax'       => __DIR__ . '/../view/layout/layoutAjax.phtml',
+            'layout/layoutAcademia'   => __DIR__ . '/../view/layout/layoutAcademia.phtml',
+            'layout/layoutAluno'      => __DIR__ . '/../view/layout/layoutAluno.phtml',
             'application/index/index' => __DIR__ . '/../view/academia/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',                     
