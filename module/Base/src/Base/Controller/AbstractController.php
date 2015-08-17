@@ -64,82 +64,83 @@ abstract class AbstractController extends AbstractActionController
      /*   echo "<pre>";
         print_r($this);
         echo "</pre>";*/
-       if (!$sessao->acl->isAllowed('aluno', 'inserir') && !$sessao->acl->isAllowed('academia', 'inserir')) 
+       if ($sessao->acl->isAllowed('aluno', 'inserir') || $sessao->acl->isAllowed('academia', 'inserir')) 
        {
-           echo "Sem permissão";
-           return false;//sem permissao
-        }
-        
-       // echo var_dump($this->getIdentity);
-        if(is_string($this->form)){
-        
-           // $formManager = $this->serviceLocator->get('FormElementManager');
-            
-             //$form = $formManager->get($this->form);
-             
-             $form = new $this->form;
-        }
-        else
-            $form = $this->form;
-        
-        $request = $this->getRequest(); 
-        
-        // echo var_dump($request->getPost());
-        if($request->isPost()) { 
-          // echo var_dump($request->getPost());
-                 
-               $form->setData($request->getPost());
-               
-              // echo var_dump($form->isValid());exit;
-              // if($form->isValid()){
-                  // echo var_dump($request->getPost());exit;
-             //  echo var_dump($this->service);
-                   $service = $this->getServiceLocator()->get($this->service);            
-              //  print_r($service);exit;
-                    if($service->save($request->getPost()->toArray())){
-                        
-                        $this->flashMessenger()->addSuccessMessage("Cadastrado com Sucesso!");
-                    }else{
-                       
-                        $this->flashMessenger()->addErrorMessage("Não foi possível cadastrar, tente novamente mais tarde.");
-                    }
-                  
-                    return $this->redirect()->toRoute($this->route,['controller'=> $this->controller]);//redureciona para o controller que será indicado
-             //   }
-                /* else {
-                    // email is invalid; print the reasons
-                    foreach ($form->getMessages() as $messageId => $message) {
-                        echo "Validation failure '$messageId': $message\n";
-                    }
-                    exit;
-                }        */
+                
 
-        }
-       // echo var_dump($this);
-        if ($this->flashMessenger()->hasSuccessMessages()) {//se existir alguma msg de sucesso
-            return new ViewModel([
-                'form' => $form, 
-                'success' => $this->flashMessenger()->getSuccessMessages()
-            ]);
-        }
+                
+                // echo var_dump($this->getIdentity);
+                 if(is_string($this->form)){
+
+                    // $formManager = $this->serviceLocator->get("FormElementManager');
+
+                      //$form = $formManager->get($this->form);
+
+                      $form = new $this->form;
+                 }
+                 else
+                     $form = $this->form;
+
+                 $request = $this->getRequest(); 
+
+                 // echo var_dump($request->getPost());
+                 if($request->isPost()) { 
+                   // echo var_dump($request->getPost());
+
+                        $form->setData($request->getPost());
+
+                       // echo var_dump($form->isValid());exit;
+                       // if($form->isValid()){
+                           // echo var_dump($request->getPost());exit;
+                      //  echo var_dump($this->service);
+                            $service = $this->getServiceLocator()->get($this->service);            
+                       //  print_r($service);exit;
+                             if($service->save($request->getPost()->toArray())){
+
+                                 $this->flashMessenger()->addSuccessMessage("Cadastrado com Sucesso!");
+                             }else{
+
+                                 $this->flashMessenger()->addErrorMessage("Não foi possível cadastrar, tente novamente mais tarde.");
+                             }
+
+                             return $this->redirect()->toRoute($this->route,['controller'=> $this->controller]);//redureciona para o controller que será indicado
+                      //   }
+                         /* else {
+                             // email is invalid; print the reasons
+                             foreach ($form->getMessages() as $messageId => $message) {
+                                 echo "Validation failure '$messageId': $message\n";
+                             }
+                             exit;
+                         }        */
+
+                 }
+                // echo var_dump($this);
+                 if ($this->flashMessenger()->hasSuccessMessages()) {//se existir alguma msg de sucesso
+                     return new ViewModel([
+                         'form' => $form, 
+                         'success' => $this->flashMessenger()->getSuccessMessages()
+                     ]);
+                 }
+
+                 if ($this->flashMessenger()->hasErrorMessages()) {//se existir alguma msg de sucesso
+                     return new ViewModel([
+                         'form' => $form, 
+                         'success' => $this->flashMessenger()->getErrorMessages()
+                     ]);
+                 }
+
+                 $this->flashMessenger()->clearMessages();
+
+                 //se for uma requisicao ajax
+                  if($this->getRequest()->isXmlHttpRequest()) {
+                     $this->layout('layout/layoutAjax');//muda para um layout sem menu e rodape
+                  }
+                 $view = new ViewModel(['form' => $form]);
+
+
+                 return $view;
         
-        if ($this->flashMessenger()->hasErrorMessages()) {//se existir alguma msg de sucesso
-            return new ViewModel([
-                'form' => $form, 
-                'success' => $this->flashMessenger()->getErrorMessages()
-            ]);
-        }
-        
-        $this->flashMessenger()->clearMessages();
-        
-        //se for uma requisicao ajax
-         if($this->getRequest()->isXmlHttpRequest()) {
-            $this->layout('layout/layoutAjax');//muda para um layout sem menu e rodape
-         }
-        $view = new ViewModel(['form' => $form]);
-        
-       
-        return $view;
+       }
     }
     
     /*
@@ -148,104 +149,109 @@ abstract class AbstractController extends AbstractActionController
     public function editarAction(){
          $sessao = new Container();
          
-       if (!$sessao->acl->isAllowed('aluno', 'editar') && !$sessao->acl->isAllowed('academia', 'editar')) 
+       if ($sessao->acl->isAllowed('aluno', 'editar') || $sessao->acl->isAllowed('academia', 'editar') || $sessao->acl->isAllowed('aluno','editarAluno')) 
        {
-           echo "Sem permissão";
-           return false;//sem permissao
-        }
-     /*   if(is_string($this->form))//formulario´é uma string
-            $form = new $this->from;//instancia um novo formulario
-        else
-            $form = $this->form;//retorna o formulario já referenciado
-       */
-        
-        $formManager = $this->serviceLocator->get('FormElementManager');
-            
-             $form = $formManager->get($this->form);
-             
-        $request = $this->getRequest();
-        
-        $param = $this->params()->fromRoute('id',0);//se nao passar nenhum parametro coloca com id 0        
-        $repository = $this->getEm()->getRepository($this->entity)->find($param);//procura no banco um registro com esse id
-        
-        if($repository){
-            
-            //convertendo objeto data para um string
-            $array = array();
-            
-            foreach($repository->toArray() as $key => $value){
-                //echo "teste"; die;
-                if($value instanceof \DateTime) {
-                    $array[$key] = $value->format('d/m/Y');
-                }else if($value instanceof \Academia\Entity\Endereco){
-                    $array[$key] = $value->toArray();                
-                }else{
-                    $array[$key] = $value;
+            /*   if(is_string($this->form))//formulario´é uma string
+                   $form = new $this->from;//instancia um novo formulario
+               else
+                   $form = $this->form;//retorna o formulario já referenciado
+              */
+                          
+           //configurando para mostrar perfil do usuario
+                if($sessao->acl->isAllowed('aluno','editarAluno')){
+                    if($this->entity != 'Academia\Entity\Aluno'){
+                        return;//nao permite
+                    }
+                 
                 }
-            }
-            
-            //convertendo em array
-            if(isset($array['endereco']['cepbr_endereco_cep']))
-                $array['endereco']['cepbr_endereco_cep'] = $array['endereco']['cepbr_endereco_cep']->toArray();
-         
-           // echo var_dump($array);die;
-            
-            
-            $form->setData($array);
-            if($request->isPost()){
-              $form->setData($request->getPost());
-              // if($form->isValid()){
-                   $service = $this->getServiceLocator()->get($this->service);
-                   //pega id do registro que será atualizado
-                   $data = $request->getPost()->toArray();
-                   $data['id'] = (int) $param;
-             //  }
-                  // echo $param;die;
-               
-               if($service->save($data)){
-                   $this->flashMessenger()->addSuccessMessage("Atualizado com Sucesso!");
-               }else{
-                   $this->flashMessenger()->addErrorMessage("Não foi possível atualizar, tente novamente mais tarde.");
-               }
-               return $this->redirect()->toRoute($this->route,['controller'=> $this->controller]);//redureciona para o controller que será indicado
-            }
-        }else{//nao encontrou nenhum registro
-             
-            $this->flashMessenger()->addInfoMessage('Registro não foi encontrado');
-            return $this->redirect()->toRoute($this->route, ['controller'=>$this->controller]);//retorna para o controlador referenciado
-        }
-        
-        if ($this->flashMessenger()->hasSuccessMessages()) {//se existir alguma msg de sucesso
-            return new ViewModel([
-                'form' => $form, 
-                'success' => $this->flashMessenger()->getSuccessMessages(),
-                'id' => $param
-            ]);
-        }
+                
+               $formManager = $this->serviceLocator->get('FormElementManager');
 
-        if ($this->flashMessenger()->hasErrorMessages()) {//se existir alguma msg de sucesso
-            return new ViewModel([
-                'form' => $form, 
-                'success' => $this->flashMessenger()->getErrorMessages(),
-                'id' => $param
-            ]);
-        }
-        
-        if ($this->flashMessenger()->hasInfoMessages()) {//não é um erro, apenas um aviso
-            return new ViewModel([
-                'form' => $form, 
-                'success' => $this->flashMessenger()->getInfoMessages(),
-                'id' => $param
-            ]);
-        }
-        
-        $this->flashMessenger()->clearMessages();
-        return new ViewModel([
-            'form' => $form, 
-            'id' => $param
-        ]);
+                    $form = $formManager->get($this->form);
+
+               $request = $this->getRequest();
+
+               $param = $this->params()->fromRoute('id',0);//se nao passar nenhum parametro coloca com id 0        
+               $repository = $this->getEm()->getRepository($this->entity)->find($param);//procura no banco um registro com esse id
+
+               if($repository){
+
+                   //convertendo objeto data para um string
+                   $array = array();
+
+                   foreach($repository->toArray() as $key => $value){
+                       //echo "teste"; die;
+                       if($value instanceof \DateTime) {
+                           $array[$key] = $value->format('d/m/Y');
+                       }else if($value instanceof \Academia\Entity\Endereco){
+                           $array[$key] = $value->toArray();                
+                       }else{
+                           $array[$key] = $value;
+                       }
+                   }
+
+                   //convertendo em array
+                   if(isset($array['endereco']['cepbr_endereco_cep']))
+                       $array['endereco']['cepbr_endereco_cep'] = $array['endereco']['cepbr_endereco_cep']->toArray();
+
+                  // echo var_dump($array);die;
+
+
+                   $form->setData($array);
+                   if($request->isPost()){
+                     $form->setData($request->getPost());
+                     // if($form->isValid()){
+                          $service = $this->getServiceLocator()->get($this->service);
+                          //pega id do registro que será atualizado
+                          $data = $request->getPost()->toArray();
+                          $data['id'] = (int) $param;
+                    //  }
+                         // echo $param;die;
+
+                      if($service->save($data)){
+                          $this->flashMessenger()->addSuccessMessage("Atualizado com Sucesso!");
+                      }else{
+                          $this->flashMessenger()->addErrorMessage("Não foi possível atualizar, tente novamente mais tarde.");
+                      }
+                      return $this->redirect()->toRoute($this->route,['controller'=> $this->controller]);//redureciona para o controller que será indicado
+                   }
+               }else{//nao encontrou nenhum registro
+
+                   $this->flashMessenger()->addInfoMessage('Registro não foi encontrado');
+                   return $this->redirect()->toRoute($this->route, ['controller'=>$this->controller]);//retorna para o controlador referenciado
+               }
+
+               if ($this->flashMessenger()->hasSuccessMessages()) {//se existir alguma msg de sucesso
+                   return new ViewModel([
+                       'form' => $form, 
+                       'success' => $this->flashMessenger()->getSuccessMessages(),
+                       'id' => $param
+                   ]);
+               }
+
+               if ($this->flashMessenger()->hasErrorMessages()) {//se existir alguma msg de sucesso
+                   return new ViewModel([
+                       'form' => $form, 
+                       'success' => $this->flashMessenger()->getErrorMessages(),
+                       'id' => $param
+                   ]);
+               }
+
+               if ($this->flashMessenger()->hasInfoMessages()) {//não é um erro, apenas um aviso
+                   return new ViewModel([
+                       'form' => $form, 
+                       'success' => $this->flashMessenger()->getInfoMessages(),
+                       'id' => $param
+                   ]);
+               }
+
+               $this->flashMessenger()->clearMessages();
+               return new ViewModel([
+                   'form' => $form, 
+                   'id' => $param
+               ]);
+           }
     }
-    
     /*
      * Exclui um registro
      */
@@ -298,6 +304,8 @@ abstract class AbstractController extends AbstractActionController
         $sessao->acl->addResource(new Resource('listar'));
         $sessao->acl->addResource(new Resource('index'));
         $sessao->acl->addResource(new Resource('excluir'));
+        $sessao->acl->addResource(new Resource('editarAluno'));
+        
            //echo var_dump($this->identity());exit;
         if ($this->identity() instanceof \Academia\Entity\Academia){
              $sessao->acl->allow('academia', array('index','inserir','editar','listar','excluir'));
@@ -305,7 +313,7 @@ abstract class AbstractController extends AbstractActionController
            //  echo var_dump( $this->acl->isAllowed('academia', 'editar'));exit;
             /*fim autorizacao*/
         }else if($this->identity() instanceof \Academia\Entity\Aluno){
-            $sessao->acl->allow('aluno', array('index','listar'));
+            $sessao->acl->allow('aluno', array('index','listar','editarAluno'));
             $this->layout = 'layout/layoutAluno';//muda para um layout com menu diferente
              
         }

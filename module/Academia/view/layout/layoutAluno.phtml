@@ -46,7 +46,7 @@
                     <ul class="nav navbar-nav navigation">
                         <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
                             
-                        <li><a href="<?php echo $this->url('cadastrarAluno') ?>"><?php echo $this->translate('Perfil') ?></a></li>
+                        <li><a href="<?php  echo $this->url('cadastrarAluno',array('action'=>'editar','id'=>$this->identity()->getId())) ?>"><?php echo $this->translate('Perfil') ?></a></li>
                         
                               <li role="presentation" class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" href="<?php echo $this->url('cadastrarAluno') ?>">Consultar <span class="caret"></a>
@@ -88,6 +88,8 @@
         </div> <!-- /container -->
         <?php 
             echo $this->inlineScript();
+            
+            
         ?>
     </body>
 </html>
