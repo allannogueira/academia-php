@@ -9,14 +9,16 @@
     "homepage": "http://framework.zend.com/",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "~2.3"
+        "zendframework/zendframework": "~2.3",
+        "zendframework/zftool": "dev-master"
     },
 	"minimum-stability": "dev",
 	"require-dev":{
 		"doctrine/doctrine-orm-module": "dev-master",
 		"hounddog/doctrine-data-fixture-module": "dev-master",
 		"zendframework/zend-developer-tools": "dev-master",
-		"neilime/zf2-twb-bundle": "1.0.*@dev"
+		"neilime/zf2-twb-bundle": "1.0.*@dev",
+        "phpunit/phpunit": "^4.8"
 	},
 	"config": {
 		"bin-dir": "bin"

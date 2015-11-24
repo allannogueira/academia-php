@@ -1,10 +1,9 @@
 <?php
 namespace Academia\Form;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
-use Zend\Validator\NotEmpty;
+use Zend\Validator;
+use JS\Validator\Cpf;
 /**
  * Description of AlunoFilter
  *
@@ -13,17 +12,28 @@ use Zend\Validator\NotEmpty;
 class AlunoFilter extends InputFilter{
     public function __construct(){
         $nome = new Input('nome');
-        $nome->setRequired(true)
+        $nome->setRequired(true);/*
              ->getFilterChain()->attach(new StringTrim())
              ->attach(new StripTags());
-        $nome->getValidatorChain()->attach(new NotEmpty());
+        $nome->getValidatorChain()->attach(new NotEmpty());*/
         $this->add($nome);
         
         $email = new Input('email');
-        $email->setRequired(true)
-             ->getFilterChain()->attach(new StringTrim())
+        $email->getValidatorChain()
+                ->attach(new Validator\EmailAddress());
+        // $email->setRequired(true);
+       /*      ->getFilterChain()->attach(new StringTrim())
              ->attach(new StripTags());
-        $email->getValidatorChain()->attach(new NotEmpty());
+        $email->getValidatorChain()->attach(new NotEmpty());*/
         $this->add($email);
+        
+        $cpf = new Input('cpf');
+      //  echo var_dump($this->getRequest());
+        $validadorCpf = new Cpf(['valid_if_empty' => true]);
+        $cpf->getFilterChain()->attach($validadorCpf);//pega classe que foi criada manualmente
+        $cpf->setErrorMessage("Cpf inválido!");
+        
+        //echo var_dump($cpf);
+        $this->add($cpf);
     }
 }

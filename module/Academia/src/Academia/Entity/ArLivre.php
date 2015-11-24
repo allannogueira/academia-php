@@ -2,8 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * ArLivre
@@ -37,14 +36,11 @@ class ArLivre extends AbstractEntity
     private $distanciaPercorrida;
 
     /**
-     * @var \Academia\Entity\Aluno
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="aluno_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="aluno_id", type="bigint", nullable=true)
      */
-    private $aluno;
+    private $alunoId;
 
 
 
@@ -105,25 +101,25 @@ class ArLivre extends AbstractEntity
     }
 
     /**
-     * Set aluno
+     * Set alunoId
      *
-     * @param \Academia\Entity\Aluno $aluno
+     * @param integer $alunoId
      * @return ArLivre
      */
-    public function setAluno(\Academia\Entity\Aluno $aluno = null)
+    public function setAlunoId($alunoId)
     {
-        $this->aluno = $aluno;
+        $this->alunoId = $alunoId;
     
         return $this;
     }
 
     /**
-     * Get aluno
+     * Get alunoId
      *
-     * @return \Academia\Entity\Aluno 
+     * @return integer 
      */
-    public function getAluno()
+    public function getAlunoId()
     {
-        return $this->aluno;
+        return $this->alunoId;
     }
 }

@@ -2,8 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * Academia
@@ -37,36 +36,38 @@ class Academia extends AbstractEntity
     private $dataCadastro;
 
     /**
-     * @var \Academia\Entity\Academia
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="matriz_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="matriz_id", type="bigint", nullable=true)
      */
-    private $matriz;
+    private $matrizId;
 
+    
     /**
      * @var \Academia\Entity\Endereco
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Endereco",cascade={"persist","merge"})
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Endereco",cascade={"persist", "remove"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="endereco_id", referencedColumnName="id")
      * })
      */
     private $endereco;
-/**
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="senha", type="string", length=45)
+     * @ORM\Column(name="senha", type="string", length=45, nullable=true)
      */
     private $senha;
+
     /**
-    * @var string
+     * @var string
      *
-     * @ORM\Column(name="usuario", type="string", length=45)
+     * @ORM\Column(name="usuario", type="string", length=45, nullable=true)
      */
     private $usuario;
+
 
 
     /**
@@ -126,35 +127,35 @@ class Academia extends AbstractEntity
     }
 
     /**
-     * Set matriz
+     * Set matrizId
      *
-     * @param \Academia\Entity\Academia $matriz
+     * @param integer $matrizId
      * @return Academia
      */
-    public function setMatriz(\Academia\Entity\Academia $matriz = null)
+    public function setMatrizId($matrizId)
     {
-        $this->matriz = $matriz;
+        $this->matrizId = $matrizId;
     
         return $this;
     }
 
     /**
-     * Get matriz
+     * Get matrizId
      *
-     * @return \Academia\Entity\Academia 
+     * @return integer 
      */
-    public function getMatriz()
+    public function getMatrizId()
     {
-        return $this->matriz;
+        return $this->matrizId;
     }
 
     /**
      * Set endereco
      *
-     * @param \Academia\Entity\Endereco $endereco
+     * @param integer $endereco
      * @return Academia
      */
-    public function setEndereco(\Academia\Entity\Endereco $endereco = null)
+    public function setEndereco(\Academia\Entity\Endereco $endereco)
     {
         $this->endereco = $endereco;
     
@@ -170,8 +171,14 @@ class Academia extends AbstractEntity
     {
         return $this->endereco;
     }
-    
-     public function setSenha($senha)
+
+    /**
+     * Set senha
+     *
+     * @param string $senha
+     * @return Academia
+     */
+    public function setSenha($senha)
     {
         $this->senha = $senha;
     
@@ -179,7 +186,7 @@ class Academia extends AbstractEntity
     }
 
     /**
-     * Get nome
+     * Get senha
      *
      * @return string 
      */
@@ -187,8 +194,21 @@ class Academia extends AbstractEntity
     {
         return $this->senha;
     }
+
+    /**
+     * Set usuario
+     *
+     * @param string $usuario
+     * @return Academia
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
     
-     /**
+        return $this;
+    }
+
+    /**
      * Get usuario
      *
      * @return string 
@@ -196,12 +216,5 @@ class Academia extends AbstractEntity
     public function getUsuario()
     {
         return $this->usuario;
-    }
-    
-     public function setUsuario($usuario)
-    {
-        $this->usuario = $usuario;
-    
-        return $this;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * CepbrEndereco
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="cepbr_endereco", indexes={@ORM\Index(name="fk_cepbr_endereco_cepbr_bairro1_idx", columns={"id_bairro"}), @ORM\Index(name="fk_cepbr_endereco_cepbr_cidade1_idx", columns={"id_cidade"})})
  * @ORM\Entity
  */
-class CepbrEndereco
+class CepbrEndereco extends AbstractEntity
 {
     /**
      * @var string
@@ -29,22 +29,16 @@ class CepbrEndereco
     private $endereco;
 
     /**
-     * @var \Academia\Entity\CepbrBairro
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrBairro")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_bairro", referencedColumnName="id_bairro")
-     * })
+     * @ORM\Column(name="id_bairro", type="integer", nullable=true)
      */
     private $idBairro;
 
     /**
-     * @var \Academia\Entity\CepbrCidade
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrCidade")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_cidade", referencedColumnName="id_cidade")
-     * })
+     * @ORM\Column(name="id_cidade", type="integer", nullable=true)
      */
     private $idCidade;
 

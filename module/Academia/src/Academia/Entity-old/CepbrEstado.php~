@@ -1,0 +1,39 @@
+<?php
+
+namespace Academia\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CepbrEstado
+ *
+ * @ORM\Table(name="cepbr_estado")
+ * @ORM\Entity
+ */
+class CepbrEstado
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="uf", type="string", length=2, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $uf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="estado", type="string", length=100, nullable=true)
+     */
+    private $estado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cod_ibge", type="string", length=10, nullable=true)
+     */
+    private $codIbge;
+
+
+}

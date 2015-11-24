@@ -2,8 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * Aparelho
@@ -44,10 +43,11 @@ class Aparelho extends AbstractEntity
     private $finalidade;
 
     /**
-     * @var \Academia\Entity\Academia
-     * @ORM\Column(name="academia_id", type="string", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(name="academia_id", type="bigint", nullable=true)
      */
-    private $academia;
+    private $academiaId;
 
 
 
@@ -131,25 +131,25 @@ class Aparelho extends AbstractEntity
     }
 
     /**
-     * Set academia
+     * Set academiaId
      *
-     * @param \Academia\Entity\Academia $academia
+     * @param integer $academiaId
      * @return Aparelho
      */
-    public function setAcademia( $academia = null)
+    public function setAcademiaId($academiaId)
     {
-        $this->academia = $academia;
+        $this->academiaId = $academiaId;
     
         return $this;
     }
 
     /**
-     * Get academia
+     * Get academiaId
      *
-     * @return \Academia\Entity\Academia 
+     * @return integer 
      */
-    public function getAcademia()
+    public function getAcademiaId()
     {
-        return $this->academia;
+        return $this->academiaId;
     }
 }

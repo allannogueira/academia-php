@@ -10,24 +10,52 @@ use Zend\Form\Form;
 use Academia\Form\AlunoFilter;
 use Zend\InputFilter\InputFilter;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use DoctrineModule\Persistence\ObjectManagerAwareInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use DoctrineModule\Form\Element\ObjectSelect;
 
-class AlunoForm extends Form
+class AlunoForm extends Form implements ObjectManagerAwareInterface
 {
-    public function __construct()
+     protected $objectManager;
+    public function __construct(ObjectManager $objectManager)
     {
+        $this->setObjectManager($objectManager);
         parent::__construct('aluno');
      /*   $this->setAttribute('method','POST');
         $this->setInputFilter(new AlunoFilter());                
         */
+       /* $this
+             ->setAttribute('method', 'POST')
+            // ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
+             ->setInputFilter(new AlunoFilter())
+         ;*/
         $this
              ->setAttribute('method', 'POST')
-             ->setHydrator(new ClassMethodsHydrator())
+         //    ->setHydrator(new ClassMethodsHydrator())
              ->setInputFilter(new AlunoFilter())
          ;
-        
        
         $this->setLabel('Dados Pessoais');             
         
+        $academia = new ObjectSelect("academia_id");
+         $academia->setLabel("Academia")
+                 ->setOptions([ 
+                'object_manager'     => $this->getObjectManager(),
+                'target_class'       => 'Academia\Entity\Academia',
+                'property' => 'nome',
+               'empty_option' => 'selecione',
+                'is_method' => true,
+                'find_method'        => array(
+                    'name'  => 'findBy',
+                    'params' =>[
+                        'criteria'   => array(),
+                        'orderBy'   => array("nome" => "ASC"),
+                    ]
+                )            
+        ]);
+        $this->add($academia);
+          
        $this->add([
            'name' => 'nome',
            'type' => 'text',
@@ -54,19 +82,29 @@ class AlunoForm extends Form
        
        $this->add([
            'name' => 'email',
-           'type' => 'text',
+           'type' => 'Zend\Form\Element\Email',
            'options' => [
                'label' => 'Email',
            ]
        ]);
        
-       $this->add([
-           'name' => 'objetivo',
-           'type' => 'textarea',
-           'options' => [
-               'label' => 'Objetivo',
-           ]
-       ]);
+        $aluno = new ObjectSelect("objetivo");
+         $aluno->setLabel("Objetivo")
+                 ->setOptions([ 
+                'object_manager'     => $this->getObjectManager(),
+                'target_class'       => 'Academia\Entity\Objetivo',
+                'property' => 'descricao',
+               'empty_option' => 'selecione',
+                'is_method' => true,
+                'find_method'        => array(
+                    'name'  => 'findBy',
+                    'params' =>[
+                        'criteria'   => array(),
+                        'orderBy'   => array("descricao" => "ASC"),
+                    ]
+                )            
+        ]);
+         $this->add($aluno);
        
        $this->add([
            'name' => 'usuario',
@@ -84,12 +122,13 @@ class AlunoForm extends Form
            ]
        ]);
        
-       $this->add(array(
+     /*  $this->add(array(
              'type' => 'Academia\Form\EnderecoFieldset',
              'options' => array(
                  'use_as_base_fieldset' => true,
              ),
-         ));
+         ));*/
+        $this->add(new EnderecoFieldset($this->getObjectManager()));
        
        
        $this->add(array(
@@ -106,5 +145,11 @@ class AlunoForm extends Form
        ]);
     }
     
-    
+    public function getObjectManager() {
+        return $this->objectManager;
+    }
+
+    public function setObjectManager(ObjectManager $objectManager) {
+        $this->objectManager = $objectManager;
+    }
 }

@@ -2,8 +2,8 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * CepbrBairro
  *
@@ -29,12 +29,9 @@ class CepbrBairro extends AbstractEntity
     private $bairro;
 
     /**
-     * @var \Academia\Entity\CepbrCidade
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrCidade")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_cidade", referencedColumnName="id_cidade")
-     * })
+     * @ORM\Column(name="id_cidade", type="integer", nullable=true)
      */
     private $idCidade;
 
@@ -76,10 +73,10 @@ class CepbrBairro extends AbstractEntity
     /**
      * Set idCidade
      *
-     * @param \Academia\Entity\CepbrCidade $idCidade
+     * @param integer $idCidade
      * @return CepbrBairro
      */
-    public function setIdCidade(\Academia\Entity\CepbrCidade $idCidade = null)
+    public function setIdCidade($idCidade)
     {
         $this->idCidade = $idCidade;
     
@@ -89,7 +86,7 @@ class CepbrBairro extends AbstractEntity
     /**
      * Get idCidade
      *
-     * @return \Academia\Entity\CepbrCidade 
+     * @return integer 
      */
     public function getIdCidade()
     {

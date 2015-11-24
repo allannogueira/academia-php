@@ -17,9 +17,10 @@ class TreinoController extends AbstractController
     {
         $this->form = 'Academia\Form\TreinoForm';
         $this->controller = 'TreinoController';
-        $this->route = 'cadastrarTreino';
+        $this->route = 'treino';
         $this->service = 'Academia\Service\TreinoService';
         $this->entity = 'Academia\Entity\Treino';
+        $this->listarAction = "treinosAction";//nome da chamada no webservice
     }
     /*
     public function inserirAction(){
@@ -29,10 +30,18 @@ class TreinoController extends AbstractController
         exit;
     }*/
     
-     public function inserirAction(){
+
+    
+   public function listarAction($where = ""){
+        $nome = $this->params()->fromPost("nome");
+        $dataInicioDe = $this->params()->fromPost("data_inicio_de");
+        $dataInicioAte = $this->params()->fromPost("data_inicio_ate");
+                
+        $where = "where (t.nome like '%".$nome."%' or '".$nome."' = '') "
+                . "and ((t.dataInicio between '".$dataInicioDe."' and '".$dataInicioAte."') or '".$dataInicioDe."' = '' or '".$dataInicioAte."' = '')";
         
-        $this->form = $this->getServiceLocator()->get($this->form);        
-        return parent::inserirAction();
+        return parent::listarAction($where);
+        
+      
     }
-	
 }

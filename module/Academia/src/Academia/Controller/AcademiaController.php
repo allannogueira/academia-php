@@ -10,6 +10,7 @@
 namespace Academia\Controller;
 
 use Base\Controller\AbstractController;
+use WS\Controller\ClienteController;
 
 class AcademiaController extends AbstractController
 {
@@ -17,9 +18,21 @@ class AcademiaController extends AbstractController
     {
         $this->form = 'Academia\Form\AcademiaForm';
         $this->controller = 'AcademiaController';
-        $this->route = 'cadastrarAcademia';
+        $this->route = 'academia';
         $this->service = 'Academia\Service\AcademiaService';
         $this->entity = 'Academia\Entity\Academia';
+        $this->listarAction = "academiasAction";//nome da chamada no webservice
     }
-	
+    
+    public function listarAction($where = ""){
+        $nome = $this->params()->fromPost("nome");
+        $usuario = $this->params()->fromPost("usuario");
+        $dataCadastroDe = $this->params()->fromPost("data_cadastro_de");
+        $dataCadastroAte = $this->params()->fromPost("data_cadastro_ate");
+                
+        $where = "where (t.nome like '%".$nome."%' or '".$nome."' = '') "
+                . "and (t.usuario='".$usuario."' or '".$usuario."' = '')"
+                . "and ((t.dataCadastro between '".$dataCadastroDe."' and '".$dataCadastroAte."') or '".$dataCadastroDe."' = '' or '".$dataCadastroAte."' = '')";
+        return parent::listarAction($where);
+    }
 }

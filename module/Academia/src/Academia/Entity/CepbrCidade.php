@@ -2,8 +2,8 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * CepbrCidade
  *
@@ -36,12 +36,9 @@ class CepbrCidade extends AbstractEntity
     private $codIbge;
 
     /**
-     * @var \Academia\Entity\CepbrEstado
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrEstado")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="uf", referencedColumnName="uf")
-     * })
+     * @ORM\Column(name="uf", type="string", length=2, nullable=true)
      */
     private $uf;
 
@@ -106,10 +103,10 @@ class CepbrCidade extends AbstractEntity
     /**
      * Set uf
      *
-     * @param \Academia\Entity\CepbrEstado $uf
+     * @param string $uf
      * @return CepbrCidade
      */
-    public function setUf(\Academia\Entity\CepbrEstado $uf = null)
+    public function setUf($uf)
     {
         $this->uf = $uf;
     
@@ -119,7 +116,7 @@ class CepbrCidade extends AbstractEntity
     /**
      * Get uf
      *
-     * @return \Academia\Entity\CepbrEstado 
+     * @return string 
      */
     public function getUf()
     {

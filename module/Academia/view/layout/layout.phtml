@@ -1,9 +1,9 @@
-<?php echo $this->doctype(); ?>
+<?php  echo $this->doctype(); ?>
 
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle($this->translate('Sistema Workout'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -41,9 +41,9 @@
                            <a class="navbar-brand" style="color: orange" href="<?php echo $this->url('home') ?>">
                                &nbsp;<?php echo $this->translate('Workout') ?>
                            </a>
-                           <ul class="nav navbar-nav navigation">
+                           <!--ul class="nav navbar-nav navigation">
                                <li><a href="<?php echo $this->url('login',array('action' => 'logout')) ?>"><?php echo $this->translate('Fale Conosco') ?></a></li>		
-                           </ul>
+                           </ul-->
                        </div>
 
                    </div>

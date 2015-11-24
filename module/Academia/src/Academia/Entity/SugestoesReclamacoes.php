@@ -2,8 +2,8 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * SugestoesReclamacoes
  *
@@ -29,34 +29,25 @@ class SugestoesReclamacoes extends AbstractEntity
     private $descricao;
 
     /**
-     * @var \Academia\Entity\Academia
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="academia_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="aluno_id", type="bigint", nullable=true)
      */
-    private $academia;
+    private $alunoId;
 
     /**
-     * @var \Academia\Entity\Aluno
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="aluno_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="sugestoes_reclamacoes_tipo_id", type="bigint", nullable=true)
      */
-    private $aluno;
+    private $sugestoesReclamacoesTipoId;
 
     /**
-     * @var \Academia\Entity\SugestoesReclamacoesTipo
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\SugestoesReclamacoesTipo")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="sugestoes_reclamacoes_tipo_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="academia_id", type="bigint", nullable=true)
      */
-    private $sugestoesReclamacoesTipo;
+    private $academiaId;
 
 
 
@@ -94,71 +85,71 @@ class SugestoesReclamacoes extends AbstractEntity
     }
 
     /**
-     * Set academia
+     * Set alunoId
      *
-     * @param \Academia\Entity\Academia $academia
+     * @param integer $alunoId
      * @return SugestoesReclamacoes
      */
-    public function setAcademia(\Academia\Entity\Academia $academia = null)
+    public function setAlunoId($alunoId)
     {
-        $this->academia = $academia;
+        $this->alunoId = $alunoId;
     
         return $this;
     }
 
     /**
-     * Get academia
+     * Get alunoId
      *
-     * @return \Academia\Entity\Academia 
+     * @return integer 
      */
-    public function getAcademia()
+    public function getAlunoId()
     {
-        return $this->academia;
+        return $this->alunoId;
     }
 
     /**
-     * Set aluno
+     * Set sugestoesReclamacoesTipoId
      *
-     * @param \Academia\Entity\Aluno $aluno
+     * @param integer $sugestoesReclamacoesTipoId
      * @return SugestoesReclamacoes
      */
-    public function setAluno(\Academia\Entity\Aluno $aluno = null)
+    public function setSugestoesReclamacoesTipoId($sugestoesReclamacoesTipoId)
     {
-        $this->aluno = $aluno;
+        $this->sugestoesReclamacoesTipoId = $sugestoesReclamacoesTipoId;
     
         return $this;
     }
 
     /**
-     * Get aluno
+     * Get sugestoesReclamacoesTipoId
      *
-     * @return \Academia\Entity\Aluno 
+     * @return integer 
      */
-    public function getAluno()
+    public function getSugestoesReclamacoesTipoId()
     {
-        return $this->aluno;
+        return $this->sugestoesReclamacoesTipoId;
     }
 
     /**
-     * Set sugestoesReclamacoesTipo
+     * Set academiaId
      *
-     * @param \Academia\Entity\SugestoesReclamacoesTipo $sugestoesReclamacoesTipo
+     * @param integer $academiaId
      * @return SugestoesReclamacoes
      */
-    public function setSugestoesReclamacoesTipo(\Academia\Entity\SugestoesReclamacoesTipo $sugestoesReclamacoesTipo = null)
+    public function setAcademiaId($academiaId)
     {
-        $this->sugestoesReclamacoesTipo = $sugestoesReclamacoesTipo;
+        $this->academiaId = $academiaId;
     
         return $this;
     }
 
     /**
-     * Get sugestoesReclamacoesTipo
+     * Get academiaId
      *
-     * @return \Academia\Entity\SugestoesReclamacoesTipo 
+     * @return integer 
      */
-    public function getSugestoesReclamacoesTipo()
+    public function getAcademiaId()
     {
-        return $this->sugestoesReclamacoesTipo;
+        return $this->academiaId;
     }
 }

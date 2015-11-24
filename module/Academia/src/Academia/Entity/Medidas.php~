@@ -2,15 +2,15 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * Medidas
  *
- * @ORM\Table(name="medidas", indexes={@ORM\Index(name="fk_medidas_aluno1_idx", columns={"aluno_id"})})
+ * @ORM\Table(name="medidas")
  * @ORM\Entity
  */
-class Medidas
+class Medidas extends AbstractEntity
 {
     /**
      * @var integer
@@ -38,6 +38,20 @@ class Medidas
     /**
      * @var string
      *
+     * @ORM\Column(name="biceps", type="string", length=45, nullable=true)
+     */
+    private $biceps;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="triceps", type="string", length=45, nullable=true)
+     */
+    private $triceps;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="peitoral_maior", type="string", length=45, nullable=true)
      */
     private $peitoralMaior;
@@ -55,86 +69,6 @@ class Medidas
      * @ORM\Column(name="quadril", type="string", length=45, nullable=true)
      */
     private $quadril;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="biceps_esquerdo", type="string", length=45, nullable=true)
-     */
-    private $bicepsEsquerdo;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="biceps_direito", type="string", length=45, nullable=true)
-     */
-    private $bicepsDireito;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="triceps_esquerdo", type="string", length=45, nullable=true)
-     */
-    private $tricepsEsquerdo;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="triceps_direito", type="string", length=45, nullable=true)
-     */
-    private $tricepsDireito;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="coxas_esquerda", type="string", length=45, nullable=true)
-     */
-    private $coxasEsquerda;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="coxas_direita", type="string", length=45, nullable=true)
-     */
-    private $coxasDireita;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="panturrilha_esquerda", type="string", length=45, nullable=true)
-     */
-    private $panturrilhaEsquerda;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="panturrilha_direita", type="string", length=45, nullable=true)
-     */
-    private $panturrilhaDireita;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="quadril_esquerdo", type="string", length=45, nullable=true)
-     */
-    private $quadrilEsquerdo;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="quadril_direito", type="string", length=45, nullable=true)
-     */
-    private $quadrilDireito;
-
-    /**
-     * @var \Academia\Entity\Aluno
-     *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="aluno_id", referencedColumnName="id")
-     * })
-     */
-    private $aluno;
 
 
 }

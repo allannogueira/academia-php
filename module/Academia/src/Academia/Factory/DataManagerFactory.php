@@ -1,0 +1,26 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of DataManagerFactory
+ *
+ * @author Allan
+ */
+use MyModule\Service\DataManager;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\FactoryInterface;
+
+class DataManagerFactory implements FactoryInterface
+{
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        return new DataManager(
+            $serviceLocator->get('Doctrine\ORM\EntityManager')
+        );
+    }
+}

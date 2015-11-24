@@ -2,8 +2,8 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * Telefone
  *
@@ -17,7 +17,7 @@ class Telefone extends AbstractEntity
      *
      * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 
@@ -31,14 +31,43 @@ class Telefone extends AbstractEntity
     /**
      * @var \Academia\Entity\TelefoneTipo
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\TelefoneTipo")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\TelefoneTipo")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="telefone_tipo_id", referencedColumnName="id")
      * })
      */
     private $telefoneTipo;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Academia\Entity\Aluno", mappedBy="telefone")
+     */
+    private $aluno;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->aluno = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * Set id
+     *
+     * @param integer $id
+     * @return Telefone
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    
+        return $this;
+    }
 
     /**
      * Get id
@@ -79,7 +108,7 @@ class Telefone extends AbstractEntity
      * @param \Academia\Entity\TelefoneTipo $telefoneTipo
      * @return Telefone
      */
-    public function setTelefoneTipo(\Academia\Entity\TelefoneTipo $telefoneTipo = null)
+    public function setTelefoneTipo(\Academia\Entity\TelefoneTipo $telefoneTipo)
     {
         $this->telefoneTipo = $telefoneTipo;
     
@@ -94,5 +123,38 @@ class Telefone extends AbstractEntity
     public function getTelefoneTipo()
     {
         return $this->telefoneTipo;
+    }
+
+    /**
+     * Add aluno
+     *
+     * @param \Academia\Entity\Aluno $aluno
+     * @return Telefone
+     */
+    public function addAluno(\Academia\Entity\Aluno $aluno)
+    {
+        $this->aluno[] = $aluno;
+    
+        return $this;
+    }
+
+    /**
+     * Remove aluno
+     *
+     * @param \Academia\Entity\Aluno $aluno
+     */
+    public function removeAluno(\Academia\Entity\Aluno $aluno)
+    {
+        $this->aluno->removeElement($aluno);
+    }
+
+    /**
+     * Get aluno
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAluno()
+    {
+        return $this->aluno;
     }
 }

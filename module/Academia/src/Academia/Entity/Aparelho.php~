@@ -2,7 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * Aparelho
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="aparelho", indexes={@ORM\Index(name="fk_aparelho_academia1_idx", columns={"academia_id"})})
  * @ORM\Entity
  */
-class Aparelho
+class Aparelho extends AbstractEntity
 {
     /**
      * @var integer
@@ -43,14 +43,11 @@ class Aparelho
     private $finalidade;
 
     /**
-     * @var \Academia\Entity\Academia
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="academia_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="academia_id", type="bigint", nullable=true)
      */
-    private $academia;
+    private $academiaId;
 
 
 }

@@ -23,24 +23,10 @@ class AcademiaService extends AbstractService{
     }
     
      public function save(Array $data = array()){
-        //echo var_dump($data);exit;
-        $entityEndereco = new Endereco();
-        $entityEndereco->setRua($data['endereco']['rua']);
-        $entityEndereco->setNumero($data['endereco']['numero']);
-        $entityEndereco->setComplemento($data['endereco']['complemento']);
-       // echo var_dump($entityEndereco);exit;
-        
-        $entityCepbrEndereco = new CepbrEndereco();
-      //  echo var_dump($this->em->getRepository('Academia\Entity\CepbrEndereco')->find($data['endereco']['cepbr_endereco_cep']['cep']));exit;
-        $entityEndereco->setCepbrEnderecoCep($this->em->getRepository('Academia\Entity\CepbrEndereco')
-                                                        ->find($data['endereco']['cepbr_endereco_cep']['cep']));
-       
-         $entityCepbrEndereco = new CepbrEndereco();
-      //  echo var_dump($this->em->getRepository('Academia\Entity\CepbrEndereco')->find($data['endereco']['cepbr_endereco_cep']['cep']));exit;
-        $entityEndereco->setCepbrEnderecoCep($this->em->getRepository('Academia\Entity\CepbrEndereco')
-                                                        ->find($data['endereco']['cepbr_endereco_cep']['cep']));
-       
+        $data['senha'] = md5($data['senha']);
+        $entityEndereco = new Endereco($data['endereco']);
         $data['endereco'] = $entityEndereco;
+        
         return parent::save($data);
    //     $data['endereco'] = $this->em->getRepository('Academia\Entity\Endereco')
      //                           ->find($data['']);

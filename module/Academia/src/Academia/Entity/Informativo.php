@@ -2,8 +2,8 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * Informativo
  *
@@ -29,19 +29,16 @@ class Informativo extends AbstractEntity
     private $descricao;
 
     /**
-     * @var \Academia\Entity\Academia
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia",cascade={"persist"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="academia_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="academia_id", type="bigint", nullable=true)
      */
-    private $academia;
+    private $academiaId;
 
     /**
      * @var \Academia\Entity\Aluno
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="aluno_id", referencedColumnName="id")
      * })
@@ -84,26 +81,26 @@ class Informativo extends AbstractEntity
     }
 
     /**
-     * Set academia
+     * Set academiaId
      *
-     * @param \Academia\Entity\Academia $academia
+     * @param integer $academiaId
      * @return Informativo
      */
-    public function setAcademia(\Academia\Entity\Academia $academia = null)
+    public function setAcademiaId($academiaId)
     {
-        $this->academia = $academia;
+        $this->academiaId = $academiaId;
     
         return $this;
     }
 
     /**
-     * Get academia
+     * Get academiaId
      *
-     * @return \Academia\Entity\Academia 
+     * @return integer 
      */
-    public function getAcademia()
+    public function getAcademiaId()
     {
-        return $this->academia;
+        return $this->academiaId;
     }
 
     /**

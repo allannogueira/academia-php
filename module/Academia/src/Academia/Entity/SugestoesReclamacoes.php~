@@ -2,7 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * SugestoesReclamacoes
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="sugestoes_reclamacoes", indexes={@ORM\Index(name="fk_sugestoes_reclamacoes_aluno1_idx", columns={"aluno_id"}), @ORM\Index(name="fk_sugestoes_reclamacoes_sugestoes_reclamacoes_tipo1_idx", columns={"sugestoes_reclamacoes_tipo_id"}), @ORM\Index(name="fk_sugestoes_reclamacoes_academia1_idx", columns={"academia_id"})})
  * @ORM\Entity
  */
-class SugestoesReclamacoes
+class SugestoesReclamacoes extends AbstractEntity
 {
     /**
      * @var integer
@@ -29,34 +29,25 @@ class SugestoesReclamacoes
     private $descricao;
 
     /**
-     * @var \Academia\Entity\Academia
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="academia_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="aluno_id", type="bigint", nullable=true)
      */
-    private $academia;
+    private $alunoId;
 
     /**
-     * @var \Academia\Entity\Aluno
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="aluno_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="sugestoes_reclamacoes_tipo_id", type="bigint", nullable=true)
      */
-    private $aluno;
+    private $sugestoesReclamacoesTipoId;
 
     /**
-     * @var \Academia\Entity\SugestoesReclamacoesTipo
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\SugestoesReclamacoesTipo")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="sugestoes_reclamacoes_tipo_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="academia_id", type="bigint", nullable=true)
      */
-    private $sugestoesReclamacoesTipo;
+    private $academiaId;
 
 
 }

@@ -1,5 +1,19 @@
+<?php
+$sessao = new Zend\Session\Container();
 
-<img width="100%" style="position: relative; top: -10px;" src="<?php echo $this->basePath('img/banner.png'); ?>">
+$nome = "";
+$quemEstaLogado = "";
+
+if(isset($sessao->authenticate) && $sessao->quemEstaLogado != "admin"){
+  $nome = $sessao->authenticate->getIdentity()->getNome();//id da academia ou do alluno
+}
+
+if(isset($sessao->quemEstaLogado)){
+    $quemEstaLogado =  $sessao->quemEstaLogado;
+}
+  
+ ?>
+<img width="100%" style="position: relative; top: -10px;" src="<?php echo $this->basePath('img/banner.jpg'); ?>">
 <!--
 <div class="jumbotron">
     É dono de uma academia e ainda não possuí um sistema de qualidade? Acompanhe de perto seus alunos e diminua seu esforço de trabalho, com esse sofisticado sistema de acompanhamento de treinos.
@@ -27,7 +41,9 @@
                 <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<?php echo $this->translate('Login') ?></h3>
             </div>
             <div class="panel-body">
-                <?php if(!$this->identity()){ ?>
+                <?php  
+                    
+                    if(($nome == "" or $nome == null) and $quemEstaLogado == ""){ ?> 
                         <form id="login-form" action="<?php echo $this->url('login',array('action' => 'login')) ?>" method="post" role="form" style="display: block;">
                             <div class="form-group "><input type="text" name="usuario" placeholder="usuario" class="form-control" value=""></div>
                             <div class="form-group "><input type="password" name="senha" placeholder="senha" class="form-control" value=""></div>
@@ -42,9 +58,9 @@
                 <?php }else{
                     
                     ?>
-                Seja Bem Vindo!<h4> <?php  echo $this->identity()->getNome(); ?>.</h4>
+                Seja Bem Vindo!<h4> <?php  echo $nome; ?>.</h4>
                     <p><a class="btn btn-primary pull-right" href="<?php echo $this->url('login',array('action' => 'logout')) ?>" ><?php echo $this->translate('Sair') ?></a></p>
-                <?php }?>
+                <?php  }?>
             </div>
         </div>
     </div>

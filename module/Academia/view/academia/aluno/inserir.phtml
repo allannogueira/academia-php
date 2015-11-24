@@ -8,6 +8,8 @@
  echo "<h1 style='text-align:center'>$title</h1>";
 $form = $this->form;
 
+
+
 //informa se existir erros no formulario
 $flash = $this->flashMessenger();
  $flash->setMessageOpenFormat('<div%s>
@@ -22,10 +24,12 @@ $flash = $this->flashMessenger();
  echo $flash->render('info',    array('alert', 'alert-dismissible', 'alert-info'));
  echo $flash->render('default', array('alert', 'alert-dismissible', 'alert-warning'));
  echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
- 
+
 //seta action, para onde o formulario será enviar o formulario
-$form->setAttribute('action',$this->url('cadastrarAluno',['action'=>'inserir']));
+ //echo var_dump($form);
+$form->setAttribute('action',$this->url('aluno',['action'=>'inserir']));
 $form->prepare();//prepara o formulario
+
 echo $this->form()->openTag($form);//abre a tag form com o action
 echo $this->formCollection($form);//monta o corpo do formulario
 echo $this->form()->closeTag();//fecha formulario

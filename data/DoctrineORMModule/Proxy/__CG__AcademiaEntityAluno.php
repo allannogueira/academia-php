@@ -64,10 +64,10 @@ class Aluno extends \Academia\Entity\Aluno implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'id', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nome', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpf', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rg', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'email', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'objetivo', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'endereco', 'underscoreSeparatedKeys', 'strategies', 'namingStrategy', 'filterComposite');
+            return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'id', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nome', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpf', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rg', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'email', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'objetivo', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'usuario', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'senha', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'academiaId', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'dieta', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'endereco', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'medidas', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'treino', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'telefone');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'id', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nome', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpf', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rg', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'email', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'objetivo', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'endereco', 'underscoreSeparatedKeys', 'strategies', 'namingStrategy', 'filterComposite');
+        return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'id', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nome', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpf', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rg', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'email', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'objetivo', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'usuario', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'senha', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'academiaId', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'dieta', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'endereco', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'medidas', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'treino', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'telefone');
     }
 
     /**
@@ -173,6 +173,17 @@ class Aluno extends \Academia\Entity\Aluno implements \Doctrine\ORM\Proxy\Proxy
     }
 
     
+    /**
+     * {@inheritDoc}
+     */
+    public function setId($id)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setId', array($id));
+
+        return parent::setId($id);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -301,7 +312,95 @@ class Aluno extends \Academia\Entity\Aluno implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setEndereco(\Academia\Entity\Endereco $endereco = NULL)
+    public function setUsuario($usuario)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsuario', array($usuario));
+
+        return parent::setUsuario($usuario);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUsuario()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsuario', array());
+
+        return parent::getUsuario();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSenha($senha)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSenha', array($senha));
+
+        return parent::setSenha($senha);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSenha()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSenha', array());
+
+        return parent::getSenha();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setAcademiaId($academiaId)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAcademiaId', array($academiaId));
+
+        return parent::setAcademiaId($academiaId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAcademiaId()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAcademiaId', array());
+
+        return parent::getAcademiaId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDieta(\Academia\Entity\Dieta $dieta)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDieta', array($dieta));
+
+        return parent::setDieta($dieta);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDieta()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDieta', array());
+
+        return parent::getDieta();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEndereco(\Academia\Entity\Endereco $endereco)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEndereco', array($endereco));
@@ -323,243 +422,89 @@ class Aluno extends \Academia\Entity\Aluno implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function setMedidas(\Academia\Entity\Medidas $medidas)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setMedidas', array($medidas));
+
+        return parent::setMedidas($medidas);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getMedidas()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getMedidas', array());
+
+        return parent::getMedidas();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTreino(\Academia\Entity\Treino $treino)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTreino', array($treino));
+
+        return parent::setTreino($treino);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTreino()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTreino', array());
+
+        return parent::getTreino();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addTelefone(\Academia\Entity\Telefone $telefone)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addTelefone', array($telefone));
+
+        return parent::addTelefone($telefone);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeTelefone(\Academia\Entity\Telefone $telefone)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeTelefone', array($telefone));
+
+        return parent::removeTelefone($telefone);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTelefone()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTelefone', array());
+
+        return parent::getTelefone();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function toArray()
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', array());
 
         return parent::toArray();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setOptions($options)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setOptions', array($options));
-
-        return parent::setOptions($options);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUnderscoreSeparatedKeys', array($underscoreSeparatedKeys));
-
-        return parent::setUnderscoreSeparatedKeys($underscoreSeparatedKeys);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUnderscoreSeparatedKeys()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUnderscoreSeparatedKeys', array());
-
-        return parent::getUnderscoreSeparatedKeys();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function extract($object)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'extract', array($object));
-
-        return parent::extract($object);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function hydrate(array $data, $object)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'hydrate', array($data, $object));
-
-        return parent::hydrate($data, $object);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addFilter($name, $filter, $condition = 1)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addFilter', array($name, $filter, $condition));
-
-        return parent::addFilter($name, $filter, $condition);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeFilter($name)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeFilter', array($name));
-
-        return parent::removeFilter($name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setNamingStrategy(\Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface $strategy)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNamingStrategy', array($strategy));
-
-        return parent::setNamingStrategy($strategy);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeNamingStrategy()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeNamingStrategy', array());
-
-        return parent::removeNamingStrategy();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getStrategy($name)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getStrategy', array($name));
-
-        return parent::getStrategy($name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function hasStrategy($name)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'hasStrategy', array($name));
-
-        return parent::hasStrategy($name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addStrategy($name, \Zend\Stdlib\Hydrator\Strategy\StrategyInterface $strategy)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addStrategy', array($name, $strategy));
-
-        return parent::addStrategy($name, $strategy);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeStrategy($name)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeStrategy', array($name));
-
-        return parent::removeStrategy($name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function extractValue($name, $value, $object = NULL)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'extractValue', array($name, $value, $object));
-
-        return parent::extractValue($name, $value, $object);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function hydrateValue($name, $value, $data = NULL)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'hydrateValue', array($name, $value, $data));
-
-        return parent::hydrateValue($name, $value, $data);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function extractName($name, $object = NULL)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'extractName', array($name, $object));
-
-        return parent::extractName($name, $object);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function hydrateName($name, $data = NULL)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'hydrateName', array($name, $data));
-
-        return parent::hydrateName($name, $data);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getFilter()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFilter', array());
-
-        return parent::getFilter();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function hasFilter($name)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'hasFilter', array($name));
-
-        return parent::hasFilter($name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getNamingStrategy()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNamingStrategy', array());
-
-        return parent::getNamingStrategy();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function hasNamingStrategy()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'hasNamingStrategy', array());
-
-        return parent::hasNamingStrategy();
     }
 
 }

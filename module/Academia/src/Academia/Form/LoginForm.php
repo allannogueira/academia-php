@@ -19,6 +19,7 @@ class LoginForm extends Form implements ObjectManagerAwareInterface
     protected $objectManager;
     public function __construct(ObjectManager $objectManager)
     {
+        //die('LoginForm');
         $this->setObjectManager($objectManager);
         parent::__construct('academia');
      /*   $this->setAttribute('method','POST');

@@ -12,20 +12,22 @@ use Academia\Entity\Aluno;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use DoctrineModule\Form\Element\ObjectSelect;
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
 
 class TreinoForm extends Form implements ObjectManagerAwareInterface
 {
-    public function __construct(ObjectManager $objectManager)
+    
+    public function init()
     {
-         $this->setObjectManager($objectManager);
+        
         parent::__construct('academia');
      /*   $this->setAttribute('method','POST');
         $this->setInputFilter(new AlunoFilter());                
         */
         
         
-       $this->setHydrator(new ClassMethodsHydrator(false));
-       
+       $this->setHydrator(new DoctrineEntity($this->getObjectManager(), 'Academia\Entity\Treino'));
+       /*
         $this->setLabel('Aluno');             
         
         $aluno = new ObjectSelect("aluno");
@@ -48,9 +50,26 @@ class TreinoForm extends Form implements ObjectManagerAwareInterface
         // echo var_dump($academia);
         $this->add($aluno);
         
-                 
+         $treino = new ObjectSelect("treino");
+         $treino->setLabel("Treino")
+                 ->setOptions([ 
+                'object_manager'     => $this->getObjectManager(),
+                'target_class'       => 'Academia\Entity\Treino',
+                'property' => 'nome',
+               'empty_option' => 'selecione',
+                'is_method' => true,
+                'find_method'        => array(
+                    'name'  => 'findBy',
+                    'params' =>[
+                        'criteria'   => array(),
+                        'orderBy'   => array("nome" => "ASC"),
+                    ]
+                )            
+        ]);
+        $this->add($treino);
         
-       $this->add([
+         */
+        $this->add([
            'name' => 'nome',
            'type' => 'text',
            'options' => [
@@ -74,7 +93,20 @@ class TreinoForm extends Form implements ObjectManagerAwareInterface
            ]
        ]);
        
-       
+          $this->add(array(
+             'type' => 'Zend\Form\Element\Collection',
+             'name' => 'exercicios',
+             'options' => array(
+                 'label' => 'Escolha exercicios para esse treino',
+                 'count' => 2,
+                 'allow_add' => true,
+                 'target_element' => array(
+                     'type' => 'Academia\Form\ExerciciosFieldset',
+                 ),
+             ),
+         ));
+   
+
        $this->add(array(
              'type' => 'Zend\Form\Element\Csrf',
              'name' => 'csrf',

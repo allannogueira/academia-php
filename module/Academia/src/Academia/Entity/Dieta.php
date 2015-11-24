@@ -2,12 +2,12 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * Dieta
  *
- * @ORM\Table(name="dieta", indexes={@ORM\Index(name="fk_dieta_aluno1_idx", columns={"aluno_id"})})
+ * @ORM\Table(name="dieta")
  * @ORM\Entity
  */
 class Dieta extends AbstractEntity
@@ -48,13 +48,6 @@ class Dieta extends AbstractEntity
      * @ORM\Column(name="data_fim", type="string", length=45, nullable=true)
      */
     private $dataFim;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="aluno_id", type="string", nullable=true)
-     */
-    private $aluno;
 
 
 
@@ -122,7 +115,7 @@ class Dieta extends AbstractEntity
      */
     public function setDataInicio($dataInicio)
     {
-        $this->dataInicio = new \DateTime($dataInicio);
+        $this->dataInicio = $dataInicio;
     
         return $this;
     }
@@ -158,22 +151,5 @@ class Dieta extends AbstractEntity
     public function getDataFim()
     {
         return $this->dataFim;
-    }
-
-    public function setAluno( $aluno = null)
-    {
-        $this->aluno = $aluno;
-    
-        return $this;
-    }
-
-    /**
-     * Get aluno
-     *
-     * @return string
-     */
-    public function getAluno()
-    {
-        return $this->aluno;
     }
 }

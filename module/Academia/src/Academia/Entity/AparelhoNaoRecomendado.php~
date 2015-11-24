@@ -2,7 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * AparelhoNaoRecomendado
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="aparelho_nao_recomendado")
  * @ORM\Entity
  */
-class AparelhoNaoRecomendado
+class AparelhoNaoRecomendado extends AbstractEntity
 {
     /**
      * @var integer

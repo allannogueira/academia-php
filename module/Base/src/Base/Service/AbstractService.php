@@ -23,13 +23,17 @@ class AbstractService {
         $this->em = $em;
     }
     
+    public function getEm(){
+        return $this->em;
+    }
+    
     public function save(Array $data = array())
     {
        // print_r($entity);
        // exit(0);
       //  echo var_dump($data); die;
         if(isset($data['id'])){//atualiza
-            // echo var_dump($data);
+             //echo var_dump($data);
            $entity = $this->em->getReference($this->entity,$data['id']);
            
            $hydrator = new ClassMethods();
@@ -39,13 +43,17 @@ class AbstractService {
           
         }else{//cadastra um novo
          //   echo "<pre>".var_dump($this->entity)."</pre>"; exit;
-            $entity = new $this->entity($data);
+           $entity = new $this->entity($data);
+           $hydrator = new ClassMethods();
+           $hydrator->hydrate($data, $entity);
+           
         }
         
-       // echo "<pre>";
-       // print_r($entity);
-       // exit(0);
-       // echo "</pre>";
+      /*  echo "<pre>";
+        echo var_dump($entity);
+        exit(0);
+        echo "</pre>";*/
+        
         $this->em->persist($entity);
         $this->em->flush();
         

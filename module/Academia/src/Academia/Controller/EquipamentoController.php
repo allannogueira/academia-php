@@ -20,6 +20,7 @@ class EquipamentoController extends AbstractController
         $this->route = 'cadastrarEquipamento';
         $this->service = 'Academia\Service\EquipamentoService';
         $this->entity = 'Academia\Entity\Equipamento';
+        $this->listarAction = "equipamentosAction";//nome da chamada no webservice
     }
     
     public function inserirAction(){

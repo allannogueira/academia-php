@@ -17,9 +17,10 @@ class AparelhoController extends AbstractController
     {
         $this->form = 'Academia\Form\AparelhoForm';
         $this->controller = 'AparelhoController';
-        $this->route = 'cadastrarAparelho';
+        $this->route = 'aparelho';
         $this->service = 'Academia\Service\AparelhoService';
         $this->entity = 'Academia\Entity\Aparelho';
+        $this->listarAction = "aparelhosAction";//nome da chamada no webservice
     }
 	
     public function inserirAction(){

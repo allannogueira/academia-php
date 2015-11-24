@@ -22,15 +22,15 @@ return array(
               ) 
             )
         ),
-        'authentication' => array(
+      /*  'authentication' => array(
             'orm_default' => array(
                 'object_manager' => 'Doctrine\ORM\EntityManager',
-                'identity_class' => 'Academia\Entity\Aluno',
+                'identity_class' => 'Academia\Entity\Academia',
                 'identity_property' => 'usuario',
                 'credential_property' => 'senha',
             ),        
-        ),/*
-        'authenticationAluno' => array(
+        ),*/
+        /*'authenticationAluno' => array(
             'orm_default' => array(
                 'object_manager' => 'Doctrine\ORM\EntityManager',
                 'identity_class' => 'Academia\Entity\Academia',
@@ -41,6 +41,7 @@ return array(
     ),
     
     'service_manager' => array(
+   
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
@@ -64,18 +65,26 @@ return array(
             'Academia\Controller\Index' => 'Academia\Controller\IndexController',           
             'Academia\Controller\Aluno' => 'Academia\Controller\AlunoController',
             'Academia\Controller\Academia' => 'Academia\Controller\AcademiaController',
+            'Academia\Controller\Exercicio' => 'Academia\Controller\ExercicioController',
             'Academia\Controller\Treino' => 'Academia\Controller\TreinoController',
             'Academia\Controller\Dieta' => 'Academia\Controller\DietaController',
             'Academia\Controller\CepbrEndereco' => 'Academia\Controller\CepbrEnderecoController',
-            'Academia\Controller\CadastrarMedida' => 'Academia\Controller\MedidaController',
+            'Academia\Controller\Medida' => 'Academia\Controller\MedidaController',
             'Academia\Controller\Alimento' => 'Academia\Controller\AlimentoController',
             'Academia\Controller\Informativo' => 'Academia\Controller\InformativoController',
             'Academia\Controller\Profissional' => 'Academia\Controller\ProfissionalController',
             'Academia\Controller\Frequencia' => 'Academia\Controller\FrequenciaController',
             'Academia\Controller\Aparelho' => 'Academia\Controller\AparelhoController',
-            'Academia\Controller\Login' => 'Academia\Controller\LoginController'
+            'Academia\Controller\Login' => 'Academia\Controller\LoginController',
+            
             
         ),
+    ),
+    'form_elements' => array(
+        'invokables' => array(
+            'treino-form' => 'Academia\Form\TreinoForm',
+            'exercicios-fieldset' => 'Academia\Form\ExerciciosFieldset',
+        )
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,
@@ -88,16 +97,19 @@ return array(
             'layout/layoutAjax'       => __DIR__ . '/../view/layout/layoutAjax.phtml',
             'layout/layoutAcademia'   => __DIR__ . '/../view/layout/layoutAcademia.phtml',
             'layout/layoutAluno'      => __DIR__ . '/../view/layout/layoutAluno.phtml',
+            'layout/layoutAdmin'      => __DIR__ . '/../view/layout/layoutAdmin.phtml',
+            'layout/layoutProfissional'      => __DIR__ . '/../view/layout/layoutProfissional.phtml',
             'application/index/index' => __DIR__ . '/../view/academia/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',                     
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
-        ),
-        'strategies' => array(
-            'ViewJsonStrategy',
         )
+    ),
+    'view_helpers' => array(
+        'invokables'=> array(
+            'PaginationHelper' => 'Academia\Helper\PaginationHelper'        )
     ),
 	 // The following section is new and should be added to your file
      'router' => array(
@@ -107,7 +119,7 @@ return array(
                  'options' => array(
                      'route'    => '/[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -116,13 +128,13 @@ return array(
                      ),
                  ),
              ),
-            'cadastrarAluno' => array(
+            'aluno' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarAluno[/:action][/:id]',
+                     'route'    => '/aluno[/:action][/:id][/page/:page]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                         'id'     => '[0-9]+',
+                         'action'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'      => '[0-9]+',
                      ),
                      'defaults' => array(
                          'controller' => 'Academia\Controller\Aluno',
@@ -130,12 +142,27 @@ return array(
                      ),
                  ),
              ),
-		 'cadastrarProfissional' => array(
+             
+            'objetivo' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarProfissional[/:action][/:id]',
+                     'route'    => '/objetivo[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\Objetivo',
+                         'action'     => 'inserir',
+                     ),
+                 ),
+             ),
+		 'profissional' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/profissional[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -144,12 +171,12 @@ return array(
                      ),
                  ),
              ),
-              'cadastrarAcademia' => array(
+              'academia' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarAcademia[/:action][/:id]',
+                     'route'    => '/academia[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -158,12 +185,26 @@ return array(
                      ),
                  ),
              ),
-             'cadastrarTreino' => array(
+             'exercicio' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarTreino[/:action][/:id]',
+                     'route'    => '/exercicio[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\Exercicio',
+                         'action'     => 'inserir',
+                     ),
+                 ),
+             ),
+             'treino' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/treino[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -172,12 +213,12 @@ return array(
                      ),
                  ),
              ),
-             'cadastrarDieta' => array(
+             'dieta' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarDieta[/:action][/:id]',
+                     'route'    => '/dieta[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -186,26 +227,26 @@ return array(
                      ),
                  ),
              ),
-             'cadastrarMedida' => array(
+             'medida' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarMedida[/:action][/:id]',
+                     'route'    => '/medida[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
-                         'controller' => 'Academia\Controller\CadastrarMedida',
+                         'controller' => 'Academia\Controller\Medida',
                          'action'     => 'inserir',
                      ),
                  ),
              ),
-             'cadastrarAlimento' => array(
+             'alimento' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarAlimento[/:action][/:id]',
+                     'route'    => '/alimento[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -215,12 +256,12 @@ return array(
                  ),
              ),
              
-             'cadastrarFrequencia' => array(
+             'frequencia' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarFrequencia[/:action][/:id]',
+                     'route'    => '/frequencia[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -229,12 +270,12 @@ return array(
                      ),
                  ),
              ),
-             'cadastrarInformativo' => array(
+             'informativo' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarInformativo[/:action][/:id]',
+                     'route'    => '/informativo[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -246,9 +287,9 @@ return array(
              'login' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/Login[/:action][/:id]',
+                     'route'    => '/login[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -260,9 +301,9 @@ return array(
               'cepbrEndereco' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CepbrEndereco[/:action][/:id]',
+                     'route'    => '/cepbrEndereco[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -271,12 +312,12 @@ return array(
                      ),
                  ),
              ),
-             'cadastrarEquipamento' => array(
+             'Equipamento' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarEquipamento[/:action][/:id]',
+                     'route'    => '/equipamento[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
@@ -285,12 +326,12 @@ return array(
                      ),
                  ),
              ),
-             'cadastrarAparelho' => array(
+             'aparelho' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/CadastrarAparelho[/:action][/:id]',
+                     'route'    => '/aparelho[/:action][/:id]',
                      'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(

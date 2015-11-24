@@ -21,6 +21,7 @@ class CepbrEnderecoController extends AbstractController
        // $this->route = 'cadastrarAluno';
         $this->service = 'Academia\Service\CepbrEnderecoService';
         $this->entity = 'Academia\Entity\CepbrEndereco';
+        $this->listarAction = "cepbrEnderecosAction";//nome da chamada no webservice
     }
 	
     public function getCepAction(){

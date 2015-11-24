@@ -2,7 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * Informativo
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="informativo", indexes={@ORM\Index(name="fk_informativo_aluno1_idx", columns={"aluno_id"}), @ORM\Index(name="fk_informativo_academia1_idx", columns={"academia_id"})})
  * @ORM\Entity
  */
-class Informativo
+class Informativo extends AbstractEntity
 {
     /**
      * @var integer
@@ -29,14 +29,11 @@ class Informativo
     private $descricao;
 
     /**
-     * @var \Academia\Entity\Academia
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="academia_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="academia_id", type="bigint", nullable=true)
      */
-    private $academia;
+    private $academiaId;
 
     /**
      * @var \Academia\Entity\Aluno

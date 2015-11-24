@@ -7,7 +7,6 @@ namespace Academia\Form;
  */
 
 use Zend\Form\Form;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 
 class AcademiaForm extends Form
 {
@@ -19,7 +18,6 @@ class AcademiaForm extends Form
         */
         $this
              ->setAttribute('method', 'POST')
-             ->setHydrator(new ClassMethodsHydrator())
            //  ->setInputFilter(new AlunoFilter())
          ;
         

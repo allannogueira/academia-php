@@ -33,7 +33,7 @@ class AparelhoForm extends Form implements ObjectManagerAwareInterface
        
         $this->setLabel('Cadastrar Academia');             
         
-        $academia = new ObjectSelect("Academia");
+        $academia = new ObjectSelect("academia_id");
          $academia->setLabel("Academia")
                  ->setOptions([ 
                 'object_manager'     => $this->getObjectManager(),

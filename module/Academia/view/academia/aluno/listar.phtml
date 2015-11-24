@@ -1,7 +1,26 @@
+
+<nav class="navbar navbar-default ">
+<form class="margin20" method="POST">
+  <fieldset>
+    <div class="form-group">
+      <label for="disabledTextInput">Nome</label>
+      <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome">
+    </div>
+    <div class="form-group">
+      <label for="disabledTextInput">CPF</label>
+      <input type="text" id="cpf" name="cpf" class="form-control" placeholder="Digite o cpf">
+    </div>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+  </fieldset>
+</form>
+</nav>
+
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">Alunos</div>
 
+
+  
   <!-- Table -->
   <table class="table">
       <thead>
@@ -13,19 +32,19 @@
           <th>Objetivo</th>
       </tr>
       </thead>
-      <tbody
+      <tbody>
 <?php foreach ($this->data as $aluno): ?>
       <tr> 
         <td><?php echo $aluno->getNome(); ?></td>
         <td><?php echo $aluno->getRg(); ?></td>
         <td><?php echo $aluno->getCpf(); ?></td>
-        <td><?php echo $aluno->getEmail(); ?></td>
-        <td><?php echo $aluno->getObjetivo(); ?></td>      
+        <td><?php echo "<a href='mailto:".$aluno->getEmail()."'>".$aluno->getEmail()."</a>"; ?></td>
+       
         <td>
-            <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('cadastrarAluno', ['action' => 'editar', 'id' => $aluno->getId()]); ?>'"class="btn btn-default" aria-label="Left Align">
+            <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('aluno', ['action' => 'editar', 'id' => $aluno->getId()]); ?>'"class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
             </button>
-             <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('cadastrarAluno', ['action' => 'excluir', 'id' => $aluno->getId()]); ?>'" class="btn btn-default" aria-label="Left Align">
+             <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('aluno', ['action' => 'excluir', 'id' => $aluno->getId()]); ?>'" class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
         </td>      
@@ -33,4 +52,12 @@
 <?php endforeach; ?>
       </tbody>
    </table>
+</div>
+
+
+<div class="paging">
+    <?php 
+        $paging = $this->paginationHelper($this->data, $this->page, "/aluno/listar/", $this->data->getDefaultItemCountPerPage()); 
+        echo $paging; 
+    ?>
 </div>

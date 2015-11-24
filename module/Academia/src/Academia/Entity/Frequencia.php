@@ -2,8 +2,8 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * Frequencia
  *
@@ -30,12 +30,18 @@ class Frequencia extends AbstractEntity
 
     /**
      * @var \Academia\Entity\Aluno
-     *@ORM\Column(name="aluno_id", type="string", nullable=true)
-    
+     *
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="aluno_id", referencedColumnName="id")
+     * })
      */
     private $aluno;
 
 
+
+  
 
     /**
      * Get id
@@ -76,7 +82,7 @@ class Frequencia extends AbstractEntity
      * @param \Academia\Entity\Aluno $aluno
      * @return Frequencia
      */
-    public function setAluno( $aluno = null)
+    public function setAluno(\Academia\Entity\Aluno $aluno)
     {
         $this->aluno = $aluno;
     

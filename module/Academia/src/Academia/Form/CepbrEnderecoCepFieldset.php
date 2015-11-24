@@ -16,7 +16,7 @@ use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
  *
  * @author Allan
  */
-class CepbrEnderecoCepFieldset extends Fieldset implements InputFilterProviderInterface{
+class CepbrEnderecoCepFieldset extends Fieldset {
     //put your code here
      public function __construct()
     {
@@ -41,12 +41,5 @@ class CepbrEnderecoCepFieldset extends Fieldset implements InputFilterProviderIn
         
     }
 
-    public function getInputFilterSpecification() {
-        return array(
-             'name' => array(
-                 'required' => true,
-             ),
-         );
-    }
 
 }

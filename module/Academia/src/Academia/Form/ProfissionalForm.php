@@ -33,7 +33,7 @@ class ProfissionalForm extends Form implements ObjectManagerAwareInterface
        
         $this->setLabel('Cadastrar Academia');             
         
-        $academia = new ObjectSelect("academia");
+        $academia = new ObjectSelect("academia_id");
          $academia->setLabel("Academia")
                  ->setOptions([ 
                 'object_manager'     => $this->getObjectManager(),
@@ -50,6 +50,22 @@ class ProfissionalForm extends Form implements ObjectManagerAwareInterface
                 )            
         ]);
          
+         $academia = new ObjectSelect("academia_id");
+         $academia->setLabel("Academia")
+                 ->setOptions([ 
+                'object_manager'     => $this->getObjectManager(),
+                'target_class'       => 'Academia\Entity\Academia',
+                'property' => 'nome',
+               'empty_option' => 'selecione',
+                'is_method' => true,
+                'find_method'        => array(
+                    'name'  => 'findBy',
+                    'params' =>[
+                        'criteria'   => array(),
+                        'orderBy'   => array("nome" => "ASC"),
+                    ]
+                )            
+        ]);
         // echo var_dump($academia);
         $this->add($academia);
          
@@ -62,6 +78,14 @@ class ProfissionalForm extends Form implements ObjectManagerAwareInterface
        ]);
        
        $this->add([
+           'name' => 'usuario',
+           'type' => 'text',
+           'options' => [
+               'label' => 'Usuario',
+           ]
+       ]);
+       
+       $this->add([
            'name' => 'senha',
            'type' => 'password',
            'options' => [
@@ -69,6 +93,13 @@ class ProfissionalForm extends Form implements ObjectManagerAwareInterface
            ]
        ]);
      
+        $this->add(array(
+             'type' => 'Academia\Form\EnderecoFieldset',
+             'options' => array(
+                 'use_as_base_fieldset' => true,
+             ),
+         ));
+        
        $this->add(array(
              'type' => 'Zend\Form\Element\Csrf',
              'name' => 'csrf',

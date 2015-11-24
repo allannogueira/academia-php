@@ -17,9 +17,10 @@ class DietaController extends AbstractController
     {
         $this->form = 'Academia\Form\DietaForm';
         $this->controller = 'DietaController';
-        $this->route = 'cadastrarDieta';
+        $this->route = 'dieta';
         $this->service = 'Academia\Service\DietaService';
         $this->entity = 'Academia\Entity\Dieta';
+        $this->listarAction = "dietasAction";//nome da chamada no webservice
     }
     
     public function inserirAction(){

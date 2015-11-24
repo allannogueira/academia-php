@@ -1,5 +1,5 @@
 function carregaCep(){       
-   var cep = $("input[name='endereco[cepbr_endereco_cep][cep]']").val();
+   var cep = $("input[name='endereco[cepbr_endereco_cep]']").val();
    $.ajax({
         url: "/CepbrEndereco/getCep",
         dataType: "json",
@@ -29,3 +29,19 @@ $(document).ready(function(){
         });
     });
 });
+
+function add_field(name,index) {
+    var currentCount = $('#'+name+'  input').length ;
+    var template = $('#'+name+'  > span').data('template');
+    var re = new RegExp("__"+index+"__","g");
+    template = $($(template.replace(re, currentCount)));
+    c = template.find('div.col-sm-5');
+    d = template.find('div.input-group');
+	var b = $(' <span class="input-group-btn"><button class="btn btn-default" >remove</button></span>');
+	b.click(function (){$(this).parent().parent().parent().remove();});
+    b.appendTo(d);
+    d.appendTo(c);
+    c.appendTo(template);
+    $('#'+name+' ').append(template);
+    return false;
+}

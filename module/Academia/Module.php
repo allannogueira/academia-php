@@ -6,6 +6,7 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Academia\Service\AlunoService;
 use Academia\Service\AcademiaService;
+use Academia\Service\ExercicioService;
 use Academia\Service\TreinoService;
 use Academia\Service\DietaService;
 use Academia\Service\CepbrEnderecoService;
@@ -16,24 +17,37 @@ use Academia\Service\ProfissionalService;
 use Academia\Service\FrequenciaService;
 use Academia\Service\AparelhoService;
 use Academia\Form\ProfissionalForm;
+use Academia\Form\ExercicioForm;
 use Academia\Form\TreinoForm;
 use Academia\Form\DietaForm;
 use Academia\Form\MedidaForm;
 use Academia\Form\FrequenciaForm;
 use Academia\Form\AparelhoForm;
 use Academia\Form\LoginForm;
-use DoctrineModule\Authentication\Adapter\ObjectRepository;
+use Academia\Form\EnderecoForm;
+use Academia\Form\AlunoForm;
+use Academia\Form\InformativoForm;
+use DoctrineModule\Authentication\Adapter\ObjectRepository as ObjectRepositoryAdapter;
+use DoctrineModule\Authentication\Storage\ObjectRepository as StorageObjectRepository;
+use DoctrineModule\Options\Authentication;
+use Zend\Authentication\Storage\Session;
+use Academia\Controller\AcademiaController;
+use Zend\ModuleManager\Feature\FormElementProviderInterface;
+use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 
-class Module
+
+class Module implements FormElementProviderInterface
 {
+ 
+    
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-        
+       
         //toda vez que chamar AbstractActionController, será verificado se o está logado
-        $sharedEvents = $eventManager->getSharedManager();
+       /* $sharedEvents = $eventManager->getSharedManager();
         $sharedEvents->attach("Zend\Mvc\Controller\AbstractActionController","dispatch", function($ev){
              //se está logado
             $authService = $ev->getApplication()->getServiceManager()->get('Zend\Authentication\AuthenticationService');
@@ -52,7 +66,7 @@ class Module
            echo "Acesso Negado.";
             //se nao estiver logado
         },99);
-       
+       */
         
     }
 
@@ -72,15 +86,120 @@ class Module
         );
     }
     
+    public function getFormElementConfig()
+    {
+        return array(
+            'initializers' => array(
+                'ObjectManagerInitializer' => function ($element, $formElements) {
+                    if ($element instanceof ObjectManagerAwareInterface) {
+                        $services      = $formElements->getServiceLocator();
+                        $entityManager = $services->get('Doctrine\ORM\EntityManager');
+
+                        $element->setObjectManager($entityManager);
+                    }
+                },
+            ),
+            'factories' => array(
+                'ExerciciosFieldset' => function($sm) {
+            
+            echo "lalala";
+                    // I assume here that the Album\Model\AlbumTable
+                    // dependency have been defined too
+
+                   // $serviceLocator = $sm->getServiceLocator();
+                   // $albumTable = $serviceLocator->get('Album\Model\AlbumTable');
+                    $fieldset = new Academia\Form\ExerciciosFieldset();
+                    return $fieldset;
+                }
+            )
+        );
+    }
+    
     public function getServiceConfig(){
         return [
             'factories' => array(
                 'Zend\Authentication\AuthenticationService' => function($em) {
+            
                         // If you are using DoctrineORMModule:
-                        $service = $em->get('doctrine.authenticationservice.orm_default');
-                   //     $service->setAdapter($em->get('AuthAdapterAcademia'));
-                        return $service;
-                        
+                        return $em->get('doctrine.authenticationservice.orm_default');
+                },
+                        //utilizado em LoginController.php
+                'adapters' => function($em){
+                    $adapterAcademia = new ObjectRepositoryAdapter([
+                        'object_manager' => $em->get("Doctrine\ORM\EntityManager"),
+                        'identity_class' => 'Academia\Entity\Academia',
+                        'identity_property' => 'usuario',
+                        'credential_property' => 'senha',
+                        'storage' => 'DoctrineModule\Authentication\Storage\Session',
+                    ]);
+                    
+                    $adapterAluno = new ObjectRepositoryAdapter([
+                        'object_manager' => $em->get("Doctrine\ORM\EntityManager"),
+                        'identity_class' => 'Academia\Entity\Aluno',
+                        'identity_property' => 'usuario',
+                        'credential_property' => 'senha',
+                        'storage' => 'DoctrineModule\Authentication\Storage\Session',
+                    ]);
+                    
+                    $adapterAdmin = new ObjectRepositoryAdapter([
+                        'object_manager' => $em->get("Doctrine\ORM\EntityManager"),
+                        'identity_class' => 'Academia\Entity\Admin',
+                        'identity_property' => 'usuario',
+                        'credential_property' => 'senha',
+                        'storage' => 'DoctrineModule\Authentication\Storage\Session',
+                    ]);
+                    
+                    $adapterProfissional = new ObjectRepositoryAdapter([
+                        'object_manager' => $em->get("Doctrine\ORM\EntityManager"),
+                        'identity_class' => 'Academia\Entity\Profissional',
+                        'identity_property' => 'usuario',
+                        'credential_property' => 'senha',
+                        'storage' => 'DoctrineModule\Authentication\Storage\Session',
+                    ]);
+                    
+                    return [$adapterAluno,$adapterAcademia,$adapterAdmin,$adapterProfissional];
+                },
+                'storages' => function($em){
+                    $storageAluno = new StorageObjectRepository(
+                        new Authentication([
+                                'object_manager' => $em->get("Doctrine\ORM\EntityManager"),
+                                'identity_class' => 'Academia\Entity\Aluno',
+                                'identity_property' => 'usuario',
+                                'credential_property' => 'senha',
+                                'storage' => new Session(),
+                        ])
+                    );
+                    
+                    $storageAcademia = new StorageObjectRepository(
+                        new Authentication([
+                                'object_manager' => $em->get("Doctrine\ORM\EntityManager"),
+                                'identity_class' => 'Academia\Entity\Academia',
+                                'identity_property' => 'usuario',
+                                'credential_property' => 'senha',
+                                'storage' => new Session(),
+                        ])
+                    );
+                    
+                    $storageAdmin = new StorageObjectRepository(
+                        new Authentication([
+                                'object_manager' => $em->get("Doctrine\ORM\EntityManager"),
+                                'identity_class' => 'Academia\Entity\Admin',
+                                'identity_property' => 'usuario',
+                                'credential_property' => 'senha',
+                                'storage' => new Session(),
+                        ])
+                    );
+                    
+                    $storageProfissional = new StorageObjectRepository(
+                        new Authentication([
+                                'object_manager' => $em->get("Doctrine\ORM\EntityManager"),
+                                'identity_class' => 'Academia\Entity\Profissional',
+                                'identity_property' => 'usuario',
+                                'credential_property' => 'senha',
+                                'storage' => new Session(),
+                        ])
+                    );
+                    return [$storageAluno,$storageAcademia,$storageAdmin,$storageProfissional];
                 },
           /*      'AuthAdapterAcademia' => function($sm) {
                     return new ObjectRepository(array(
@@ -125,8 +244,19 @@ class Module
                     return new ProfissionalForm($em->get("Doctrine\ORM\EntityManager"));
                 },
                 'Academia\Form\TreinoForm' => function($em){
-                    return new TreinoForm($em->get("Doctrine\ORM\EntityManager"));
+                    
+                    /*$form = $em->get("treino-form");
+                    $form->setObjectManager($em->get("Doctrine\ORM\EntityManager"));*/
+                    
+                    $form = $em->get('FormElementManager')->get('treino-form');
+                     //$form->setObjectManager($em->get("Doctrine\ORM\EntityManager"));
+                   // return new TreinoForm($em->get("Doctrine\ORM\EntityManager"));
+                    return $form;
                 },
+                'Academia\Form\ExercicioForm' => function($em){
+                    return new ExercicioForm($em->get("Doctrine\ORM\EntityManager"));
+                },
+                        
                 'Academia\Form\DietaForm' => function($em){
                     return new DietaForm($em->get("Doctrine\ORM\EntityManager"));
                 },
@@ -136,14 +266,29 @@ class Module
                 'Academia\Service\FrequenciaService' => function($em){
                     return new FrequenciaService($em->get("Doctrine\ORM\EntityManager"));
                 },
+                'Academia\Service\ExercicioService' => function($em){
+                    return new ExercicioService($em->get("Doctrine\ORM\EntityManager"));
+                },
                 'Academia\Form\FrequenciaForm' => function($em){
                     return new FrequenciaForm($em->get("Doctrine\ORM\EntityManager"));
                 },
                 'Academia\Form\AparelhoForm' => function($em){
                     return new AparelhoForm($em->get("Doctrine\ORM\EntityManager"));
                 },
+                'Academia\Form\EnderecoFieldset' => function($em){
+                    return new EnderecoFieldset($em->get("Doctrine\ORM\EntityManager"));
+                },
+                'Academia\Form\AlunoForm' => function($em){
+                   
+                    return new AlunoForm($em->get("Doctrine\ORM\EntityManager"));
+                },
                 'Academia\Form\LoginForm' => function($em){
+                   // die('Module.php');
                     return new LoginForm($em->get("Doctrine\ORM\EntityManager"));
+                },
+                'Academia\Form\InformativoForm' => function($em){
+                 //    die('Module.php');
+                    return new InformativoForm($em->get("Doctrine\ORM\EntityManager"));
                 }
             )
         ];

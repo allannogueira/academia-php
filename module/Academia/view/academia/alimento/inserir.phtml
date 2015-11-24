@@ -23,7 +23,7 @@ $flash = $this->flashMessenger();
  echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
  
 //seta action, para onde o formulario será enviar o formulario
-$form->setAttribute('action',$this->url('cadastrarAlimento',['action'=>'inserir']));
+$form->setAttribute('action',$this->url('alimento',['action'=>'inserir']));
 $form->prepare();//prepara o formulario
 echo $this->form()->openTag($form);//abre a tag form com o action
 echo $this->formCollection($form);//monta o corpo do formulario

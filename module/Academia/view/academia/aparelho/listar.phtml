@@ -16,18 +16,25 @@
       <tbody
 <?php foreach ($this->data as $aluno): ?>
       <tr> 
-        <td><?php echo $aluno->getNome(); ?></td>
-        <td><?php echo $aluno->getRg(); ?></td>
-        <td><?php echo $aluno->getCpf(); ?></td>
-        <td><?php echo $aluno->getEmail(); ?></td>
-        <td><?php echo $aluno->getObjetivo(); ?></td>      
+        <td><?php echo $aluno['nome']; ?></td>
+        <td><?php echo $aluno['rg']; ?></td>
+        <td><?php echo $aluno['cpf']; ?></td>
+        <td><?php echo $aluno['email']; ?></td>
+        <td><?php echo $aluno['objetivo']; ?></td>      
         <td>
             <input type="button" class="btn btn-primary" value="Visualizar">
             <input type="button" class="btn btn-warning" value="Editar">
-            <input type="button" onclick="javascript:window.location.href = '<?php echo $this->url('cadastrarAluno', ['action' => 'excluir', 'id' => $aluno->getId()]); ?>'" class="btn btn-danger" value="Excluir">
+            <input type="button" onclick="javascript:window.location.href = '<?php echo $this->url('aluno', ['action' => 'excluir', 'id' => $aluno['id']]); ?>'" class="btn btn-danger" value="Excluir">
         </td>      
       </tr>
 <?php endforeach; ?>
       </tbody>
    </table>
+</div>
+
+<div class="paging">
+    <?php 
+        $paging = $this->paginationHelper($this->data, $this->page, "/aparelho/listar/", $this->data->getDefaultItemCountPerPage()); 
+        echo $paging; 
+    ?>
 </div>

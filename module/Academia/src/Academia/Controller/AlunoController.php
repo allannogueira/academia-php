@@ -19,9 +19,10 @@ class AlunoController extends AbstractController
         
         $this->form = 'Academia\Form\AlunoForm';
         $this->controller = 'AlunoController';
-        $this->route = 'cadastrarAluno';
+        $this->route = 'aluno';
         $this->service = 'Academia\Service\AlunoService';
         $this->entity = 'Academia\Entity\Aluno';
+        $this->listarAction = "alunosAction";//nome da chamada no webservice
     }
     
     /*
@@ -37,5 +38,19 @@ class AlunoController extends AbstractController
         return $viewModel;
     }
     
+    public function inserirAction(){
+        
+        $this->form = $this->getServiceLocator()->get($this->form);
+        
+        return parent::inserirAction();
+    }
     
+    public function listarAction($where = ""){
+        $nome = $this->params()->fromPost("nome");
+        $cpf = $this->params()->fromPost("cpf");
+                
+        $where = "where (t.nome like '%".$nome."%' or '".$nome."' = '') and (t.cpf='".$cpf."' or '".$cpf."' = '')";
+        return parent::listarAction($where);
+        
+    }
 }

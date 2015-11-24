@@ -2,22 +2,22 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * Aluno
  *
- * @ORM\Table(name="aluno", indexes={@ORM\Index(name="fk_aluno_endereco1_idx", columns={"endereco_id"})})
+ * @ORM\Table(name="aluno", indexes={@ORM\Index(name="fk_aluno_endereco1_idx", columns={"endereco_id"}), @ORM\Index(name="fk_aluno_treino1_idx", columns={"treino_id"}), @ORM\Index(name="fk_aluno_medidas1_idx", columns={"medidas_id"}), @ORM\Index(name="fk_aluno_dieta1_idx", columns={"dieta_id"})})
  * @ORM\Entity
  */
-class Aluno
+class Aluno extends AbstractEntity
 {
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 
@@ -57,14 +57,98 @@ class Aluno
     private $objetivo;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="usuario", type="string", length=45, nullable=true)
+     */
+    private $usuario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="senha", type="string", length=45, nullable=true)
+     */
+    private $senha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="academia_id", type="string", length=45, nullable=true)
+     */
+    private $academiaId;
+
+    /**
+     * @var \Academia\Entity\Dieta
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Dieta")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="dieta_id", referencedColumnName="id")
+     * })
+     */
+    private $dieta;
+
+    /**
      * @var \Academia\Entity\Endereco
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Endereco")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Endereco")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="endereco_id", referencedColumnName="id")
      * })
      */
     private $endereco;
 
+    /**
+     * @var \Academia\Entity\Medidas
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Medidas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="medidas_id", referencedColumnName="id")
+     * })
+     */
+    private $medidas;
+
+    /**
+     * @var \Academia\Entity\Treino
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Treino")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="treino_id", referencedColumnName="id")
+     * })
+     */
+    private $treino;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Academia\Entity\Telefone", inversedBy="aluno")
+     * @ORM\JoinTable(name="aluno_has_telefone",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="aluno_id", referencedColumnName="id"),
+     *     @ORM\JoinColumn(name="aluno_treino_id", referencedColumnName="treino_id"),
+     *     @ORM\JoinColumn(name="aluno_medidas_id", referencedColumnName="medidas_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="telefone_id", referencedColumnName="id"),
+     *     @ORM\JoinColumn(name="telefone_telefone_tipo_id", referencedColumnName="telefone_tipo_id")
+     *   }
+     * )
+     */
+    private $telefone;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->telefone = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 }

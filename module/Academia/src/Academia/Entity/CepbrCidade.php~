@@ -2,7 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * CepbrCidade
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="cepbr_cidade", indexes={@ORM\Index(name="fk_cepbr_cidade_cepbr_estado1_idx", columns={"uf"})})
  * @ORM\Entity
  */
-class CepbrCidade
+class CepbrCidade extends AbstractEntity
 {
     /**
      * @var integer
@@ -36,12 +36,9 @@ class CepbrCidade
     private $codIbge;
 
     /**
-     * @var \Academia\Entity\CepbrEstado
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrEstado")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="uf", referencedColumnName="uf")
-     * })
+     * @ORM\Column(name="uf", type="string", length=2, nullable=true)
      */
     private $uf;
 

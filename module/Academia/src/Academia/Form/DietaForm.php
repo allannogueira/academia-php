@@ -63,7 +63,7 @@ class DietaForm extends Form implements ObjectManagerAwareInterface
            'name' => 'finalidade',
            'type' => 'textarea',
            'options' => [
-               'label' => 'Finalidade do Treino',
+               'label' => 'Finalidade',
            ]
        ]);
        

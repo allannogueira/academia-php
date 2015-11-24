@@ -17,9 +17,10 @@ class FrequenciaController extends AbstractController
     {
         $this->form = 'Academia\Form\FrequenciaForm';
         $this->controller = 'FrequenciaController';
-        $this->route = 'cadastrarFrequencia';
+        $this->route = 'frequencia';
         $this->service = 'Academia\Service\FrequenciaService';
         $this->entity = 'Academia\Entity\Frequencia';
+        $this->listarAction = "frequenciasAction";//nome da chamada no webservice
     }
     /*
     public function inserirAction(){

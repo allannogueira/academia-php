@@ -2,7 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
 
 /**
  * Frequencia
@@ -10,14 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="frequencia", indexes={@ORM\Index(name="fk_frequencia_aluno1_idx", columns={"aluno_id"})})
  * @ORM\Entity
  */
-class Frequencia
+class Frequencia extends AbstractEntity
 {
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 
@@ -31,7 +31,9 @@ class Frequencia
     /**
      * @var \Academia\Entity\Aluno
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="aluno_id", referencedColumnName="id")
      * })

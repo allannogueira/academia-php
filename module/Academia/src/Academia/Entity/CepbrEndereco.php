@@ -2,8 +2,8 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * CepbrEndereco
  *
@@ -29,22 +29,16 @@ class CepbrEndereco extends AbstractEntity
     private $endereco;
 
     /**
-     * @var \Academia\Entity\CepbrBairro
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrBairro")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_bairro", referencedColumnName="id_bairro")
-     * })
+     * @ORM\Column(name="id_bairro", type="integer", nullable=true)
      */
     private $idBairro;
 
     /**
-     * @var \Academia\Entity\CepbrCidade
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrCidade")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_cidade", referencedColumnName="id_cidade")
-     * })
+     * @ORM\Column(name="id_cidade", type="integer", nullable=true)
      */
     private $idCidade;
 
@@ -86,10 +80,10 @@ class CepbrEndereco extends AbstractEntity
     /**
      * Set idBairro
      *
-     * @param \Academia\Entity\CepbrBairro $idBairro
+     * @param integer $idBairro
      * @return CepbrEndereco
      */
-    public function setIdBairro(\Academia\Entity\CepbrBairro $idBairro = null)
+    public function setIdBairro($idBairro)
     {
         $this->idBairro = $idBairro;
     
@@ -99,7 +93,7 @@ class CepbrEndereco extends AbstractEntity
     /**
      * Get idBairro
      *
-     * @return \Academia\Entity\CepbrBairro 
+     * @return integer 
      */
     public function getIdBairro()
     {
@@ -109,10 +103,10 @@ class CepbrEndereco extends AbstractEntity
     /**
      * Set idCidade
      *
-     * @param \Academia\Entity\CepbrCidade $idCidade
+     * @param integer $idCidade
      * @return CepbrEndereco
      */
-    public function setIdCidade(\Academia\Entity\CepbrCidade $idCidade = null)
+    public function setIdCidade($idCidade)
     {
         $this->idCidade = $idCidade;
     
@@ -122,7 +116,7 @@ class CepbrEndereco extends AbstractEntity
     /**
      * Get idCidade
      *
-     * @return \Academia\Entity\CepbrCidade 
+     * @return integer 
      */
     public function getIdCidade()
     {

@@ -17,9 +17,10 @@ class ProfissionalController extends AbstractController
     {
         $this->form = 'Academia\Form\ProfissionalForm';
         $this->controller = 'ProfissionalController';
-        $this->route = 'cadastrarProfissional';
+        $this->route = 'profissional';
         $this->service = 'Academia\Service\ProfissionalService';
         $this->entity = 'Academia\Entity\Profissional';
+        $this->listarAction = "profissionaisAction";//nome da chamada no webservice
     }
     
     public function inserirAction(){
@@ -29,4 +30,12 @@ class ProfissionalController extends AbstractController
         return parent::inserirAction();
     }
 	
+      public function listarAction($where = ""){
+        $nome = $this->params()->fromPost("nome");
+        $usuario = $this->params()->fromPost("usuario");
+                
+        $where = "where (t.nome like '%".$nome."%' or '".$nome."' = '') and (t.usuario='".$usuario."' or '".$usuario."' = '')";
+        return parent::listarAction($where);
+        
+    }
 }

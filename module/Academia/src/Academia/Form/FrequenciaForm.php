@@ -30,7 +30,7 @@ class FrequenciaForm extends Form implements ObjectManagerAwareInterface
         
         $this->setLabel('Aluno');             
         
-        $aluno = new ObjectSelect("Aluno");
+        $aluno = new ObjectSelect("aluno");
          $aluno->setLabel("Aluno")
                  ->setOptions([ 
                 'object_manager'     => $this->getObjectManager(),
@@ -50,7 +50,14 @@ class FrequenciaForm extends Form implements ObjectManagerAwareInterface
         // echo var_dump($academia);
         $this->add($aluno);
         
-                 
+        $this->add([
+           'name' => 'dataPresenca',
+           'options' => [
+               'label' => 'Data de presença',
+                'format'=>'Y-m-d'
+           ],
+    'type'  => 'Zend\Form\Element\Date'
+       ]);
         
       
        

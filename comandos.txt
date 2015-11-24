@@ -1,0 +1,22 @@
+#criar modulo#
+dentro de academia-php
+php vendor/zendframework/zftool/zf.php
+
+#gerar entidades do banco para o php#
+acessar C:/Users/Allan/Documents/GitHub/academia-php/bin
+criar entidades: doctrine-module orm:convert-mapping --namespace="Academia\Entity\\" --force --from-database annotation ./module/Academia/src/
+gerar gets e sets das entidades: doctrine-module orm:generate-entities ./module/Academia/src/ --generate-annotations=true
+
+
+#criando uma database pelo doctrine, apenas a database#
+doctrine-module dbal:run-sql "drop database Academia"
+
+#copiando classes entity do codigo para o banco de dados#
+1 - no mysql:
+drop database Academia;
+create database Academia;
+2- acessar C:/Users/Allan/Documents/GitHub/academia-php/bin
+doctrine-module orm:schema-tool:create
+ou
+doctrine-module orm:schema-tool:update
+

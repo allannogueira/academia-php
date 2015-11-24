@@ -17,9 +17,17 @@ class InformativoController extends AbstractController
     {
         $this->form = 'Academia\Form\InformativoForm';
         $this->controller = 'InformativoController';
-        $this->route = 'cadastrarInformativo';
+        $this->route = 'informativo';
         $this->service = 'Academia\Service\InformativoService';
         $this->entity = 'Academia\Entity\Informativo';
+        $this->listarAction = "informativosAction";//nome da chamada no webservice
+    }
+    
+      public function inserirAction(){
+        
+        $this->form = $this->getServiceLocator()->get($this->form);
+        
+        return parent::inserirAction();
     }
 	
 }

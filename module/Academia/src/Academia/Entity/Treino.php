@@ -2,12 +2,12 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * Treino
  *
- * @ORM\Table(name="treino", indexes={@ORM\Index(name="fk_treino_aluno1_idx", columns={"aluno_id"})})
+ * @ORM\Table(name="treino")
  * @ORM\Entity
  */
 class Treino extends AbstractEntity
@@ -31,6 +31,13 @@ class Treino extends AbstractEntity
     /**
      * @var \DateTime
      *
+     * @ORM\Column(name="data_cadastro", type="date", nullable=true)
+     */
+    private $dataCadastro;
+
+    /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="data_inicio", type="date", nullable=true)
      */
     private $dataInicio;
@@ -43,12 +50,27 @@ class Treino extends AbstractEntity
     private $dataFim;
 
     /**
-     * @var string
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\Column(name="aluno_id", type="string", nullable=true)
+     * @ORM\ManyToMany(targetEntity="Academia\Entity\Exercicios", inversedBy="treino",  cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="exercicios_has_treino",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="exercicios_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="treino_id", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $aluno;
+    private $exercicios;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->exercicios = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -84,7 +106,28 @@ class Treino extends AbstractEntity
         return $this->nome;
     }
 
+    /**
+     * Set dataCadastro
+     *
+     * @param \DateTime $dataCadastro
+     * @return Treino
+     */
+    public function setDataCadastro($dataCadastro)
+    {
+        $this->dataCadastro = $dataCadastro;
+    
+        return $this;
+    }
 
+    /**
+     * Get dataCadastro
+     *
+     * @return \DateTime 
+     */
+    public function getDataCadastro()
+    {
+        return $this->dataCadastro;
+    }
 
     /**
      * Set dataInicio
@@ -94,7 +137,7 @@ class Treino extends AbstractEntity
      */
     public function setDataInicio($dataInicio)
     {
-        $this->dataInicio = new \DateTime($dataInicio);
+        $this->dataInicio = $dataInicio;
     
         return $this;
     }
@@ -117,7 +160,7 @@ class Treino extends AbstractEntity
      */
     public function setDataFim($dataFim)
     {
-        $this->dataFim = new \DateTime($dataFim);
+        $this->dataFim = $dataFim;
     
         return $this;
     }
@@ -132,16 +175,35 @@ class Treino extends AbstractEntity
         return $this->dataFim;
     }
 
-    public function setAluno($aluno = null)
+    /**
+     * Add exercicios
+     *
+     * @param \Academia\Entity\Exercicios $exercicios
+     * @return Treino
+     */
+    public function addExercicio(\Academia\Entity\Exercicios $exercicios)
     {
-        $this->aluno = $aluno;
-    
+        $this->exercicios[] = $exercicios;
         return $this;
     }
 
-    public function getAluno()
+    /**
+     * Remove exercicios
+     *
+     * @param \Academia\Entity\Exercicios $exercicios
+     */
+    public function removeExercicio(\Academia\Entity\Exercicios $exercicios)
     {
-        return $this->aluno;
+        $this->exercicios->removeElement($exercicios);
     }
-    
+
+    /**
+     * Get exercicios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getExercicios()
+    {
+        return $this->exercicios;
+    }
 }

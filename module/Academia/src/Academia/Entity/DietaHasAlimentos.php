@@ -2,8 +2,8 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * DietaHasAlimentos
  *
@@ -13,21 +13,18 @@ use Base\Entity\AbstractEntity;
 class DietaHasAlimentos extends AbstractEntity
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="alimentos_id", type="bigint", nullable=true)
+     */
+    private $alimentosId;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="horario", type="time", nullable=true)
      */
     private $horario;
-
-    /**
-     * @var \Academia\Entity\Alimentos
-     *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Alimentos")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="alimentos_id", referencedColumnName="id")
-     * })
-     */
-    private $alimentos;
 
     /**
      * @var \Academia\Entity\Dieta
@@ -42,6 +39,29 @@ class DietaHasAlimentos extends AbstractEntity
     private $dieta;
 
 
+
+    /**
+     * Set alimentosId
+     *
+     * @param integer $alimentosId
+     * @return DietaHasAlimentos
+     */
+    public function setAlimentosId($alimentosId)
+    {
+        $this->alimentosId = $alimentosId;
+    
+        return $this;
+    }
+
+    /**
+     * Get alimentosId
+     *
+     * @return integer 
+     */
+    public function getAlimentosId()
+    {
+        return $this->alimentosId;
+    }
 
     /**
      * Set horario
@@ -64,29 +84,6 @@ class DietaHasAlimentos extends AbstractEntity
     public function getHorario()
     {
         return $this->horario;
-    }
-
-    /**
-     * Set alimentos
-     *
-     * @param \Academia\Entity\Alimentos $alimentos
-     * @return DietaHasAlimentos
-     */
-    public function setAlimentos(\Academia\Entity\Alimentos $alimentos = null)
-    {
-        $this->alimentos = $alimentos;
-    
-        return $this;
-    }
-
-    /**
-     * Get alimentos
-     *
-     * @return \Academia\Entity\Alimentos 
-     */
-    public function getAlimentos()
-    {
-        return $this->alimentos;
     }
 
     /**

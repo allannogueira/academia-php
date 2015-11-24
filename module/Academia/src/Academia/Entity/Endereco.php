@@ -2,8 +2,8 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+
 /**
  * Endereco
  *
@@ -43,12 +43,9 @@ class Endereco extends AbstractEntity
     private $complemento;
 
     /**
-     * @var \Academia\Entity\CepbrEndereco
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrEndereco")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="cepbr_endereco_cep", referencedColumnName="cep")
-     * })
+     * @ORM\Column(name="cepbr_endereco_cep", type="string", length=10, nullable=true)
      */
     private $cepbrEnderecoCep;
 
@@ -136,10 +133,10 @@ class Endereco extends AbstractEntity
     /**
      * Set cepbrEnderecoCep
      *
-     * @param \Academia\Entity\CepbrEndereco $cepbrEnderecoCep
+     * @param string $cepbrEnderecoCep
      * @return Endereco
      */
-    public function setCepbrEnderecoCep(\Academia\Entity\CepbrEndereco $cepbrEnderecoCep = null)
+    public function setCepbrEnderecoCep($cepbrEnderecoCep)
     {
         $this->cepbrEnderecoCep = $cepbrEnderecoCep;
     
@@ -149,7 +146,7 @@ class Endereco extends AbstractEntity
     /**
      * Get cepbrEnderecoCep
      *
-     * @return \Academia\Entity\CepbrEndereco 
+     * @return string 
      */
     public function getCepbrEnderecoCep()
     {
