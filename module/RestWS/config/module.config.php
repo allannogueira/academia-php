@@ -3,6 +3,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'RestWS\Controller\AlbumRest' => 'RestWS\Controller\AlbumRestController',
+            'RestWS\Controller\Login' => 'RestWS\Controller\LoginController',
         ),
     ),
     
@@ -12,12 +13,24 @@ return array(
             'album-rest' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/album-rest[/:id][/:action][.:formatter]',
+                    'route'    => '/album-rest[/:action][/:id][.:formatter]',
                     'constraints' => array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
                         'controller' => 'RestWS\Controller\AlbumRest',
+                    ),
+                ),
+            ),
+             'login' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/login[/:action][/:id][.:formatter]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'RestWS\Controller\Login',
                     ),
                 ),
             ),

@@ -13,7 +13,7 @@ class AlbumRestController extends AbstractRestfulController
     public function getList()
     {
           return new JsonModel(array(
-            'create' => array("parabens, vc chamou o metodo CREATE"),
+            'getList' => array("parabens, vc chamou o metodo getList"),
         ));
     }
  
@@ -39,7 +39,9 @@ class AlbumRestController extends AbstractRestfulController
  
     public function create($data)
     {
-        return $this->get($data);
+           return new JsonModel(array(
+            'create' => array("parabens, vc chamou o metodo CREATE"),
+        ));
     }
  
     public function update($id, $data)
@@ -57,8 +59,9 @@ class AlbumRestController extends AbstractRestfulController
     }
     
     public function createAction(){
-        return $this->delete();
+        return $this->create("teste");
     }
+    
     public function updateAction(){
         return $this->update();
     }
