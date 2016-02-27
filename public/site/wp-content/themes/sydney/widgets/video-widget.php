@@ -2,14 +2,10 @@
 
 class Sydney_Video_Widget extends WP_Widget {
 
-    function sydney_video_widget() {
+	public function __construct() {
 		$widget_ops = array('classname' => 'sydney_video_widget_widget', 'description' => __( 'Display a video from Youtube, Vimeo etc.', 'sydney') );
         parent::__construct(false, $name = __('Sydney: Video', 'sydney'), $widget_ops);
 		$this->alt_option_name = 'sydney_video_widget';
-		
-		add_action( 'save_post', array($this, 'flush_widget_cache') );
-		add_action( 'deleted_post', array($this, 'flush_widget_cache') );
-		add_action( 'switch_theme', array($this, 'flush_widget_cache') );		
     }
 	
 	function form($instance) {
@@ -32,17 +28,12 @@ class Sydney_Video_Widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['url'] = esc_url_raw($new_instance['url']);
-		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
 		if ( isset($alloptions['sydney_video_widget']) )
 			delete_option('sydney_video_widget');		  
 		  
 		return $instance;
-	}
-	
-	function flush_widget_cache() {
-		wp_cache_delete('sydney_video_widget', 'widget');
 	}
 	
 	function widget($args, $instance) {

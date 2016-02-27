@@ -20,12 +20,5 @@ class AparelhoController extends AbstractController
         $this->route = 'aparelho';
         $this->service = 'Academia\Service\AparelhoService';
         $this->entity = 'Academia\Entity\Aparelho';
-        $this->listarAction = "aparelhosAction";//nome da chamada no webservice
-    }
-	
-    public function inserirAction(){
-        
-        $this->form = $this->getServiceLocator()->get($this->form);        
-        return parent::inserirAction();
     }
 }

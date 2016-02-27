@@ -2,208 +2,177 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Treino
  *
- * @ORM\Table(name="treino")
+ * @ORM\Table(name="treino", indexes={@ORM\Index(name="fk_Treino_Aluno1_idx", columns={"id_aluno"}), @ORM\Index(name="fk_Treino_Treino_Geral1_idx", columns={"id_treino_geral"})})
  * @ORM\Entity
  */
-class Treino extends AbstractEntity
+class Treino extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Column(name="id_treino", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nome", type="string", length=100, nullable=true)
-     */
-    private $nome;
+    private $idTreino;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data_cadastro", type="date", nullable=true)
+     * @ORM\Column(name="data_ini_vig", type="date", nullable=true)
      */
-    private $dataCadastro;
+    private $dataIniVig;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data_inicio", type="date", nullable=true)
+     * @ORM\Column(name="data_fim_vig", type="date", nullable=true)
      */
-    private $dataInicio;
+    private $dataFimVig;
 
     /**
-     * @var \DateTime
+     * @var \Academia\Entity\Aluno
      *
-     * @ORM\Column(name="data_fim", type="date", nullable=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno", cascade={"all"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
+     * })
      */
-    private $dataFim;
+    private $idAluno;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var \Academia\Entity\TreinoGeral
      *
-     * @ORM\ManyToMany(targetEntity="Academia\Entity\Exercicios", inversedBy="treino",  cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="exercicios_has_treino",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="exercicios_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="treino_id", referencedColumnName="id")
-     *   }
-     * )
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\TreinoGeral")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_treino_geral", referencedColumnName="id_treino_geral")
+     * })
      */
-    private $exercicios;
+    private $idTreinoGeral;
+
+
 
     /**
-     * Constructor
+     * Set idTreino
+     *
+     * @param integer $idTreino
+     * @return Treino
      */
-    public function __construct()
+    public function setIdTreino($idTreino)
     {
-        $this->exercicios = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idTreino = $idTreino;
+    
+        return $this;
     }
 
-
     /**
-     * Get id
+     * Get idTreino
      *
      * @return integer 
      */
-    public function getId()
+    public function getIdTreino()
     {
-        return $this->id;
+        return $this->idTreino;
     }
 
     /**
-     * Set nome
+     * Set dataIniVig
      *
-     * @param string $nome
+     * @param \DateTime $dataIniVig
      * @return Treino
      */
-    public function setNome($nome)
+    public function setDataIniVig($dataIniVig)
     {
-        $this->nome = $nome;
+        $this->dataIniVig = $dataIniVig;
     
         return $this;
     }
 
     /**
-     * Get nome
-     *
-     * @return string 
-     */
-    public function getNome()
-    {
-        return $this->nome;
-    }
-
-    /**
-     * Set dataCadastro
-     *
-     * @param \DateTime $dataCadastro
-     * @return Treino
-     */
-    public function setDataCadastro($dataCadastro)
-    {
-        $this->dataCadastro = $dataCadastro;
-    
-        return $this;
-    }
-
-    /**
-     * Get dataCadastro
+     * Get dataIniVig
      *
      * @return \DateTime 
      */
-    public function getDataCadastro()
+    public function getDataIniVig()
     {
-        return $this->dataCadastro;
+        return $this->dataIniVig;
     }
 
     /**
-     * Set dataInicio
+     * Set dataFimVig
      *
-     * @param \DateTime $dataInicio
+     * @param \DateTime $dataFimVig
      * @return Treino
      */
-    public function setDataInicio($dataInicio)
+    public function setDataFimVig($dataFimVig)
     {
-        $this->dataInicio = $dataInicio;
+        $this->dataFimVig = $dataFimVig;
     
         return $this;
     }
 
     /**
-     * Get dataInicio
+     * Get dataFimVig
      *
      * @return \DateTime 
      */
-    public function getDataInicio()
+    public function getDataFimVig()
     {
-        return $this->dataInicio;
+        return $this->dataFimVig;
     }
 
     /**
-     * Set dataFim
+     * Set idAluno
      *
-     * @param \DateTime $dataFim
+     * @param \Academia\Entity\Aluno $idAluno
      * @return Treino
      */
-    public function setDataFim($dataFim)
+    public function setIdAluno(\Academia\Entity\Aluno $idAluno)
     {
-        $this->dataFim = $dataFim;
+        $this->idAluno = $idAluno;
     
         return $this;
     }
 
     /**
-     * Get dataFim
+     * Get idAluno
      *
-     * @return \DateTime 
+     * @return \Academia\Entity\Aluno 
      */
-    public function getDataFim()
+    public function getIdAluno()
     {
-        return $this->dataFim;
+        return $this->idAluno;
     }
 
     /**
-     * Add exercicios
+     * Set idTreinoGeral
      *
-     * @param \Academia\Entity\Exercicios $exercicios
+     * @param \Academia\Entity\TreinoGeral $idTreinoGeral
      * @return Treino
      */
-    public function addExercicio(\Academia\Entity\Exercicios $exercicios)
+    public function setIdTreinoGeral(\Academia\Entity\TreinoGeral $idTreinoGeral)
     {
-        $this->exercicios[] = $exercicios;
+        $this->idTreinoGeral = $idTreinoGeral;
+    
         return $this;
     }
 
     /**
-     * Remove exercicios
+     * Get idTreinoGeral
      *
-     * @param \Academia\Entity\Exercicios $exercicios
+     * @return \Academia\Entity\TreinoGeral 
      */
-    public function removeExercicio(\Academia\Entity\Exercicios $exercicios)
+    public function getIdTreinoGeral()
     {
-        $this->exercicios->removeElement($exercicios);
-    }
-
-    /**
-     * Get exercicios
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getExercicios()
-    {
-        return $this->exercicios;
+        return $this->idTreinoGeral;
     }
 }

@@ -7,60 +7,75 @@ namespace Academia\Form;
  */
 
 use Zend\Form\Form;
-use Academia\Form\AlunoFilter;
-use Zend\InputFilter\InputFilter;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use DoctrineModule\Form\Element\ObjectSelect;
+use Academia\Entity\Aluno;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class AlunoForm extends Form implements ObjectManagerAwareInterface
 {
-     protected $objectManager;
-    public function __construct(ObjectManager $objectManager)
+    private $objectManager;
+    public function __construct($name = null, $options = array())
     {
-        $this->setObjectManager($objectManager);
-        parent::__construct('aluno');
-     /*   $this->setAttribute('method','POST');
-        $this->setInputFilter(new AlunoFilter());                
-        */
-       /* $this
-             ->setAttribute('method', 'POST')
-            // ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
-             ->setInputFilter(new AlunoFilter())
-         ;*/
+        parent::__construct($name,$options);
+    }
+    
+    public function init(){
         $this
-             ->setAttribute('method', 'POST')
-         //    ->setHydrator(new ClassMethodsHydrator())
-             ->setInputFilter(new AlunoFilter())
-         ;
-       
-        $this->setLabel('Dados Pessoais');             
+            ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
+            ->setObject(new Aluno())
+        ;
         
-        $academia = new ObjectSelect("academia_id");
-         $academia->setLabel("Academia")
-                 ->setOptions([ 
-                'object_manager'     => $this->getObjectManager(),
-                'target_class'       => 'Academia\Entity\Academia',
-                'property' => 'nome',
-               'empty_option' => 'selecione',
-                'is_method' => true,
-                'find_method'        => array(
-                    'name'  => 'findBy',
-                    'params' =>[
-                        'criteria'   => array(),
-                        'orderBy'   => array("nome" => "ASC"),
-                    ]
-                )            
-        ]);
-        $this->add($academia);
+         $this->add([
+           'name' => 'idAluno',
+           'type' => 'hidden'
+       ]);
+            
+        $this->add(array(
+             'type' => 'Academia\Form\AcademiaFieldset'
+         ));
+
+         $this->add(array(
+             'type' => 'Academia\Form\FinalidadeFieldset'
+         ));
           
        $this->add([
-           'name' => 'nome',
+           'name' => 'nomeAluno',
            'type' => 'text',
            'options' => [
                'label' => 'Nome',
+           ]
+       ]);
+       
+       $this->add([
+           'name' => 'sobrenomeAluno',
+           'type' => 'text',
+           'options' => [
+               'label' => 'Sobrenome',
+           ]
+       ]);
+       
+       $this->add([
+           'name' => 'telefoneAluno',
+           'type' => 'text',
+           'options' => [
+               'label' => 'Telefone',
+           ]
+       ]);
+       
+       $this->add([
+           'name' => 'celularAluno',
+           'type' => 'text',
+           'options' => [
+               'label' => 'Celular',
+           ]
+       ]);
+       
+       $this->add([
+           'name' => 'dataNasc',
+           'type' => 'date',
+           'options' => [
+               'label' => 'Data de Nascimento',
            ]
        ]);
        
@@ -80,55 +95,17 @@ class AlunoForm extends Form implements ObjectManagerAwareInterface
            ]
        ]);
        
-       $this->add([
-           'name' => 'email',
-           'type' => 'Zend\Form\Element\Email',
-           'options' => [
-               'label' => 'Email',
-           ]
-       ]);
+     
        
-        $aluno = new ObjectSelect("objetivo");
-         $aluno->setLabel("Objetivo")
-                 ->setOptions([ 
-                'object_manager'     => $this->getObjectManager(),
-                'target_class'       => 'Academia\Entity\Objetivo',
-                'property' => 'descricao',
-               'empty_option' => 'selecione',
-                'is_method' => true,
-                'find_method'        => array(
-                    'name'  => 'findBy',
-                    'params' =>[
-                        'criteria'   => array(),
-                        'orderBy'   => array("descricao" => "ASC"),
-                    ]
-                )            
-        ]);
-         $this->add($aluno);
+       $this->add(array(
+             'type' => 'Academia\Form\LoginFieldset'
+         ));
        
-       $this->add([
-           'name' => 'usuario',
-           'type' => 'text',
-           'options' => [
-               'label' => 'Usuario',
-           ]
-       ]);
+       $this->add(array(
+             'type' => 'Academia\Form\EnderecoFieldset'
+         ));
+      //  $this->add(new EnderecoFieldset());
        
-       $this->add([
-           'name' => 'senha',
-           'type' => 'password',
-           'options' => [
-               'label' => 'Senha',
-           ]
-       ]);
-       
-     /*  $this->add(array(
-             'type' => 'Academia\Form\EnderecoFieldset',
-             'options' => array(
-                 'use_as_base_fieldset' => true,
-             ),
-         ));*/
-        $this->add(new EnderecoFieldset($this->getObjectManager()));
        
        
        $this->add(array(

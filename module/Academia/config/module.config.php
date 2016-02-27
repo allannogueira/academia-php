@@ -1,53 +1,11 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
+namespace Academia;
 
 return array(
-    'doctrine' => array(
-        'driver' => array(
-            'application_entities' => array(
-              'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-              'cache' => 'array',
-              'paths' => array(__DIR__ . '/../src/Academia/Entity')
-            ),
-
-            'orm_default' => array(
-              'drivers' => array(
-                    'Academia\Entity' => 'application_entities'
-              ) 
-            )
-        ),
-      /*  'authentication' => array(
-            'orm_default' => array(
-                'object_manager' => 'Doctrine\ORM\EntityManager',
-                'identity_class' => 'Academia\Entity\Academia',
-                'identity_property' => 'usuario',
-                'credential_property' => 'senha',
-            ),        
-        ),*/
-        /*'authenticationAluno' => array(
-            'orm_default' => array(
-                'object_manager' => 'Doctrine\ORM\EntityManager',
-                'identity_class' => 'Academia\Entity\Academia',
-                'identity_property' => 'id',
-                'credential_property' => 'senha',
-            ),        
-        )*/
-    ),
-    
     'service_manager' => array(
-   
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
-        ),
-        'aliases' => array(
-            'translator' => 'MvcTranslator',
         ),
     ),
     'translator' => array(
@@ -64,10 +22,15 @@ return array(
         'invokables' => array(
             'Academia\Controller\Index' => 'Academia\Controller\IndexController',           
             'Academia\Controller\Aluno' => 'Academia\Controller\AlunoController',
-            'Academia\Controller\Academia' => 'Academia\Controller\AcademiaController',
-            'Academia\Controller\Exercicio' => 'Academia\Controller\ExercicioController',
+            'Academia\Controller\Academia' => 'Academia\Controller\AcademiaController',            
             'Academia\Controller\Treino' => 'Academia\Controller\TreinoController',
-            'Academia\Controller\Dieta' => 'Academia\Controller\DietaController',
+            'Academia\Controller\TreinoGeral' => 'Academia\Controller\TreinoGeralController',
+            'Academia\Controller\TreinoExercicio' => 'Academia\Controller\TreinoExercicioController',
+            'Academia\Controller\Musculo' => 'Academia\Controller\MusculoController',
+            'Academia\Controller\Exercicio' => 'Academia\Controller\ExercicioController',
+            'Academia\Controller\DietaGeral' => 'Academia\Controller\DietaGeralController',
+            'Academia\Controller\DietaAlimento' => 'Academia\Controller\DietaAlimentoController',
+            'Academia\Controller\DietaAluno' => 'Academia\Controller\DietaAlunoController',
             'Academia\Controller\CepbrEndereco' => 'Academia\Controller\CepbrEnderecoController',
             'Academia\Controller\Medida' => 'Academia\Controller\MedidaController',
             'Academia\Controller\Alimento' => 'Academia\Controller\AlimentoController',
@@ -76,16 +39,17 @@ return array(
             'Academia\Controller\Frequencia' => 'Academia\Controller\FrequenciaController',
             'Academia\Controller\Aparelho' => 'Academia\Controller\AparelhoController',
             'Academia\Controller\Login' => 'Academia\Controller\LoginController',
+            'Academia\Controller\Facebook' => 'Academia\Controller\FacebookController',
             
             
         ),
     ),
-    'form_elements' => array(
+   /* 'form_elements' => array(
         'invokables' => array(
             'treino-form' => 'Academia\Form\TreinoForm',
             'exercicios-fieldset' => 'Academia\Form\ExerciciosFieldset',
         )
-    ),
+    ),*/
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -105,7 +69,8 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
-        )
+        ),
+        'layout' => 'layout/layoutAdmin',
     ),
     'view_helpers' => array(
         'invokables'=> array(
@@ -185,6 +150,20 @@ return array(
                      ),
                  ),
              ),
+             'musculo' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/musculo[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\Musculo',
+                         'action'     => 'inserir',
+                     ),
+                 ),
+             ),
              'exercicio' => array(
                  'type'    => 'segment',
                  'options' => array(
@@ -213,16 +192,72 @@ return array(
                      ),
                  ),
              ),
-             'dieta' => array(
+             'treinoGeral' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/dieta[/:action][/:id]',
+                     'route'    => '/treinoGeral[/:action][/:id]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
-                         'controller' => 'Academia\Controller\Dieta',
+                         'controller' => 'Academia\Controller\TreinoGeral',
+                         'action'     => 'inserir',
+                     ),
+                 ),
+             ),
+             'treinoExercicio' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/treinoExercicio[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\TreinoExercicio',
+                         'action'     => 'inserir',
+                     ),
+                 ),
+             ),
+             'dietaGeral' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/dietaGeral[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\DietaGeral',
+                         'action'     => 'inserir',
+                     ),
+                 ),
+             ),
+             'dietaAlimento' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/dietaAlimento[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\DietaAlimento',
+                         'action'     => 'inserir',
+                     ),
+                 ),
+             ),
+             'dietaAluno' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/dietaAluno[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\DietaAluno',
                          'action'     => 'inserir',
                      ),
                  ),
@@ -312,16 +347,16 @@ return array(
                      ),
                  ),
              ),
-             'Equipamento' => array(
+             'aparelho' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/equipamento[/:action][/:id]',
+                     'route'    => '/aparelho[/:action][/:id]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
-                         'controller' => 'Academia\Controller\Equipamento',
+                         'controller' => 'Academia\Controller\Aparelho',
                          'action'     => 'inserir',
                      ),
                  ),
@@ -337,6 +372,19 @@ return array(
                      'defaults' => array(
                          'controller' => 'Academia\Controller\Aparelho',
                          'action'     => 'inserir',
+                     ),
+                 ),
+             ),
+             'facebook' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/facebook[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\Facebook'
                      ),
                  ),
              ),

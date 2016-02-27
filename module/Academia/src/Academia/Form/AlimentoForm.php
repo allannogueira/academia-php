@@ -8,6 +8,7 @@ namespace Academia\Form;
 
 use Zend\Form\Form;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Academia\Entity\Alimento;
 
 class AlimentoForm extends Form
 {
@@ -17,25 +18,37 @@ class AlimentoForm extends Form
      /*   $this->setAttribute('method','POST');
         $this->setInputFilter(new AlunoFilter());                
         */
+    }
+    
+    public function init(){
         $this
              ->setAttribute('method', 'POST')
              ->setHydrator(new ClassMethodsHydrator())
-           //  ->setInputFilter(new AlunoFilter())
+             ->setObject(new Alimento())
          ;
         
+        $this->add([
+           'name' => 'idAlimento',
+           'type' => 'hidden'
+       ]);
+        
+         $this->add(array(
+             'type' => 'Academia\Form\AcademiaFieldset'
+         ));
+         
        $this->add([
-           'name' => 'nome',
+           'name' => 'nomeAlimento',
            'type' => 'text',
            'options' => [
-               'label' => 'Nome',
+               'label' => 'Nome Alimento',
            ]
        ]);
        
        $this->add([
-           'name' => 'caracteristica',
+           'name' => 'descricao',
            'type' => 'textarea',
            'options' => [
-               'label' => 'Caracteristicas',
+               'label' => 'Descricao',
            ]
        ]);
        

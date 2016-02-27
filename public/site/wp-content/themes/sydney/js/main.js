@@ -54,7 +54,7 @@
 		})();
 
 		$(function() {
-          $('a[href*=#]:not([href=#],.wc-tabs a,.activity-content a)').click(function() {
+          $('a[href*=#]:not([href=#],[class*="tab"] a,.wc-tabs a, .activity-content a)').click(function() { 
 		    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 		      var target = $(this.hash);
 		      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');

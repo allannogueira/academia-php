@@ -2,36 +2,36 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Endereco
  *
- * @ORM\Table(name="endereco", indexes={@ORM\Index(name="fk_endereco_cepbr_endereco1_idx", columns={"cepbr_endereco_cep"})})
+ * @ORM\Table(name="endereco", indexes={@ORM\Index(name="fk_Endereco_Tipo_Endereco1_idx", columns={"id_tipo_endereco"}), @ORM\Index(name="fk_Endereco_cepbr_endereco1_idx", columns={"cepbr_endereco_cep"})})
  * @ORM\Entity
  */
-class Endereco extends AbstractEntity
+class Endereco extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id_endereco", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idEndereco;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rua", type="string", length=45, nullable=true)
+     * @ORM\Column(name="rua", type="string", length=150, nullable=true)
      */
     private $rua;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="numero", type="string", length=45, nullable=true)
+     * @ORM\Column(name="numero", type="string", length=4, nullable=true)
      */
     private $numero;
 
@@ -43,22 +43,50 @@ class Endereco extends AbstractEntity
     private $complemento;
 
     /**
-     * @var string
+     * @var \Academia\Entity\CepbrEndereco
      *
-     * @ORM\Column(name="cepbr_endereco_cep", type="string", length=10, nullable=true)
+     * 
+     * 
+     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrEndereco",cascade={"persist"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="cepbr_endereco_cep", referencedColumnName="cep")
+     * })
      */
     private $cepbrEnderecoCep;
+
+    /**
+     * @var \Academia\Entity\TipoEndereco
+     *
+     * @ORM\OneToOne(targetEntity="Academia\Entity\TipoEndereco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipo_endereco", referencedColumnName="id")
+     * })
+     */
+    private $idTipoEndereco;
 
 
 
     /**
-     * Get id
+     * Set idEndereco
+     *
+     * @param integer $idEndereco
+     * @return Endereco
+     */
+    public function setIdEndereco($idEndereco)
+    {
+        $this->idEndereco = $idEndereco;
+    
+        return $this;
+    }
+
+    /**
+     * Get idEndereco
      *
      * @return integer 
      */
-    public function getId()
+    public function getIdEndereco()
     {
-        return $this->id;
+        return $this->idEndereco;
     }
 
     /**
@@ -69,6 +97,7 @@ class Endereco extends AbstractEntity
      */
     public function setRua($rua)
     {
+        
         $this->rua = $rua;
     
         return $this;
@@ -133,10 +162,10 @@ class Endereco extends AbstractEntity
     /**
      * Set cepbrEnderecoCep
      *
-     * @param string $cepbrEnderecoCep
+     * @param \Academia\Entity\CepbrEndereco $cepbrEnderecoCep
      * @return Endereco
      */
-    public function setCepbrEnderecoCep($cepbrEnderecoCep)
+    public function setCepbrEnderecoCep(\Academia\Entity\CepbrEndereco $cepbrEnderecoCep)
     {
         $this->cepbrEnderecoCep = $cepbrEnderecoCep;
     
@@ -146,10 +175,33 @@ class Endereco extends AbstractEntity
     /**
      * Get cepbrEnderecoCep
      *
-     * @return string 
+     * @return \Academia\Entity\CepbrEndereco 
      */
     public function getCepbrEnderecoCep()
     {
         return $this->cepbrEnderecoCep;
+    }
+
+    /**
+     * Set idTipoEndereco
+     *
+     * @param \Academia\Entity\TipoEndereco $idTipoEndereco
+     * @return Endereco
+     */
+    public function setIdTipoEndereco(\Academia\Entity\TipoEndereco $idTipoEndereco)
+    {
+        $this->idTipoEndereco = $idTipoEndereco;
+    
+        return $this;
+    }
+
+    /**
+     * Get idTipoEndereco
+     *
+     * @return \Academia\Entity\TipoEndereco 
+     */
+    public function getIdTipoEndereco()
+    {
+        return $this->idTipoEndereco;
     }
 }

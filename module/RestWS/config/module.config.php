@@ -22,10 +22,10 @@ return array(
                     ),
                 ),
             ),
-             'login' => array(
+             'wsLogin' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/login[/:action][/:id][.:formatter]',
+                    'route'    => '/wsLogin[/:action][/:id][.:formatter]',
                     'constraints' => array(
                         'id'     => '[0-9]+',
                     ),

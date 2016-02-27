@@ -1,0 +1,43 @@
+<?php
+
+namespace Academia\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CepbrBairro
+ *
+ * @ORM\Table(name="cepbr_bairro", indexes={@ORM\Index(name="fk_Cepbr_Bairro_Cepbr_Cidade1_idx", columns={"id_cidade"})})
+ * @ORM\Entity
+ */
+class CepbrBairro extends \Base\Entity\AbstractEntity
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_bairro", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idBairro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="bairro", type="string", length=50, nullable=true)
+     */
+    private $bairro;
+
+    /**
+     * @var \Academia\Entity\CepbrCidade
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrCidade")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cidade", referencedColumnName="id_cidade")
+     * })
+     */
+    private $idCidade;
+
+
+}
+

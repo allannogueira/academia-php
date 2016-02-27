@@ -2,483 +2,381 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Aluno
  *
- * @ORM\Table(name="aluno", indexes={@ORM\Index(name="fk_aluno_endereco1_idx", columns={"endereco_id"}), @ORM\Index(name="fk_aluno_treino1_idx", columns={"treino_id"}), @ORM\Index(name="fk_aluno_objetivo_id", columns={"objetivo_id"}), @ORM\Index(name="fk_aluno_medidas1_idx", columns={"medidas_id"}), @ORM\Index(name="fk_aluno_dieta1_idx", columns={"dieta_id"})})
+ * @ORM\Table(name="aluno", indexes={@ORM\Index(name="fk_Aluno_Login1_idx", columns={"id_login"}), @ORM\Index(name="fk_Aluno_Academia1_idx", columns={"id_academia"}), @ORM\Index(name="fk_Aluno_Finalidade1_idx", columns={"id_finalidade"}), @ORM\Index(name="fk_Aluno_Endereco1_idx", columns={"id_endereco"})})
  * @ORM\Entity
  */
-class Aluno extends AbstractEntity
+class Aluno extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Column(name="id_aluno", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idAluno;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nome", type="string", length=45, nullable=true)
+     * @ORM\Column(name="nome_aluno", type="string", length=150, nullable=true)
      */
-    private $nome;
+    private $nomeAluno;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cpf", type="string", length=15, nullable=true)
+     * @ORM\Column(name="sobrenome_aluno", type="string", length=100, nullable=true)
+     */
+    private $sobrenomeAluno;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefone_aluno", type="string", length=11, nullable=true)
+     */
+    private $telefoneAluno;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="celular_aluno", type="string", length=11, nullable=true)
+     */
+    private $celularAluno;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_nasc", type="date", nullable=true)
+     */
+    private $dataNasc;
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="cpf_aluno", type="string", nullable=true)
      */
     private $cpf;
-
+    
     /**
      * @var string
      *
-     * @ORM\Column(name="rg", type="string", length=15, nullable=true)
+     * @ORM\Column(name="rg_aluno", type="string", nullable=true)
      */
     private $rg;
-
+    
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     * @ORM\Column(name="email_aluno", type="string", nullable=true)
      */
     private $email;
 
     /**
-     * @var string
+     * @var \Academia\Entity\Academia
      *
-     * @ORM\Column(name="objetivo_id", type="bigint", nullable=false)
-     */
-    private $objetivo;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="usuario", type="string", length=45, nullable=true)
-     */
-    private $usuario;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="senha", type="string", length=45, nullable=true)
-     */
-    private $senha;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="academia_id", type="string", length=45, nullable=true)
-     */
-    private $academiaId;
-
-    /**
-     * @var \Academia\Entity\Dieta
-     *
-     
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Dieta")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="dieta_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
      * })
      */
-    private $dieta;
+    private $idAcademia;
 
     /**
      * @var \Academia\Entity\Endereco
      *
-     
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Endereco",cascade={"persist", "remove"})
+     * 
+     * 
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Endereco", cascade={"all"})
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="endereco_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_endereco", referencedColumnName="id_endereco")
      * })
      */
-    private $endereco;
+    private $idEndereco;
 
     /**
-     * @var \Academia\Entity\Medidas
+     * @var \Academia\Entity\Finalidade
      *
-     
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Medidas")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Finalidade", cascade={"persist"})
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="medidas_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_finalidade", referencedColumnName="id_finalidade")
      * })
      */
-    private $medidas;
+    private $idFinalidade;
 
     /**
-     * @var \Academia\Entity\Treino
+     * @var \Academia\Entity\Login
      *
-     
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Treino")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Login", cascade={"all"},inversedBy="idAluno")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="treino_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_login", referencedColumnName="id_login",nullable=false)
      * })
      */
-    private $treino;
+    private $idLogin;
+
+    
+
+
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * Set idAluno
      *
-     * @ORM\ManyToMany(targetEntity="Academia\Entity\Telefone", inversedBy="aluno")
-     * @ORM\JoinTable(name="aluno_has_telefone",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="aluno_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="telefone_id", referencedColumnName="id"),
-     *     @ORM\JoinColumn(name="telefone_telefone_tipo_id", referencedColumnName="telefone_tipo_id")
-     *   }
-     * )
-     */
-    private $telefone;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->telefone = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-
-    /**
-     * Set id
-     *
-     * @param integer $id
+     * @param integer $idAluno
      * @return Aluno
      */
-    public function setId($id)
+    public function setIdAluno($idAluno)
     {
-        $this->id = $id;
+        $this->idAluno = $idAluno;
     
         return $this;
     }
 
     /**
-     * Get id
+     * Get idAluno
      *
      * @return integer 
      */
-    public function getId()
+    public function getIdAluno()
     {
-        return $this->id;
+        return $this->idAluno;
     }
 
     /**
-     * Set nome
+     * Set nomeAluno
      *
-     * @param string $nome
+     * @param string $nomeAluno
      * @return Aluno
      */
-    public function setNome($nome)
+    public function setNomeAluno($nomeAluno)
     {
-        $this->nome = $nome;
+        $this->nomeAluno = $nomeAluno;
     
         return $this;
     }
 
     /**
-     * Get nome
+     * Get nomeAluno
      *
      * @return string 
      */
-    public function getNome()
+    public function getNomeAluno()
     {
-        return $this->nome;
+        return $this->nomeAluno;
     }
 
     /**
-     * Set cpf
+     * Set sobrenomeAluno
      *
-     * @param string $cpf
+     * @param string $sobrenomeAluno
      * @return Aluno
      */
-    public function setCpf($cpf)
+    public function setSobrenomeAluno($sobrenomeAluno)
     {
-        $this->cpf = $cpf;
+        $this->sobrenomeAluno = $sobrenomeAluno;
     
         return $this;
     }
 
     /**
-     * Get cpf
+     * Get sobrenomeAluno
      *
      * @return string 
      */
-    public function getCpf()
+    public function getSobrenomeAluno()
     {
-        return $this->cpf;
+        return $this->sobrenomeAluno;
     }
 
     /**
-     * Set rg
+     * Set telefoneAluno
      *
-     * @param string $rg
+     * @param string $telefoneAluno
      * @return Aluno
      */
-    public function setRg($rg)
+    public function setTelefoneAluno($telefoneAluno)
     {
-        $this->rg = $rg;
+        $this->telefoneAluno = $telefoneAluno;
     
         return $this;
     }
 
     /**
-     * Get rg
+     * Get telefoneAluno
      *
      * @return string 
      */
-    public function getRg()
+    public function getTelefoneAluno()
     {
-        return $this->rg;
+        return $this->telefoneAluno;
     }
 
     /**
-     * Set email
+     * Set celularAluno
      *
-     * @param string $email
+     * @param string $celularAluno
      * @return Aluno
      */
-    public function setEmail($email)
+    public function setCelularAluno($celularAluno)
     {
-        $this->email = $email;
+        $this->celularAluno = $celularAluno;
     
         return $this;
     }
 
     /**
-     * Get email
+     * Get celularAluno
      *
      * @return string 
      */
-    public function getEmail()
+    public function getCelularAluno()
     {
-        return $this->email;
+        return $this->celularAluno;
     }
 
     /**
-     * Set objetivo
+     * Set dataNasc
      *
-     * @param string $objetivo
+     * @param \DateTime $dataNasc
      * @return Aluno
      */
-    public function setObjetivo($objetivo)
+    public function setDataNasc($dataNasc)
     {
-        $this->objetivo = $objetivo;
+        $this->dataNasc = $dataNasc;
     
         return $this;
     }
 
     /**
-     * Get objetivo
+     * Get dataNasc
      *
-     * @return string 
+     * @return \DateTime 
      */
-    public function getObjetivo()
+    public function getDataNasc()
     {
-        return $this->objetivo;
+        return $this->dataNasc;
     }
 
     /**
-     * Set usuario
+     * Set idAcademia
      *
-     * @param string $usuario
+     * @param \Academia\Entity\Academia $idAcademia
      * @return Aluno
      */
-    public function setUsuario($usuario)
+    public function setIdAcademia(\Academia\Entity\Academia $idAcademia)
     {
-        $this->usuario = $usuario;
+        $this->idAcademia = $idAcademia;
     
         return $this;
     }
 
     /**
-     * Get usuario
+     * Get idAcademia
      *
-     * @return string 
+     * @return \Academia\Entity\Academia 
      */
-    public function getUsuario()
+    public function getIdAcademia()
     {
-        return $this->usuario;
+        return $this->idAcademia;
     }
 
     /**
-     * Set senha
+     * Set idEndereco
      *
-     * @param string $senha
+     * @param \Academia\Entity\Endereco $idEndereco
      * @return Aluno
      */
-    public function setSenha($senha)
+    public function setIdEndereco(\Academia\Entity\Endereco $idEndereco)
     {
-        $this->senha = $senha;
+        $this->idEndereco = $idEndereco;
     
         return $this;
     }
 
     /**
-     * Get senha
-     *
-     * @return string 
-     */
-    public function getSenha()
-    {
-        return $this->senha;
-    }
-
-    /**
-     * Set academiaId
-     *
-     * @param string $academiaId
-     * @return Aluno
-     */
-    public function setAcademiaId($academiaId)
-    {
-        $this->academiaId = $academiaId;
-    
-        return $this;
-    }
-
-    /**
-     * Get academiaId
-     *
-     * @return string 
-     */
-    public function getAcademiaId()
-    {
-        return $this->academiaId;
-    }
-
-    /**
-     * Set dieta
-     *
-     * @param \Academia\Entity\Dieta $dieta
-     * @return Aluno
-     */
-    public function setDieta(\Academia\Entity\Dieta $dieta)
-    {
-        $this->dieta = $dieta;
-    
-        return $this;
-    }
-
-    /**
-     * Get dieta
-     *
-     * @return \Academia\Entity\Dieta 
-     */
-    public function getDieta()
-    {
-        return $this->dieta;
-    }
-
-    /**
-     * Set endereco
-     *
-     * @param \Academia\Entity\Endereco $endereco
-     * @return Aluno
-     */
-    public function setEndereco(\Academia\Entity\Endereco $endereco)
-    {
-        $this->endereco = $endereco;
-    
-        return $this;
-    }
-
-    /**
-     * Get endereco
+     * Get idEndereco
      *
      * @return \Academia\Entity\Endereco 
      */
-    public function getEndereco()
+    public function getIdEndereco()
     {
-        return $this->endereco;
+        return $this->idEndereco;
     }
 
     /**
-     * Set medidas
+     * Set idFinalidade
      *
-     * @param \Academia\Entity\Medidas $medidas
+     * @param \Academia\Entity\Finalidade $idFinalidade
      * @return Aluno
      */
-    public function setMedidas(\Academia\Entity\Medidas $medidas)
+    public function setIdFinalidade(\Academia\Entity\Finalidade $idFinalidade)
     {
-        $this->medidas = $medidas;
+        $this->idFinalidade = $idFinalidade;
     
         return $this;
     }
 
     /**
-     * Get medidas
+     * Get idFinalidade
      *
-     * @return \Academia\Entity\Medidas 
+     * @return \Academia\Entity\Finalidade 
      */
-    public function getMedidas()
+    public function getIdFinalidade()
     {
-        return $this->medidas;
+        return $this->idFinalidade;
     }
 
     /**
-     * Set treino
+     * Set idLogin
      *
-     * @param \Academia\Entity\Treino $treino
+     * @param \Academia\Entity\Login $idLogin
      * @return Aluno
      */
-    public function setTreino(\Academia\Entity\Treino $treino)
+    public function setIdLogin(\Academia\Entity\Login $idLogin)
     {
-        $this->treino = $treino;
+        $this->idLogin = $idLogin;
     
         return $this;
     }
 
     /**
-     * Get treino
+     * Get idLogin
      *
-     * @return \Academia\Entity\Treino 
+     * @return \Academia\Entity\Login 
      */
-    public function getTreino()
+    public function getIdLogin()
     {
-        return $this->treino;
+        return $this->idLogin;
     }
-
-    /**
-     * Add telefone
-     *
-     * @param \Academia\Entity\Telefone $telefone
-     * @return Aluno
-     */
-    public function addTelefone(\Academia\Entity\Telefone $telefone)
-    {
-        $this->telefone[] = $telefone;
     
-        return $this;
+    function getCpf() {
+        return $this->cpf;
     }
 
-    /**
-     * Remove telefone
-     *
-     * @param \Academia\Entity\Telefone $telefone
-     */
-    public function removeTelefone(\Academia\Entity\Telefone $telefone)
-    {
-        $this->telefone->removeElement($telefone);
+    function setCpf($cpf) {
+        $this->cpf = $cpf;
     }
 
-    /**
-     * Get telefone
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTelefone()
-    {
-        return $this->telefone;
+    function getEmail() {
+        return $this->email;
     }
+
+    function setEmail($email) {
+        $this->email = $email;
+    }
+    
+    function getRg() {
+        return $this->rg;
+    }
+
+    function setRg($rg) {
+        $this->rg = $rg;
+    }
+
+
+
 }

@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManager;
  */
 class AlimentoService extends AbstractService{
     public function __construct(EntityManager $em){
-        $this->entity = 'Academia\Entity\Alimentos';
+        $this->entity = 'Academia\Entity\Alimento';
         parent::__construct($em);
         
        // $request = $this->getRequest();

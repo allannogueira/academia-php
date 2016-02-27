@@ -1,5 +1,14 @@
 Changelog
 
+20 February 2015 - 1.24
+- changed constructors in widgets;
+- fixed typo in customizer;
+- submenu transition fix for Safari;
+- slider images parallax fix.
+
+1.23 - no info
+1.22 - no info
+1.21 - no info
 
 17 November 2015 - 1.20
 - properly style social widget for sidebar use;

@@ -9,7 +9,7 @@
 namespace Base\Entity;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
-
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 /**
  * Description of AbstractEntity
  *
@@ -17,14 +17,16 @@ use Zend\Stdlib\Hydrator\ClassMethods;
  */
 abstract class AbstractEntity{
     //put your code here
-    public function __construct(Array $options = array()){
-        $hydrator = new ClassMethods();
-        $hydrator->hydrate($options, $this);
+    public function __construct(Array $data = array(),$em = ""){
+        if($em != ""){
+            $hydrator = new DoctrineHydrator($em);
+            $hydrator->hydrate($data, $this);
+        }
        // echo var_dump($this);exit;
     }
     
-    public function toArray(){
-        $hydrator = new ClassMethods();
+    public function toArray($em){
+        $hydrator = new DoctrineHydrator($em);
         return $hydrator->extract($this);
     }
 }

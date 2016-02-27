@@ -8,47 +8,36 @@ namespace Academia\Form;
 
 use Zend\Form\Form;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
-use Academia\Entity\Frequencia;
+use Academia\Entity\FrequenciaAluno;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use DoctrineModule\Form\Element\ObjectSelect;
 
 class FrequenciaForm extends Form implements ObjectManagerAwareInterface
 {
-    public function __construct(ObjectManager $objectManager)
+    private $objectManager;
+    public function __construct()
     {
-         $this->setObjectManager($objectManager);
-        parent::__construct('academia');
+        parent::__construct('frequencia');
      /*   $this->setAttribute('method','POST');
         $this->setInputFilter(new AlunoFilter());                
         */
+    }
+    
+    public function init(){
         $this
              ->setAttribute('method', 'POST')
              ->setHydrator(new ClassMethodsHydrator())
+             ->setObject(new FrequenciaAluno())
            //  ->setInputFilter(new AlunoFilter())
          ;
         
-        $this->setLabel('Aluno');             
-        
-        $aluno = new ObjectSelect("aluno");
-         $aluno->setLabel("Aluno")
-                 ->setOptions([ 
-                'object_manager'     => $this->getObjectManager(),
-                'target_class'       => 'Academia\Entity\Aluno',
-                'property' => 'nome',
-               'empty_option' => 'selecione',
-                'is_method' => true,
-                'find_method'        => array(
-                    'name'  => 'findBy',
-                    'params' =>[
-                        'criteria'   => array(),
-                        'orderBy'   => array("nome" => "ASC"),
-                    ]
-                )            
+        $this->add([
+            'name' => 'idFrequenciaAluno',
+            'type' => 'hidden'
         ]);
-         
-        // echo var_dump($academia);
-        $this->add($aluno);
+
+        $this->add(['type' => 'Academia\Form\AlunoFieldset']);
         
         $this->add([
            'name' => 'dataPresenca',
@@ -56,7 +45,7 @@ class FrequenciaForm extends Form implements ObjectManagerAwareInterface
                'label' => 'Data de presença',
                 'format'=>'Y-m-d'
            ],
-    'type'  => 'Zend\Form\Element\Date'
+            'type'  => 'date'
        ]);
         
       

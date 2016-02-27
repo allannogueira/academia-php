@@ -22,7 +22,7 @@ class TreinoService extends AbstractService{
     }
     
      public function save(Array $data = array()){
-         //trata as datas
+       /*  //trata as datas
          $hydrator = new ClassMethods();
          $entity = new \Academia\Entity\Exercicios();
          //$data['exercicios'] = $hydrator->hydrate($data['exercicios'][0], $entity);
@@ -32,11 +32,11 @@ class TreinoService extends AbstractService{
         $data['data_inicio'] = new \DateTime($data['data_inicio']);
         $data['data_fim'] = new \DateTime($data['data_fim']);
         $entityTreino = parent::save($data);
-        return $this->addExercicios($entityTreino,$data);
+        return $this->addExercicios($entityTreino,$data);*/
         
-        
+        return parent::save($data);
     }
-    
+    /*
     public function addExercicios($entityTreino,$data){
         //transforma em entidades de exercicios e adiciona ao treino
         //passa por cada id, e busca sua referencia na classe retornando uma entidade de Exercicios
@@ -52,5 +52,5 @@ class TreinoService extends AbstractService{
         $this->em->persist($entityTreino);
         $this->em->flush();
         return $entityTreino;
-    }
+    }*/
 }

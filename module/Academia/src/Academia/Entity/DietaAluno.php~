@@ -1,0 +1,60 @@
+<?php
+
+namespace Academia\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DietaAluno
+ *
+ * @ORM\Table(name="dieta_aluno", indexes={@ORM\Index(name="id_dieta_geral_idx", columns={"id_dieta_geral"}), @ORM\Index(name="id_aluno", columns={"id_aluno"})})
+ * @ORM\Entity
+ */
+class DietaAluno extends \Base\Entity\AbstractEntity
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_dieta_aluno", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idDietaAluno;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_dieta_geral", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idDietaGeral;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_ini_vig", type="date", nullable=true)
+     */
+    private $dataIniVig;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_fim_vig", type="date", nullable=true)
+     */
+    private $dataFimVig;
+
+    /**
+     * @var \Academia\Entity\Aluno
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
+     * })
+     */
+    private $idAluno;
+
+
+}

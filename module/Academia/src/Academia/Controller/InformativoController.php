@@ -22,12 +22,6 @@ class InformativoController extends AbstractController
         $this->entity = 'Academia\Entity\Informativo';
         $this->listarAction = "informativosAction";//nome da chamada no webservice
     }
-    
-      public function inserirAction(){
-        
-        $this->form = $this->getServiceLocator()->get($this->form);
-        
-        return parent::inserirAction();
-    }
+
 	
 }

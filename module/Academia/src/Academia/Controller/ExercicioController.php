@@ -19,21 +19,14 @@ class ExercicioController extends AbstractController
         $this->controller = 'ExercicioController';
         $this->route = 'exercicio';
         $this->service = 'Academia\Service\ExercicioService';
-        $this->entity = 'Academia\Entity\Exercicios';
+        $this->entity = 'Academia\Entity\Exercicio';
     }
-    /*
-    public function inserirAction(){
-        echo "<pre>";
-        var_dump($this);
-        echo "</pre>";
-        exit;
-    }*/
     
-    
-    
-     public function inserirAction(){
-        $this->form = $this->getServiceLocator()->get($this->form);        
-        return parent::inserirAction();
+    public function listarAction($where = ""){
+        $nome = $this->params()->fromPost("nome");
+                
+        $where = "where (t.nomeExercicio like '%".$nome."%' or '".$nome."' = '') ";
+             
+        return parent::listarAction($where);
     }
-	
 }

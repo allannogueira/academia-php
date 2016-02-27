@@ -22,13 +22,7 @@ class ProfissionalController extends AbstractController
         $this->entity = 'Academia\Entity\Profissional';
         $this->listarAction = "profissionaisAction";//nome da chamada no webservice
     }
-    
-    public function inserirAction(){
-        
-        $this->form = $this->getServiceLocator()->get($this->form);
-        
-        return parent::inserirAction();
-    }
+
 	
       public function listarAction($where = ""){
         $nome = $this->params()->fromPost("nome");

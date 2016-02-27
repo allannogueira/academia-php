@@ -2,22 +2,22 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CepbrCidade
  *
- * @ORM\Table(name="cepbr_cidade", indexes={@ORM\Index(name="fk_cepbr_cidade_cepbr_estado1_idx", columns={"uf"})})
+ * @ORM\Table(name="cepbr_cidade", indexes={@ORM\Index(name="fk_Cepbr_Cidade_Cepbr_Estado1_idx", columns={"uf"})})
  * @ORM\Entity
  */
-class CepbrCidade extends AbstractEntity
+class CepbrCidade extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
      *
      * @ORM\Column(name="id_cidade", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $idCidade;
 
@@ -36,9 +36,14 @@ class CepbrCidade extends AbstractEntity
     private $codIbge;
 
     /**
-     * @var string
+     * @var \Academia\Entity\CepbrEstado
      *
-     * @ORM\Column(name="uf", type="string", length=2, nullable=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrEstado")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="uf", referencedColumnName="uf")
+     * })
      */
     private $uf;
 

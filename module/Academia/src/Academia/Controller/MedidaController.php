@@ -19,13 +19,11 @@ class MedidaController extends AbstractController
         $this->controller = 'TreinoController';
         $this->route = 'medida';
         $this->service = 'Academia\Service\MedidaService';
-        $this->entity = 'Academia\Entity\Medidas';
+        $this->entity = 'Academia\Entity\Medida';
         $this->listarAction = "medidasAction";//nome da chamada no webservice
     }
-	
-    public function inserirAction(){
-        
-        $this->form = $this->getServiceLocator()->get($this->form); 
-        return parent::inserirAction();
-    }
+    
+   
+    
+
 }

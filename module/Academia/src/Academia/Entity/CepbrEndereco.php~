@@ -2,22 +2,22 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CepbrEndereco
  *
- * @ORM\Table(name="cepbr_endereco", indexes={@ORM\Index(name="fk_cepbr_endereco_cepbr_bairro1_idx", columns={"id_bairro"}), @ORM\Index(name="fk_cepbr_endereco_cepbr_cidade1_idx", columns={"id_cidade"})})
+ * @ORM\Table(name="cepbr_endereco", indexes={@ORM\Index(name="fk_Cepbr_endereco_Cepbr_Cidade1_idx", columns={"id_cidade"}), @ORM\Index(name="fk_Cepbr_endereco_Cepbr_Bairro1_idx", columns={"id_bairro"})})
  * @ORM\Entity
  */
-class CepbrEndereco extends AbstractEntity
+class CepbrEndereco extends \Base\Entity\AbstractEntity
 {
     /**
      * @var string
      *
      * @ORM\Column(name="cep", type="string", length=10, nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $cep;
 
@@ -29,16 +29,26 @@ class CepbrEndereco extends AbstractEntity
     private $endereco;
 
     /**
-     * @var integer
+     * @var \Academia\Entity\CepbrBairro
      *
-     * @ORM\Column(name="id_bairro", type="integer", nullable=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrBairro")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_bairro", referencedColumnName="id_bairro")
+     * })
      */
     private $idBairro;
 
     /**
-     * @var integer
+     * @var \Academia\Entity\CepbrCidade
      *
-     * @ORM\Column(name="id_cidade", type="integer", nullable=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrCidade")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cidade", referencedColumnName="id_cidade")
+     * })
      */
     private $idCidade;
 

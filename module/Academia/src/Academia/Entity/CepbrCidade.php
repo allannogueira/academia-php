@@ -2,22 +2,22 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CepbrCidade
  *
- * @ORM\Table(name="cepbr_cidade", indexes={@ORM\Index(name="fk_cepbr_cidade_cepbr_estado1_idx", columns={"uf"})})
+ * @ORM\Table(name="cepbr_cidade", indexes={@ORM\Index(name="fk_Cepbr_Cidade_Cepbr_Estado1_idx", columns={"uf"})})
  * @ORM\Entity
  */
-class CepbrCidade extends AbstractEntity
+class CepbrCidade extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
      *
      * @ORM\Column(name="id_cidade", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $idCidade;
 
@@ -36,13 +36,31 @@ class CepbrCidade extends AbstractEntity
     private $codIbge;
 
     /**
-     * @var string
+     * @var \Academia\Entity\CepbrEstado
      *
-     * @ORM\Column(name="uf", type="string", length=2, nullable=true)
+     * 
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrEstado", cascade={"persist"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="uf", referencedColumnName="uf")
+     * })
      */
     private $uf;
 
 
+
+    /**
+     * Set idCidade
+     *
+     * @param integer $idCidade
+     * @return CepbrCidade
+     */
+    public function setIdCidade($idCidade)
+    {
+        $this->idCidade = $idCidade;
+    
+        return $this;
+    }
 
     /**
      * Get idCidade
@@ -103,10 +121,10 @@ class CepbrCidade extends AbstractEntity
     /**
      * Set uf
      *
-     * @param string $uf
+     * @param \Academia\Entity\CepbrEstado $uf
      * @return CepbrCidade
      */
-    public function setUf($uf)
+    public function setUf(\Academia\Entity\CepbrEstado $uf)
     {
         $this->uf = $uf;
     
@@ -116,7 +134,7 @@ class CepbrCidade extends AbstractEntity
     /**
      * Get uf
      *
-     * @return string 
+     * @return \Academia\Entity\CepbrEstado 
      */
     public function getUf()
     {

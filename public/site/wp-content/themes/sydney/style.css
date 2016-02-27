@@ -4,7 +4,7 @@ Theme URI: http://athemes.com/theme/sydney
 Author: aThemes
 Author URI: http://athemes.com
 Description: Sydney is a powerful business theme that provides a fast way for companies or freelancers to create an awesome online presence. Sydney brings plenty of customization possibilities like access to all Google Fonts, full color control, layout control, logo upload, full screen slider, header image, sticky navigation and much more. Also, Sydney provides all the construction blocks you need to rapidly create an engaging front page.
-Version: 1.20
+Version: 1.24
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: sydney
@@ -732,7 +732,7 @@ Header
 		width: 180px;
 		position: absolute;
 		top: 100%;
-		left: -999em; 
+		left: initial; 
 		opacity: 0;
 		visibility: hidden;
 		-webkit-border-radius: 0 0 2px 2px;
@@ -1033,7 +1033,7 @@ Layout
 	.entry-post img {
 		margin: 10px 0 20px;
 	}
-	.slides-container,
+	.header-slider,
 	.owl-wrapper {
 		direction: ltr;
 	}
@@ -1056,6 +1056,7 @@ Hero section
 	   padding-left: 0;
 	}	
 	.slides-container .slide-item {
+		display: block !important;
 	    background-attachment: fixed;
 	    background-position: center;
 	    background-repeat: no-repeat;
@@ -2260,6 +2261,9 @@ Panels
 	.roll-testimonials .owl-controls {
 		margin-top: 40px;
 	}
+	.hentry .roll-testimonials blockquote {
+		background: transparent;
+	}	
 	.owl-carousel .owl-wrapper:after {
 		content: ".";
 		display: block;
@@ -2816,8 +2820,8 @@ Panels
 		border: 1px solid #d65050;
 		background-color: #d65050;
 	}
-	.project-filter li.active,
-	.project-filter li:hover {
+	.project-filter li a.active,
+	.project-filter li a:hover {
 		background-color: #d65050;
 	}
 	.roll-testimonials .name {

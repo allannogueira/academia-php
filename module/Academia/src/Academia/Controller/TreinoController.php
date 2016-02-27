@@ -10,6 +10,9 @@
 namespace Academia\Controller;
 
 use Base\Controller\AbstractController;
+use Zend\Paginator\Paginator;
+use Zend\Paginator\Adapter\ArrayAdapter;
+use Zend\View\Model\ViewModel;
 
 class TreinoController extends AbstractController
 {
@@ -22,26 +25,26 @@ class TreinoController extends AbstractController
         $this->entity = 'Academia\Entity\Treino';
         $this->listarAction = "treinosAction";//nome da chamada no webservice
     }
-    /*
-    public function inserirAction(){
-        echo "<pre>";
-        var_dump($this);
-        echo "</pre>";
-        exit;
-    }*/
     
-
     
    public function listarAction($where = ""){
-        $nome = $this->params()->fromPost("nome");
-        $dataInicioDe = $this->params()->fromPost("data_inicio_de");
-        $dataInicioAte = $this->params()->fromPost("data_inicio_ate");
-                
-        $where = "where (t.nome like '%".$nome."%' or '".$nome."' = '') "
-                . "and ((t.dataInicio between '".$dataInicioDe."' and '".$dataInicioAte."') or '".$dataInicioDe."' = '' or '".$dataInicioAte."' = '')";
+        $idAluno = $this->params()->fromPost("idAluno")["idAluno"];
+        $idTreinoGeral = $this->params()->fromPost("idTreinoGeral")["idTreinoGeral"];
         
-        return parent::listarAction($where);
+        $forms = $this->getServiceLocator()->get('FormElementManager');
+        $form = $forms->get("FiltroTreinoAlunoForm", array());
+            
+        $where = "where (t.idAluno = '".$idAluno."' or '".$idAluno."' = '') and "
+                . "(t.idTreinoGeral = '".$idTreinoGeral."' or '".$idTreinoGeral."' = '')";
+        $query = "select t from $this->entity t $where";
         
-      
-    }
+        $list = $this->getEm()->createQuery($query)->getResult();//faz o select no banco de dados
+        $page = $this->params()->fromRoute('page');
+        
+        $paginator = new Paginator(new ArrayAdapter($list));//paginacao trazendo todos nosso resultado
+        $paginator->setCurrentPageNumber($page)//seta a pagina atual que será paginada
+                ->setDefaultItemCountPerPage(10); //quantidade de paginas que será feito a busca
+        $view = new ViewModel(['data'=> $paginator, 'page' => $page, 'form' => $form]);//retorna para a pagina as paginas com a lista de paginas
+        return $view;
+   }
 }

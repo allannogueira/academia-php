@@ -23,27 +23,27 @@ function sydney_slider_template() {
 
     //Slider text
     if ( !function_exists('pll_register_string') ) {
-        $slider_title_1     = get_theme_mod('slider_title_1', 'Solução Para Academias');
-        $slider_title_2     = get_theme_mod('slider_title_2', 'Gestão de Treinos e Dietas');
-        $slider_title_3     = get_theme_mod('slider_title_3', 'Treinos');
-        $slider_title_4     = get_theme_mod('slider_title_4', 'Desempenho');
-        $slider_title_5     = get_theme_mod('slider_title_5', 'Treino ao ar livre');
-        $slider_subtitle_1  = get_theme_mod('slider_subtitle_1','Já pensou em melhorar o treino para seus alunos?');
-        $slider_subtitle_2  = get_theme_mod('slider_subtitle_2', 'Relatórios, acompanhamento, dicas e muito mais na palma da sua mão.');
-        $slider_subtitle_3  = get_theme_mod('slider_subtitle_3','Sua ficha de treino no celular.');
-        $slider_subtitle_4  = get_theme_mod('slider_subtitle_4', 'Relatórios de acompanhamento do treino.');
-        $slider_subtitle_5  = get_theme_mod('slider_subtitle_5', 'Saiba quantas calorias perdeu no treino.');
-        $slider_button      = get_theme_mod('slider_button_text', 'Começar!');
+        $slider_title_1     = get_theme_mod('slider_title_1', 'Welcome to Sydney');
+        $slider_title_2     = get_theme_mod('slider_title_2', 'Ready to begin your journey?');
+        $slider_title_3     = get_theme_mod('slider_title_3');
+        $slider_title_4     = get_theme_mod('slider_title_4');
+        $slider_title_5     = get_theme_mod('slider_title_5');
+        $slider_subtitle_1  = get_theme_mod('slider_subtitle_1','Feel free to look around');
+        $slider_subtitle_2  = get_theme_mod('slider_subtitle_2', 'Click the button below');
+        $slider_subtitle_3  = get_theme_mod('slider_subtitle_3');
+        $slider_subtitle_4  = get_theme_mod('slider_subtitle_4');
+        $slider_subtitle_5  = get_theme_mod('slider_subtitle_5');
+        $slider_button      = get_theme_mod('slider_button_text', 'Click to begin');
         $slider_button_url  = get_theme_mod('slider_button_url','#primary');        
     } else {
         $slider_title_1     = pll__(get_theme_mod('slider_title_1', 'Welcome to Sydney'));
         $slider_title_2     = pll__(get_theme_mod('slider_title_2', 'Ready to begin your journey?'));
-        $slider_title_3     = pll__(get_theme_mod('slider_title_3','teste'));
+        $slider_title_3     = pll__(get_theme_mod('slider_title_3'));
         $slider_title_4     = pll__(get_theme_mod('slider_title_4'));
         $slider_title_5     = pll__(get_theme_mod('slider_title_5'));
         $slider_subtitle_1  = pll__(get_theme_mod('slider_subtitle_1','Feel free to look around'));
         $slider_subtitle_2  = pll__(get_theme_mod('slider_subtitle_2', 'Click the button below'));
-        $slider_subtitle_3  = pll__(get_theme_mod('slider_subtitle_3','teste'));
+        $slider_subtitle_3  = pll__(get_theme_mod('slider_subtitle_3'));
         $slider_subtitle_4  = pll__(get_theme_mod('slider_subtitle_4'));
         $slider_subtitle_5  = pll__(get_theme_mod('slider_subtitle_5'));  
         $slider_button      = pll__(get_theme_mod('slider_button_text', 'Click to begin'));
@@ -55,21 +55,21 @@ function sydney_slider_template() {
 	<div id="slideshow" class="header-slider" data-speed="<?php echo esc_attr($speed); ?>">
 	    <div class="slides-container">
 		    <?php 
-			    if ( get_theme_mod('slider_image_1', get_template_directory_uri() . '/images/2.png') ) {
-					echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_1', get_template_directory_uri() . '/images/2.jpg')) . ');"></div>';
+			    if ( get_theme_mod('slider_image_1', get_template_directory_uri() . '/images/1.png') ) {
+					echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_1', get_template_directory_uri() . '/images/1.jpg')) . ');"></div>';
 				
 				}
-			    if ( get_theme_mod('slider_image_2', get_template_directory_uri() . '/images/1.jpg') ) {
-					echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_2', get_template_directory_uri() . '/images/1.jpg')) . ');"></div>';
+			    if ( get_theme_mod('slider_image_2', get_template_directory_uri() . '/images/2.jpg') ) {
+					echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_2', get_template_directory_uri() . '/images/2.jpg')) . ');"></div>';
 				}			
-			    if ( get_theme_mod('slider_image_3', get_template_directory_uri() . '/images/2.jpg') ) {
-                                        echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_3',get_template_directory_uri() . '/images/1.jpg')) . ');"></div>';
+			    if ( get_theme_mod('slider_image_3') ) {
+                    echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_3')) . ');"></div>';
 				}
-			    if ( get_theme_mod('slider_image_4', get_template_directory_uri() . '/images/2.jpg') ) {
-                                        echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_4',get_template_directory_uri() . '/images/2.jpg')) . ');"></div>';
+			    if ( get_theme_mod('slider_image_4') ) {
+                    echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_4')) . ');"></div>';
 				}
-			    if ( get_theme_mod('slider_image_5', get_template_directory_uri() . '/images/2.jpg') ) {
-                                        echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_5',get_template_directory_uri() . '/images/1.jpg')) . ');"></div>';
+			    if ( get_theme_mod('slider_image_5') ) {
+                    echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_5')) . ');"></div>';
 				}				
 			?>	
 	    </div>

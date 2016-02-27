@@ -19,14 +19,14 @@ class AlimentoController extends AbstractController
         $this->controller = 'AlimentoController';
         $this->route = 'alimento';
         $this->service = 'Academia\Service\AlimentoService';
-        $this->entity = 'Academia\Entity\Alimentos';
+        $this->entity = 'Academia\Entity\Alimento';
         $this->listarAction = "alimentosAction";//nome da chamada no webservice
     }
     
      public function listarAction($where = ""){
         $nome = $this->params()->fromPost("nome");
                 
-        $where = "where (t.nome like '%".$nome."%' or '".$nome."' = '') ";
+        $where = "where (t.nomeAlimento like '%".$nome."%' or '".$nome."' = '') ";
         return parent::listarAction($where);
     }
 	

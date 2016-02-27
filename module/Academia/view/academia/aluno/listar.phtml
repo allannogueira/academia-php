@@ -1,3 +1,19 @@
+<?php 
+//informa se existir erros no formulario
+$flash = $this->flashMessenger();
+ $flash->setMessageOpenFormat('<div%s>
+     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+         &times;
+     </button>
+     <ul><li>')
+     ->setMessageSeparatorString('</li><li>')
+     ->setMessageCloseString('</li></ul></div>');
+
+ echo $flash->render('error',   array('alert', 'alert-dismissible', 'alert-danger'));
+ echo $flash->render('info',    array('alert', 'alert-dismissible', 'alert-info'));
+ echo $flash->render('default', array('alert', 'alert-dismissible', 'alert-warning'));
+ echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
+ ?>
 
 <nav class="navbar navbar-default ">
 <form class="margin20" method="POST">
@@ -35,16 +51,16 @@
       <tbody>
 <?php foreach ($this->data as $aluno): ?>
       <tr> 
-        <td><?php echo $aluno->getNome(); ?></td>
+        <td><?php echo $aluno->getNomeAluno(); ?></td>
         <td><?php echo $aluno->getRg(); ?></td>
         <td><?php echo $aluno->getCpf(); ?></td>
         <td><?php echo "<a href='mailto:".$aluno->getEmail()."'>".$aluno->getEmail()."</a>"; ?></td>
        
         <td>
-            <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('aluno', ['action' => 'editar', 'id' => $aluno->getId()]); ?>'"class="btn btn-default" aria-label="Left Align">
+            <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('aluno', ['action' => 'editar', 'id' => $aluno->getIdAluno()]); ?>'"class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
             </button>
-             <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('aluno', ['action' => 'excluir', 'id' => $aluno->getId()]); ?>'" class="btn btn-default" aria-label="Left Align">
+             <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('aluno', ['action' => 'excluir', 'id' => $aluno->getIdAluno()]); ?>'" class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
         </td>      

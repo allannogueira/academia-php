@@ -176,6 +176,17 @@ class CepbrBairro extends \Academia\Entity\CepbrBairro implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
+    public function setIdBairro($idBairro)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdBairro', array($idBairro));
+
+        return parent::setIdBairro($idBairro);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getIdBairro()
     {
         if ($this->__isInitialized__ === false) {
@@ -213,7 +224,7 @@ class CepbrBairro extends \Academia\Entity\CepbrBairro implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
-    public function setIdCidade(\Academia\Entity\CepbrCidade $idCidade = NULL)
+    public function setIdCidade(\Academia\Entity\CepbrCidade $idCidade)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdCidade', array($idCidade));
@@ -235,12 +246,12 @@ class CepbrBairro extends \Academia\Entity\CepbrBairro implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
-    public function toArray()
+    public function toArray($em)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', array($em));
 
-        return parent::toArray();
+        return parent::toArray($em);
     }
 
 }

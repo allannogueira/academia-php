@@ -2,92 +2,71 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Aluno
  *
- * @ORM\Table(name="aluno", indexes={@ORM\Index(name="fk_aluno_endereco1_idx", columns={"endereco_id"}), @ORM\Index(name="fk_aluno_treino1_idx", columns={"treino_id"}), @ORM\Index(name="fk_aluno_medidas1_idx", columns={"medidas_id"}), @ORM\Index(name="fk_aluno_dieta1_idx", columns={"dieta_id"})})
+ * @ORM\Table(name="aluno", indexes={@ORM\Index(name="fk_Aluno_Login1_idx", columns={"id_login"}), @ORM\Index(name="fk_Aluno_Academia1_idx", columns={"id_academia"}), @ORM\Index(name="fk_Aluno_Finalidade1_idx", columns={"id_finalidade"}), @ORM\Index(name="fk_Aluno_Endereco1_idx", columns={"id_endereco"})})
  * @ORM\Entity
  */
-class Aluno extends AbstractEntity
+class Aluno extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Column(name="id_aluno", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    private $idAluno;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nome", type="string", length=45, nullable=true)
+     * @ORM\Column(name="nome_aluno", type="string", length=150, nullable=true)
      */
-    private $nome;
+    private $nomeAluno;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cpf", type="string", length=15, nullable=true)
+     * @ORM\Column(name="sobrenome_aluno", type="string", length=100, nullable=true)
      */
-    private $cpf;
+    private $sobrenomeAluno;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rg", type="string", length=15, nullable=true)
+     * @ORM\Column(name="telefone_aluno", type="string", length=11, nullable=true)
      */
-    private $rg;
+    private $telefoneAluno;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     * @ORM\Column(name="celular_aluno", type="string", length=11, nullable=true)
      */
-    private $email;
+    private $celularAluno;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="objetivo", type="string", length=500, nullable=true)
+     * @ORM\Column(name="data_nasc", type="date", nullable=true)
      */
-    private $objetivo;
+    private $dataNasc;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="usuario", type="string", length=45, nullable=true)
-     */
-    private $usuario;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="senha", type="string", length=45, nullable=true)
-     */
-    private $senha;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="academia_id", type="string", length=45, nullable=true)
-     */
-    private $academiaId;
-
-    /**
-     * @var \Academia\Entity\Dieta
+     * @var \Academia\Entity\Academia
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Dieta")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="dieta_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
      * })
      */
-    private $dieta;
+    private $idAcademia;
 
     /**
      * @var \Academia\Entity\Endereco
@@ -96,59 +75,34 @@ class Aluno extends AbstractEntity
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="Academia\Entity\Endereco")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="endereco_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_endereco", referencedColumnName="id_endereco")
      * })
      */
-    private $endereco;
+    private $idEndereco;
 
     /**
-     * @var \Academia\Entity\Medidas
+     * @var \Academia\Entity\Finalidade
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Medidas")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Finalidade")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="medidas_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_finalidade", referencedColumnName="id_finalidade")
      * })
      */
-    private $medidas;
+    private $idFinalidade;
 
     /**
-     * @var \Academia\Entity\Treino
+     * @var \Academia\Entity\Login
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Treino")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Login")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="treino_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_login", referencedColumnName="id_login")
      * })
      */
-    private $treino;
+    private $idLogin;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Academia\Entity\Telefone", inversedBy="aluno")
-     * @ORM\JoinTable(name="aluno_has_telefone",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="aluno_id", referencedColumnName="id"),
-     *     @ORM\JoinColumn(name="aluno_treino_id", referencedColumnName="treino_id"),
-     *     @ORM\JoinColumn(name="aluno_medidas_id", referencedColumnName="medidas_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="telefone_id", referencedColumnName="id"),
-     *     @ORM\JoinColumn(name="telefone_telefone_tipo_id", referencedColumnName="telefone_tipo_id")
-     *   }
-     * )
-     */
-    private $telefone;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->telefone = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 }

@@ -14,7 +14,7 @@ use \Zend\Stdlib\Hydrator;
  */
 class ExercicioService extends AbstractService{
     public function __construct(EntityManager $em){
-        $this->entity = 'Academia\Entity\Exercicios';
+        $this->entity = 'Academia\Entity\Exercicio';
         parent::__construct($em);
         
        // $request = $this->getRequest();
@@ -29,7 +29,7 @@ class ExercicioService extends AbstractService{
         //echo print_r($data);
        // echo "</pre>";
         
-        $entity = parent::save($data);
+        return parent::save($data);
         //$this->addTreino($entity,$data);
         //return $entity;
     }

@@ -1,69 +1,100 @@
-<?php
-$sessao = new Zend\Session\Container();
+<style type="text/css">
+    body{
+        background: url('http://localhost/site/wp-content/themes/sydney/images/2.jpg');
+    } 
+    
+    footer p{
+        color: #CCC;
+    }
+    
+    img{
+        max-width: 100%;
+    }
+    
+    .logo{
+        cursor: pointer;
+    }
+</style>
+<link href='http://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
 
-$nome = "";
-$quemEstaLogado = "";
+<div class="container ">
+    <div class="page-header">
+        <h1 onclick="window.location.href='site'" class="logo">Workout <small> System</small></h1>
+    </div>    
+    <?php if(!$this->identity()){ ?>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="middlePage">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Login</h3>
+                        </div>
+                        <div class="panel-body">
+                           
+                            <div class="row">
+                                <div class="col-md-5" >
+                                    <a href="<?php echo $this->urlLogin; ?>"><img src="http://techulus.com/buttons/fb.png" /></a><br/>
+                                    <!--a href="#"><img src="http://techulus.com/buttons/tw.png" /></a><br/>
+                                    <a href="#"><img src="http://techulus.com/buttons/gplus.png" /></a-->
+                                    <br/>
+                                    <div class="text-center visible-xs visible-sm">ou</div>
+                                    <br/>
+                                </div>
+                                <div class="col-md-7">
+                                    <form class="form-vertical" method="POST" action="/user/login">
+                                            <!--div class="form-group">
+                                                <label>
+                                                    <input type="radio" name="tipoLogin" value="1" />
+                                                    Aluno
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="tipoLogin" value="2"/>
+                                                    Academia
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="tipoLogin" value="6"/>
+                                                    Profissional
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="tipoLogin" value="4"/>
+                                                    Administrador
+                                                </label>
+                                            </div-->
 
-if(isset($sessao->authenticate) && $sessao->quemEstaLogado != "admin"){
-  $nome = $sessao->authenticate->getIdentity()->getNome();//id da academia ou do alluno
-}
-
-if(isset($sessao->quemEstaLogado)){
-    $quemEstaLogado =  $sessao->quemEstaLogado;
-}
-  
- ?>
-<img width="100%" style="position: relative; top: -10px;" src="<?php echo $this->basePath('img/banner.jpg'); ?>">
-<!--
-<div class="jumbotron">
-    É dono de uma academia e ainda não possuí um sistema de qualidade? Acompanhe de perto seus alunos e diminua seu esforço de trabalho, com esse sofisticado sistema de acompanhamento de treinos.
-    Tenha relatórios de desempenho de seus alunos, dispare avisos para cada um deles, cadastre os treinos e dietas para cada um. Saiba o quanto seu aluno está desenvolvendo através de relatórios e muito mais.
-</div>
--->
-<div class="row ">
-
-    <div class="col-md-8">
-        <div class="panel panel-default minHeight200">
-            <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp; <?php echo $this->translate('Android') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('Faça o download do aplicativo Workout e acompanhe seus treinos, receba dicas de dietas e treinos, pratique atividades físicas e seja acompanhado por esse incrível aplicativo!')); ?></p>
-                <p><a class="btn btn-default pull-right" href="http://framework.zend.com/zf2" target="_blank"><?php echo $this->translate('Download') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="panel panel-default minHeight200">
-            <div class="panel-heading">
-                
-                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<?php echo $this->translate('Login') ?></h3>
-            </div>
-            <div class="panel-body">
-                <?php  
-                    
-                    if(($nome == "" or $nome == null) and $quemEstaLogado == ""){ ?> 
-                        <form id="login-form" action="<?php echo $this->url('login',array('action' => 'login')) ?>" method="post" role="form" style="display: block;">
-                            <div class="form-group "><input type="text" name="usuario" placeholder="usuario" class="form-control" value=""></div>
-                            <div class="form-group "><input type="password" name="senha" placeholder="senha" class="form-control" value=""></div>
-                            <div class="form-group">
-                                <div class="row">
-                                        <div class="col-sm-4 pull-right">
-                                                <input type="submit" name="login-submit"  tabindex="4" class="form-control btn btn-primary " value="Entrar">
-                                        </div>
+                                            <div class="form-group">
+                                                <input id="textinput" name="identity" type="text" placeholder="Email" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input id="textinput" name="credential" type="password" placeholder="Senha" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="spacing">
+                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+                                                    <small> Remember me</small>
+                                                </div>
+                                                <div class="spacing">
+                                                    <a href="#"><small> Esqueceu sua senha?</small></a>
+                                                </div>
+                                                <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary pull-right">Entrar</button>
+                                            </div>
+                                    </form>
                                 </div>
                             </div>
-                        </form>
-                <?php }else{
-                    
-                    ?>
-                Seja Bem Vindo!<h4> <?php  echo $nome; ?>.</h4>
-                    <p><a class="btn btn-primary pull-right" href="<?php echo $this->url('login',array('action' => 'logout')) ?>" ><?php echo $this->translate('Sair') ?></a></p>
-                <?php  }?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-   
+    <?php }else{
+        //USUARIO LOGADO
+        //
+        //
+        
+        $session = new Zend\Session\Container();
+        
+        echo var_dump($this->identity());
+        echo "Bem Vindo, ". $this->identity()->getEmail();
+        
+    } ?>
+    
 </div>

@@ -3,12 +3,9 @@ namespace Academia\Form;
 
 use Academia\Entity\Endereco;
 use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-
+use DoctrineModule\Persistence\ObjectManagerAwareInterface;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,26 +17,33 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @author Allan
  */
-class EnderecoFieldset extends Fieldset{
+class EnderecoFieldset extends Fieldset implements ObjectManagerAwareInterface{
     //put your code here
+    private $objectManager;
     public function __construct()
     {
         // Add any elements that need to fetch data from database
         // using the album table !
-        parent::__construct('endereco');
-    /*    $this
-            // ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
+        parent::__construct("idEndereco");
+       
+    }
+    
+    public function init(){
+         $this
+             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
              ->setObject(new Endereco())
-         ;*/
+         ;
 
-        $this->setLabel('Endereco');
         
         $this->add(array(
-             'name' => 'cepbr_endereco_cep',
-             'options' => array(
-                 'label' => 'Cep',
-             ),
-             'attributes' => array(
+             'type' => 'hidden',
+             'name' => 'idEndereco'
+         ));
+        
+      
+        $this->add(array(
+             'type' => 'Academia\Form\CepbrEnderecoFieldset',             
+            'attributes' => array(
                  'required' => 'required',
                  'onBlur' => 'carregaCep()',
              ),
@@ -48,7 +52,7 @@ class EnderecoFieldset extends Fieldset{
         $this->add(array(
              'name' => 'rua',
              'options' => array(
-                 'label' => 'Rua',
+                 'label' => 'Logradouro',
              ),
              'attributes' => array(
                  'required' => 'required',
@@ -72,6 +76,17 @@ class EnderecoFieldset extends Fieldset{
              )
          ));
         
-        
+        $this->add(array(
+             'type' => 'Academia\Form\TipoEnderecoFieldset'
+         ));
     }
+
+      public function getObjectManager() {
+        return $this->objectManager;
+    }
+
+    public function setObjectManager(ObjectManager $objectManager) {
+        $this->objectManager = $objectManager;
+    }
+
 }

@@ -2,7 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CepbrEstado
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
  * @ORM\Table(name="cepbr_estado")
  * @ORM\Entity
  */
-class CepbrEstado extends AbstractEntity
+class CepbrEstado extends \Base\Entity\AbstractEntity
 {
     /**
      * @var string

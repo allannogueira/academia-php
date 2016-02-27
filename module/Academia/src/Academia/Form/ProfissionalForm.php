@@ -17,10 +17,9 @@ use DoctrineModule\Form\Element\ObjectSelect;
 class ProfissionalForm extends Form implements ObjectManagerAwareInterface
 {
     protected $objectManager;
-    public function __construct(ObjectManager $objectManager)
+    public function __construct($name = null, $options = array())
     {
-        $this->setObjectManager($objectManager);
-        parent::__construct('academia');
+        parent::__construct($name,$options);
      /*   $this->setAttribute('method','POST');
         $this->setInputFilter(new AlunoFilter());                
         */
@@ -29,8 +28,10 @@ class ProfissionalForm extends Form implements ObjectManagerAwareInterface
              ->setHydrator(new ClassMethodsHydrator())
            //  ->setInputFilter(new AlunoFilter())
          ;
-        
-       
+    }
+    
+    public function init(){
+      
         $this->setLabel('Cadastrar Academia');             
         
         $academia = new ObjectSelect("academia_id");

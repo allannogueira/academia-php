@@ -19,21 +19,9 @@ class FrequenciaController extends AbstractController
         $this->controller = 'FrequenciaController';
         $this->route = 'frequencia';
         $this->service = 'Academia\Service\FrequenciaService';
-        $this->entity = 'Academia\Entity\Frequencia';
+        $this->entity = 'Academia\Entity\FrequenciaAluno';
         $this->listarAction = "frequenciasAction";//nome da chamada no webservice
     }
-    /*
-    public function inserirAction(){
-        echo "<pre>";
-        var_dump($this);
-        echo "</pre>";
-        exit;
-    }*/
-    
-     public function inserirAction(){
-        
-        $this->form = $this->getServiceLocator()->get($this->form);        
-        return parent::inserirAction();
-    }
+
 	
 }

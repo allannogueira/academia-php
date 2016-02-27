@@ -176,6 +176,17 @@ class CepbrEndereco extends \Academia\Entity\CepbrEndereco implements \Doctrine\
     /**
      * {@inheritDoc}
      */
+    public function setCep($cep)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCep', array($cep));
+
+        return parent::setCep($cep);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getCep()
     {
         if ($this->__isInitialized__ === false) {
@@ -213,7 +224,7 @@ class CepbrEndereco extends \Academia\Entity\CepbrEndereco implements \Doctrine\
     /**
      * {@inheritDoc}
      */
-    public function setIdBairro(\Academia\Entity\CepbrBairro $idBairro = NULL)
+    public function setIdBairro(\Academia\Entity\CepbrBairro $idBairro)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdBairro', array($idBairro));
@@ -235,7 +246,7 @@ class CepbrEndereco extends \Academia\Entity\CepbrEndereco implements \Doctrine\
     /**
      * {@inheritDoc}
      */
-    public function setIdCidade(\Academia\Entity\CepbrCidade $idCidade = NULL)
+    public function setIdCidade(\Academia\Entity\CepbrCidade $idCidade)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdCidade', array($idCidade));
@@ -257,12 +268,12 @@ class CepbrEndereco extends \Academia\Entity\CepbrEndereco implements \Doctrine\
     /**
      * {@inheritDoc}
      */
-    public function toArray()
+    public function toArray($em)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', array($em));
 
-        return parent::toArray();
+        return parent::toArray($em);
     }
 
 }

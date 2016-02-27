@@ -2,14 +2,11 @@
 
 class Sydney_Employees extends WP_Widget {
 
-    function sydney_employees() {
+	public function __construct() {
 		$widget_ops = array('classname' => 'sydney_employees_widget', 'description' => __( 'Display your team members in a stylish way.', 'sydney') );
         parent::__construct(false, $name = __('Sydney FP: Employees', 'sydney'), $widget_ops);
 		$this->alt_option_name = 'sydney_employees_widget';
-		
-		add_action( 'save_post', array($this, 'flush_widget_cache') );
-		add_action( 'deleted_post', array($this, 'flush_widget_cache') );
-		add_action( 'switch_theme', array($this, 'flush_widget_cache') );		
+
     }
 
 	function form($instance) {
@@ -49,19 +46,13 @@ class Sydney_Employees extends WP_Widget {
 		$instance['category'] 		= strip_tags($new_instance['category']);
 		$instance['center_content'] = isset( $new_instance['center_content'] ) ? (bool) $new_instance['center_content'] : false;		
 
-		$this->flush_widget_cache();
-
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
 		if ( isset($alloptions['sydney_employees']) )
 			delete_option('sydney_employees');		  
 		  
 		return $instance;
 	}
-	
-	function flush_widget_cache() {
-		wp_cache_delete('sydney_employees', 'widget');
-	}
-	
+
 	function widget($args, $instance) {
 		$cache = array();
 		if ( ! $this->is_preview() ) {

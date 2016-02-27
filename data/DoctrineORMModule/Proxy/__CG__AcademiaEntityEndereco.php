@@ -64,10 +64,10 @@ class Endereco extends \Academia\Entity\Endereco implements \Doctrine\ORM\Proxy\
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'id', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'rua', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'numero', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'complemento', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'cepbrEnderecoCep');
+            return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'idEndereco', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'rua', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'numero', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'complemento', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'cepbrEnderecoCep', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'idTipoEndereco');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'id', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'rua', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'numero', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'complemento', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'cepbrEnderecoCep');
+        return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'idEndereco', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'rua', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'numero', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'complemento', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'cepbrEnderecoCep', '' . "\0" . 'Academia\\Entity\\Endereco' . "\0" . 'idTipoEndereco');
     }
 
     /**
@@ -176,16 +176,27 @@ class Endereco extends \Academia\Entity\Endereco implements \Doctrine\ORM\Proxy\
     /**
      * {@inheritDoc}
      */
-    public function getId()
+    public function setIdEndereco($idEndereco)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdEndereco', array($idEndereco));
+
+        return parent::setIdEndereco($idEndereco);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIdEndereco()
     {
         if ($this->__isInitialized__ === false) {
-            return (int)  parent::getId();
+            return (int)  parent::getIdEndereco();
         }
 
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdEndereco', array());
 
-        return parent::getId();
+        return parent::getIdEndereco();
     }
 
     /**
@@ -257,7 +268,7 @@ class Endereco extends \Academia\Entity\Endereco implements \Doctrine\ORM\Proxy\
     /**
      * {@inheritDoc}
      */
-    public function setCepbrEnderecoCep($cepbrEnderecoCep)
+    public function setCepbrEnderecoCep(\Academia\Entity\CepbrEndereco $cepbrEnderecoCep)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCepbrEnderecoCep', array($cepbrEnderecoCep));
@@ -279,12 +290,34 @@ class Endereco extends \Academia\Entity\Endereco implements \Doctrine\ORM\Proxy\
     /**
      * {@inheritDoc}
      */
-    public function toArray()
+    public function setIdTipoEndereco(\Academia\Entity\TipoEndereco $idTipoEndereco)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdTipoEndereco', array($idTipoEndereco));
 
-        return parent::toArray();
+        return parent::setIdTipoEndereco($idTipoEndereco);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIdTipoEndereco()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdTipoEndereco', array());
+
+        return parent::getIdTipoEndereco();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function toArray($em)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', array($em));
+
+        return parent::toArray($em);
     }
 
 }

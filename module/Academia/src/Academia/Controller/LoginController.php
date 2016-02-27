@@ -12,7 +12,7 @@ namespace Academia\Controller;
 use Base\Controller\AbstractController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
-
+use Zend\Authentication\Result;
 
 
 
@@ -44,35 +44,67 @@ class LoginController extends AbstractController
     
     public function loginAction()
     {
+       // $authServer = $this->getServiceLocator()->get('doctrine.authenticationservice.orm_default');
+        $authServer = new \Zend\Authentication\AuthenticationService();
+        $adapter = new \DoctrineModule\Authentication\Adapter\ObjectRepository(array(
+            'objectManager' => $this->getEm(),
+            'identityClass' => 'Academia\Entity\Login',
+            'identityProperty' => 'email',
+            'credentialProperty' => 'senha'/*,
+            'credentialCallable' => 'Academia\Entity\Login::hashPassword'*/
+        ));        
+         
        //pega os post do formulario
         $data = $this->getRequest()->getPost();
+        $adapter->setIdentityValue($data->email);
+        $adapter->setCredentialValue($data->senha);
+        $authServer->setAdapter($adapter);
+        $result = $authServer->authenticate();
         
-        // If you used another name for the authentication service, change it here
-        $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-        
-        $adapters = $this->getServiceLocator()->get("adapters");//recupera do serviço abaixo em Module.php
-        $storages = $this->getServiceLocator()->get('storages');//recupera do serviço abaixo em Module.php
-        //percorre todos os adaptadores
-        foreach($adapters as $index => $adapter){
-            $authService->setStorage($storages[$index]);//get storage da classe Module.php
-            $authService->setAdapter($adapters[$index]);//get adaptador da classe Module.php
+        switch ($result->getCode()) {
 
-            $adapter = $authService->getAdapter();
-            
-            
-            $adapter->setIdentityValue($data->usuario);
-            $adapter->setCredentialValue(md5($data->senha));
-            if ($authService->authenticate()->isValid()){
-                /*Define quem vai ter autorização do que no sistema*/
-                 $session = new Container();
-                 $session->authenticate = $authService->authenticate();
-                $this->setAutorizacao();
-                  //echo var_dump($authResult);exit;
-                /*redireciona para home*/
-                return $this->redirect()->toRoute('home');
-            }
+            case Result::FAILURE_IDENTITY_NOT_FOUND:
+                return new ViewModel(['error' => "Email Inválido."]);   
+                break;
+
+            case Result::FAILURE_CREDENTIAL_INVALID:
+                return new ViewModel(['error' => "Senha inválida."]);   
+                break;
+
+            case Result::SUCCESS:
+                $this->selecionaTemplate();
+                $this->redirect()->toRoute('home')->setMetadata(array('success'=> "Bem Vindo!"));
+                
+                break;
+
+            default:
+                return new ViewModel(['error' => "Login Inválido, tente novamente."]);   
+                break;
         }
-        $this->redirect()->toRoute('home');
+    }
+    
+    public function selecionaTemplate(){
+        /*1	aluno
+        2	academia
+        3	profissional
+        4	administrador*/
+        $session = new Container();
+        $tipoUsuario = $this->identity()->getCodTipoLogin()->getCodTipoLogin();//recupera o codigo tipo do login
+        
+        switch ($tipoUsuario){
+           case 1: 
+               $session->layout = "layout/layoutAluno";
+               break;
+           case 2:
+                $session->layout = "layout/layoutAcademia";
+               break;
+           case 3:
+                $session->layout = "layout/layoutProfissional";
+               break;
+           case 4:
+                $session->layout = "layout/layoutAdmin";
+               break;
+        }
     }
     
     

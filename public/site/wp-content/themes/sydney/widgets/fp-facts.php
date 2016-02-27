@@ -3,14 +3,10 @@
 class Sydney_Facts extends WP_Widget {
 
 // constructor
-    function sydney_facts() {
+	public function __construct() {
 		$widget_ops = array('classname' => 'sydney_facts_widget', 'description' => __( 'Show your visitors some facts about your company.', 'sydney') );
         parent::__construct(false, $name = __('Sydney FP: Facts', 'sydney'), $widget_ops);
 		$this->alt_option_name = 'sydney_facts_widget';
-		
-		add_action( 'save_post', array($this, 'flush_widget_cache') );
-		add_action( 'deleted_post', array($this, 'flush_widget_cache') );
-		add_action( 'switch_theme', array($this, 'flush_widget_cache') );		
     }
 	
 	// widget form creation
@@ -120,7 +116,6 @@ class Sydney_Facts extends WP_Widget {
 		$instance['fact_four'] 		= strip_tags($new_instance['fact_four']);
 		$instance['fact_four_max'] 	= intval($new_instance['fact_four_max']);
 		$instance['fact_four_icon'] = strip_tags($new_instance['fact_four_icon']);
-		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
 		if ( isset($alloptions['sydney_facts']) )
@@ -128,11 +123,7 @@ class Sydney_Facts extends WP_Widget {
 		  
 		return $instance;
 	}
-	
-	function flush_widget_cache() {
-		wp_cache_delete('sydney_facts', 'widget');
-	}
-	
+		
 	// display widget
 	function widget($args, $instance) {
 		$cache = array();

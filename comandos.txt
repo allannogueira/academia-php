@@ -1,10 +1,26 @@
+
 #criar modulo#
 dentro de academia-php
 php vendor/zendframework/zftool/zf.php
 
+#atualizar composer#
+navegar no terminal até: C:\Users\Allan\Documents\GitHub\academia-php\
+rodar o comando:php composer.phar self-update (atualiza o composer)
+rodar o comando:php composer.phar update (atualiza os modulos especificados no composer)
+caso de erro e peça para remover alguma versão, rodar: php composer.phar require x/y
+
+#instalar modulos por composer#
+navegar no terminal até: C:\Users\Allan\Documents\GitHub\academia-php\
+rodar o comando:php composer.phar require zf-commons/zfc-user
+
+#generate autoload_classmap.php#
+cd C:\Users\Allan\Documents\GitHub\academia-php\vendor
+php C:\Users\Allan\Documents\GitHub\academia-php\vendor\zendframework\zendframework\bin\classmap_generator.php 
+
+
 #gerar entidades do banco para o php#
 acessar C:/Users/Allan/Documents/GitHub/academia-php/bin
-criar entidades: doctrine-module orm:convert-mapping --namespace="Academia\Entity\\" --force --from-database annotation ./module/Academia/src/
+criar entidades: doctrine-module orm:convert-mapping --namespace="Academia\Entity\\" --extend="Base\Entity\AbstractEntity" --force --from-database annotation ./module/Academia/src/
 gerar gets e sets das entidades: doctrine-module orm:generate-entities ./module/Academia/src/ --generate-annotations=true
 
 

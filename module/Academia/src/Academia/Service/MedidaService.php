@@ -15,7 +15,7 @@ class MedidaService extends AbstractService{
     
     public function __construct(EntityManager $em){
         
-        $this->entity = 'Academia\Entity\Medidas';
+        $this->entity = 'Academia\Entity\Medida';
         parent::__construct($em);
         
        // $request = $this->getRequest();
@@ -33,19 +33,8 @@ class MedidaService extends AbstractService{
     public function save(Array $data = array())
     {
        $entity = parent::save($data);
-       $this->setData($data);
-       $this->saveIdMedidaAluno($entity);
        return $entity;
     }
-    
-    public function saveIdMedidaAluno(\Academia\Entity\Medidas $entityMedidas){
-        $idAluno = $this->getData()['aluno'];
-        
-         $entity = $this->getEm()->getReference("\Academia\Entity\Aluno",$idAluno);
-         $entity->setMedidas($entityMedidas);
-        
-         $this->em->persist($entity);
-        $this->em->flush();
-    }
+ 
     
 }

@@ -18,53 +18,21 @@ class InformativoForm extends Form implements ObjectManagerAwareInterface
     
     public function __construct(ObjectManager $objectManager)
     {
-        $this->setObjectManager($objectManager);
         parent::__construct('informativo');
      /*   $this->setAttribute('method','POST');
         $this->setInputFilter(new AlunoFilter());                
         */
+    }
+    
+    public function init(){
         $this
              ->setAttribute('method', 'POST')
              ->setHydrator(new ClassMethodsHydrator())
            //  ->setInputFilter(new AlunoFilter())
          ;
         
-                  
-         $academia = new ObjectSelect("academia_id");
-         $academia->setLabel("Academia")
-                 ->setOptions([ 
-                'object_manager'     => $this->getObjectManager(),
-                'target_class'       => 'Academia\Entity\Academia',
-                'property' => 'nome',
-               'empty_option' => 'selecione',
-                'is_method' => true,
-                'find_method'        => array(
-                    'name'  => 'findBy',
-                    'params' =>[
-                        'criteria'   => array(),
-                        'orderBy'   => array("nome" => "ASC"),
-                    ]
-                )            
-        ]);
-        $this->add($academia);
-        
-        $aluno = new ObjectSelect("aluno");
-         $aluno->setLabel("Aluno")
-                 ->setOptions([ 
-                'object_manager'     => $this->getObjectManager(),
-                'target_class'       => 'Academia\Entity\Aluno',
-                'property' => 'nome',
-               'empty_option' => 'selecione',
-                'is_method' => true,
-                'find_method'        => array(
-                    'name'  => 'findBy',
-                    'params' =>[
-                        'criteria'   => array(),
-                        'orderBy'   => array("nome" => "ASC"),
-                    ]
-                )            
-        ]);
-        $this->add($aluno);
+         $this->add(['type' => 'Academia\Form\AlunoFieldset']);
+         $this->add(['type' => 'Academia\Form\AcademiaFieldset']);
         
        $this->add([
            'name' => 'descricao',

@@ -7,78 +7,41 @@ namespace Academia\Form;
  */
 
 use Zend\Form\Form;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
-use Academia\Entity\Aluno;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use DoctrineModule\Form\Element\ObjectSelect;
-use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
+use Academia\Entity\Treino;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class TreinoForm extends Form implements ObjectManagerAwareInterface
 {
     
-    public function init()
+     private $objectManager;
+    public function __construct($name = null, $options = array())
     {
+        parent::__construct($name,$options);
+    }
+    
+    public function init(){
+        $this
+            ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
+            ->setObject(new Treino())
+        ;
         
-        parent::__construct('academia');
-     /*   $this->setAttribute('method','POST');
-        $this->setInputFilter(new AlunoFilter());                
-        */
-        
-        
-       $this->setHydrator(new DoctrineEntity($this->getObjectManager(), 'Academia\Entity\Treino'));
-       /*
-        $this->setLabel('Aluno');             
-        
-        $aluno = new ObjectSelect("aluno");
-         $aluno->setLabel("Aluno")
-                 ->setOptions([ 
-                'object_manager'     => $this->getObjectManager(),
-                'target_class'       => 'Academia\Entity\Aluno',
-                'property' => 'nome',
-               'empty_option' => 'selecione',
-                'is_method' => true,
-                'find_method'        => array(
-                    'name'  => 'findBy',
-                    'params' =>[
-                        'criteria'   => array(),
-                        'orderBy'   => array("nome" => "ASC"),
-                    ]
-                )            
-        ]);
-         
-        // echo var_dump($academia);
-        $this->add($aluno);
-        
-         $treino = new ObjectSelect("treino");
-         $treino->setLabel("Treino")
-                 ->setOptions([ 
-                'object_manager'     => $this->getObjectManager(),
-                'target_class'       => 'Academia\Entity\Treino',
-                'property' => 'nome',
-               'empty_option' => 'selecione',
-                'is_method' => true,
-                'find_method'        => array(
-                    'name'  => 'findBy',
-                    'params' =>[
-                        'criteria'   => array(),
-                        'orderBy'   => array("nome" => "ASC"),
-                    ]
-                )            
-        ]);
-        $this->add($treino);
-        
-         */
         $this->add([
-           'name' => 'nome',
-           'type' => 'text',
-           'options' => [
-               'label' => 'Nome do Treino',
-           ]
+           'name' => 'idTreino',
+           'type' => 'hidden'
        ]);
        
+         $this->add(array(
+             'type' => 'Academia\Form\AlunoFieldset'
+         ));
+         
+         $this->add(array(
+             'type' => 'Academia\Form\TreinoGeralFieldset'
+         ));
+         
        $this->add([
-           'name' => 'data_inicio',
+           'name' => 'dataIniVig',
            'type' => 'date',
            'options' => [
                'label' => 'Data de Inicio',
@@ -86,26 +49,12 @@ class TreinoForm extends Form implements ObjectManagerAwareInterface
        ]);
        
        $this->add([
-           'name' => 'data_fim',
+           'name' => 'dataFimVig',
            'type' => 'date',
            'options' => [
                'label' => 'Data Final',
            ]
        ]);
-       
-          $this->add(array(
-             'type' => 'Zend\Form\Element\Collection',
-             'name' => 'exercicios',
-             'options' => array(
-                 'label' => 'Escolha exercicios para esse treino',
-                 'count' => 2,
-                 'allow_add' => true,
-                 'target_element' => array(
-                     'type' => 'Academia\Form\ExerciciosFieldset',
-                 ),
-             ),
-         ));
-   
 
        $this->add(array(
              'type' => 'Zend\Form\Element\Csrf',

@@ -38,22 +38,44 @@ class LoginController extends AbstractRestfulController
         ));
     }*/
     
-    private function verificaLogin($usuario,$senha){
-        $qb = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager')->createQueryBuilder();
-        $qb->select('a')
-            ->from('Academia\Entity\Academia', 'a')
-            ->where("a.usuario = '".$usuario."' and a.senha = '".$senha."'");
-            
+    private function verificaLogin($email,$senha){
+        $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+      /*  $qb = $em->createQueryBuilder();
+
+  
+        $qb->select('a.idAluno','l','fin','aca','e','ea')
+            ->from('Academia\Entity\Aluno', 'a')
+            ->innerJoin('Academia\Entity\Login','l',\Doctrine\ORM\Query\Expr\Join::INNER_JOIN,'a.idLogin = l.idLogin')
+            ->innerJoin('Academia\Entity\Endereco','e',\Doctrine\ORM\Query\Expr\Join::INNER_JOIN,'a.idEndereco = e.idEndereco')
+            ->innerJoin('Academia\Entity\Finalidade','fin',\Doctrine\ORM\Query\Expr\Join::INNER_JOIN,'a.idFinalidade = fin.idFinalidade')
+            ->innerJoin('Academia\Entity\Academia','aca',\Doctrine\ORM\Query\Expr\Join::INNER_JOIN,'a.idAcademia = aca.idAcademia')
+            ->innerJoin('Academia\Entity\Endereco','ea',\Doctrine\ORM\Query\Expr\Join::INNER_JOIN,'aca.idEndereco = ea.idEndereco')
+            ->where("l.email = '".$email."' and l.senha = '".$senha."'");
+       //$retorno_array = $em->getRepository("Academia\Entity\Aluno")->findAll(); 
         $retorno_array = $qb->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-        
+     */
+        $productRepository = $em->getRepository('Academia\Entity\Aluno');
+$products = $productRepository->findAll();
+/*
+foreach ($products as $product) {
+    echo sprintf("-%s\n", $product->getNome());
+}*/
+exit;
+        $retorno_array = array("teste"=>"teste");
         return new JsonModel(array(
             'usuario' => array($retorno_array),
         ));
     }
     
     public function verificaLoginAction(){
-        $usuario = $this->params()->fromPost("usuario");
-        $senha = $this->params()->fromPost("senha");
-        return $this->verificaLogin($usuario,$senha);
+        $email = $this->params()->fromQuery("email");
+        $senha = $this->params()->fromQuery("senha");
+        if($email == "")
+           $email = $this->params()->fromPost("email");
+        
+        if($senha == "")
+           $senha = $this->params()->fromPost("senha");
+        
+        return $this->verificaLogin($email,$senha);
     }
 }

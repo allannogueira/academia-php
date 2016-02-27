@@ -2,38 +2,44 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * AparelhoNaoRecomendado
  *
- * @ORM\Table(name="aparelho_nao_recomendado")
+ * @ORM\Table(name="aparelho_nao_recomendado", indexes={@ORM\Index(name="id_aparelho_idx", columns={"id_aparelho"}), @ORM\Index(name="id_academia_idx", columns={"id_academia"})})
  * @ORM\Entity
  */
-class AparelhoNaoRecomendado extends AbstractEntity
+class AparelhoNaoRecomendado extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var string
+     * @var \Academia\Entity\Academia
      *
-     * @ORM\Column(name="nome", type="string", length=45, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
+     * })
      */
-    private $nome;
+    private $idAcademia;
 
     /**
-     * @var string
+     * @var \Academia\Entity\Aparelho
      *
-     * @ORM\Column(name="motivo", type="string", length=45, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aparelho")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_aparelho", referencedColumnName="id_aparelho")
+     * })
      */
-    private $motivo;
+    private $idAparelho;
 
 
 
@@ -48,48 +54,48 @@ class AparelhoNaoRecomendado extends AbstractEntity
     }
 
     /**
-     * Set nome
+     * Set idAcademia
      *
-     * @param string $nome
+     * @param \Academia\Entity\Academia $idAcademia
      * @return AparelhoNaoRecomendado
      */
-    public function setNome($nome)
+    public function setIdAcademia(\Academia\Entity\Academia $idAcademia = null)
     {
-        $this->nome = $nome;
+        $this->idAcademia = $idAcademia;
     
         return $this;
     }
 
     /**
-     * Get nome
+     * Get idAcademia
      *
-     * @return string 
+     * @return \Academia\Entity\Academia 
      */
-    public function getNome()
+    public function getIdAcademia()
     {
-        return $this->nome;
+        return $this->idAcademia;
     }
 
     /**
-     * Set motivo
+     * Set idAparelho
      *
-     * @param string $motivo
+     * @param \Academia\Entity\Aparelho $idAparelho
      * @return AparelhoNaoRecomendado
      */
-    public function setMotivo($motivo)
+    public function setIdAparelho(\Academia\Entity\Aparelho $idAparelho = null)
     {
-        $this->motivo = $motivo;
+        $this->idAparelho = $idAparelho;
     
         return $this;
     }
 
     /**
-     * Get motivo
+     * Get idAparelho
      *
-     * @return string 
+     * @return \Academia\Entity\Aparelho 
      */
-    public function getMotivo()
+    public function getIdAparelho()
     {
-        return $this->motivo;
+        return $this->idAparelho;
     }
 }

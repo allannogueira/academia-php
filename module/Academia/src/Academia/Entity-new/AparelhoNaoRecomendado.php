@@ -1,0 +1,46 @@
+<?php
+
+namespace Academia\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AparelhoNaoRecomendado
+ *
+ * @ORM\Table(name="aparelho_nao_recomendado", indexes={@ORM\Index(name="id_aparelho_idx", columns={"id_aparelho"}), @ORM\Index(name="id_academia_idx", columns={"id_academia"})})
+ * @ORM\Entity
+ */
+class AparelhoNaoRecomendado extends \Base\Entity\AbstractEntity
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Academia\Entity\Academia
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
+     * })
+     */
+    private $idAcademia;
+
+    /**
+     * @var \Academia\Entity\Aparelho
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aparelho")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_aparelho", referencedColumnName="id_aparelho")
+     * })
+     */
+    private $idAparelho;
+
+
+}
+

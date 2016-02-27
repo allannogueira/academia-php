@@ -2,7 +2,7 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TipoEndereco
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
  * @ORM\Table(name="tipo_endereco")
  * @ORM\Entity
  */
-class TipoEndereco extends AbstractEntity
+class TipoEndereco extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
@@ -24,7 +24,7 @@ class TipoEndereco extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="descricao", type="string", length=45, nullable=true)
+     * @ORM\Column(name="descricao", type="string", length=150, nullable=true)
      */
     private $descricao;
 

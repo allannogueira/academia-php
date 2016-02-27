@@ -64,10 +64,10 @@ class Aluno extends \Academia\Entity\Aluno implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'id', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nome', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpf', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rg', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'email', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'objetivo', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'usuario', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'senha', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'academiaId', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'dieta', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'endereco', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'medidas', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'treino', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'telefone');
+            return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'sobrenomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'telefoneAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'celularAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'dataNasc', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpf', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rg', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'email', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAcademia', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idEndereco', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idFinalidade', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idLogin');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'id', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nome', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpf', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rg', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'email', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'objetivo', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'usuario', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'senha', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'academiaId', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'dieta', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'endereco', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'medidas', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'treino', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'telefone');
+        return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'sobrenomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'telefoneAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'celularAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'dataNasc', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpf', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rg', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'email', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAcademia', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idEndereco', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idFinalidade', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idLogin');
     }
 
     /**
@@ -176,60 +176,225 @@ class Aluno extends \Academia\Entity\Aluno implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setId($id)
+    public function setIdAluno($idAluno)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setId', array($id));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdAluno', array($idAluno));
 
-        return parent::setId($id);
+        return parent::setIdAluno($idAluno);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getId()
+    public function getIdAluno()
     {
         if ($this->__isInitialized__ === false) {
-            return  parent::getId();
+            return (int)  parent::getIdAluno();
         }
 
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdAluno', array());
 
-        return parent::getId();
+        return parent::getIdAluno();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setNome($nome)
+    public function setNomeAluno($nomeAluno)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNome', array($nome));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNomeAluno', array($nomeAluno));
 
-        return parent::setNome($nome);
+        return parent::setNomeAluno($nomeAluno);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getNome()
+    public function getNomeAluno()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNome', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNomeAluno', array());
 
-        return parent::getNome();
+        return parent::getNomeAluno();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setCpf($cpf)
+    public function setSobrenomeAluno($sobrenomeAluno)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCpf', array($cpf));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSobrenomeAluno', array($sobrenomeAluno));
 
-        return parent::setCpf($cpf);
+        return parent::setSobrenomeAluno($sobrenomeAluno);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSobrenomeAluno()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSobrenomeAluno', array());
+
+        return parent::getSobrenomeAluno();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTelefoneAluno($telefoneAluno)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTelefoneAluno', array($telefoneAluno));
+
+        return parent::setTelefoneAluno($telefoneAluno);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTelefoneAluno()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTelefoneAluno', array());
+
+        return parent::getTelefoneAluno();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCelularAluno($celularAluno)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCelularAluno', array($celularAluno));
+
+        return parent::setCelularAluno($celularAluno);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCelularAluno()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCelularAluno', array());
+
+        return parent::getCelularAluno();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDataNasc($dataNasc)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDataNasc', array($dataNasc));
+
+        return parent::setDataNasc($dataNasc);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDataNasc()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDataNasc', array());
+
+        return parent::getDataNasc();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIdAcademia(\Academia\Entity\Academia $idAcademia)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdAcademia', array($idAcademia));
+
+        return parent::setIdAcademia($idAcademia);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIdAcademia()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdAcademia', array());
+
+        return parent::getIdAcademia();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIdEndereco(\Academia\Entity\Endereco $idEndereco)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdEndereco', array($idEndereco));
+
+        return parent::setIdEndereco($idEndereco);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIdEndereco()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdEndereco', array());
+
+        return parent::getIdEndereco();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIdFinalidade(\Academia\Entity\Finalidade $idFinalidade)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdFinalidade', array($idFinalidade));
+
+        return parent::setIdFinalidade($idFinalidade);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIdFinalidade()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdFinalidade', array());
+
+        return parent::getIdFinalidade();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIdLogin(\Academia\Entity\Login $idLogin)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdLogin', array($idLogin));
+
+        return parent::setIdLogin($idLogin);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIdLogin()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdLogin', array());
+
+        return parent::getIdLogin();
     }
 
     /**
@@ -246,34 +411,12 @@ class Aluno extends \Academia\Entity\Aluno implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setRg($rg)
+    public function setCpf($cpf)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRg', array($rg));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCpf', array($cpf));
 
-        return parent::setRg($rg);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getRg()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRg', array());
-
-        return parent::getRg();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setEmail($email)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmail', array($email));
-
-        return parent::setEmail($email);
+        return parent::setCpf($cpf);
     }
 
     /**
@@ -290,221 +433,45 @@ class Aluno extends \Academia\Entity\Aluno implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setObjetivo($objetivo)
+    public function setEmail($email)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setObjetivo', array($objetivo));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmail', array($email));
 
-        return parent::setObjetivo($objetivo);
+        return parent::setEmail($email);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getObjetivo()
+    public function getRg()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getObjetivo', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRg', array());
 
-        return parent::getObjetivo();
+        return parent::getRg();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setUsuario($usuario)
+    public function setRg($rg)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsuario', array($usuario));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRg', array($rg));
 
-        return parent::setUsuario($usuario);
+        return parent::setRg($rg);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getUsuario()
+    public function toArray($em)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsuario', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', array($em));
 
-        return parent::getUsuario();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setSenha($senha)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSenha', array($senha));
-
-        return parent::setSenha($senha);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getSenha()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSenha', array());
-
-        return parent::getSenha();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setAcademiaId($academiaId)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAcademiaId', array($academiaId));
-
-        return parent::setAcademiaId($academiaId);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAcademiaId()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAcademiaId', array());
-
-        return parent::getAcademiaId();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setDieta(\Academia\Entity\Dieta $dieta)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDieta', array($dieta));
-
-        return parent::setDieta($dieta);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDieta()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDieta', array());
-
-        return parent::getDieta();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setEndereco(\Academia\Entity\Endereco $endereco)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEndereco', array($endereco));
-
-        return parent::setEndereco($endereco);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getEndereco()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEndereco', array());
-
-        return parent::getEndereco();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setMedidas(\Academia\Entity\Medidas $medidas)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setMedidas', array($medidas));
-
-        return parent::setMedidas($medidas);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getMedidas()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getMedidas', array());
-
-        return parent::getMedidas();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setTreino(\Academia\Entity\Treino $treino)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTreino', array($treino));
-
-        return parent::setTreino($treino);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getTreino()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTreino', array());
-
-        return parent::getTreino();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addTelefone(\Academia\Entity\Telefone $telefone)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addTelefone', array($telefone));
-
-        return parent::addTelefone($telefone);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeTelefone(\Academia\Entity\Telefone $telefone)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeTelefone', array($telefone));
-
-        return parent::removeTelefone($telefone);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getTelefone()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTelefone', array());
-
-        return parent::getTelefone();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function toArray()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', array());
-
-        return parent::toArray();
+        return parent::toArray($em);
     }
 
 }

@@ -2,36 +2,36 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Endereco
  *
- * @ORM\Table(name="endereco", indexes={@ORM\Index(name="fk_endereco_cepbr_endereco1_idx", columns={"cepbr_endereco_cep"})})
+ * @ORM\Table(name="endereco", indexes={@ORM\Index(name="fk_Endereco_Tipo_Endereco1_idx", columns={"id_tipo_endereco"}), @ORM\Index(name="fk_Endereco_Cepbr_endereco1_idx", columns={"Cepbr_endereco_cep"})})
  * @ORM\Entity
  */
-class Endereco extends AbstractEntity
+class Endereco extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id_endereco", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    private $idEndereco;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rua", type="string", length=45, nullable=true)
+     * @ORM\Column(name="rua", type="string", length=150, nullable=true)
      */
     private $rua;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="numero", type="string", length=45, nullable=true)
+     * @ORM\Column(name="numero", type="string", length=4, nullable=true)
      */
     private $numero;
 
@@ -43,11 +43,28 @@ class Endereco extends AbstractEntity
     private $complemento;
 
     /**
-     * @var string
+     * @var \Academia\Entity\CepbrEndereco
      *
-     * @ORM\Column(name="cepbr_endereco_cep", type="string", length=10, nullable=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrEndereco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Cepbr_endereco_cep", referencedColumnName="cep")
+     * })
      */
     private $cepbrEnderecoCep;
+
+    /**
+     * @var \Academia\Entity\TipoEndereco
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\TipoEndereco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipo_endereco", referencedColumnName="id")
+     * })
+     */
+    private $idTipoEndereco;
 
 
 }

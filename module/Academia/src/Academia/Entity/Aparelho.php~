@@ -2,31 +2,31 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Aparelho
  *
- * @ORM\Table(name="aparelho", indexes={@ORM\Index(name="fk_aparelho_academia1_idx", columns={"academia_id"})})
+ * @ORM\Table(name="aparelho", indexes={@ORM\Index(name="FK_id_academi_idx", columns={"id_academia"})})
  * @ORM\Entity
  */
-class Aparelho extends AbstractEntity
+class Aparelho extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Column(name="id_aparelho", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    private $idAparelho;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nome", type="string", length=100, nullable=true)
+     * @ORM\Column(name="nome_aparelho", type="string", length=150, nullable=true)
      */
-    private $nome;
+    private $nomeAparelho;
 
     /**
      * @var string
@@ -36,18 +36,16 @@ class Aparelho extends AbstractEntity
     private $modelo;
 
     /**
-     * @var string
+     * @var \Academia\Entity\Academia
      *
-     * @ORM\Column(name="finalidade", type="string", length=500, nullable=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
+     * })
      */
-    private $finalidade;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="academia_id", type="bigint", nullable=true)
-     */
-    private $academiaId;
+    private $idAcademia;
 
 
 }

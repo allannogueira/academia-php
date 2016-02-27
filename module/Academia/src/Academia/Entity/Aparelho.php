@@ -2,31 +2,31 @@
 
 namespace Academia\Entity;
 
-use Doctrine\ORM\Mapping as ORM; use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Aparelho
  *
- * @ORM\Table(name="aparelho", indexes={@ORM\Index(name="fk_aparelho_academia1_idx", columns={"academia_id"})})
+ * @ORM\Table(name="aparelho", indexes={@ORM\Index(name="FK_id_academi_idx", columns={"id_academia"})})
  * @ORM\Entity
  */
-class Aparelho extends AbstractEntity
+class Aparelho extends \Base\Entity\AbstractEntity
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Column(name="id_aparelho", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idAparelho;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nome", type="string", length=100, nullable=true)
+     * @ORM\Column(name="nome_aparelho", type="string", length=150, nullable=true)
      */
-    private $nome;
+    private $nomeAparelho;
 
     /**
      * @var string
@@ -36,52 +36,63 @@ class Aparelho extends AbstractEntity
     private $modelo;
 
     /**
-     * @var string
+     * @var \Academia\Entity\Academia
      *
-     * @ORM\Column(name="finalidade", type="string", length=500, nullable=true)
+     * 
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia",cascade={"all"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
+     * })
      */
-    private $finalidade;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="academia_id", type="bigint", nullable=true)
-     */
-    private $academiaId;
+    private $idAcademia;
 
 
 
     /**
-     * Get id
+     * Set idAparelho
      *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set nome
-     *
-     * @param string $nome
+     * @param integer $idAparelho
      * @return Aparelho
      */
-    public function setNome($nome)
+    public function setIdAparelho($idAparelho)
     {
-        $this->nome = $nome;
+        $this->idAparelho = $idAparelho;
     
         return $this;
     }
 
     /**
-     * Get nome
+     * Get idAparelho
+     *
+     * @return integer 
+     */
+    public function getIdAparelho()
+    {
+        return $this->idAparelho;
+    }
+
+    /**
+     * Set nomeAparelho
+     *
+     * @param string $nomeAparelho
+     * @return Aparelho
+     */
+    public function setNomeAparelho($nomeAparelho)
+    {
+        $this->nomeAparelho = $nomeAparelho;
+    
+        return $this;
+    }
+
+    /**
+     * Get nomeAparelho
      *
      * @return string 
      */
-    public function getNome()
+    public function getNomeAparelho()
     {
-        return $this->nome;
+        return $this->nomeAparelho;
     }
 
     /**
@@ -108,48 +119,25 @@ class Aparelho extends AbstractEntity
     }
 
     /**
-     * Set finalidade
+     * Set idAcademia
      *
-     * @param string $finalidade
+     * @param \Academia\Entity\Academia $idAcademia
      * @return Aparelho
      */
-    public function setFinalidade($finalidade)
+    public function setIdAcademia(\Academia\Entity\Academia $idAcademia)
     {
-        $this->finalidade = $finalidade;
+        $this->idAcademia = $idAcademia;
     
         return $this;
     }
 
     /**
-     * Get finalidade
+     * Get idAcademia
      *
-     * @return string 
+     * @return \Academia\Entity\Academia 
      */
-    public function getFinalidade()
+    public function getIdAcademia()
     {
-        return $this->finalidade;
-    }
-
-    /**
-     * Set academiaId
-     *
-     * @param integer $academiaId
-     * @return Aparelho
-     */
-    public function setAcademiaId($academiaId)
-    {
-        $this->academiaId = $academiaId;
-    
-        return $this;
-    }
-
-    /**
-     * Get academiaId
-     *
-     * @return integer 
-     */
-    public function getAcademiaId()
-    {
-        return $this->academiaId;
+        return $this->idAcademia;
     }
 }

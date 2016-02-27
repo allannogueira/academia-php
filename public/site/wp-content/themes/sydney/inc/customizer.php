@@ -86,7 +86,7 @@ function sydney_customize_register( $wp_customize ) {
     $wp_customize->add_control(
         'wrapper_bottom_padding',
         array(
-            'label'         => __( 'Page wrapper - top padding', 'sydney' ),
+            'label'         => __( 'Page wrapper - bottom padding', 'sydney' ),
             'section'       => 'sydney_general',
             'type'          => 'number',
             'description'   => __('Bottom padding for the page wrapper (the space between the page content and the footer)', 'sydney'),       
