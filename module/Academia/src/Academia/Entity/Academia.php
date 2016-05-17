@@ -7,20 +7,27 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Academia
  *
- * @ORM\Table(name="academia", indexes={@ORM\Index(name="fk_Academia_Endereco1_idx", columns={"id_endereco"}), @ORM\Index(name="fk_Academia_Cepbr_endereco1_idx", columns={"Cepbr_endereco_cep"}), @ORM\Index(name="fk_Academia_Tipo_Endereco1_idx", columns={"id_tipo_endereco"}), @ORM\Index(name="fk_Academia_Academia1_idx", columns={"id_matriz"})})
+ * @ORM\Table(name="academia", indexes={@ORM\Index(name="fk_Academia_Login", columns={"id_login"}),@ORM\Index(name="fk_Academia_Endereco1_idx", columns={"id_endereco"}), @ORM\Index(name="fk_Academia_Academia1_idx", columns={"id_matriz"})})
  * @ORM\Entity
  */
 class Academia extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="id_academia", type="integer", nullable=true)
+     * @ORM\Column(name="id_academia", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idAcademia;
 
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="cnpj", type="integer", length=15, nullable=true)
+     */
+    private $cnpj;
+    
     /**
      * @var string
      *
@@ -49,45 +56,40 @@ class Academia extends \Base\Entity\AbstractEntity
      */
     private $telefoneComercial2;
 
-     /**
-     * @var string
+    /**
+     * @var \Academia\Entity\Academia
      *
-     * @ORM\Column(name="id_matriz", type="string", length=12, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_matriz", referencedColumnName="id_academia")
+     * })
      */
     private $idMatriz;
-
-    
 
     /**
      * @var \Academia\Entity\Endereco
      *
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Endereco",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Endereco",cascade={"all"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_endereco", referencedColumnName="id_endereco")
      * })
      */
     private $idEndereco;
 
-
-
-
     /**
-     * Set idAcademia
+     * @var \Academia\Entity\Login
      *
-     * @param integer $idAcademia
-     * @return Academia
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Login", cascade={"all"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_login", referencedColumnName="id_login")
+     * })
      */
-    public function setIdAcademia($idAcademia)
-    {
-        $this->idAcademia = $idAcademia;
-    
-        return $this;
-    }
+    private $idLogin;
 
     /**
      * Get idAcademia
      *
-     * @return integer 
+     * @return int
      */
     public function getIdAcademia()
     {
@@ -98,6 +100,7 @@ class Academia extends \Base\Entity\AbstractEntity
      * Set nome
      *
      * @param string $nome
+     *
      * @return Academia
      */
     public function setNome($nome)
@@ -110,7 +113,7 @@ class Academia extends \Base\Entity\AbstractEntity
     /**
      * Get nome
      *
-     * @return string 
+     * @return string
      */
     public function getNome()
     {
@@ -121,6 +124,7 @@ class Academia extends \Base\Entity\AbstractEntity
      * Set dataCadastro
      *
      * @param \DateTime $dataCadastro
+     *
      * @return Academia
      */
     public function setDataCadastro($dataCadastro)
@@ -133,7 +137,7 @@ class Academia extends \Base\Entity\AbstractEntity
     /**
      * Get dataCadastro
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataCadastro()
     {
@@ -144,6 +148,7 @@ class Academia extends \Base\Entity\AbstractEntity
      * Set telefoneComercial1
      *
      * @param string $telefoneComercial1
+     *
      * @return Academia
      */
     public function setTelefoneComercial1($telefoneComercial1)
@@ -156,7 +161,7 @@ class Academia extends \Base\Entity\AbstractEntity
     /**
      * Get telefoneComercial1
      *
-     * @return string 
+     * @return string
      */
     public function getTelefoneComercial1()
     {
@@ -167,6 +172,7 @@ class Academia extends \Base\Entity\AbstractEntity
      * Set telefoneComercial2
      *
      * @param string $telefoneComercial2
+     *
      * @return Academia
      */
     public function setTelefoneComercial2($telefoneComercial2)
@@ -179,7 +185,7 @@ class Academia extends \Base\Entity\AbstractEntity
     /**
      * Get telefoneComercial2
      *
-     * @return string 
+     * @return string
      */
     public function getTelefoneComercial2()
     {
@@ -189,38 +195,35 @@ class Academia extends \Base\Entity\AbstractEntity
     /**
      * Set idMatriz
      *
-     * @param string $idMatriz
+     * @param \Academia\Entity\Academia $idMatriz
+     *
      * @return Academia
      */
-    public function setIdMatriz($idMatriz)
+    public function setIdMatriz(\Academia\Entity\Academia $idMatriz = null)
     {
-        if($idMatriz == ""){
-            $this->idMatriz = null;
-        }else{
-            $this->idMatriz = $idMatriz;
-        }
+        $this->idMatriz = $idMatriz;
+    
         return $this;
     }
 
     /**
      * Get idMatriz
      *
-     * @return string
+     * @return \Academia\Entity\Academia
      */
     public function getIdMatriz()
     {
         return $this->idMatriz;
     }
 
-
- 
     /**
      * Set idEndereco
      *
      * @param \Academia\Entity\Endereco $idEndereco
+     *
      * @return Academia
      */
-    public function setIdEndereco(\Academia\Entity\Endereco $idEndereco)
+    public function setIdEndereco(\Academia\Entity\Endereco $idEndereco = null)
     {
         $this->idEndereco = $idEndereco;
     
@@ -230,11 +233,44 @@ class Academia extends \Base\Entity\AbstractEntity
     /**
      * Get idEndereco
      *
-     * @return \Academia\Entity\Endereco 
+     * @return \Academia\Entity\Endereco
      */
     public function getIdEndereco()
     {
         return $this->idEndereco;
     }
+    
+    /**
+     * Get idLogin
+     *
+     * @return int
+     */
+    public function getIdLogin()
+    {
+        return $this->idLogin;
+    }
+    
+     /**
+     * Set idLogin
+     *
+     * @param int $idLogin
+     *
+     * @return Aluno
+     */
+    public function setIdLogin($idLogin)
+    {
+        $this->idLogin = $idLogin;
+    
+        return $this;
+    }
+    
+    function getCnpj() {
+        return $this->cnpj;
+    }
+
+    function setCnpj($cnpj) {
+        $this->cnpj = $cnpj;
+    }
+
 
 }

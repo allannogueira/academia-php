@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Pergunta extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_pergunta", type="integer", nullable=false)
      * @ORM\Id
@@ -42,3 +42,4 @@ class Pergunta extends \Base\Entity\AbstractEntity
 
 
 }
+

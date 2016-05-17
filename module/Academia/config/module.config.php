@@ -40,6 +40,13 @@ return array(
             'Academia\Controller\Aparelho' => 'Academia\Controller\AparelhoController',
             'Academia\Controller\Login' => 'Academia\Controller\LoginController',
             'Academia\Controller\Facebook' => 'Academia\Controller\FacebookController',
+            'Academia\Controller\MassaMuscular' => 'Academia\Controller\MassaMuscularController',
+            'Academia\Controller\FrequenciaTreinos' => 'Academia\Controller\FrequenciaTreinosController',
+            'Academia\Controller\GorduraQueimada' => 'Academia\Controller\GorduraQueimadaController',
+            'Academia\Controller\MediaCrescimentoMuscular' => 'Academia\Controller\MediaCrescimentoMuscularController',
+            'Academia\Controller\CaloriasQueimadas' => 'Academia\Controller\CaloriasQueimadasController',
+            'Academia\Controller\Atividade' => 'Academia\Controller\AtividadeController',
+            'Academia\Controller\BugReport' => 'Academia\Controller\BugReportController',
             
             
         ),
@@ -50,6 +57,7 @@ return array(
             'exercicios-fieldset' => 'Academia\Form\ExerciciosFieldset',
         )
     ),*/
+    
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -385,6 +393,104 @@ return array(
                      ),
                      'defaults' => array(
                          'controller' => 'Academia\Controller\Facebook'
+                     ),
+                 ),
+             ),
+             'massaMuscular' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/massaMuscular[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\MassaMuscular',
+                         'action' => 'listar' 
+                     ),
+                 ),
+             ),
+             'frequenciaTreinos' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/frequenciaTreinos[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\FrequenciaTreinos',
+                         'action' => 'listar'
+                     ),
+                 ),
+             ),
+             'gorduraQueimada' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/gorduraQueimada[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\GorduraQueimada',
+                         'action' => 'listar'
+                     ),
+                 ),
+             ),
+             'mediaCrescimentoMuscular' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/mediaCrescimentoMuscular[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\MediaCrescimentoMuscular',
+                         'action' => 'listar'
+                     ),
+                 ),
+             ),
+             'caloriasQueimadas' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/caloriasQueimadas[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\CaloriasQueimadas',
+                         'action' => 'listar'
+                     ),
+                 ),
+             ),
+             'atividade' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/atividade[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\Atividade',
+                         'action' => 'listar'
+                     ),
+                 ),
+             ),
+             'bugReport' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/bugReport[/:action][/:id]',
+                     'constraints' => array(
+                         'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Academia\Controller\BugReport',
+                         'action' => 'listar'
                      ),
                  ),
              ),

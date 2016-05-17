@@ -35,8 +35,19 @@ class AlunoFieldset extends Fieldset  implements ObjectManagerAwareInterface{
              ->setObject(new Aluno())
         ;
         
+        $session = new \Zend\Session\Container();
+        
+        if($session['idAcademia'] != ""){
+            $condicao = array("idAcademia" => $session['idAcademia']);
+        }else if($session['idAluno'] != ""){
+            $condicao = array("idAluno" => "".$session['idAluno']."");
+        }else{
+            $condicao = array();
+        }
+        
+        $this->setLabel('Aluno');
         $aluno = new ObjectSelect("idAluno");
-         $aluno->setLabel("Aluno")
+         $aluno->setLabel("")
                  ->setOptions([ 
                 'object_manager'     => $this->getObjectManager(),
                 'target_class'       => 'Academia\Entity\Aluno',
@@ -46,7 +57,7 @@ class AlunoFieldset extends Fieldset  implements ObjectManagerAwareInterface{
                 'find_method'        => array(
                     'name'  => 'findBy',
                     'params' =>[
-                        'criteria'   => array(),
+                        'criteria'   => $condicao,
                         'orderBy'   => array("nomeAluno" => "ASC"),
                     ]
                 )            

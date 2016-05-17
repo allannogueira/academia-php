@@ -21,7 +21,6 @@ class AcademiaController extends AbstractController
         $this->route = 'academia';
         $this->service = 'Academia\Service\AcademiaService';
         $this->entity = 'Academia\Entity\Academia';
-        $this->listarAction = "academiasAction";//nome da chamada no webservice
     }
     
     public function editarAction(){

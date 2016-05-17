@@ -7,17 +7,17 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Academia
  *
- * @ORM\Table(name="academia", indexes={@ORM\Index(name="fk_Academia_Endereco1_idx", columns={"id_endereco"}), @ORM\Index(name="fk_Academia_Cepbr_endereco1_idx", columns={"Cepbr_endereco_cep"}), @ORM\Index(name="fk_Academia_Tipo_Endereco1_idx", columns={"id_tipo_endereco"}), @ORM\Index(name="fk_Academia_Academia1_idx", columns={"id_matriz"})})
+ * @ORM\Table(name="academia", indexes={@ORM\Index(name="fk_Academia_Endereco1_idx", columns={"id_endereco"}), @ORM\Index(name="fk_Academia_Academia1_idx", columns={"id_matriz"})})
  * @ORM\Entity
  */
 class Academia extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_academia", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idAcademia;
 
@@ -52,9 +52,7 @@ class Academia extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Academia
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_matriz", referencedColumnName="id_academia")
      * })
@@ -62,40 +60,15 @@ class Academia extends \Base\Entity\AbstractEntity
     private $idMatriz;
 
     /**
-     * @var \Academia\Entity\CepbrEndereco
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrEndereco")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Cepbr_endereco_cep", referencedColumnName="cep")
-     * })
-     */
-    private $cepbrEnderecoCep;
-
-    /**
      * @var \Academia\Entity\Endereco
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Endereco")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Endereco")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_endereco", referencedColumnName="id_endereco")
      * })
      */
     private $idEndereco;
 
-    /**
-     * @var \Academia\Entity\TipoEndereco
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\TipoEndereco")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tipo_endereco", referencedColumnName="id")
-     * })
-     */
-    private $idTipoEndereco;
-
 
 }
+

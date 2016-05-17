@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class FrequenciaAluno extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_frequencia_aluno", type="integer", nullable=false)
      * @ORM\Id
@@ -42,3 +42,4 @@ class FrequenciaAluno extends \Base\Entity\AbstractEntity
 
 
 }
+

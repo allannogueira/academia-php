@@ -1,0 +1,39 @@
+<?php //echo var_dump($retorno);?>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Atividade</div>
+
+  <!-- Table -->
+  <table class="table">
+      <thead>
+      <tr>
+          <th>Aluno</th>
+          <th>Tempo</th>
+          <th>Distância</th>
+          <th>Competencia</th>
+          <th>Calorias Gastas</th>
+      </tr>
+      </thead>
+      <tbody>
+<?php 
+//echo var_dump($this->data);
+foreach ($this->data as $data): ?>
+      <tr> 
+        <td><?php echo $data->getIdAluno()->getNomeAluno(); ?></td>     
+        <td><?php echo $data->getTempo(); ?></td> 
+        <td><?php echo $data->getDistancia(); ?></td> 
+        <td><?php echo $data->getCompetencia(); ?></td> 
+        <td><?php echo $data->getCalorias(); ?></td> 
+      </tr>
+<?php endforeach; ?>
+      </tbody>
+   </table>
+</div>
+
+<div class="paging">
+    <?php 
+        $paging = $this->paginationHelper($this->data, $this->page, "/atividade/listar/", $this->data->getDefaultItemCountPerPage()); 
+        echo $paging; 
+    ?>
+</div>

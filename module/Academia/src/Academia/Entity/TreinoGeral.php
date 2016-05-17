@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class TreinoGeral extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_treino_geral", type="integer", nullable=false)
      * @ORM\Id
@@ -31,9 +31,7 @@ class TreinoGeral extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Academia
      *
-     * 
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
      * })
@@ -43,49 +41,19 @@ class TreinoGeral extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Finalidade
      *
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Finalidade",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Finalidade")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_finalidade", referencedColumnName="id_finalidade")
      * })
      */
     private $idFinalidade;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Academia\Entity\Exercicio", inversedBy="idTreinoGeral")
-     * @ORM\JoinTable(name="treino_exercicio",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="id_treino_geral", referencedColumnName="id_treino_geral")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="id_exercicio", referencedColumnName="id_exercicio")
-     *   }
-     * )
-     */
-    private $idExercicio;
 
-
-
-    /**
-     * Set idTreinoGeral
-     *
-     * @param integer $idTreinoGeral
-     * @return TreinoGeral
-     */
-    public function setIdTreinoGeral($idTreinoGeral)
-    {
-        $this->idTreinoGeral = $idTreinoGeral;
-    
-        return $this;
-    }
 
     /**
      * Get idTreinoGeral
      *
-     * @return integer 
+     * @return int
      */
     public function getIdTreinoGeral()
     {
@@ -96,6 +64,7 @@ class TreinoGeral extends \Base\Entity\AbstractEntity
      * Set nomeTreino
      *
      * @param string $nomeTreino
+     *
      * @return TreinoGeral
      */
     public function setNomeTreino($nomeTreino)
@@ -108,7 +77,7 @@ class TreinoGeral extends \Base\Entity\AbstractEntity
     /**
      * Get nomeTreino
      *
-     * @return string 
+     * @return string
      */
     public function getNomeTreino()
     {
@@ -119,9 +88,10 @@ class TreinoGeral extends \Base\Entity\AbstractEntity
      * Set idAcademia
      *
      * @param \Academia\Entity\Academia $idAcademia
+     *
      * @return TreinoGeral
      */
-    public function setIdAcademia(\Academia\Entity\Academia $idAcademia)
+    public function setIdAcademia(\Academia\Entity\Academia $idAcademia = null)
     {
         $this->idAcademia = $idAcademia;
     
@@ -131,7 +101,7 @@ class TreinoGeral extends \Base\Entity\AbstractEntity
     /**
      * Get idAcademia
      *
-     * @return \Academia\Entity\Academia 
+     * @return \Academia\Entity\Academia
      */
     public function getIdAcademia()
     {
@@ -142,9 +112,10 @@ class TreinoGeral extends \Base\Entity\AbstractEntity
      * Set idFinalidade
      *
      * @param \Academia\Entity\Finalidade $idFinalidade
+     *
      * @return TreinoGeral
      */
-    public function setIdFinalidade(\Academia\Entity\Finalidade $idFinalidade)
+    public function setIdFinalidade(\Academia\Entity\Finalidade $idFinalidade = null)
     {
         $this->idFinalidade = $idFinalidade;
     
@@ -154,43 +125,10 @@ class TreinoGeral extends \Base\Entity\AbstractEntity
     /**
      * Get idFinalidade
      *
-     * @return \Academia\Entity\Finalidade 
+     * @return \Academia\Entity\Finalidade
      */
     public function getIdFinalidade()
     {
         return $this->idFinalidade;
-    }
-
-    /**
-     * Add idExercicio
-     *
-     * @param \Academia\Entity\Exercicio $idExercicio
-     * @return TreinoGeral
-     */
-    public function addIdExercicio(\Academia\Entity\Exercicio $idExercicio)
-    {
-        $this->idExercicio[] = $idExercicio;
-    
-        return $this;
-    }
-
-    /**
-     * Remove idExercicio
-     *
-     * @param \Academia\Entity\Exercicio $idExercicio
-     */
-    public function removeIdExercicio(\Academia\Entity\Exercicio $idExercicio)
-    {
-        $this->idExercicio->removeElement($idExercicio);
-    }
-
-    /**
-     * Get idExercicio
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdExercicio()
-    {
-        return $this->idExercicio;
     }
 }

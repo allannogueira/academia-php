@@ -106,4 +106,3 @@ class User extends \Base\Entity\AbstractEntity
 
 
 }
-

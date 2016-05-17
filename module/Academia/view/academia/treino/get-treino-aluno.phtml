@@ -1,0 +1,22 @@
+<div class="row">
+            <div class="col-sm-4 hide">
+        <?php foreach ($this->data as $data):             
+           if(method_exists($data,'getIdTreino')){?>              
+                    </div>
+                        <div class="col-sm-4">
+                    <h1><?php echo $data->getIdTreinoGeral()->getNomeTreino();?></h1>
+           <?php     
+           }else{?>
+                <div class="list-group">
+                    <a class="list-group-item active"><label>Exercício:</label> <?php echo $data->getIdExercicio()->getNomeExercicio(); ?></a>
+                    <a class="list-group-item"><label>Descrição:</label> <?php echo $data->getIdExercicio()->getDescricao(); ?></a>
+                    <a class="list-group-item"><label>Série:</label> <span class="badge"><?php echo $data->getSerie(); ?></span></a>
+                    <a class="list-group-item"><label>Repetição:</label> <span class="badge"><?php echo $data->getRepeticao(); ?></span></a>
+                    <a class="list-group-item"><label>Intervalo:</label> <span class="badge"><?php echo $data->getIntervalo(); ?></span></a>
+                    <a class="list-group-item"><label>Peso:</label> <span class="badge"><?php echo $data->getPeso(); ?></span></a>
+                    <a class="list-group-item"><label>Trabalha o músculo:</label><?php echo $data->getIdExercicio()->getIdMusculo()->getNomeMusculo(); ?></a>
+                 </div>
+        <?php } endforeach; ?>
+    </div>
+</div>
+    

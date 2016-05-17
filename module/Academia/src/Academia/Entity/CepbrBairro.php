@@ -13,11 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class CepbrBairro extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_bairro", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idBairro;
 
@@ -31,9 +31,7 @@ class CepbrBairro extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\CepbrCidade
      *
-     * 
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrCidade")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrCidade")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_cidade", referencedColumnName="id_cidade")
      * })
@@ -43,22 +41,9 @@ class CepbrBairro extends \Base\Entity\AbstractEntity
 
 
     /**
-     * Set idBairro
-     *
-     * @param integer $idBairro
-     * @return CepbrBairro
-     */
-    public function setIdBairro($idBairro)
-    {
-        $this->idBairro = $idBairro;
-    
-        return $this;
-    }
-
-    /**
      * Get idBairro
      *
-     * @return integer 
+     * @return int
      */
     public function getIdBairro()
     {
@@ -69,6 +54,7 @@ class CepbrBairro extends \Base\Entity\AbstractEntity
      * Set bairro
      *
      * @param string $bairro
+     *
      * @return CepbrBairro
      */
     public function setBairro($bairro)
@@ -81,7 +67,7 @@ class CepbrBairro extends \Base\Entity\AbstractEntity
     /**
      * Get bairro
      *
-     * @return string 
+     * @return string
      */
     public function getBairro()
     {
@@ -92,9 +78,10 @@ class CepbrBairro extends \Base\Entity\AbstractEntity
      * Set idCidade
      *
      * @param \Academia\Entity\CepbrCidade $idCidade
+     *
      * @return CepbrBairro
      */
-    public function setIdCidade(\Academia\Entity\CepbrCidade $idCidade)
+    public function setIdCidade(\Academia\Entity\CepbrCidade $idCidade = null)
     {
         $this->idCidade = $idCidade;
     
@@ -104,7 +91,7 @@ class CepbrBairro extends \Base\Entity\AbstractEntity
     /**
      * Get idCidade
      *
-     * @return \Academia\Entity\CepbrCidade 
+     * @return \Academia\Entity\CepbrCidade
      */
     public function getIdCidade()
     {

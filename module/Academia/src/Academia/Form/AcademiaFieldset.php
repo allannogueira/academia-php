@@ -30,26 +30,39 @@ class AcademiaFieldset extends Fieldset  implements ObjectManagerAwareInterface{
     }
     
     public function init(){
+        
         $this
              ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
              ->setObject(new Academia())
          ;
+        
+        $session = new \Zend\Session\Container();
+        if($session['idAcademia'] != ""){
+            $condicao = array("idAcademia" => "".$session['idAcademia']."");
+        }else{
+            $condicao = array();
+        }
+        
+        $this->setLabel('Academia');
         $academia = new ObjectSelect("idAcademia");
-        $academia->setLabel("Academia")
+        $academia->setLabel("")
                  ->setOptions([ 
-                'object_manager'     => $this->getObjectManager(),
-                'target_class'       => 'Academia\Entity\Academia',
-                'property' => 'nome',
-               'empty_option' => 'selecione',
-                'is_method' => true,
-                'find_method'        => array(
-                    'name'  => 'findBy',
-                    'params' =>[
-                        'criteria'   => array(),
-                        'orderBy'   => array("nome" => "ASC"),
-                    ]
-                )            
-        ]);
+                    'object_manager'     => $this->getObjectManager(),
+                    'target_class'       => 'Academia\Entity\Academia',
+                    'property' => 'nome',
+                    'is_method' => true,
+                    'required' => true,
+                    'find_method'        => array(
+                        'name'  => 'findBy',
+                        'params' =>[
+                            'criteria'   => $condicao,
+                            'orderBy'   => array("nome" => "ASC"),
+                        ]
+                    )            
+                ])
+                ->setAttributes([
+                 'required' => 'true'
+                ]);
         $this->add($academia);
     }
 

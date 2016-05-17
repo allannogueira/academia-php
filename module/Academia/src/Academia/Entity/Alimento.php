@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Alimento extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_alimento", type="integer", nullable=false)
      * @ORM\Id
@@ -38,39 +38,19 @@ class Alimento extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Academia
      *
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
      * })
      */
     private $idAcademia;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Academia\Entity\DietaGeral", mappedBy="idAlimento")
-     */
-    private $idDietaGeral;
 
-
-
-    /**
-     * Set idAlimento
-     *
-     * @param integer $idAlimento
-     * @return Alimento
-     */
-    public function setIdAlimento($idAlimento)
-    {
-        $this->idAlimento = $idAlimento;
-    
-        return $this;
-    }
 
     /**
      * Get idAlimento
      *
-     * @return integer 
+     * @return int
      */
     public function getIdAlimento()
     {
@@ -81,6 +61,7 @@ class Alimento extends \Base\Entity\AbstractEntity
      * Set nomeAlimento
      *
      * @param string $nomeAlimento
+     *
      * @return Alimento
      */
     public function setNomeAlimento($nomeAlimento)
@@ -93,7 +74,7 @@ class Alimento extends \Base\Entity\AbstractEntity
     /**
      * Get nomeAlimento
      *
-     * @return string 
+     * @return string
      */
     public function getNomeAlimento()
     {
@@ -104,6 +85,7 @@ class Alimento extends \Base\Entity\AbstractEntity
      * Set descricao
      *
      * @param string $descricao
+     *
      * @return Alimento
      */
     public function setDescricao($descricao)
@@ -116,7 +98,7 @@ class Alimento extends \Base\Entity\AbstractEntity
     /**
      * Get descricao
      *
-     * @return string 
+     * @return string
      */
     public function getDescricao()
     {
@@ -127,9 +109,10 @@ class Alimento extends \Base\Entity\AbstractEntity
      * Set idAcademia
      *
      * @param \Academia\Entity\Academia $idAcademia
+     *
      * @return Alimento
      */
-    public function setIdAcademia(\Academia\Entity\Academia $idAcademia)
+    public function setIdAcademia(\Academia\Entity\Academia $idAcademia = null)
     {
         $this->idAcademia = $idAcademia;
     
@@ -139,43 +122,10 @@ class Alimento extends \Base\Entity\AbstractEntity
     /**
      * Get idAcademia
      *
-     * @return \Academia\Entity\Academia 
+     * @return \Academia\Entity\Academia
      */
     public function getIdAcademia()
     {
         return $this->idAcademia;
-    }
-
-    /**
-     * Add idDietaGeral
-     *
-     * @param \Academia\Entity\DietaGeral $idDietaGeral
-     * @return Alimento
-     */
-    public function addIdDietaGeral(\Academia\Entity\DietaGeral $idDietaGeral)
-    {
-        $this->idDietaGeral[] = $idDietaGeral;
-    
-        return $this;
-    }
-
-    /**
-     * Remove idDietaGeral
-     *
-     * @param \Academia\Entity\DietaGeral $idDietaGeral
-     */
-    public function removeIdDietaGeral(\Academia\Entity\DietaGeral $idDietaGeral)
-    {
-        $this->idDietaGeral->removeElement($idDietaGeral);
-    }
-
-    /**
-     * Get idDietaGeral
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdDietaGeral()
-    {
-        return $this->idDietaGeral;
     }
 }

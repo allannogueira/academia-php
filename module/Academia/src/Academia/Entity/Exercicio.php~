@@ -13,11 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Exercicio extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_exercicio", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idExercicio;
 
@@ -38,21 +38,13 @@ class Exercicio extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Musculo
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Musculo")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Musculo")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_musculo", referencedColumnName="id_musculo")
      * })
      */
     private $idMusculo;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Academia\Entity\TreinoGeral", mappedBy="idExercicio")
-     */
-    private $idTreinoGeral;
-
 
 }
+

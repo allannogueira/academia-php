@@ -17,6 +17,15 @@ class IndexController extends AbstractController
     }
     
     public function indexAction(){
+        //se for o aluno que estiver logado, redireciona para o perfil dele
+        if($this->identity()){
+            if($this->identity()->getIdAluno() != null){
+                return $this->redirect()->toRoute('aluno', array(
+                    'id' => $this->identity()->getIdAluno()->getIdAluno(),
+                    'action' => 'getPerfil'
+                ));
+            }
+        }
        /* try {
             $this->getEm()->getConnection()->connect();
         } catch (\Exception $e) {
@@ -26,10 +35,10 @@ class IndexController extends AbstractController
        // $db = \Zend_Db::factory('pdo_mysql',array('host'=> '192.185.176.178','username'=> 'ddc_allan','password'=> '96321924','dbname'=> 'ddc_academia'));
         //$link = mysqli_connect('192.185.176.178', 'ddc_allan', '96321924'); if (!$link) { die('Não foi possível conectar: ' . mysqli_error()); } echo 'Conexão bem sucedida'; mysqli_close($link);
 //exit;
-        $facebook = new FacebookController();
+      /*  $facebook = new FacebookController();
         $urlLogin = $facebook->getUrlLogin();
         return new ViewModel(array(
             'urlLogin' => $urlLogin
-        ));
+        ));*/
     }
 }

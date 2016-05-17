@@ -10,6 +10,9 @@
 namespace Academia\Controller;
 
 use Base\Controller\AbstractController;
+use Zend\Paginator\Paginator;
+use Zend\Paginator\Adapter\ArrayAdapter;
+use Zend\View\Model\ViewModel;
 
 class FrequenciaController extends AbstractController
 {
@@ -23,5 +26,21 @@ class FrequenciaController extends AbstractController
         $this->listarAction = "frequenciasAction";//nome da chamada no webservice
     }
 
-	
+    public function listarAction($where = ""){
+        $idAluno = $this->params()->fromPost("idAluno")["idAluno"];
+        $forms = $this->getServiceLocator()->get('FormElementManager');
+        $form = $forms->get("FiltroAlunoForm", array());
+            
+        $where = "where (t.idAluno = '".$idAluno."' or '".$idAluno."' = '')";
+        $query = "select t from $this->entity t $where";
+        
+        $list = $this->getEm()->createQuery($query)->getResult();//faz o select no banco de dados
+        $page = $this->params()->fromRoute('page');
+        
+        $paginator = new Paginator(new ArrayAdapter($list));//paginacao trazendo todos nosso resultado
+        $paginator->setCurrentPageNumber($page)//seta a pagina atual que será paginada
+                ->setDefaultItemCountPerPage(10); //quantidade de paginas que será feito a busca
+        $view = new ViewModel(['data'=> $paginator, 'page' => $page, 'form' => $form]);//retorna para a pagina as paginas com a lista de paginas
+        return $view;
+   }
 }

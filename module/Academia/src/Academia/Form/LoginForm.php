@@ -30,7 +30,7 @@ class LoginForm extends Form implements ObjectManagerAwareInterface
              ->setHydrator(new ClassMethodsHydrator())
            //  ->setInputFilter(new AlunoFilter())
          ;
-                 
+         $this->setAttribute('class', 'form-inline');        
         
         $academia = new ObjectSelect("academia");
          $academia->setOptions([ 

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Login extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_login", type="integer", nullable=false)
      * @ORM\Id
@@ -31,23 +31,33 @@ class Login extends \Base\Entity\AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="senha", type="string", length=16, nullable=false)
+     * @ORM\Column(name="senha", type="string", length=250, nullable=false)
      */
     private $senha;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_profissional", type="integer", nullable=true)
      */
     private $idProfissional;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_administrador", type="integer", nullable=true)
      */
     private $idAdministrador;
+
+    /**
+     * @var \Academia\Entity\Aluno
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
+     * })
+     */
+    private $idAluno;
 
     /**
      * @var \Academia\Entity\Academia
@@ -69,15 +79,6 @@ class Login extends \Base\Entity\AbstractEntity
      */
     private $codTipoLogin;
 
-    /**
-     * @var \Academia\Entity\Aluno
-     *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
-     * })
-     */
-    private $idAluno;
-
 
 }
+

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class AparelhoNaoRecomendado extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -46,7 +46,7 @@ class AparelhoNaoRecomendado extends \Base\Entity\AbstractEntity
     /**
      * Get id
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -57,6 +57,7 @@ class AparelhoNaoRecomendado extends \Base\Entity\AbstractEntity
      * Set idAcademia
      *
      * @param \Academia\Entity\Academia $idAcademia
+     *
      * @return AparelhoNaoRecomendado
      */
     public function setIdAcademia(\Academia\Entity\Academia $idAcademia = null)
@@ -69,7 +70,7 @@ class AparelhoNaoRecomendado extends \Base\Entity\AbstractEntity
     /**
      * Get idAcademia
      *
-     * @return \Academia\Entity\Academia 
+     * @return \Academia\Entity\Academia
      */
     public function getIdAcademia()
     {
@@ -80,6 +81,7 @@ class AparelhoNaoRecomendado extends \Base\Entity\AbstractEntity
      * Set idAparelho
      *
      * @param \Academia\Entity\Aparelho $idAparelho
+     *
      * @return AparelhoNaoRecomendado
      */
     public function setIdAparelho(\Academia\Entity\Aparelho $idAparelho = null)
@@ -92,7 +94,7 @@ class AparelhoNaoRecomendado extends \Base\Entity\AbstractEntity
     /**
      * Get idAparelho
      *
-     * @return \Academia\Entity\Aparelho 
+     * @return \Academia\Entity\Aparelho
      */
     public function getIdAparelho()
     {

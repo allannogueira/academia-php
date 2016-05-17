@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Finalidade extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_finalidade", type="integer", nullable=false)
      * @ORM\Id
@@ -33,7 +33,7 @@ class Finalidade extends \Base\Entity\AbstractEntity
     /**
      * Get idFinalidade
      *
-     * @return integer 
+     * @return int
      */
     public function getIdFinalidade()
     {
@@ -44,6 +44,7 @@ class Finalidade extends \Base\Entity\AbstractEntity
      * Set finalidade
      *
      * @param string $finalidade
+     *
      * @return Finalidade
      */
     public function setFinalidade($finalidade)
@@ -56,7 +57,7 @@ class Finalidade extends \Base\Entity\AbstractEntity
     /**
      * Get finalidade
      *
-     * @return string 
+     * @return string
      */
     public function getFinalidade()
     {

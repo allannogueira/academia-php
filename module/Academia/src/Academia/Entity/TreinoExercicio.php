@@ -50,82 +50,180 @@ class TreinoExercicio extends \Base\Entity\AbstractEntity
     private $peso;
 
     /**
-     * @var \Academia\Entity\TreinoGeral
-     *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\TreinoGeral",cascade={"all"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_treino_geral", referencedColumnName="id_treino_geral")
-     * })
-     */
-    private $idTreinoGeral;
-
-    /**
      * @var \Academia\Entity\Exercicio
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Exercicio",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Exercicio")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_exercicio", referencedColumnName="id_exercicio")
      * })
      */
     private $idExercicio;
 
-    function getIdTreinoExercicio() {
+    /**
+     * @var \Academia\Entity\TreinoGeral
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\TreinoGeral")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_treino_geral", referencedColumnName="id_treino_geral")
+     * })
+     */
+    private $idTreinoGeral;
+
+
+
+    /**
+     * Get idTreinoExercicio
+     *
+     * @return int
+     */
+    public function getIdTreinoExercicio()
+    {
         return $this->idTreinoExercicio;
     }
 
-    function getSerie() {
+    /**
+     * Set serie
+     *
+     * @param int $serie
+     *
+     * @return TreinoExercicio
+     */
+    public function setSerie($serie)
+    {
+        $this->serie = $serie;
+    
+        return $this;
+    }
+
+    /**
+     * Get serie
+     *
+     * @return int
+     */
+    public function getSerie()
+    {
         return $this->serie;
     }
 
-    function getRepeticao() {
+    /**
+     * Set repeticao
+     *
+     * @param int $repeticao
+     *
+     * @return TreinoExercicio
+     */
+    public function setRepeticao($repeticao)
+    {
+        $this->repeticao = $repeticao;
+    
+        return $this;
+    }
+
+    /**
+     * Get repeticao
+     *
+     * @return int
+     */
+    public function getRepeticao()
+    {
         return $this->repeticao;
     }
 
-    function getIntervalo() {
+    /**
+     * Set intervalo
+     *
+     * @param int $intervalo
+     *
+     * @return TreinoExercicio
+     */
+    public function setIntervalo($intervalo)
+    {
+        $this->intervalo = $intervalo;
+    
+        return $this;
+    }
+
+    /**
+     * Get intervalo
+     *
+     * @return int
+     */
+    public function getIntervalo()
+    {
         return $this->intervalo;
     }
 
-    function getPeso() {
+    /**
+     * Set peso
+     *
+     * @param int $peso
+     *
+     * @return TreinoExercicio
+     */
+    public function setPeso($peso)
+    {
+        $this->peso = $peso;
+    
+        return $this;
+    }
+
+    /**
+     * Get peso
+     *
+     * @return int
+     */
+    public function getPeso()
+    {
         return $this->peso;
     }
 
-    function getIdTreinoGeral() {
-        return $this->idTreinoGeral;
+
+
+    /**
+     * Set idExercicio
+     *
+     * @param \Academia\Entity\Exercicio $idExercicio
+     *
+     * @return TreinoExercicio
+     */
+    public function setIdExercicio(\Academia\Entity\Exercicio $idExercicio = null)
+    {
+        $this->idExercicio = $idExercicio;
+    
+        return $this;
     }
 
-    function getIdExercicio() {
+    /**
+     * Get idExercicio
+     *
+     * @return \Academia\Entity\Exercicio
+     */
+    public function getIdExercicio()
+    {
         return $this->idExercicio;
     }
 
-    function setIdTreinoExercicio($idTreinoExercicio) {
-        $this->idTreinoExercicio = $idTreinoExercicio;
-    }
-
-    function setSerie($serie) {
-        $this->serie = $serie;
-    }
-
-    function setRepeticao($repeticao) {
-        $this->repeticao = $repeticao;
-    }
-
-    function setIntervalo($intervalo) {
-        $this->intervalo = $intervalo;
-    }
-
-    function setPeso($peso) {
-        $this->peso = $peso;
-    }
-
-    function setIdTreinoGeral(\Academia\Entity\TreinoGeral $idTreinoGeral) {
+    /**
+     * Set idTreinoGeral
+     *
+     * @param \Academia\Entity\TreinoGeral $idTreinoGeral
+     *
+     * @return TreinoExercicio
+     */
+    public function setIdTreinoGeral(\Academia\Entity\TreinoGeral $idTreinoGeral = null)
+    {
         $this->idTreinoGeral = $idTreinoGeral;
+    
+        return $this;
     }
 
-    function setIdExercicio(\Academia\Entity\Exercicio $idExercicio) {
-        $this->idExercicio = $idExercicio;
+    /**
+     * Get idTreinoGeral
+     *
+     * @return \Academia\Entity\TreinoGeral
+     */
+    public function getIdTreinoGeral()
+    {
+        return $this->idTreinoGeral;
     }
-
-
-
 }
-

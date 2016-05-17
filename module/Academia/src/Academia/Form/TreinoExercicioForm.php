@@ -25,19 +25,13 @@ class TreinoExercicioForm extends Form implements ObjectManagerAwareInterface
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new TreinoExercicio())
         ;            
-        
+        $this->setAttribute('class', 'form-inline');
          $this->add([
            'name' => 'idTreinoExercicio',
            'type' => 'hidden'
        ]);
          
          $this->add([
-           'type' => 'Academia\Form\TreinoGeralFieldset'
-           
-       ]);
-         
-       
-       $this->add([
            'name' => 'serie',
            'type' => 'number',
            'options' => [
@@ -68,6 +62,14 @@ class TreinoExercicioForm extends Form implements ObjectManagerAwareInterface
                'label' => 'Peso (kg)',
            ]
        ]);
+        
+         $this->add([
+           'type' => 'Academia\Form\TreinoGeralFieldset'
+           
+       ]);
+         
+       
+       
         
         
         $this->add(array(
@@ -102,6 +104,9 @@ class TreinoExercicioForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

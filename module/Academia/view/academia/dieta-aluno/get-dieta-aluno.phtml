@@ -1,0 +1,21 @@
+
+<?php
+//    echo var_dump($this->data);exit;
+?>
+<div class="row">
+            <div class="col-sm-4 hide">
+        <?php foreach ($this->data as $data):             
+           if(method_exists($data,'getIdDietaAluno')){?>              
+                    </div>
+                        <div class="col-sm-4">
+                    <h1><?php echo $data->getIdDietaGeral()->getNomeDieta();?></h1>
+           <?php     
+           }else{?>
+                <div class="list-group">
+                <a class="list-group-item"><label>Alimento:</label> <?php echo $data->getIdAlimento()->getNomeAlimento(); ?></a>
+                    <a class="list-group-item"><label>Descrição:</label> <?php echo $data->getIdAlimento()->getDescricao(); ?></a>
+                 </div>
+        <?php } endforeach; ?>
+    </div>
+</div>
+    

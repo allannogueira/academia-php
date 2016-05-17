@@ -30,7 +30,7 @@ class InformativoForm extends Form implements ObjectManagerAwareInterface
              ->setHydrator(new ClassMethodsHydrator())
            //  ->setInputFilter(new AlunoFilter())
          ;
-        
+        $this->setAttribute('class', 'form-inline');
          $this->add(['type' => 'Academia\Form\AlunoFieldset']);
          $this->add(['type' => 'Academia\Form\AcademiaFieldset']);
         
@@ -52,6 +52,9 @@ class InformativoForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

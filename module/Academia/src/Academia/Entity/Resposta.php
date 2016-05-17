@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Resposta extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_resposta", type="integer", nullable=false)
      * @ORM\Id
@@ -45,7 +45,8 @@ class Resposta extends \Base\Entity\AbstractEntity
     /**
      * Set idResposta
      *
-     * @param integer $idResposta
+     * @param int $idResposta
+     *
      * @return Resposta
      */
     public function setIdResposta($idResposta)
@@ -58,7 +59,7 @@ class Resposta extends \Base\Entity\AbstractEntity
     /**
      * Get idResposta
      *
-     * @return integer 
+     * @return int
      */
     public function getIdResposta()
     {
@@ -69,6 +70,7 @@ class Resposta extends \Base\Entity\AbstractEntity
      * Set resposta
      *
      * @param string $resposta
+     *
      * @return Resposta
      */
     public function setResposta($resposta)
@@ -81,7 +83,7 @@ class Resposta extends \Base\Entity\AbstractEntity
     /**
      * Get resposta
      *
-     * @return string 
+     * @return string
      */
     public function getResposta()
     {
@@ -92,6 +94,7 @@ class Resposta extends \Base\Entity\AbstractEntity
      * Set idPergunta
      *
      * @param \Academia\Entity\Pergunta $idPergunta
+     *
      * @return Resposta
      */
     public function setIdPergunta(\Academia\Entity\Pergunta $idPergunta)
@@ -104,7 +107,7 @@ class Resposta extends \Base\Entity\AbstractEntity
     /**
      * Get idPergunta
      *
-     * @return \Academia\Entity\Pergunta 
+     * @return \Academia\Entity\Pergunta
      */
     public function getIdPergunta()
     {

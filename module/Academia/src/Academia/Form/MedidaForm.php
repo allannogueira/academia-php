@@ -29,125 +29,123 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new Medida())
          ;
-        
+        $this->setAttribute('class', 'form-inline');
         $this->add([
             'name' => 'idMedida',
             'type' => 'hidden'
         ]);
         
-        $this->add(array(
-             'type' => 'Academia\Form\AlunoFieldset'
-         ));
+       
         
        $this->add([
            'name' => 'altura',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Altura',
+               'label' => 'Altura (cm)',
            ]
        ]);
        
         $this->add([
            'name' => 'peso',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Peso',
+               'label' => 'Peso (kg)',
            ]
        ]);
         
          $this->add([
            'name' => 'bracoD',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Braço Direito',
+               'label' => 'Braço Direito (cm)',
            ]
        ]);
          
           $this->add([
            'name' => 'bracoE',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Braço Esquerdo',
+               'label' => 'Braço Esquerdo (cm)',
            ]
        ]);
           
            $this->add([
            'name' => 'antiBracoD',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Anti-Braço Direito',
+               'label' => 'Anti-Braço Direito (cm)',
            ]
        ]);
            
         $this->add([
            'name' => 'antiBracoE',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Anti-Braço Esquerdo',
+               'label' => 'Anti-Braço Esquerdo (cm)',
            ]
        ]);
        
          $this->add([
            'name' => 'coxaD',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Coxa Direita',
+               'label' => 'Coxa Direita (cm)',
            ]
        ]);
          
           $this->add([
            'name' => 'coxaE',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Coxa Esquerda',
+               'label' => 'Coxa Esquerda (cm)',
            ]
        ]);
           
            $this->add([
            'name' => 'panturrilhaD',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Panturrilha Direita',
+               'label' => 'Panturrilha Direita (cm)',
            ]
        ]);
            
             $this->add([
            'name' => 'panturrilhaE',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Panturrilha Esquerda',
+               'label' => 'Panturrilha Esquerda (cm)',
            ]
        ]);
             
              $this->add([
            'name' => 'peitoralMaior',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Peitoral Maior',
+               'label' => 'Peitoral Maior (cm)',
            ]
        ]);
              
         $this->add([
            'name' => 'peitoralMenor',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Peitoral Menor',
+               'label' => 'Peitoral Menor (cm)',
            ]
        ]);      
         
          $this->add([
            'name' => 'imc',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'IMC',
+               'label' => 'IMC'
            ]
        ]);
          
           $this->add([
            'name' => 'massGordura',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Massa Gordura',
+               'label' => 'Massa Gordura (kg)',
            ]
        ]);
           
@@ -158,55 +156,52 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
                'label' => 'Data Inicio Vigente',
            ]
        ]);
-           
-           $this->add([
-           'name' => 'dataFimVig',
-           'type' => 'date',
-           'options' => [
-               'label' => 'Data Fim Vigente',
-           ]
-       ]);
+        
  
         $this->add([
             'name' => 'pressao',
-            'type' => 'text',
+            'type' => 'number',
             'options' => [
-                'label' => 'Pressão',
+                'label' => 'Pressão (PUL/min)',
             ]
         ]);
     
         $this->add([
             'name' => 'batCardiaco',
-            'type' => 'text',
+            'type' => 'number',
             'options' => [
-                'label' => 'Batimento Cardiaco',
+                'label' => 'Batimento Cardiaco (bpm)',
             ]
         ]);
 
         $this->add([
             'name' => 'abdomen',
-            'type' => 'text',
+            'type' => 'number',
             'options' => [
-                'label' => 'Abdomen',
+                'label' => 'Abdomen (cm)',
             ]
         ]);
         
            $this->add([
         'name' => 'costas',
-        'type' => 'text',
+        'type' => 'number',
         'options' => [
-            'label' => 'Costas',
+            'label' => 'Costas (cm)',
         ]
     ]);
     
     $this->add([
         'name' => 'quadril',
-        'type' => 'text',
+        'type' => 'number',
         'options' => [
-            'label' => 'Quadril',
+            'label' => 'Quadril (cm)',
         ]
     ]);
         
+     $this->add(array(
+             'type' => 'Academia\Form\AlunoFieldset'
+         ));
+     
        $this->add(array(
              'type' => 'Zend\Form\Element\Csrf',
              'name' => 'csrf',
@@ -217,6 +212,9 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     

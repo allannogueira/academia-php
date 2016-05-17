@@ -21,9 +21,10 @@
     <div class="page-header">
         <h1 onclick="window.location.href='site'" class="logo">Workout <small> System</small></h1>
     </div>    
-    <?php if(!$this->identity()){ ?>
+    <?php 
+    if(!$this->identity()){ ?>
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-5 col-md-offset-3">
                 <div class="middlePage">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -32,15 +33,15 @@
                         <div class="panel-body">
                            
                             <div class="row">
-                                <div class="col-md-5" >
+                                <!--div class="col-md-5" >
                                     <a href="<?php echo $this->urlLogin; ?>"><img src="http://techulus.com/buttons/fb.png" /></a><br/>
                                     <!--a href="#"><img src="http://techulus.com/buttons/tw.png" /></a><br/>
                                     <a href="#"><img src="http://techulus.com/buttons/gplus.png" /></a-->
-                                    <br/>
+                                    <!--br/>
                                     <div class="text-center visible-xs visible-sm">ou</div>
                                     <br/>
-                                </div>
-                                <div class="col-md-7">
+                                </div-->
+                                <div class="col-md-12">
                                     <form class="form-vertical" method="POST" action="/user/login">
                                             <!--div class="form-group">
                                                 <label>
@@ -91,8 +92,6 @@
         //
         
         $session = new Zend\Session\Container();
-        
-        echo var_dump($this->identity());
         echo "Bem Vindo, ". $this->identity()->getEmail();
         
     } ?>

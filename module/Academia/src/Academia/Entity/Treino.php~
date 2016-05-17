@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Treino extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_treino", type="integer", nullable=false)
      * @ORM\Id
@@ -36,18 +36,6 @@ class Treino extends \Base\Entity\AbstractEntity
     private $dataFimVig;
 
     /**
-     * @var \Academia\Entity\Aluno
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
-     * })
-     */
-    private $idAluno;
-
-    /**
      * @var \Academia\Entity\TreinoGeral
      *
      * @ORM\Id
@@ -59,5 +47,18 @@ class Treino extends \Base\Entity\AbstractEntity
      */
     private $idTreinoGeral;
 
+    /**
+     * @var \Academia\Entity\Aluno
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
+     * })
+     */
+    private $idAluno;
+
 
 }
+

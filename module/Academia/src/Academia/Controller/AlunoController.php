@@ -11,6 +11,7 @@ namespace Academia\Controller;
 
 use Base\Controller\AbstractController;
 use Zend\View\Model\ViewModel;
+use ZfcUser\View\Helper\ZfcUserIdentity;
 
 class AlunoController extends AbstractController
 {
@@ -25,43 +26,25 @@ class AlunoController extends AbstractController
         $this->listarAction = "alunosAction";//nome da chamada no webservice
     }
     
-    
-    /*public function selecionarAction() {
-        $viewModel = $this->listarAction();
-        $viewModel = $viewModel->setTerminal(true);
-        return $viewModel;
-    }*/
-    
-    public function editarAction(){
-     
-      /*  $qb = $this->getEm()->createQueryBuilder();
-        $qb->select('a','e','t','c','b','d','uf','i','g','h')
-             ->from('Academia\Entity\Aluno', 'a') 
-           //  ->join('Academia\Entity\Endereco', 'e','e.id = a.endereco_id');
-                ->leftJoin('a.idEndereco','e')
-                 ->leftJoin('e.idTipoEndereco','t')
-                 ->leftJoin('e.cepbrEnderecoCep','c')
-                ->leftJoin('c.idBairro','b')
-                ->leftJoin('c.idCidade','d')
-                ->leftJoin('d.uf','uf')
-                ->leftJoin('a.idLogin','i')
-                ->leftJoin('a.idAcademia','g')
-                ->leftJoin('a.idFinalidade','h')
-                 ->where('a.idAluno = 1');
-        $this->resultData = $qb->getQuery()->getArrayResult();//(\Doctrine\ORM\Query::HYDRATE_ARRAY);*/
-       //   echo var_dump($this->resultData);      
-        return parent::editarAction();
-    }
+ 
+
     
     public function listarAction($where = ""){
         $nome = $this->params()->fromPost("nome");
         $cpf = $this->params()->fromPost("cpf");
                 
-        $where = "where (t.nomeAluno like '%".$nome."%' or '".$nome."' = '') and (t.cpf='".$cpf."' or '".$cpf."' = '')";
+        $where = "where (t.nomeAluno like '%".$nome."%' or '".$nome."' = '') and (t.cpfAluno='".$cpf."' or '".$cpf."' = '')";
         
         
         return parent::listarAction($where);
         
+    }
+    
+     public function getPerfilAction($where = ""){
+        $id = $this->params()->fromRoute('id');
+        $where = "where (t.idAluno = '".$id."')";
+        
+        return parent::listarAction($where);        
     }
     
     /*
@@ -79,5 +62,4 @@ class AlunoController extends AbstractController
         return $this->redirect()->toRoute($this->route, array('controller' => $this->controller, 'action' => 'listar'));
     }
     
-   
 }

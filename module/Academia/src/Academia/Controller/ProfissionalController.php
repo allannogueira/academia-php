@@ -24,12 +24,22 @@ class ProfissionalController extends AbstractController
     }
 
 	
-      public function listarAction($where = ""){
+    public function listarAction($where = ""){
         $nome = $this->params()->fromPost("nome");
-        $usuario = $this->params()->fromPost("usuario");
-                
-        $where = "where (t.nome like '%".$nome."%' or '".$nome."' = '') and (t.usuario='".$usuario."' or '".$usuario."' = '')";
+      
+        $where = "where (t.nome like '%".$nome."%' or '".$nome."' = '')";
         return parent::listarAction($where);
+    }
+    
+     public function getPerfilAction($where = ""){
+        $id = $this->params()->fromRoute("id");
+      
+        $where = "where (t.id = '".$id."')";
+        return parent::listarAction($where);
+    }
+    
+    public function editarAction(){
+        return parent::editarAction();
         
     }
 }

@@ -25,7 +25,7 @@ class ExercicioForm extends Form implements ObjectManagerAwareInterface
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new Aluno())
         ;             
-        
+        $this->setAttribute('class', 'form-inline');
          $this->add([
            'name' => 'idExercicio',
            'type' => 'hidden'
@@ -51,6 +51,9 @@ class ExercicioForm extends Form implements ObjectManagerAwareInterface
              'type' => 'Academia\Form\MusculoFieldset'
         ));
        
+        $this->add(array(
+             'type' => 'Academia\Form\AcademiaFieldset'
+         ));
        
        $this->add(array(
              'type' => 'Zend\Form\Element\Csrf',
@@ -62,6 +65,9 @@ class ExercicioForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

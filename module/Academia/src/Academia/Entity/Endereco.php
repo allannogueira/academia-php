@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Endereco extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_endereco", type="integer", nullable=false)
      * @ORM\Id
@@ -45,9 +45,7 @@ class Endereco extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\CepbrEndereco
      *
-     * 
-     * 
-     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrEndereco",cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrEndereco")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="cepbr_endereco_cep", referencedColumnName="cep")
      * })
@@ -69,7 +67,8 @@ class Endereco extends \Base\Entity\AbstractEntity
     /**
      * Set idEndereco
      *
-     * @param integer $idEndereco
+     * @param int $idEndereco
+     *
      * @return Endereco
      */
     public function setIdEndereco($idEndereco)
@@ -82,7 +81,7 @@ class Endereco extends \Base\Entity\AbstractEntity
     /**
      * Get idEndereco
      *
-     * @return integer 
+     * @return int
      */
     public function getIdEndereco()
     {
@@ -93,11 +92,11 @@ class Endereco extends \Base\Entity\AbstractEntity
      * Set rua
      *
      * @param string $rua
+     *
      * @return Endereco
      */
     public function setRua($rua)
     {
-        
         $this->rua = $rua;
     
         return $this;
@@ -106,7 +105,7 @@ class Endereco extends \Base\Entity\AbstractEntity
     /**
      * Get rua
      *
-     * @return string 
+     * @return string
      */
     public function getRua()
     {
@@ -117,6 +116,7 @@ class Endereco extends \Base\Entity\AbstractEntity
      * Set numero
      *
      * @param string $numero
+     *
      * @return Endereco
      */
     public function setNumero($numero)
@@ -129,7 +129,7 @@ class Endereco extends \Base\Entity\AbstractEntity
     /**
      * Get numero
      *
-     * @return string 
+     * @return string
      */
     public function getNumero()
     {
@@ -140,6 +140,7 @@ class Endereco extends \Base\Entity\AbstractEntity
      * Set complemento
      *
      * @param string $complemento
+     *
      * @return Endereco
      */
     public function setComplemento($complemento)
@@ -152,7 +153,7 @@ class Endereco extends \Base\Entity\AbstractEntity
     /**
      * Get complemento
      *
-     * @return string 
+     * @return string
      */
     public function getComplemento()
     {
@@ -163,6 +164,7 @@ class Endereco extends \Base\Entity\AbstractEntity
      * Set cepbrEnderecoCep
      *
      * @param \Academia\Entity\CepbrEndereco $cepbrEnderecoCep
+     *
      * @return Endereco
      */
     public function setCepbrEnderecoCep(\Academia\Entity\CepbrEndereco $cepbrEnderecoCep)
@@ -175,7 +177,7 @@ class Endereco extends \Base\Entity\AbstractEntity
     /**
      * Get cepbrEnderecoCep
      *
-     * @return \Academia\Entity\CepbrEndereco 
+     * @return \Academia\Entity\CepbrEndereco
      */
     public function getCepbrEnderecoCep()
     {
@@ -186,6 +188,7 @@ class Endereco extends \Base\Entity\AbstractEntity
      * Set idTipoEndereco
      *
      * @param \Academia\Entity\TipoEndereco $idTipoEndereco
+     *
      * @return Endereco
      */
     public function setIdTipoEndereco(\Academia\Entity\TipoEndereco $idTipoEndereco)
@@ -198,7 +201,7 @@ class Endereco extends \Base\Entity\AbstractEntity
     /**
      * Get idTipoEndereco
      *
-     * @return \Academia\Entity\TipoEndereco 
+     * @return \Academia\Entity\TipoEndereco
      */
     public function getIdTipoEndereco()
     {

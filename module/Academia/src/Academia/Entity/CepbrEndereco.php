@@ -31,9 +31,7 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\CepbrBairro
      *
-     * 
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrBairro", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrBairro")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_bairro", referencedColumnName="id_bairro")
      * })
@@ -43,9 +41,7 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\CepbrCidade
      *
-     * 
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrCidade", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrCidade")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_cidade", referencedColumnName="id_cidade")
      * })
@@ -58,6 +54,7 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
      * Set cep
      *
      * @param string $cep
+     *
      * @return CepbrEndereco
      */
     public function setCep($cep)
@@ -70,7 +67,7 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
     /**
      * Get cep
      *
-     * @return string 
+     * @return string
      */
     public function getCep()
     {
@@ -81,6 +78,7 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
      * Set endereco
      *
      * @param string $endereco
+     *
      * @return CepbrEndereco
      */
     public function setEndereco($endereco)
@@ -93,7 +91,7 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
     /**
      * Get endereco
      *
-     * @return string 
+     * @return string
      */
     public function getEndereco()
     {
@@ -104,6 +102,7 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
      * Set idBairro
      *
      * @param \Academia\Entity\CepbrBairro $idBairro
+     *
      * @return CepbrEndereco
      */
     public function setIdBairro(\Academia\Entity\CepbrBairro $idBairro)
@@ -116,7 +115,7 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
     /**
      * Get idBairro
      *
-     * @return \Academia\Entity\CepbrBairro 
+     * @return \Academia\Entity\CepbrBairro
      */
     public function getIdBairro()
     {
@@ -127,6 +126,7 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
      * Set idCidade
      *
      * @param \Academia\Entity\CepbrCidade $idCidade
+     *
      * @return CepbrEndereco
      */
     public function setIdCidade(\Academia\Entity\CepbrCidade $idCidade)
@@ -139,7 +139,7 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
     /**
      * Get idCidade
      *
-     * @return \Academia\Entity\CepbrCidade 
+     * @return \Academia\Entity\CepbrCidade
      */
     public function getIdCidade()
     {

@@ -13,11 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class CepbrCidade extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_cidade", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idCidade;
 
@@ -36,11 +36,16 @@ class CepbrCidade extends \Base\Entity\AbstractEntity
     private $codIbge;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="area", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $area = '0';
+
+    /**
      * @var \Academia\Entity\CepbrEstado
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrEstado")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrEstado")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="uf", referencedColumnName="uf")
      * })
@@ -49,3 +54,4 @@ class CepbrCidade extends \Base\Entity\AbstractEntity
 
 
 }
+

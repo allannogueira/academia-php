@@ -47,4 +47,22 @@ class TreinoController extends AbstractController
         $view = new ViewModel(['data'=> $paginator, 'page' => $page, 'form' => $form]);//retorna para a pagina as paginas com a lista de paginas
         return $view;
    }
+   
+   public function getTreinoAlunoAction(){
+        $idAluno = $this->params()->fromRoute("id");
+        
+        $qb = $this->getEm()->createQueryBuilder();
+        $qb->select('t','tg','te','e')
+                ->from('Academia\Entity\Treino', 't')
+                ->join('t.idTreinoGeral','tg')
+                ->join('Academia\Entity\TreinoExercicio','te','te.idTreinoGeral = tg.idTreinoGeral')                
+                ->join('te.idExercicio','e')
+                ->where("t.idAluno = '".$idAluno."' and t.dataFimVig >= CURRENT_DATE()");
+                
+           //  ->join('Academia\Entity\Endereco', 'e','e.id = a.endereco_id');
+            // ->where('a.idAluno = 1');
+        $data = $qb->getQuery()->getResult();
+        $view = new ViewModel(["data"=> $data]);
+        return $view;
+   }
 }

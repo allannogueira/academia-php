@@ -1,0 +1,430 @@
+<?php
+   //echo var_dump($this->data);exit;
+   
+?>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Medidas</div>
+
+  <!-- Table -->
+  <table class="table display responsive nowrap">
+      <thead>
+      <tr>
+          <th>Data</th>
+          <th>Peso Cresceu/Perdeu</th>
+          <th>Peso (média)</th>
+          
+          <th>Braço D Cresceu/Perdeu</th>
+          <th>Braço D (média)</th>
+          
+          <th>Braço E Cresceu/Perdeu</th>
+          <th>Braço E (média)</th>
+          
+          <th>Anti-Braço D Cresceu/Perdeu</th>
+          <th>Anti-Braço D (média)</th>
+          
+          <th>Anti-Braço E Cresceu/Perdeu</th>
+          <th>Anti-Braço E (média)</th>
+          
+          <th>Coxa D Cresceu/Perdeu</th>
+          <th>Coxa D (média)</th>
+          
+          <th>Coxa E Cresceu/Perdeu</th>
+          <th>Coxa E (média)</th>
+          
+          <th>Panturrilha D Cresceu/Perdeu</th>
+            <th>Panturrilha D (média)</th>
+
+            <th>Panturrilha E Cresceu/Perdeu</th>
+            <th>Panturrilha E (média)</th>
+
+            <th>Peitoral Maior Cresceu/Perdeu</th>
+            <th>Peitoral Maior (média)</th>
+
+            <th>Peitoral Menor Cresceu/Perdeu</th>
+            <th>Peitoral Menor (média)</th>
+
+            <th>Abdomen Cresceu/Perdeu</th>
+            <th>Abdomen(média)</th>
+
+            <th>Costas Cresceu/Perdeu</th>
+            <th>Costas(média)</th>
+
+            <th>Quadril Cresceu/Perdeu</th>
+            <th>Quadril(média)</th>
+          
+      </tr>
+      </thead>
+      <tbody>
+          
+<?php 
+    //inicializa variavel
+    $i = 0;
+    $i2 = 0;
+    $dados[0] = array('Data','Peso','Braço D','Braço E','Anti-Braço D','Anti-Braço E','Coxa D','Coxa E','Panturrilha D','Panturrilha E','Peitoral Maior','Peitoral Menor','Abdomen','Costas','Quadril');
+    //peso
+    $resultadoPeso = 0;
+    $mediaPeso = 0;
+    $somaResultadoPeso = 0;
+    
+    //braco direito
+    $resultadoSubBracoD = 0;
+    $mediaBracoD = 0;
+    $somaResultadoBracoD = 0;
+    
+    //braco esquerdo
+    $resultadoSubBracoE = 0;
+    $mediaBracoE = 0;
+    $somaResultadoBracoE = 0;
+    
+    //anti braco direito
+    $resultadoSubAntiBracoD = 0;
+    $mediaAntiBracoD = 0;
+    $somaResultadoAntiBracoD = 0;
+    
+    //anti braco esquerdo
+    $resultadoSubAntiBracoE = 0;
+    $mediaAntiBracoE = 0;
+    $somaResultadoAntiBracoE = 0;
+    
+    //coxa direita
+    $resultadoSubCoxaD = 0;
+    $mediaCoxaD = 0;
+    $somaResultadoCoxaD = 0;
+    
+     //coxa esquerda
+    $resultadoSubCoxaE = 0;
+    $mediaCoxaE = 0;
+    $somaResultadoCoxaE = 0;
+    
+    //coxa esquerda
+    $resultadoSubPanturrilhaD = 0;
+    $mediaPanturrilhaD = 0;
+    $somaResultadoPanturrilhaD = 0;
+
+    //coxa esquerda
+    $resultadoSubPanturrilhaE = 0;
+    $mediaPanturrilhaE = 0;
+    $somaResultadoPanturrilhaE = 0;
+
+    //coxa esquerda
+    $resultadoSubPeitoralMaior = 0;
+    $mediaPeitoralMaior = 0;
+    $somaResultadoPeitoralMaior = 0;
+
+    //coxa esquerda
+    $resultadoSubPeitoralMenor = 0;
+    $mediaPeitoralMenor = 0;
+    $somaResultadoPeitoralMenor = 0;
+
+    //coxa esquerda
+    $resultadoSubAbdomen = 0;
+    $mediaAbdomen = 0;
+    $somaResultadoAbdomen = 0;
+
+    //coxa esquerda
+    $resultadoSubCostas = 0;
+    $mediaCostas = 0;
+    $somaResultadoCostas = 0;
+
+    //coxa esquerda
+    $resultadoSubQuadril = 0;
+    $mediaQuadril = 0;
+    $somaResultadoQuadril = 0;
+    //repetição
+    foreach ($this->data as $data):
+    $periodo = date_format($data->getDataIniVig(),'d/m/Y'); 
+    $dados[$i+1][$i2] = $periodo;
+    
+    if($i==0){
+        //peso
+        $peso_ant = $data->getPeso();
+        $resultadoPeso = $data->getPeso();
+        $resultadoPeso = $resultadoPeso;
+        
+        //braco direito
+        $bracoD_ant = $data->getBracoD();       
+        $resultadoSubBracoD = $data->getBracoD();
+        $resultadoSubBracoD_ant = $resultadoSubBracoD;
+        
+        //braco esquerdo
+        $bracoE_ant = $data->getBracoE();       
+        $resultadoSubBracoE = $data->getBracoE();
+        $resultadoSubBracoE_ant = $resultadoSubBracoE;
+        
+        //anti braco direito
+        $antibracoD_ant = $data->getAntiBracoD();       
+        $resultadoSubAntiBracoD = $data->getAntiBracoD();
+        $resultadoSubAntiBracoD_ant = $resultadoSubAntiBracoD;
+        
+        //anti braco esquerdo
+        $antibracoE_ant = $data->getAntiBracoE();       
+        $resultadoSubAntiBracoE = $data->getAntiBracoE();
+        $resultadoSubAntiBracoE_ant = $resultadoSubAntiBracoE;
+        
+        //coxa direita
+        $CoxaD_ant = $data->getCoxaD();       
+        $resultadoSubCoxaD = $data->getCoxaD();
+        $resultadoSubCoxaD_ant = $resultadoSubCoxaD;
+        
+        //coxa esquerda
+        $CoxaE_ant = $data->getCoxaE();       
+        $resultadoSubCoxaE = $data->getCoxaE();
+        $resultadoSubCoxaE_ant = $resultadoSubCoxaE;
+        
+        //coxa esquerda
+        $PanturrilhaD_ant = $data->getPanturrilhaD();       
+        $resultadoSubPanturrilhaD = $data->getPanturrilhaD();
+        $resultadoSubPanturrilhaD_ant = $resultadoSubPanturrilhaD;
+
+        //coxa esquerda
+        $PanturrilhaE_ant = $data->getPanturrilhaE();       
+        $resultadoSubPanturrilhaE = $data->getPanturrilhaE();
+        $resultadoSubPanturrilhaE_ant = $resultadoSubPanturrilhaE;
+
+        //coxa esquerda
+        $PeitoralMaior_ant = $data->getPeitoralMaior();       
+        $resultadoSubPeitoralMaior = $data->getPeitoralMaior();
+        $resultadoSubPeitoralMaior_ant = $resultadoSubPeitoralMaior;
+
+        //coxa esquerda
+        $PeitoralMenor_ant = $data->getPeitoralMenor();       
+        $resultadoSubPeitoralMenor = $data->getPeitoralMenor();
+        $resultadoSubPeitoralMenor_ant = $resultadoSubPeitoralMenor;
+
+        //coxa esquerda
+        $Abdomen_ant = $data->getAbdomen();       
+        $resultadoSubAbdomen = $data->getAbdomen();
+        $resultadoSubAbdomen_ant = $resultadoSubAbdomen;
+
+        //coxa esquerda
+        $Costas_ant = $data->getCostas();       
+        $resultadoSubCostas = $data->getCostas();
+        $resultadoSubCostas_ant = $resultadoSubCostas;
+
+        //coxa esquerda
+        $Quadril_ant = $data->getQuadril();       
+        $resultadoSubQuadril = $data->getQuadril();
+        $resultadoSubQuadril_ant = $resultadoSubQuadril;
+        
+        
+        
+    }else{
+        //peso
+        $resultadoPeso = $data->getPeso() - $peso_ant;
+        $somaResultadoPeso += $resultadoPeso;
+        $mediaPeso = $somaResultadoPeso / $i;
+        //atualiza, anterior receber o valor do atual        
+        $peso_ant = $data->getPeso();//valor anterior
+        $resultadoPeso_ant = $resultadoPeso;
+        
+        //braco direito
+        $resultadoSubBracoD = $data->getBracoD() - $bracoD_ant;
+        $somaResultadoBracoD += $resultadoSubBracoD;
+        $mediaBracoD = $somaResultadoBracoD / $i;
+        //atualiza, anterior receber o valor do atual        
+        $bracoD_ant = $data->getBracoD();//valor anterior
+        $resultadoSubBracoD_ant = $resultadoSubBracoD;
+        
+        //braco esquerdo
+        $resultadoSubBracoE = $data->getBracoE() - $bracoE_ant;
+        $somaResultadoBracoE += $resultadoSubBracoE;
+        $mediaBracoE = $somaResultadoBracoE / $i;
+        //atualiza, anterior receber o valor do atual        
+        $bracoE_ant = $data->getBracoE();//valor anterior
+        $resultadoSubBracoE_ant = $resultadoSubBracoE;
+        
+         //anti braco direito
+        $resultadoSubAntiBracoD = $data->getAntiBracoD() - $antibracoD_ant;
+        $somaResultadoAntiBracoD += $resultadoSubAntiBracoD;
+        $mediaAntiBracoD = $somaResultadoAntiBracoD / $i;
+        //atualiza, anterior receber o valor do atual        
+        $antibracoD_ant = $data->getAntiBracoD();//valor anterior
+        $resultadoSubAntiBracoD_ant = $resultadoSubAntiBracoD;
+        
+         //anti braco direito
+        $resultadoSubAntiBracoE = $data->getAntiBracoE() - $antibracoE_ant;
+        $somaResultadoAntiBracoE += $resultadoSubAntiBracoE;
+        $mediaAntiBracoE = $somaResultadoAntiBracoE / $i;
+        //atualiza, anterior receber o valor do atual        
+        $antibracoE_ant = $data->getAntiBracoE();//valor anterior
+        $resultadoSubAntiBracoE_ant = $resultadoSubAntiBracoE;
+        
+        //coxa direito
+        $resultadoSubCoxaD = $data->getCoxaD() - $CoxaD_ant;
+        $somaResultadoCoxaD += $resultadoSubCoxaD;
+        $mediaCoxaD = $somaResultadoCoxaD / $i;
+        //atualiza, anterior receber o valor do atual        
+        $CoxaD_ant = $data->getCoxaD();//valor anterior
+        $resultadoSubCoxaD_ant = $resultadoSubCoxaD;
+        
+        //coxa esquerda
+        $resultadoSubCoxaE = $data->getCoxaE() - $CoxaE_ant;
+        $somaResultadoCoxaE += $resultadoSubCoxaE;
+        $mediaCoxaE = $somaResultadoCoxaE / $i;
+        //atualiza, anterior receber o valor do atual        
+        $CoxaE_ant = $data->getCoxaE();//valor anterior
+        $resultadoSubCoxaE_ant = $resultadoSubCoxaE;
+        
+        //coxa esquerda
+        $resultadoSubPanturrilhaD = $data->getPanturrilhaD() - $PanturrilhaD_ant;
+        $somaResultadoPanturrilhaD += $resultadoSubPanturrilhaD;
+        $mediaPanturrilhaD = $somaResultadoPanturrilhaD / $i;
+        //atualiza, anterior receber o valor do atual        
+        $PanturrilhaD_ant = $data->getPanturrilhaD();//valor anterior
+        $resultadoSubPanturrilhaD_ant = $resultadoSubPanturrilhaD;
+
+        //coxa esquerda
+        $resultadoSubPanturrilhaE = $data->getPanturrilhaE() - $PanturrilhaE_ant;
+        $somaResultadoPanturrilhaE += $resultadoSubPanturrilhaE;
+        $mediaPanturrilhaE = $somaResultadoPanturrilhaE / $i;
+        //atualiza, anterior receber o valor do atual        
+        $PanturrilhaE_ant = $data->getPanturrilhaE();//valor anterior
+        $resultadoSubPanturrilhaE_ant = $resultadoSubPanturrilhaE;
+
+        //coxa esquerda
+        $resultadoSubPeitoralMaior = $data->getPeitoralMaior() - $PeitoralMaior_ant;
+        $somaResultadoPeitoralMaior += $resultadoSubPeitoralMaior;
+        $mediaPeitoralMaior = $somaResultadoPeitoralMaior / $i;
+        //atualiza, anterior receber o valor do atual        
+        $PeitoralMaior_ant = $data->getPeitoralMaior();//valor anterior
+        $resultadoSubPeitoralMaior_ant = $resultadoSubPeitoralMaior;
+
+
+        //coxa esquerda
+        $resultadoSubPeitoralMenor = $data->getPeitoralMenor() - $PeitoralMenor_ant;
+        $somaResultadoPeitoralMenor += $resultadoSubPeitoralMenor;
+        $mediaPeitoralMenor = $somaResultadoPeitoralMenor / $i;
+        //atualiza, anterior receber o valor do atual        
+        $PeitoralMenor_ant = $data->getPeitoralMenor();//valor anterior
+        $resultadoSubPeitoralMenor_ant = $resultadoSubPeitoralMenor;
+
+
+        //coxa esquerda
+        $resultadoSubAbdomen = $data->getAbdomen() - $Abdomen_ant;
+        $somaResultadoAbdomen += $resultadoSubAbdomen;
+        $mediaAbdomen = $somaResultadoAbdomen / $i;
+        //atualiza, anterior receber o valor do atual        
+        $Abdomen_ant = $data->getAbdomen();//valor anterior
+        $resultadoSubAbdomen_ant = $resultadoSubAbdomen;
+
+
+        //coxa esquerda
+        $resultadoSubCostas = $data->getCostas() - $Costas_ant;
+        $somaResultadoCostas += $resultadoSubCostas;
+        $mediaCostas = $somaResultadoCostas / $i;
+        //atualiza, anterior receber o valor do atual        
+        $Costas_ant = $data->getCostas();//valor anterior
+        $resultadoSubCostas_ant = $resultadoSubCostas;
+
+
+        //coxa esquerda
+        $resultadoSubQuadril = $data->getQuadril() - $Quadril_ant;
+        $somaResultadoQuadril += $resultadoSubQuadril;
+        $mediaQuadril = $somaResultadoQuadril / $i;
+        //atualiza, anterior receber o valor do atual        
+        $Quadril_ant = $data->getQuadril();//valor anterior
+        $resultadoSubQuadril_ant = $resultadoSubQuadril;
+    }
+  
+?>
+      <tr> 
+        <td><?php echo $periodo; ?></td>        
+        
+        <td><?php echo $resultadoPeso; ?> cm</td>        
+        <td><?php echo $mediaPeso; ?> cm</td>       
+        
+        <td><?php echo $resultadoSubBracoD; ?> cm</td>        
+        <td><?php echo $mediaBracoD; ?> cm</td>      
+        
+        <td><?php echo $resultadoSubBracoE; ?> cm</td>        
+        <td><?php echo $mediaBracoE; ?> cm</td> 
+        
+        <td><?php echo $resultadoSubAntiBracoD; ?> cm</td>        
+        <td><?php echo $mediaAntiBracoD; ?> cm</td>
+        
+        <td><?php echo $resultadoSubAntiBracoE; ?> cm</td>        
+        <td><?php echo $mediaAntiBracoE; ?> cm</td>  
+        
+        <td><?php echo $resultadoSubCoxaD; ?> cm</td>        
+        <td><?php echo $mediaCoxaD; ?> cm</td> 
+        
+         <td><?php echo $resultadoSubCoxaE; ?> cm</td>        
+        <td><?php echo $mediaCoxaE; ?> cm</td>  
+        
+        <td><?php echo $resultadoSubPanturrilhaD; ?> cm</td>        
+        <td><?php echo $mediaPanturrilhaD; ?> cm</td>
+
+        <td><?php echo $resultadoSubPanturrilhaE; ?> cm</td>        
+        <td><?php echo $mediaPanturrilhaE; ?> cm</td>
+
+        <td><?php echo $resultadoSubPeitoralMaior; ?> cm</td>        
+        <td><?php echo $mediaPeitoralMaior; ?> cm</td>
+
+        <td><?php echo $resultadoSubPeitoralMenor; ?> cm</td>        
+        <td><?php echo $mediaPeitoralMenor; ?> cm</td>
+
+        <td><?php echo $resultadoSubAbdomen; ?> cm</td>        
+        <td><?php echo $mediaAbdomen; ?> cm</td>
+
+        <td><?php echo $resultadoSubCostas; ?> cm</td>        
+        <td><?php echo $mediaCostas; ?> cm</td>
+
+        <td><?php echo $resultadoSubQuadril; ?> cm</td>        
+        <td><?php echo $mediaQuadril; ?> cm</td>
+
+      </tr>
+<?php 
+    $i2++;
+    $dados[$i+1][$i2] = $mediaPeso;
+    $dados[$i+1][++$i2] = $mediaBracoD;
+    $dados[$i+1][++$i2] = $mediaBracoE;
+    $dados[$i+1][++$i2] = $mediaAntiBracoD;
+    $dados[$i+1][++$i2] = $mediaAntiBracoE;
+    $dados[$i+1][++$i2] = $mediaCoxaD;
+    $dados[$i+1][++$i2] = $mediaCoxaE;
+    $dados[$i+1][++$i2] = $mediaPanturrilhaD;
+    $dados[$i+1][++$i2] = $mediaPanturrilhaE;
+    $dados[$i+1][++$i2] = $mediaPeitoralMaior;
+    $dados[$i+1][++$i2] = $mediaPeitoralMenor;
+    $dados[$i+1][++$i2] = $mediaAbdomen;
+    $dados[$i+1][++$i2] = $mediaCostas;
+    $dados[$i+1][++$i2] = $mediaQuadril;
+
+
+    $i2=0;
+    $i++;
+    endforeach; ?>
+      </tbody>
+   </table>
+</div>
+<?php 
+        
+        $json = json_encode($dados);
+        $json = str_replace("\"","'",$json);
+        /*echo "<pre>";
+        print_r($dados);
+        echo "</pre>";*/
+?>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(
+               <?php echo $json; ?>
+        );
+
+        var options = {
+          title: 'Média de Crescimento',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+     <div id="curve_chart" style="width: 100%; height: 500px"></div>

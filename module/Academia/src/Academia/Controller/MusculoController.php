@@ -29,4 +29,16 @@ class MusculoController extends AbstractController
              
         return parent::listarAction($where);
     }
+    
+    public function excluirAction(){
+        $service = $this->getServiceLocator()->get($this->service);
+        $id = (int) $this->params()->fromRoute('id',0);
+        
+        if($service->remove(['idMusculo'=>$id])){
+            $this->flashMessenger()->addSuccessMessage("Deletado com sucesso!");
+        }else{
+            $this->flashMessenger()->addErrorMessage("Não foi possível deletar o registro!");
+        }
+        return $this->redirect()->toRoute($this->route, array('controller' => $this->controller, 'action' => 'listar'));
+    }
 }

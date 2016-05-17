@@ -1,3 +1,26 @@
+<?php
+echo "asdfasdfas";exit;
+// This example assumes ZF is on your include_path.
+// You could also load the autoloader class from a path relative to the
+// current script, or via an absolute path.
+require_once 'Zend/Loader/ClassMapAutoloader.php';
+$loader = new Zend\Loader\ClassMapAutoloader();
+
+// Register the class map:
+$loader->registerAutoloadMap('Some/Directory/autoload_classmap.php');
+
+// Register with spl_autoload:
+$loader->register();
+// Configuration defining both a file-based class map, and an array map
+
+$config = array(
+    __DIR__ . '/library/autoloader_classmap.php', // file-based class map
+    array(                              // array class map
+        'Application\Bootstrap' => __DIR__ . '/application/Bootstrap.php',
+        'Test\Bootstrap'        => __DIR__ . '/tests/Bootstrap.php',
+    ),
+);
+
 
 #criar modulo#
 dentro de academia-php
@@ -22,7 +45,7 @@ php C:\Users\Allan\Documents\GitHub\academia-php\vendor\zendframework\zendframew
 acessar C:/Users/Allan/Documents/GitHub/academia-php/bin
 criar entidades: doctrine-module orm:convert-mapping --namespace="Academia\Entity\\" --extend="Base\Entity\AbstractEntity" --force --from-database annotation ./module/Academia/src/
 gerar gets e sets das entidades: doctrine-module orm:generate-entities ./module/Academia/src/ --generate-annotations=true
-
+obs: mudar em doctrine_orm.local.php -> 'paths' => array("C:\Users\Allan\Documents\GitHub\academia-php\module\Academia\src\Academia\Entity")
 
 #criando uma database pelo doctrine, apenas a database#
 doctrine-module dbal:run-sql "drop database Academia"

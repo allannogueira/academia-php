@@ -13,11 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class CepbrCidade extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_cidade", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idCidade;
 
@@ -36,11 +36,16 @@ class CepbrCidade extends \Base\Entity\AbstractEntity
     private $codIbge;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="area", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $area = '0';
+
+    /**
      * @var \Academia\Entity\CepbrEstado
      *
-     * 
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrEstado", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrEstado",cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="uf", referencedColumnName="uf")
      * })
@@ -50,22 +55,9 @@ class CepbrCidade extends \Base\Entity\AbstractEntity
 
 
     /**
-     * Set idCidade
-     *
-     * @param integer $idCidade
-     * @return CepbrCidade
-     */
-    public function setIdCidade($idCidade)
-    {
-        $this->idCidade = $idCidade;
-    
-        return $this;
-    }
-
-    /**
      * Get idCidade
      *
-     * @return integer 
+     * @return int
      */
     public function getIdCidade()
     {
@@ -76,6 +68,7 @@ class CepbrCidade extends \Base\Entity\AbstractEntity
      * Set cidade
      *
      * @param string $cidade
+     *
      * @return CepbrCidade
      */
     public function setCidade($cidade)
@@ -88,7 +81,7 @@ class CepbrCidade extends \Base\Entity\AbstractEntity
     /**
      * Get cidade
      *
-     * @return string 
+     * @return string
      */
     public function getCidade()
     {
@@ -99,6 +92,7 @@ class CepbrCidade extends \Base\Entity\AbstractEntity
      * Set codIbge
      *
      * @param string $codIbge
+     *
      * @return CepbrCidade
      */
     public function setCodIbge($codIbge)
@@ -111,7 +105,7 @@ class CepbrCidade extends \Base\Entity\AbstractEntity
     /**
      * Get codIbge
      *
-     * @return string 
+     * @return string
      */
     public function getCodIbge()
     {
@@ -119,12 +113,37 @@ class CepbrCidade extends \Base\Entity\AbstractEntity
     }
 
     /**
+     * Set area
+     *
+     * @param float $area
+     *
+     * @return CepbrCidade
+     */
+    public function setArea($area)
+    {
+        $this->area = $area;
+    
+        return $this;
+    }
+
+    /**
+     * Get area
+     *
+     * @return float
+     */
+    public function getArea()
+    {
+        return $this->area;
+    }
+
+    /**
      * Set uf
      *
      * @param \Academia\Entity\CepbrEstado $uf
+     *
      * @return CepbrCidade
      */
-    public function setUf(\Academia\Entity\CepbrEstado $uf)
+    public function setUf(\Academia\Entity\CepbrEstado $uf = null)
     {
         $this->uf = $uf;
     
@@ -134,7 +153,7 @@ class CepbrCidade extends \Base\Entity\AbstractEntity
     /**
      * Get uf
      *
-     * @return \Academia\Entity\CepbrEstado 
+     * @return \Academia\Entity\CepbrEstado
      */
     public function getUf()
     {

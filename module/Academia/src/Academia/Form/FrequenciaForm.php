@@ -31,13 +31,13 @@ class FrequenciaForm extends Form implements ObjectManagerAwareInterface
              ->setObject(new FrequenciaAluno())
            //  ->setInputFilter(new AlunoFilter())
          ;
-        
+        $this->setAttribute('class', 'form-inline');
         $this->add([
             'name' => 'idFrequenciaAluno',
             'type' => 'hidden'
         ]);
 
-        $this->add(['type' => 'Academia\Form\AlunoFieldset']);
+        
         
         $this->add([
            'name' => 'dataPresenca',
@@ -48,13 +48,17 @@ class FrequenciaForm extends Form implements ObjectManagerAwareInterface
             'type'  => 'date'
        ]);
         
+       $this->add(['type' => 'Academia\Form\AlunoFieldset']);
       
        
        $this->add([
            'name' => 'submit',
            'type' => 'submit',
            'options' => [
-               'label' => 'Marcar Presença',
+               'label' => 'Marcar Presença'
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

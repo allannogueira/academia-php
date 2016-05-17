@@ -13,11 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class CepbrBairro extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_bairro", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idBairro;
 
@@ -31,9 +31,7 @@ class CepbrBairro extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\CepbrCidade
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\CepbrCidade")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\CepbrCidade")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_cidade", referencedColumnName="id_cidade")
      * })
@@ -42,3 +40,4 @@ class CepbrBairro extends \Base\Entity\AbstractEntity
 
 
 }
+

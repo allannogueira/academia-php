@@ -26,15 +26,13 @@ class AlimentoForm extends Form
              ->setHydrator(new ClassMethodsHydrator())
              ->setObject(new Alimento())
          ;
-        
+        $this->setAttribute('class', 'form-inline');
         $this->add([
            'name' => 'idAlimento',
            'type' => 'hidden'
        ]);
         
-         $this->add(array(
-             'type' => 'Academia\Form\AcademiaFieldset'
-         ));
+         
          
        $this->add([
            'name' => 'nomeAlimento',
@@ -61,6 +59,10 @@ class AlimentoForm extends Form
        ]);
        
        $this->add(array(
+             'type' => 'Academia\Form\AcademiaFieldset'
+         ));
+       
+       $this->add(array(
              'type' => 'Zend\Form\Element\Csrf',
              'name' => 'csrf',
          ));
@@ -70,6 +72,9 @@ class AlimentoForm extends Form
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

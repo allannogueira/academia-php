@@ -38,7 +38,7 @@ class LoginController extends AbstractController
     
     public function indexAction() {
         $form = $this->getServiceLocator()->get($this->form);
-        $viewModel = new ViewModel(['form' => $form]);        
+        $viewModel = new ViewModel(['form' => $form]); 
         return $viewModel;
     }
     

@@ -5,10 +5,6 @@
       <label for="disabledTextInput">Nome</label>
       <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome">
     </div>
-    <div class="form-group">
-      <label for="disabledTextInput">Usuario</label>
-      <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Digite o usuario">
-    </div>
     <button type="submit" class="btn btn-primary">Filtrar</button>
   </fieldset>
 </form>
@@ -24,12 +20,16 @@
       <thead>
       <tr>
           <th>Nome</th>
+          <th>RG</th>
+          <th>CPF</th>
       </tr>
       </thead>
       <tbody
 <?php foreach ($this->data as $profissional): ?>
       <tr> 
         <td><?php echo $profissional->getNome(); ?></td>
+        <td><?php echo $profissional->getRg(); ?></td>
+        <td><?php echo $profissional->getCpf(); ?></td>
         
         <td>
             <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('profissional', ['action' => 'editar', 'id' => $profissional->getId()]); ?>'"class="btn btn-default" aria-label="Left Align">

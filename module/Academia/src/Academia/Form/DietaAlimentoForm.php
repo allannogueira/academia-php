@@ -25,7 +25,7 @@ class DietaAlimentoForm extends Form implements ObjectManagerAwareInterface
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new DietaAlimento())
         ;
-        
+        $this->setAttribute('class', 'form-inline');
         $this->add([
            'name' => 'idDietaAlimento',
            'type' => 'hidden'
@@ -50,6 +50,9 @@ class DietaAlimentoForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

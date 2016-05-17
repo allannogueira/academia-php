@@ -34,9 +34,11 @@ class FinalidadeFieldset extends Fieldset  implements ObjectManagerAwareInterfac
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new Finalidade())
         ;
-            
+        
+        $this->setLabel('Finalidade');
+        
         $finalidade = new ObjectSelect("idFinalidade");
-        $finalidade->setLabel("Finalidade")
+        $finalidade->setLabel("")
                  ->setOptions([ 
                 'object_manager'     => $this->getObjectManager(),
                 'target_class'       => 'Academia\Entity\Finalidade',

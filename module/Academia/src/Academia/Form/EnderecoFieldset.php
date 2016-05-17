@@ -34,7 +34,7 @@ class EnderecoFieldset extends Fieldset implements ObjectManagerAwareInterface{
              ->setObject(new Endereco())
          ;
 
-        
+        $this->setLabel('Endereço');
         $this->add(array(
              'type' => 'hidden',
              'name' => 'idEndereco'
@@ -42,11 +42,8 @@ class EnderecoFieldset extends Fieldset implements ObjectManagerAwareInterface{
         
       
         $this->add(array(
-             'type' => 'Academia\Form\CepbrEnderecoFieldset',             
-            'attributes' => array(
-                 'required' => 'required',
-                 'onBlur' => 'carregaCep()',
-             ),
+             'type' => 'Academia\Form\CepbrEnderecoFieldset'         
+            
          ));
         
         $this->add(array(

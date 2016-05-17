@@ -4,20 +4,18 @@ namespace Academia\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use ZfcUser\Entity\UserInterface as ZfcUserInterface;
-use ZfcRbac\Identity\IdentityInterface;
 /**
  * Login
- 
- * @ORM\Table(name="login", indexes={@ORM\Index(name="fk_cod_tipo_login_idx", columns={"cod_tipo_login"}), @ORM\Index(name="fk_id_aluno_idx", columns={"id_aluno"}), @ORM\Index(name="fk_id_profissional_idx", columns={"id_academia"})})
+ *
+ * @ORM\Table(name="login", indexes={@ORM\Index(name="fk_cod_tipo_login_idx", columns={"cod_tipo_login"}),@ORM\Index(name="fk_id_profissional", columns={"id_profissional"}), @ORM\Index(name="fk_id_aluno_idx", columns={"id_aluno"}), @ORM\Index(name="fk_id_profissional_idx", columns={"id_academia"})})
  * @ORM\Entity
  */
-class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, IdentityInterface
+class Login extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="id_login", type="integer",nullable=false)
+     * @ORM\Column(name="id_login", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -25,38 +23,51 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
 
     /**
      * @var string
-     * 
-     * @ORM\Column(name="email", type="string", length=100)
+     *
+     * @ORM\Column(name="email", type="string", length=100, nullable=false, unique=true)
      */
-    public $email;
+    private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="senha", type="string", length=16)
+     * @ORM\Column(name="senha", type="string", length=250, nullable=false)
      */
     private $senha;
 
     /**
-     * @var integer
+     * @var \Academia\Entity\Profissional
      *
-     * @ORM\Column(name="id_profissional", type="integer",nullable=false)
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Profissional", fetch="EAGER")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_profissional", referencedColumnName="id")
+     * })
      */
     private $idProfissional;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="id_administrador", type="integer",nullable=false)
+     * @ORM\Column(name="id_administrador", type="integer", nullable=true)
      */
     private $idAdministrador;
 
     /**
+     * @var \Academia\Entity\Aluno
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno", fetch="EAGER")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
+     * })
+     */
+    private $idAluno;
+
+    /**
      * @var \Academia\Entity\Academia
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia", fetch="EAGER")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia",nullable=false)
+     *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
      * })
      */
     private $idAcademia;
@@ -66,41 +77,28 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
      *
      * @ORM\ManyToOne(targetEntity="Academia\Entity\TipoLogin")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="cod_tipo_login", referencedColumnName="cod_tipo_login",nullable=false)
+     *   @ORM\JoinColumn(name="cod_tipo_login", referencedColumnName="cod_tipo_login")
      * })
      */
     private $codTipoLogin;
 
+
+
     /**
-     * @var \Academia\Entity\Aluno
-     *
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno", mappedBy="idLogin",cascade={"all"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno",nullable=false)
-     * })
-     */
-    private $idAluno;
-
-
-        /**
      * Get idLogin
      *
-     * @return integer 
+     * @return int
      */
     public function getIdLogin()
     {
-     //   echo "getIdLogin";exit;
         return $this->idLogin;
     }
-    
-    function setIdLogin($idLogin) {
-        $this->idLogin = $idLogin;
-    }
 
-        /**
+    /**
      * Set email
      *
      * @param string $email
+     *
      * @return Login
      */
     public function setEmail($email)
@@ -113,11 +111,10 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
-        //echo "getEmail";exit;
         return $this->email;
     }
 
@@ -125,12 +122,19 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
      * Set senha
      *
      * @param string $senha
+     *
      * @return Login
      */
     public function setSenha($senha)
     {
-         $bcrypt = new \Zend\Crypt\Password\Bcrypt();
-        $this->senha = $bcrypt->create($senha);
+        $this->senha = md5($senha);
+    
+        return $this;
+    }
+    
+    public function setPassword($senha)
+    {
+        $this->senha = md5($senha);
     
         return $this;
     }
@@ -138,19 +142,23 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
     /**
      * Get senha
      *
-     * @return string 
+     * @return string
      */
     public function getSenha()
     {
         return $this->senha;
     }
     
-    
+    public function getPassword()
+    {
+        return $this->senha;
+    }
 
     /**
      * Set idProfissional
      *
-     * @param integer $idProfissional
+     * @param int $idProfissional
+     *
      * @return Login
      */
     public function setIdProfissional($idProfissional)
@@ -163,7 +171,7 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
     /**
      * Get idProfissional
      *
-     * @return integer 
+     * @return int
      */
     public function getIdProfissional()
     {
@@ -173,7 +181,8 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
     /**
      * Set idAdministrador
      *
-     * @param integer $idAdministrador
+     * @param int $idAdministrador
+     *
      * @return Login
      */
     public function setIdAdministrador($idAdministrador)
@@ -186,7 +195,7 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
     /**
      * Get idAdministrador
      *
-     * @return integer 
+     * @return int
      */
     public function getIdAdministrador()
     {
@@ -194,9 +203,37 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
     }
 
     /**
+     * Set idAluno
+     *
+     * @param \Academia\Entity\Aluno $idAluno
+     *
+     * @return Login
+     */
+    public function setIdAluno(\Academia\Entity\Aluno $idAluno = null)
+    {
+        $this->idAluno = $idAluno;
+    
+        return $this;
+    }
+
+    public function getId(){
+        return $this->idAluno;
+    }
+    /**
+     * Get idAluno
+     *
+     * @return \Academia\Entity\Aluno
+     */
+    public function getIdAluno()
+    {
+        return $this->idAluno;
+    }
+
+    /**
      * Set idAcademia
      *
      * @param \Academia\Entity\Academia $idAcademia
+     *
      * @return Login
      */
     public function setIdAcademia(\Academia\Entity\Academia $idAcademia = null)
@@ -209,7 +246,7 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
     /**
      * Get idAcademia
      *
-     * @return \Academia\Entity\Academia 
+     * @return \Academia\Entity\Academia
      */
     public function getIdAcademia()
     {
@@ -220,9 +257,10 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
      * Set codTipoLogin
      *
      * @param \Academia\Entity\TipoLogin $codTipoLogin
+     *
      * @return Login
      */
-    public function setCodTipoLogin($codTipoLogin = null)
+    public function setCodTipoLogin(\Academia\Entity\TipoLogin $codTipoLogin = null)
     {
         $this->codTipoLogin = $codTipoLogin;
     
@@ -232,91 +270,10 @@ class Login extends \Base\Entity\AbstractEntity implements ZfcUserInterface, Ide
     /**
      * Get codTipoLogin
      *
-     * @return \Academia\Entity\TipoLogin 
+     * @return \Academia\Entity\TipoLogin
      */
     public function getCodTipoLogin()
     {
         return $this->codTipoLogin;
     }
-
-    /**
-     * Set idAluno
-     *
-     * @param \Academia\Entity\Aluno $idAluno
-     * @return Login
-     */
-    public function setIdAluno(\Academia\Entity\Aluno $idAluno = null)
-    {
-        $this->idAluno = $idAluno;
-    
-        return $this;
-    }
-
-    /**
-     * Get idAluno
-     *
-     * @return \Academia\Entity\Aluno 
-     */
-    public function getIdAluno()
-    {
-        return $this->idAluno;
-    }
-    
-    public function getPassword(){
-        //echo "getPassword:".$this->senha;exit;
-        return $this->senha;
-    }
-
-    public function getDisplayName() {
-        return ;
-    }
-
-    public function getId() {
-       // echo "getId";exit;
-        return $this->getIdLogin();
-    }
-
-    public function getState() {
-        return;
-    }
-
-    public function getUsername() {       
-        return;
-    }
-
-    public function setDisplayName($displayName) {
-        return;
-    }
-
-    public function setId($id) {
-        $this->idLogin = $id;
-    }
-
-    public function setPassword($password) {
-        $this->setSenha($password);
-        return $this;
-    }
-
-    public function setState($state) {
-        return;
-    }
-
-    public function setUsername($username) {
-        return;
-    }
-
-    public function getRoles() {
-        $role = "visitante";
-        if($this->getIdAcademia() != null){
-            $role = "academia";
-        }else if($this->getIdAdministrador() != null){
-            $role = "admin";
-        }else if($this->getIdAluno() != null){
-            $role = "aluno";
-        }else if($this->getIdProfissional() != null){
-            $role = "profissional";
-        }
-        return array($role);
-    }
-
 }

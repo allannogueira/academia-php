@@ -35,8 +35,17 @@ class TreinoGeralFieldset extends Fieldset  implements ObjectManagerAwareInterfa
              ->setObject(new TreinoGeral())
         ;
         
+        $session = new \Zend\Session\Container();
+        
+        if($session['idAcademia'] != ""){
+            $condicao = array("idAcademia" => $session['idAcademia']);
+        }else{
+            $condicao = array();
+        }
+        
+        $this->setLabel('Treino Geral');
         $fieldset = new ObjectSelect("idTreinoGeral");
-         $fieldset->setLabel("Treino")
+         $fieldset->setLabel("")
                  ->setOptions([ 
                 'object_manager'     => $this->getObjectManager(),
                 'target_class'       => 'Academia\Entity\TreinoGeral',
@@ -46,7 +55,7 @@ class TreinoGeralFieldset extends Fieldset  implements ObjectManagerAwareInterfa
                 'find_method'        => array(
                     'name'  => 'findBy',
                     'params' =>[
-                        'criteria'   => array(),
+                        'criteria'   => $condicao,
                         'orderBy'   => array("nomeTreino" => "ASC"),
                     ]
                 )            

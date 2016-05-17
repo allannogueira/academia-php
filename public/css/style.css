@@ -1,6 +1,9 @@
 body {
     padding-top: 60px;
     padding-bottom: 40px;
+        background: url("/img/pesos.jpg") !important;
+        
+
 }
 
 .zf-green {
@@ -60,3 +63,109 @@ div.container a.brand {
 }
 
 .margin20{margin:20px}
+
+.dataTables_filter {
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.box .list-group .list-group-item
+{
+ background: none !important;   
+ border: 0px !important;
+}
+.box{
+    background: #EFEFEF;
+    color: #000;
+    font-weight: bold;
+    min-height: 500px;
+    padding: 20px;
+    border-radius: 3px;
+    opacity: 0.7;
+}
+
+.box button{display: none}
+.box:hover button{display:inline-block}
+
+.box2{
+    background: #EEE;
+    color: #000;
+    min-height: 240px;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 3px;
+    opacity: 0.7;
+}
+
+.box .foto{
+    border-radius: 50%;
+    background: #FFF;
+    color: #666;    
+    width: 150px;
+    height: 150px;
+    margin: auto;    
+    margin-bottom: 20px;
+}
+
+.box .foto i{
+    font-size: 50pt;
+    margin-top: 40px;
+}
+
+.box2 i.glyphicon{
+    margin-top: 40px;
+    font-size: 50pt
+}
+
+.box2:hover i.glyphicon{
+    color: #FF9800;
+}
+
+.box2:hover{
+    cursor: pointer;
+    box-shadow: 0px 5px 30px #000;    
+}
+
+.navbar-brand{
+    padding: 9px 15px !important;    
+}
+
+form{
+    background: #FFF;
+    opacity: 0.9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+form fieldset{
+    margin-top: 20px;
+}
+
+form fieldset legend{
+    margin-bottom: 10px;
+    color: #cc850c;
+    border-bottom: 1px solid #cc850c;
+}
+
+form fieldset fieldset fieldset{
+    margin-top: 10px;
+}
+
+form button[type='submit']{
+    margin-top: 30px;
+}
+
+.form-inline fieldset fieldset fieldset .form-group{
+    margin-top: 5px;
+}
+
+.form-horizontal .form-group{
+    margin: 0px;
+}
+
+.form-inline .form-group{
+ margin-top: 10px;   
+}
+.form-inline select.form-control{
+    width: 100%;
+}

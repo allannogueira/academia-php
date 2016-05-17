@@ -40,7 +40,7 @@ class CepbrEstado extends \Base\Entity\AbstractEntity
     /**
      * Get uf
      *
-     * @return string 
+     * @return string
      */
     public function getUf()
     {
@@ -51,6 +51,7 @@ class CepbrEstado extends \Base\Entity\AbstractEntity
      * Set estado
      *
      * @param string $estado
+     *
      * @return CepbrEstado
      */
     public function setEstado($estado)
@@ -63,7 +64,7 @@ class CepbrEstado extends \Base\Entity\AbstractEntity
     /**
      * Get estado
      *
-     * @return string 
+     * @return string
      */
     public function getEstado()
     {
@@ -74,6 +75,7 @@ class CepbrEstado extends \Base\Entity\AbstractEntity
      * Set codIbge
      *
      * @param string $codIbge
+     *
      * @return CepbrEstado
      */
     public function setCodIbge($codIbge)
@@ -86,7 +88,7 @@ class CepbrEstado extends \Base\Entity\AbstractEntity
     /**
      * Get codIbge
      *
-     * @return string 
+     * @return string
      */
     public function getCodIbge()
     {

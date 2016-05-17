@@ -54,3 +54,4 @@ class CepbrEndereco extends \Base\Entity\AbstractEntity
 
 
 }
+

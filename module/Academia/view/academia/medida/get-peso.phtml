@@ -1,0 +1,84 @@
+<?php
+   //echo var_dump($this->data);exit;
+   
+?>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Medidas</div>
+
+  <!-- Table -->
+  <table class="table display responsive nowrap">
+      <thead>
+      <tr>
+          <th>Data</th>
+          <th>Peso</th>
+          <th>Em relação ao mês anterior, você perdeu/ganhou</th>     
+      </tr>
+      </thead>
+      <tbody>
+<?php 
+    $i=0;
+    $i2=0;
+    $aux = 0;
+    $resultado = 0;
+    $peso = 0;
+    //repetição
+    foreach ($this->data as $data):
+        $dataPeso = date_format($data->getDataIniVig(),'d/m/Y');
+        if($i == 0){
+            $aux = $data->getPeso();
+        }else{
+            $aux = $peso;
+        }
+        
+        $peso = $data->getPeso();
+        $resultado =  $peso - $aux;
+        
+?>
+      <tr> 
+        <td><?php echo $dataPeso; ?></td> 
+        <td><?php echo $peso; ?> Kg</td>     
+        <td><?php echo $resultado; ?> Kg</td>     
+        
+      </tr>
+<?php 
+        $i++;
+        $dados[0][0] = 'Data';
+        $dados[0][1] = 'Peso';
+        $dados[$i][$i2++] = $dataPeso;
+        $dados[$i][$i2++] = $peso;
+        $i2=0;
+    endforeach; ?>
+      </tbody>
+   </table>
+</div>
+<?php 
+        
+        $json = json_encode($dados);
+        $json = str_replace("\"","'",$json);
+      /*  echo "<pre>";
+        print_r($dados);
+        echo "</pre>";*/
+?>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(
+               <?php echo $json; ?>
+        );
+
+        var options = {
+          title: 'Peso',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+     <div id="curve_chart" style="width: 100%; height: 500px"></div>

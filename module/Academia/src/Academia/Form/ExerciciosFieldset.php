@@ -24,9 +24,9 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
             ->setObject(new Exercicio())
         ;
         
-
+        $this->setLabel('Exercicio');    
          $exercicios = new ObjectSelect("idExercicio");
-         $exercicios->setLabel("Exercicio")
+         $exercicios->setLabel("")
                  ->setOptions([ 
                 'object_manager'     => $this->getObjectManager(),
                 'target_class'       => 'Academia\Entity\Exercicio',

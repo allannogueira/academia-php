@@ -34,7 +34,7 @@ class CepbrCidadeFieldset extends Fieldset  implements ObjectManagerAwareInterfa
              ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
              ->setObject(new CepbrCidade())
          ;
-         
+      
         $this->add(array(
              'type' => 'Academia\Form\CepbrEstadoFieldset'
          ));
@@ -43,6 +43,7 @@ class CepbrCidadeFieldset extends Fieldset  implements ObjectManagerAwareInterfa
         $cidade = new ObjectSelect("idCidade");
         $cidade->setLabel("Cidade")
                  ->setOptions([ 
+                     'disable_inarray_validator' => true,
                 'object_manager'     => $this->getObjectManager(),
                 'target_class'       => 'Academia\Entity\CepbrCidade',
                 'property' => 'cidade',
@@ -57,9 +58,10 @@ class CepbrCidadeFieldset extends Fieldset  implements ObjectManagerAwareInterfa
                 )            
         ]);
         // echo var_dump($academia);
-        $this->add($cidade);
+        $this->add($cidade);    
     }
 
+    
     public function getObjectManager() {
         return $this->objectManager;
     }

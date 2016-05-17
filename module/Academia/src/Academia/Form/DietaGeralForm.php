@@ -26,19 +26,13 @@ class DietaGeralForm extends Form implements ObjectManagerAwareInterface
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new DietaGeral())
         ;
-        
+        $this->setAttribute('class', 'form-inline');
         $this->add([
            'name' => 'idDietaGeral',
            'type' => 'hidden'
        ]);
        
-         $this->add(array(
-             'type' => 'Academia\Form\AcademiaFieldset'
-         ));
          
-         $this->add(array(
-             'type' => 'Academia\Form\FinalidadeFieldset'
-         ));
          
           $this->add([
            'name' => 'nomeDieta',
@@ -48,6 +42,14 @@ class DietaGeralForm extends Form implements ObjectManagerAwareInterface
            ]
        ]);
 
+          $this->add(array(
+             'type' => 'Academia\Form\AcademiaFieldset'
+         ));
+         
+         $this->add(array(
+             'type' => 'Academia\Form\FinalidadeFieldset'
+         ));
+         
        $this->add(array(
              'type' => 'Zend\Form\Element\Csrf',
              'name' => 'csrf',
@@ -58,6 +60,9 @@ class DietaGeralForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

@@ -5,14 +5,11 @@ namespace Academia\Form;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+use Academia\Entity\Profissional;
 use Zend\Form\Form;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
-use Academia\Entity\Academia;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use DoctrineModule\Form\Element\ObjectSelect;
-
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class ProfissionalForm extends Form implements ObjectManagerAwareInterface
 {
@@ -20,57 +17,18 @@ class ProfissionalForm extends Form implements ObjectManagerAwareInterface
     public function __construct($name = null, $options = array())
     {
         parent::__construct($name,$options);
-     /*   $this->setAttribute('method','POST');
-        $this->setInputFilter(new AlunoFilter());                
-        */
-        $this
-             ->setAttribute('method', 'POST')
-             ->setHydrator(new ClassMethodsHydrator())
-           //  ->setInputFilter(new AlunoFilter())
-         ;
     }
     
     public function init(){
-      
-        $this->setLabel('Cadastrar Academia');             
+        $this
+             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
+             ->setObject(new Profissional())
+         ;
         
-        $academia = new ObjectSelect("academia_id");
-         $academia->setLabel("Academia")
-                 ->setOptions([ 
-                'object_manager'     => $this->getObjectManager(),
-                'target_class'       => 'Academia\Entity\Academia',
-                'property' => 'nome',
-               'empty_option' => 'selecione',
-                'is_method' => true,
-                'find_method'        => array(
-                    'name'  => 'findBy',
-                    'params' =>[
-                        'criteria'   => array(),
-                        'orderBy'   => array("nome" => "ASC"),
-                    ]
-                )            
-        ]);
-         
-         $academia = new ObjectSelect("academia_id");
-         $academia->setLabel("Academia")
-                 ->setOptions([ 
-                'object_manager'     => $this->getObjectManager(),
-                'target_class'       => 'Academia\Entity\Academia',
-                'property' => 'nome',
-               'empty_option' => 'selecione',
-                'is_method' => true,
-                'find_method'        => array(
-                    'name'  => 'findBy',
-                    'params' =>[
-                        'criteria'   => array(),
-                        'orderBy'   => array("nome" => "ASC"),
-                    ]
-                )            
-        ]);
-        // echo var_dump($academia);
-        $this->add($academia);
-         
-       $this->add([
+        
+        $this->setAttribute('class', 'form-inline');
+        
+        $this->add([
            'name' => 'nome',
            'type' => 'text',
            'options' => [
@@ -78,27 +36,65 @@ class ProfissionalForm extends Form implements ObjectManagerAwareInterface
            ]
        ]);
        
+       
        $this->add([
-           'name' => 'usuario',
+           'name' => 'sobrenome',
            'type' => 'text',
            'options' => [
-               'label' => 'Usuario',
+               'label' => 'Sobrenome',
            ]
        ]);
        
        $this->add([
-           'name' => 'senha',
-           'type' => 'password',
+           'name' => 'dataNasc',
+           'type' => 'date',
            'options' => [
-               'label' => 'Senha',
+               'label' => 'Data Nascimento',
            ]
        ]);
+       
+       $this->add([
+           'name' => 'telefone',
+           'type' => 'text',
+           'options' => [
+               'label' => 'Telefone',
+           ]
+       ]);
+       
+       $this->add([
+           'name' => 'celular',
+           'type' => 'text',
+           'options' => [
+               'label' => 'Celular',
+           ]
+       ]);
+       
+       $this->add([
+           'name' => 'rg',
+           'type' => 'text',
+           'options' => [
+               'label' => 'RG',
+           ]
+       ]);
+       
+       $this->add([
+           'name' => 'cpf',
+           'type' => 'text',
+           'options' => [
+               'label' => 'CPF',
+           ]
+       ]);
+       
+        $this->add(array(
+             'type' => 'Academia\Form\AcademiaFieldset'
+         ));
+         
+        $this->add(array(
+             'type' => 'Academia\Form\LoginFieldset'
+         ));
      
         $this->add(array(
-             'type' => 'Academia\Form\EnderecoFieldset',
-             'options' => array(
-                 'use_as_base_fieldset' => true,
-             ),
+             'type' => 'Academia\Form\EnderecoFieldset'
          ));
         
        $this->add(array(
@@ -111,6 +107,9 @@ class ProfissionalForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

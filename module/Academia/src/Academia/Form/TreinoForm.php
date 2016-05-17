@@ -27,19 +27,14 @@ class TreinoForm extends Form implements ObjectManagerAwareInterface
             ->setObject(new Treino())
         ;
         
+        $this->setAttribute('class', 'form-inline');
         $this->add([
            'name' => 'idTreino',
            'type' => 'hidden'
        ]);
        
-         $this->add(array(
-             'type' => 'Academia\Form\AlunoFieldset'
-         ));
-         
-         $this->add(array(
-             'type' => 'Academia\Form\TreinoGeralFieldset'
-         ));
-         
+        
+       
        $this->add([
            'name' => 'dataIniVig',
            'type' => 'date',
@@ -56,6 +51,14 @@ class TreinoForm extends Form implements ObjectManagerAwareInterface
            ]
        ]);
 
+        $this->add(array(
+             'type' => 'Academia\Form\AlunoFieldset'
+         ));
+         
+         $this->add(array(
+             'type' => 'Academia\Form\TreinoGeralFieldset'
+         ));
+         
        $this->add(array(
              'type' => 'Zend\Form\Element\Csrf',
              'name' => 'csrf',
@@ -66,6 +69,9 @@ class TreinoForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

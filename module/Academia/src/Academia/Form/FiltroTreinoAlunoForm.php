@@ -25,7 +25,7 @@ class FiltroTreinoAlunoForm extends Form implements ObjectManagerAwareInterface
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new Treino())
         ;    
-        
+        $this->setAttribute('class', 'form-inline');
         $this->add([
            'type' => 'Academia\Form\AlunoFieldset'
            
@@ -46,6 +46,9 @@ class FiltroTreinoAlunoForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Buscar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

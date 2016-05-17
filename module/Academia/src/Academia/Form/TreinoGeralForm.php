@@ -25,7 +25,8 @@ class TreinoGeralForm extends Form implements ObjectManagerAwareInterface
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new TreinoGeral())
         ;
-        
+        $this->setInputFilter(new \Academia\Validation\TreinoGeralFilter());
+        $this->setAttribute('class', 'form-inline');
         $this->add([
            'name' => 'idTreinoGeral',
            'type' => 'hidden'
@@ -36,7 +37,11 @@ class TreinoGeralForm extends Form implements ObjectManagerAwareInterface
            'type' => 'text',
            'options' => [
                'label' => 'Nome',
-           ]
+           ],
+            'attributes' => [
+                'required' => 'true'
+            ]
+            
        ]);
         
          $this->add(array(
@@ -58,6 +63,9 @@ class TreinoGeralForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

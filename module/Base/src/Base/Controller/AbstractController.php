@@ -4,15 +4,9 @@ namespace Base\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
 use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter\ArrayAdapter;
-use Zend\Permissions\Acl\Acl;
-use Zend\Permissions\Acl\Role\GenericRole as Role;
-use Zend\Permissions\Acl\Resource\GenericResource as Resource;
 use Zend\Session\Container;
-use Zend\Stdlib\Hydrator;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 abstract class AbstractController extends AbstractActionController
 {
@@ -43,8 +37,18 @@ abstract class AbstractController extends AbstractActionController
      */
     public function listarAction($where = "")
     {    
+       // if(method_exists($this->entity,'getIdAcademia')){
+        if($this->getFilterAcademia() != ""){
+            if($where == ""){
+                $where = "where ".$this->getFilterAcademia();
+            }else{
+                $where .= " and ".$this->getFilterAcademia();
+            }
+        }
+        //}
+        
         $query = "select t from $this->entity t $where";
-        //echo var_dump($query);
+       // echo var_dump($query);
         $list = $this->getEm()->createQuery($query)->getResult();//faz o select no banco de dados
         $page = $this->params()->fromRoute('page');//recupera o parametro page da url
       //  $action = $this->params()->fromRoute('action');//recupera o parametro action da url
@@ -72,9 +76,7 @@ abstract class AbstractController extends AbstractActionController
     /*
      * Inserir Registro
      */
-    public function inserirAction(){        
-        $sessao = new Container();
-        
+    public function inserirAction(){    
         if(is_string($this->form)){
             $forms = $this->getServiceLocator()->get('FormElementManager');
             $form = $forms->get($this->form, array());
@@ -87,12 +89,24 @@ abstract class AbstractController extends AbstractActionController
         $form->bind($entity);
         if($this->request->isPost()){ 
             //echo var_dump($this->request->getPost());
-            $form->setData($this->request->getPost());
+            $post = $this->request->getPost()->toArray();
+            $file = $this->request->getFiles()->toArray();
+            $postData = array_merge_recursive($post,$file);
+            $form->setData($postData);
             
             if($form->isValid()){
-                  
+                //se existir algum upload de arquivo, deixe com o nome de "arquivo" para padronizar
+                if($postData['fotoWebcan'] != ""){
+                    $postData['arquivo'] = $postData['fotoWebcan'];
+                }else if(isset($postData['arquivo'])){
+                    $data = $form->getData();
+                    $path = $data->getArquivo()['tmp_name'];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $postData['arquivo'] = file_get_contents($path);
+                    $postData['arquivo'] =  'data:image/' . $type . ';base64,' . base64_encode($postData['arquivo']);
+                }
                 $service = $this->getServiceLocator()->get($this->service);
-                if($service->save($this->request->getPost()->toArray())){
+                if($service->save($postData)){
                     $this->flashMessenger()->addSuccessMessage("Cadastrado com Sucesso!");
                 }else{
                     $this->flashMessenger()->addErrorMessage("Não foi possível cadastrar, tente novamente mais tarde.");
@@ -100,11 +114,11 @@ abstract class AbstractController extends AbstractActionController
                 return $this->redirect()->toRoute($this->route,['controller'=> $this->controller]);//redureciona para o controller que será indicado
             }
             else {
-                echo "formulario nao eh valido";
-                foreach ($form->getMessages() as $messageId => $message) {
+                $this->flashMessenger()->addErrorMessage("formulario nao eh valido");
+               /* foreach ($form->getMessages() as $messageId => $message) {
                     foreach($message as $descricao)
                         echo "Validation failure '$messageId': $descricao\n";
-                }
+                }*/
             }      
 
         }
@@ -145,26 +159,42 @@ abstract class AbstractController extends AbstractActionController
         $param = $this->params()->fromRoute('id',0);//se nao passar nenhum parametro coloca com id 0     
         
         $repository = $this->getEm()->getRepository($this->entity)->find($param);
-        //echo var_dump($repository);
         
         if($repository != null){  
             $form->bind($repository);
+            
             if($request->isPost()){//se é um POST
-                $form->setData($request->getPost());
+                
+                $form->setData($this->getRequest()->getPost());
                 $service = $this->getServiceLocator()->get($this->service);
                 
-                $data = $request->getPost()->toArray();
-                $data['id'] = (int) $param;
-                
+                 $post = $this->request->getPost()->toArray();
+                $file = $this->request->getFiles()->toArray();
+                $postData = array_merge_recursive($post,$file);
+                $form->setData($postData);
+                $postData['id'] = (int) $param;
+               // echo var_dump($postData);exit;
                 if ($form->isValid()){
-                    if($service->save($data)){
+                    if($postData['fotoWebcan'] != ""){
+                        $postData['arquivo'] = $postData['fotoWebcan'];
+                    }else if(isset($postData['arquivo'])){
+                        $data = $form->getData();
+                        $path = $data->getArquivo()['tmp_name'];
+                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                        $postData['arquivo'] = file_get_contents($path);
+                        $postData['arquivo'] =  'data:image/' . $type . ';base64, ' . base64_encode($postData['arquivo']);
+                        
+                    }
+
+                    if($service->save($postData)){
                         $this->flashMessenger()->addSuccessMessage("Atualizado com Sucesso!");
                     }else{
                         $this->flashMessenger()->addErrorMessage("Não foi possível atualizar, tente novamente mais tarde.");
                     }
-                    return $this->redirect()->toRoute($this->route,['controller'=> $this->controller,'action' => 'editar','id'=>$data['id']]);//redureciona para o controller que será indicado
+                    return $this->redirect()->toRoute($this->route,['controller'=> $this->controller,'action' => 'editar','id'=>$postData['id']]);//redureciona para o controller que será indicado
                 }
             }
+            
         }else{//nao encontrou nenhum registro
 
             $this->flashMessenger()->addInfoMessage('Registro não foi encontrado');
@@ -215,6 +245,7 @@ abstract class AbstractController extends AbstractActionController
         }else{
             $this->flashMessenger()->addErrorMessage("Não foi possível deletar o registro!");
         }
+        $this->flashMessenger()->clearMessages();
         return $this->redirect()->toRoute($this->route, array('controller' => $this->controller, 'action' => 'listar'));
     }
     
@@ -283,5 +314,14 @@ abstract class AbstractController extends AbstractActionController
         //echo ($acl->isAllowed('aluno', 'editar') || $acl->isAllowed('academia', 'editar')) ? 'allowed' : 'denied';die("LoginController")   ;*/
     }
     
-
+    public function getFilterAcademia(){
+        $session = new \Zend\Session\Container();
+        $academia = "";
+         if(method_exists($this->entity,'getIdAcademia')){
+            if($session['idAcademia'] != ""){
+                $academia = "t.idAcademia = ".$session['idAcademia'];
+            }
+         }
+        return $academia;
+    }
 }

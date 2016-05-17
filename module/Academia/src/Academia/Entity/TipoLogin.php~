@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class TipoLogin extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="cod_tipo_login", type="integer", nullable=false)
      * @ORM\Id
@@ -30,3 +30,4 @@ class TipoLogin extends \Base\Entity\AbstractEntity
 
 
 }
+

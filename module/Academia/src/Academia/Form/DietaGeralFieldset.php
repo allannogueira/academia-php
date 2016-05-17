@@ -34,9 +34,9 @@ class DietaGeralFieldset extends Fieldset  implements ObjectManagerAwareInterfac
              ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
              ->setObject(new DietaGeral())
         ;
-        
+        $this->setLabel('Dieta Geral');
         $select = new ObjectSelect("idDietaGeral");
-         $select->setLabel("Dieta Geral")
+         $select->setLabel("")
                  ->setOptions([ 
                 'object_manager'     => $this->getObjectManager(),
                 'target_class'       => 'Academia\Entity\DietaGeral',

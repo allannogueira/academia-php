@@ -1,0 +1,102 @@
+<?php
+
+namespace Academia\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Profissional
+ *
+ * @ORM\Table(name="profissional", indexes={@ORM\Index(name="fk_profissional_endereco_idx", columns={"id_endereco"}), @ORM\Index(name="fk_profissional_academia_idx", columns={"id_academia"})})
+ * @ORM\Entity
+ */
+class Profissional extends \Base\Entity\AbstractEntity
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nome", type="string", length=100, nullable=true)
+     */
+    private $nome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sobrenome", type="string", length=100, nullable=true)
+     */
+    private $sobrenome;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_nasc", type="date", nullable=true)
+     */
+    private $dataNasc;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefone", type="string", length=15, nullable=true)
+     */
+    private $telefone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="celular", type="string", length=15, nullable=true)
+     */
+    private $celular;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rg", type="string", length=15, nullable=true)
+     */
+    private $rg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cpf", type="string", length=15, nullable=true)
+     */
+    private $cpf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var \Academia\Entity\Endereco
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Endereco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_endereco", referencedColumnName="id_endereco")
+     * })
+     */
+    private $idEndereco;
+
+    /**
+     * @var \Academia\Entity\Academia
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
+     * })
+     */
+    private $idAcademia;
+
+
+}
+

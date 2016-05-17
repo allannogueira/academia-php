@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class DietaGeral extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_dieta_geral", type="integer", nullable=false)
      * @ORM\Id
@@ -31,7 +31,7 @@ class DietaGeral extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Academia
      *
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
      * })
@@ -41,47 +41,19 @@ class DietaGeral extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Finalidade
      *
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Finalidade")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Finalidade")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_finalidade", referencedColumnName="id_finalidade")
      * })
      */
     private $idFinalidade;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Academia\Entity\Alimento", inversedBy="idDietaGeral")
-     * @ORM\JoinTable(name="dieta_alimento",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="id_dieta_geral", referencedColumnName="id_dieta_geral")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="id_alimento", referencedColumnName="id_alimento")
-     *   }
-     * )
-     */
-    private $idAlimento;
 
-
-
-    /**
-     * Set idDietaGeral
-     *
-     * @param integer $idDietaGeral
-     * @return DietaGeral
-     */
-    public function setIdDietaGeral($idDietaGeral)
-    {
-        $this->idDietaGeral = $idDietaGeral;
-    
-        return $this;
-    }
 
     /**
      * Get idDietaGeral
      *
-     * @return integer 
+     * @return int
      */
     public function getIdDietaGeral()
     {
@@ -92,6 +64,7 @@ class DietaGeral extends \Base\Entity\AbstractEntity
      * Set nomeDieta
      *
      * @param string $nomeDieta
+     *
      * @return DietaGeral
      */
     public function setNomeDieta($nomeDieta)
@@ -104,7 +77,7 @@ class DietaGeral extends \Base\Entity\AbstractEntity
     /**
      * Get nomeDieta
      *
-     * @return string 
+     * @return string
      */
     public function getNomeDieta()
     {
@@ -115,9 +88,10 @@ class DietaGeral extends \Base\Entity\AbstractEntity
      * Set idAcademia
      *
      * @param \Academia\Entity\Academia $idAcademia
+     *
      * @return DietaGeral
      */
-    public function setIdAcademia(\Academia\Entity\Academia $idAcademia)
+    public function setIdAcademia(\Academia\Entity\Academia $idAcademia = null)
     {
         $this->idAcademia = $idAcademia;
     
@@ -127,7 +101,7 @@ class DietaGeral extends \Base\Entity\AbstractEntity
     /**
      * Get idAcademia
      *
-     * @return \Academia\Entity\Academia 
+     * @return \Academia\Entity\Academia
      */
     public function getIdAcademia()
     {
@@ -138,9 +112,10 @@ class DietaGeral extends \Base\Entity\AbstractEntity
      * Set idFinalidade
      *
      * @param \Academia\Entity\Finalidade $idFinalidade
+     *
      * @return DietaGeral
      */
-    public function setIdFinalidade(\Academia\Entity\Finalidade $idFinalidade)
+    public function setIdFinalidade(\Academia\Entity\Finalidade $idFinalidade = null)
     {
         $this->idFinalidade = $idFinalidade;
     
@@ -150,43 +125,10 @@ class DietaGeral extends \Base\Entity\AbstractEntity
     /**
      * Get idFinalidade
      *
-     * @return \Academia\Entity\Finalidade 
+     * @return \Academia\Entity\Finalidade
      */
     public function getIdFinalidade()
     {
         return $this->idFinalidade;
-    }
-
-    /**
-     * Add idAlimento
-     *
-     * @param \Academia\Entity\Alimento $idAlimento
-     * @return DietaGeral
-     */
-    public function addIdAlimento(\Academia\Entity\Alimento $idAlimento)
-    {
-        $this->idAlimento[] = $idAlimento;
-    
-        return $this;
-    }
-
-    /**
-     * Remove idAlimento
-     *
-     * @param \Academia\Entity\Alimento $idAlimento
-     */
-    public function removeIdAlimento(\Academia\Entity\Alimento $idAlimento)
-    {
-        $this->idAlimento->removeElement($idAlimento);
-    }
-
-    /**
-     * Get idAlimento
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdAlimento()
-    {
-        return $this->idAlimento;
     }
 }

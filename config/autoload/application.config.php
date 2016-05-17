@@ -19,7 +19,7 @@ return array(
         'TwbBundle',
         'Academia',
        // 'ZFTool',
-       // 'JS',
+        'JS',
        // 'WS',
        // 'RestWS',
     ),

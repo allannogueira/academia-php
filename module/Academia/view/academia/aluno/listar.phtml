@@ -45,16 +45,16 @@ $flash = $this->flashMessenger();
           <th>RG</th>
           <th>CPF</th>
           <th>Email</th>
-          <th>Objetivo</th>
+          <th>Ação</th>
       </tr>
       </thead>
       <tbody>
 <?php foreach ($this->data as $aluno): ?>
       <tr> 
         <td><?php echo $aluno->getNomeAluno(); ?></td>
-        <td><?php echo $aluno->getRg(); ?></td>
-        <td><?php echo $aluno->getCpf(); ?></td>
-        <td><?php echo "<a href='mailto:".$aluno->getEmail()."'>".$aluno->getEmail()."</a>"; ?></td>
+        <td><?php echo $aluno->getRgAluno(); ?></td>
+        <td><?php echo $aluno->getCpfAluno(); ?></td>
+        <td><?php echo "<a href='mailto:".$aluno->getIdLogin()->getEmail()."'>".$aluno->getIdLogin()->getEmail()."</a>"; ?></td>
        
         <td>
             <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('aluno', ['action' => 'editar', 'id' => $aluno->getIdAluno()]); ?>'"class="btn btn-default" aria-label="Left Align">

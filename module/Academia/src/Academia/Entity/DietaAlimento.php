@@ -24,7 +24,7 @@ class DietaAlimento extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Alimento
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\Alimento",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Alimento")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_alimento", referencedColumnName="id_alimento")
      * })
@@ -34,37 +34,70 @@ class DietaAlimento extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\DietaGeral
      *
-     * @ORM\ManyToOne(targetEntity="Academia\Entity\DietaGeral",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\DietaGeral")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_dieta_geral", referencedColumnName="id_dieta_geral")
      * })
      */
     private $idDietaGeral;
 
-    function getIdDietaAlimento() {
+
+
+    /**
+     * Get idDietaAlimento
+     *
+     * @return int
+     */
+    public function getIdDietaAlimento()
+    {
         return $this->idDietaAlimento;
     }
 
-    function getIdAlimento() {
+    /**
+     * Set idAlimento
+     *
+     * @param \Academia\Entity\Alimento $idAlimento
+     *
+     * @return DietaAlimento
+     */
+    public function setIdAlimento(\Academia\Entity\Alimento $idAlimento = null)
+    {
+        $this->idAlimento = $idAlimento;
+    
+        return $this;
+    }
+
+    /**
+     * Get idAlimento
+     *
+     * @return \Academia\Entity\Alimento
+     */
+    public function getIdAlimento()
+    {
         return $this->idAlimento;
     }
 
-    function getIdDietaGeral() {
+    /**
+     * Set idDietaGeral
+     *
+     * @param \Academia\Entity\DietaGeral $idDietaGeral
+     *
+     * @return DietaAlimento
+     */
+    public function setIdDietaGeral(\Academia\Entity\DietaGeral $idDietaGeral = null)
+    {
+        $this->idDietaGeral = $idDietaGeral;
+    
+        return $this;
+    }
+
+    /**
+     * Get idDietaGeral
+     *
+     * @return \Academia\Entity\DietaGeral
+     */
+    public function getIdDietaGeral()
+    {
         return $this->idDietaGeral;
     }
-
-    function setIdDietaAlimento($idDietaAlimento) {
-        $this->idDietaAlimento = $idDietaAlimento;
-    }
-
-    function setIdAlimento(\Academia\Entity\Alimento $idAlimento) {
-        $this->idAlimento = $idAlimento;
-    }
-
-    function setIdDietaGeral(\Academia\Entity\DietaGeral $idDietaGeral) {
-        $this->idDietaGeral = $idDietaGeral;
-    }
-
-
 }
-

@@ -48,7 +48,12 @@ class CepbrEstadoFieldset extends Fieldset  implements ObjectManagerAwareInterfa
                         'criteria'   => array(),
                         'orderBy'   => array("estado" => "ASC"),
                     ]
-                )            
+                )  
+              
+        ])->setAttributes([
+                   
+                 'required' => 'required',
+                 'onBlur' => 'carregaCidade()',
         ]);
         // echo var_dump($academia);
         $this->add($estado);

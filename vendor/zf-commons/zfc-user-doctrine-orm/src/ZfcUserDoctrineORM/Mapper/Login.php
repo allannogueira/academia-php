@@ -27,8 +27,8 @@ class Login extends ZfcUserMapper
 
     public function findByEmail($email)
     {
+        
         $er = $this->em->getRepository($this->options->getUserEntityClass());
-
         return $er->findOneBy(array('email' => $email));
     }
 

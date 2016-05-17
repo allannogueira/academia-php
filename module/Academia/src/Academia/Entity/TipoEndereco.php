@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class TipoEndereco extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -33,7 +33,7 @@ class TipoEndereco extends \Base\Entity\AbstractEntity
     /**
      * Get id
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -44,6 +44,7 @@ class TipoEndereco extends \Base\Entity\AbstractEntity
      * Set descricao
      *
      * @param string $descricao
+     *
      * @return TipoEndereco
      */
     public function setDescricao($descricao)
@@ -56,7 +57,7 @@ class TipoEndereco extends \Base\Entity\AbstractEntity
     /**
      * Get descricao
      *
-     * @return string 
+     * @return string
      */
     public function getDescricao()
     {

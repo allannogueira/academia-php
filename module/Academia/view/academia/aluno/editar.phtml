@@ -7,6 +7,14 @@
  echo "<h1 style='text-align:center'>$title</h1>";
 $form = $this->form;
 
+//se tiver logado com usuario, seta para disable
+if($this->zfcUserIdentity()->getIdAluno() != null){
+    $form->getElements()['cpfAluno']->setAttribute("disabled","true");
+    $form->getElements()['rgAluno']->setAttribute("disabled","true");
+    $form->getElements()['nomeAluno']->setAttribute("disabled","true");
+    $form->getElements()['sobrenomeAluno']->setAttribute("disabled","true");
+}
+
 //informa se existir erros no formulario
 $flash = $this->flashMessenger();
  $flash->setMessageOpenFormat('<div%s>
@@ -30,25 +38,5 @@ echo $this->form()->openTag($form);//abre a tag form com o action
 echo $this->formCollection($form);//monta o corpo do formulario
 echo $this->form()->closeTag();//fecha formulario
 
-/*
-$form->setAttribute('action',$this->url('cadastrarAluno',['action'=>'inserir']))
-      ->prepare();
-
- echo $this->form()->openTag($form);
-
- $product = $form->get('aluno');
-
- echo $this->formRow($product->get('nome'));
- echo $this->formRow($product->get('cpf'));
- echo $this->formCollection($product->get('endereco'));
-
- $brand = $product->get('endereco');
-
- echo $this->formRow($brand->get('rua'));
-
- echo $this->formHidden($form->get('csrf'));
- echo $this->formElement($form->get('submit'));
-
- echo $this->form()->closeTag();
-*/
+include("webcan-foto-perfil.php");
  ?>

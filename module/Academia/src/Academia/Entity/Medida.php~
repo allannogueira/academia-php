@@ -13,93 +13,93 @@ use Doctrine\ORM\Mapping as ORM;
 class Medida extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_medida", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idMedida;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="altura", type="integer", nullable=true)
      */
     private $altura;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="peso", type="integer", nullable=true)
      */
     private $peso;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="braco_d", type="integer", nullable=true)
      */
     private $bracoD;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="braco_e", type="integer", nullable=true)
      */
     private $bracoE;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="anti_braco_d", type="integer", nullable=true)
      */
     private $antiBracoD;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="anti_braco_e", type="integer", nullable=true)
      */
     private $antiBracoE;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="coxa_d", type="integer", nullable=true)
      */
     private $coxaD;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="coxa_e", type="integer", nullable=true)
      */
     private $coxaE;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="panturrilha_d", type="integer", nullable=true)
      */
     private $panturrilhaD;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="panturrilha_e", type="integer", nullable=true)
      */
     private $panturrilhaE;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="peitoral_maior", type="integer", nullable=true)
      */
     private $peitoralMaior;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="peitoral_menor", type="integer", nullable=true)
      */
@@ -127,18 +127,44 @@ class Medida extends \Base\Entity\AbstractEntity
     private $dataIniVig;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="data_fim_vig", type="date", nullable=true)
+     * @ORM\Column(name="pressao", type="string", length=45, nullable=true)
      */
-    private $dataFimVig;
+    private $pressao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="bat_cardiaco", type="string", length=45, nullable=true)
+     */
+    private $batCardiaco;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="abdomen", type="string", length=45, nullable=true)
+     */
+    private $abdomen;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="costas", type="string", length=45, nullable=true)
+     */
+    private $costas;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="quadril", type="string", length=45, nullable=true)
+     */
+    private $quadril;
 
     /**
      * @var \Academia\Entity\Aluno
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
      * })
@@ -147,3 +173,4 @@ class Medida extends \Base\Entity\AbstractEntity
 
 
 }
+

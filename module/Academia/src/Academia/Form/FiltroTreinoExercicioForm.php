@@ -25,7 +25,7 @@ class FiltroTreinoExercicioForm extends Form implements ObjectManagerAwareInterf
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new TreinoExercicio())
         ;    
-        
+        $this->setAttribute('class', 'form-inline');
         $this->add([
            'type' => 'Academia\Form\TreinoGeralFieldset'
            
@@ -46,6 +46,9 @@ class FiltroTreinoExercicioForm extends Form implements ObjectManagerAwareInterf
            'type' => 'submit',
            'options' => [
                'label' => 'Buscar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

@@ -1,0 +1,35 @@
+<?php //echo var_dump($retorno);?>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Bugs</div>
+
+  <!-- Table -->
+  <table class="table">
+      <thead>
+      <tr>
+          <th>Aluno</th>
+          <th>Serviço</th>
+          <th>Descrição</th>
+      </tr>
+      </thead>
+      <tbody>
+<?php 
+//echo var_dump($this->data);
+foreach ($this->data as $data): ?>
+      <tr> 
+        <td><?php echo $data->getIdAluno(); ?></td>     
+        <td><?php echo $data->getServicoErro(); ?></td> 
+        <td><?php echo $data->getDescErro(); ?></td> 
+      </tr>
+<?php endforeach; ?>
+      </tbody>
+   </table>
+</div>
+
+<div class="paging">
+    <?php 
+        $paging = $this->paginationHelper($this->data, $this->page, "/atividade/listar/", $this->data->getDefaultItemCountPerPage()); 
+        echo $paging; 
+    ?>
+</div>

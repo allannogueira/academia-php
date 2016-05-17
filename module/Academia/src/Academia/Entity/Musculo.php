@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Musculo extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_musculo", type="integer", nullable=false)
      * @ORM\Id
@@ -33,7 +33,7 @@ class Musculo extends \Base\Entity\AbstractEntity
     /**
      * Get idMusculo
      *
-     * @return integer 
+     * @return int
      */
     public function getIdMusculo()
     {
@@ -44,6 +44,7 @@ class Musculo extends \Base\Entity\AbstractEntity
      * Set nomeMusculo
      *
      * @param string $nomeMusculo
+     *
      * @return Musculo
      */
     public function setNomeMusculo($nomeMusculo)
@@ -56,7 +57,7 @@ class Musculo extends \Base\Entity\AbstractEntity
     /**
      * Get nomeMusculo
      *
-     * @return string 
+     * @return string
      */
     public function getNomeMusculo()
     {

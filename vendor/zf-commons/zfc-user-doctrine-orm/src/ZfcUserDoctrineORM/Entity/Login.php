@@ -50,6 +50,7 @@ class Login //extends ZfcUserEntity
     }
 
     function setPassword($password) {
+        
         $this->senha = $password;
     }
 

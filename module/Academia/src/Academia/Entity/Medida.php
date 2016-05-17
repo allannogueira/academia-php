@@ -13,93 +13,93 @@ use Doctrine\ORM\Mapping as ORM;
 class Medida extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_medida", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idMedida;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="altura", type="integer", nullable=true)
      */
     private $altura;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="peso", type="integer", nullable=true)
      */
     private $peso;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="braco_d", type="integer", nullable=true)
      */
     private $bracoD;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="braco_e", type="integer", nullable=true)
      */
     private $bracoE;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="anti_braco_d", type="integer", nullable=true)
      */
     private $antiBracoD;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="anti_braco_e", type="integer", nullable=true)
      */
     private $antiBracoE;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="coxa_d", type="integer", nullable=true)
      */
     private $coxaD;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="coxa_e", type="integer", nullable=true)
      */
     private $coxaE;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="panturrilha_d", type="integer", nullable=true)
      */
     private $panturrilhaD;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="panturrilha_e", type="integer", nullable=true)
      */
     private $panturrilhaE;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="peitoral_maior", type="integer", nullable=true)
      */
     private $peitoralMaior;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="peitoral_menor", type="integer", nullable=true)
      */
@@ -126,70 +126,57 @@ class Medida extends \Base\Entity\AbstractEntity
      */
     private $dataIniVig;
 
-
     /**
-     * @var \Academia\Entity\Aluno
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno", cascade={"all"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
-     * })
-     */
-    private $idAluno;
-
-        /**
      * @var string
      *
      * @ORM\Column(name="pressao", type="string", length=45, nullable=true)
      */
     private $pressao;
 
-     /**
+    /**
      * @var string
      *
      * @ORM\Column(name="bat_cardiaco", type="string", length=45, nullable=true)
      */
-    private $bat_cardiaco;
-    
-     /**
+    private $batCardiaco;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="abdomen", type="string", length=45, nullable=true)
      */
     private $abdomen;
-    
-     /**
+
+    /**
      * @var string
      *
      * @ORM\Column(name="costas", type="string", length=45, nullable=true)
      */
     private $costas;
-    
-     /**
+
+    /**
      * @var string
      *
      * @ORM\Column(name="quadril", type="string", length=45, nullable=true)
      */
     private $quadril;
-    
+
     /**
-     * Set idMedida
+     * @var \Academia\Entity\Aluno
      *
-     * @param integer $idMedida
-     * @return Medida
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
+     * })
      */
-    public function setIdMedida($idMedida)
-    {
-        $this->idMedida = $idMedida;
-    
-        return $this;
-    }
+    private $idAluno;
+
+
 
     /**
      * Get idMedida
      *
-     * @return integer 
+     * @return int
      */
     public function getIdMedida()
     {
@@ -199,7 +186,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set altura
      *
-     * @param integer $altura
+     * @param int $altura
+     *
      * @return Medida
      */
     public function setAltura($altura)
@@ -212,7 +200,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get altura
      *
-     * @return integer 
+     * @return int
      */
     public function getAltura()
     {
@@ -222,7 +210,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set peso
      *
-     * @param integer $peso
+     * @param int $peso
+     *
      * @return Medida
      */
     public function setPeso($peso)
@@ -235,7 +224,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get peso
      *
-     * @return integer 
+     * @return int
      */
     public function getPeso()
     {
@@ -245,7 +234,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set bracoD
      *
-     * @param integer $bracoD
+     * @param int $bracoD
+     *
      * @return Medida
      */
     public function setBracoD($bracoD)
@@ -258,7 +248,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get bracoD
      *
-     * @return integer 
+     * @return int
      */
     public function getBracoD()
     {
@@ -268,7 +258,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set bracoE
      *
-     * @param integer $bracoE
+     * @param int $bracoE
+     *
      * @return Medida
      */
     public function setBracoE($bracoE)
@@ -281,7 +272,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get bracoE
      *
-     * @return integer 
+     * @return int
      */
     public function getBracoE()
     {
@@ -291,7 +282,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set antiBracoD
      *
-     * @param integer $antiBracoD
+     * @param int $antiBracoD
+     *
      * @return Medida
      */
     public function setAntiBracoD($antiBracoD)
@@ -304,7 +296,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get antiBracoD
      *
-     * @return integer 
+     * @return int
      */
     public function getAntiBracoD()
     {
@@ -314,7 +306,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set antiBracoE
      *
-     * @param integer $antiBracoE
+     * @param int $antiBracoE
+     *
      * @return Medida
      */
     public function setAntiBracoE($antiBracoE)
@@ -327,7 +320,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get antiBracoE
      *
-     * @return integer 
+     * @return int
      */
     public function getAntiBracoE()
     {
@@ -337,7 +330,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set coxaD
      *
-     * @param integer $coxaD
+     * @param int $coxaD
+     *
      * @return Medida
      */
     public function setCoxaD($coxaD)
@@ -350,7 +344,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get coxaD
      *
-     * @return integer 
+     * @return int
      */
     public function getCoxaD()
     {
@@ -360,7 +354,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set coxaE
      *
-     * @param integer $coxaE
+     * @param int $coxaE
+     *
      * @return Medida
      */
     public function setCoxaE($coxaE)
@@ -373,7 +368,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get coxaE
      *
-     * @return integer 
+     * @return int
      */
     public function getCoxaE()
     {
@@ -383,7 +378,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set panturrilhaD
      *
-     * @param integer $panturrilhaD
+     * @param int $panturrilhaD
+     *
      * @return Medida
      */
     public function setPanturrilhaD($panturrilhaD)
@@ -396,7 +392,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get panturrilhaD
      *
-     * @return integer 
+     * @return int
      */
     public function getPanturrilhaD()
     {
@@ -406,7 +402,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set panturrilhaE
      *
-     * @param integer $panturrilhaE
+     * @param int $panturrilhaE
+     *
      * @return Medida
      */
     public function setPanturrilhaE($panturrilhaE)
@@ -419,7 +416,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get panturrilhaE
      *
-     * @return integer 
+     * @return int
      */
     public function getPanturrilhaE()
     {
@@ -429,7 +426,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set peitoralMaior
      *
-     * @param integer $peitoralMaior
+     * @param int $peitoralMaior
+     *
      * @return Medida
      */
     public function setPeitoralMaior($peitoralMaior)
@@ -442,7 +440,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get peitoralMaior
      *
-     * @return integer 
+     * @return int
      */
     public function getPeitoralMaior()
     {
@@ -452,7 +450,8 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Set peitoralMenor
      *
-     * @param integer $peitoralMenor
+     * @param int $peitoralMenor
+     *
      * @return Medida
      */
     public function setPeitoralMenor($peitoralMenor)
@@ -465,7 +464,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get peitoralMenor
      *
-     * @return integer 
+     * @return int
      */
     public function getPeitoralMenor()
     {
@@ -476,6 +475,7 @@ class Medida extends \Base\Entity\AbstractEntity
      * Set imc
      *
      * @param string $imc
+     *
      * @return Medida
      */
     public function setImc($imc)
@@ -488,7 +488,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get imc
      *
-     * @return string 
+     * @return string
      */
     public function getImc()
     {
@@ -499,6 +499,7 @@ class Medida extends \Base\Entity\AbstractEntity
      * Set massGordura
      *
      * @param string $massGordura
+     *
      * @return Medida
      */
     public function setMassGordura($massGordura)
@@ -511,7 +512,7 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get massGordura
      *
-     * @return string 
+     * @return string
      */
     public function getMassGordura()
     {
@@ -522,6 +523,7 @@ class Medida extends \Base\Entity\AbstractEntity
      * Set dataIniVig
      *
      * @param \DateTime $dataIniVig
+     *
      * @return Medida
      */
     public function setDataIniVig($dataIniVig)
@@ -534,21 +536,141 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get dataIniVig
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataIniVig()
     {
         return $this->dataIniVig;
     }
 
-   
+    /**
+     * Set pressao
+     *
+     * @param string $pressao
+     *
+     * @return Medida
+     */
+    public function setPressao($pressao)
+    {
+        $this->pressao = $pressao;
+    
+        return $this;
+    }
+
+    /**
+     * Get pressao
+     *
+     * @return string
+     */
+    public function getPressao()
+    {
+        return $this->pressao;
+    }
+
+    /**
+     * Set batCardiaco
+     *
+     * @param string $batCardiaco
+     *
+     * @return Medida
+     */
+    public function setBatCardiaco($batCardiaco)
+    {
+        $this->batCardiaco = $batCardiaco;
+    
+        return $this;
+    }
+
+    /**
+     * Get batCardiaco
+     *
+     * @return string
+     */
+    public function getBatCardiaco()
+    {
+        return $this->batCardiaco;
+    }
+
+    /**
+     * Set abdomen
+     *
+     * @param string $abdomen
+     *
+     * @return Medida
+     */
+    public function setAbdomen($abdomen)
+    {
+        $this->abdomen = $abdomen;
+    
+        return $this;
+    }
+
+    /**
+     * Get abdomen
+     *
+     * @return string
+     */
+    public function getAbdomen()
+    {
+        return $this->abdomen;
+    }
+
+    /**
+     * Set costas
+     *
+     * @param string $costas
+     *
+     * @return Medida
+     */
+    public function setCostas($costas)
+    {
+        $this->costas = $costas;
+    
+        return $this;
+    }
+
+    /**
+     * Get costas
+     *
+     * @return string
+     */
+    public function getCostas()
+    {
+        return $this->costas;
+    }
+
+    /**
+     * Set quadril
+     *
+     * @param string $quadril
+     *
+     * @return Medida
+     */
+    public function setQuadril($quadril)
+    {
+        $this->quadril = $quadril;
+    
+        return $this;
+    }
+
+    /**
+     * Get quadril
+     *
+     * @return string
+     */
+    public function getQuadril()
+    {
+        return $this->quadril;
+    }
+
     /**
      * Set idAluno
      *
      * @param \Academia\Entity\Aluno $idAluno
+     *
      * @return Medida
      */
-    public function setIdAluno(\Academia\Entity\Aluno $idAluno)
+    public function setIdAluno(\Academia\Entity\Aluno $idAluno = null)
     {
         $this->idAluno = $idAluno;
     
@@ -558,53 +680,10 @@ class Medida extends \Base\Entity\AbstractEntity
     /**
      * Get idAluno
      *
-     * @return \Academia\Entity\Aluno 
+     * @return \Academia\Entity\Aluno
      */
     public function getIdAluno()
     {
         return $this->idAluno;
     }
-    
-    function getPressao() {
-        return $this->pressao;
-    }
-
-    function getBat_cardiaco() {
-        return $this->bat_cardiaco;
-    }
-
-    function getAbdomen() {
-        return $this->abdomen;
-    }
-
-    function getCostas() {
-        return $this->costas;
-    }
-
-    function getQuadril() {
-        return $this->quadril;
-    }
-
-    function setPressao($pressao) {
-        $this->pressao = $pressao;
-    }
-
-    function setBat_cardiaco($bat_cardiaco) {
-        $this->bat_cardiaco = $bat_cardiaco;
-    }
-
-    function setAbdomen($abdomen) {
-        $this->abdomen = $abdomen;
-    }
-
-    function setCostas($costas) {
-        $this->costas = $costas;
-    }
-
-    function setQuadril($quadril) {
-        $this->quadril = $quadril;
-    }
-
-
-    
 }

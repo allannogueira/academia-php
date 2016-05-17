@@ -34,6 +34,7 @@ class MusculoFieldset extends Fieldset  implements ObjectManagerAwareInterface{
              ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
              ->setObject(new Musculo())
          ;
+        $this->setLabel('Musculo');
         $academia = new ObjectSelect("idMusculo");
         $academia->setLabel("Musculo")
                  ->setOptions([ 

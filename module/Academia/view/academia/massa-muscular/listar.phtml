@@ -1,0 +1,75 @@
+<?php //echo var_dump($retorno);?>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Academias</div>
+
+  <!-- Table -->
+  <table class="table">
+      <thead>
+      <tr>
+          <th>Nome</th>
+          <th>Índice de Massa Muscular (IMC)</th>
+          <th>Resultado</th>
+          <th></th>
+      </tr>
+      </thead>
+      <tbody>
+<?php 
+//echo var_dump($this->data);
+foreach ($this->data as $data): ?>
+      <?php
+        $altura2 = str_replace(".","",$data->getAltura()) * str_replace(".","",$data->getAltura());
+        $imc = $data->getPeso() / $altura2 * 10000;
+        $descricao = "";
+        if($imc < 17){
+            $descricao = "Muito abaixo do peso";
+        }else if($imc >= 17 && $imc < 18.5){
+            $descricao = "Abaixo do peso";
+        }else if($imc >= 18.5 && $imc < 25){
+            $descricao = "Peso normal";
+        }else if($imc >= 25 && $imc < 30){
+            $descricao = "Acima do peso";
+        }else if($imc >= 30 && $imc < 35){
+            $descricao = "Obesidade I";
+        }else if($imc >= 35 && $imc < 40){
+            $descricao = "Obesidade II (severa)";
+        }else if($imc >= 40){
+            $descricao = "Obesidade III (mórbida)";
+        }
+      ?>
+      <tr> 
+        <td><?php echo $data->getIdAluno()->getNomeAluno();?></td>     
+        <td><?php echo $imc;?></td>  
+        <td><?php echo $descricao; ?></td> 
+         <td>
+            <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('medida', ['action' => 'editar', 'id' => $data->getIdMedida()]); ?>'"class="btn btn-default" aria-label="Left Align">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </button>
+        </td>     
+      </tr>
+<?php endforeach; ?>
+      </tbody>
+   </table>
+  
+</div>
+
+<br/>
+    <br/>
+    <div class="list-group">
+        <a class="list-group-item active">Tabela de IMC</a>
+        <a class="list-group-item"><strong>Abaixo de 17</strong> - Muito abaixo do peso</a>
+        <a class="list-group-item"><strong>Entre 17 e 18,49</strong> - Abaixo do peso</a>
+        <a class="list-group-item"><strong>Entre 18,5 e 24,99</strong> - Peso normal</a>
+        <a class="list-group-item"><strong>Entre 25 e 29,99</strong> - Acima do peso</a>
+        <a class="list-group-item"><strong>Entre 30 e 34,99</strong> - Obesidade I</a>
+        <a class="list-group-item"><strong>Entre 35 e 39,99</strong> - Obesidade II (severa)</a>
+        <a class="list-group-item"><strong>Acima de 40</strong> - Obesidade III (mórbida)</a>
+    </div>
+  </table>
+  <a href="http://portalsaude.saude.gov.br/index.php/o-ministerio/principal/portal-dcnt/noticias-portal-dcnt/6118-mais-da-metade-da-populacao-brasileira-tem-excesso-de-peso">fonte</a>
+<div class="paging">
+    <?php 
+        $paging = $this->paginationHelper($this->data, $this->page, "/academia/listar/", $this->data->getDefaultItemCountPerPage()); 
+        echo $paging; 
+    ?>
+</div>

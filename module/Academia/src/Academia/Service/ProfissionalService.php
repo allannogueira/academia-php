@@ -23,13 +23,11 @@ class ProfissionalService extends AbstractService{
     }
     
     public function save(Array $data = array()){
-        $data['senha'] = md5($data['senha']);
-        $entityEndereco = new Endereco($data['endereco']);
-        $data['endereco'] = $entityEndereco;
-        
-        return parent::save($data);
-   //     $data['endereco'] = $this->em->getRepository('Academia\Entity\Endereco')
-     //                           ->find($data['']);
-        
+         $objetoProf = parent::preSave($data);
+        $idProf = $objetoProf->getId();
+        $objetoProf->getIdLogin()->setIdProfissional($idProf);
+        parent::getEm()->persist($objetoProf);
+       parent::getEm()->flush();
+       return $objetoProf;
     }
 }

@@ -7,28 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DietaAluno
  *
- * @ORM\Table(name="dieta_aluno", indexes={@ORM\Index(name="id_dieta_geral_idx", columns={"id_dieta_geral"}), @ORM\Index(name="id_aluno", columns={"id_aluno"})})
+ * @ORM\Table(name="dieta_aluno", indexes={@ORM\Index(name="fk_aluno_idx", columns={"id_aluno"}), @ORM\Index(name="fk_dieta_geral_idx", columns={"id_dieta_geral"}), @ORM\Index(name="fk_dieta_aluno_idx", columns={"id_aluno"}), @ORM\Index(name="fk_aluno_idx1", columns={"id_aluno"})})
  * @ORM\Entity
  */
 class DietaAluno extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_dieta_aluno", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idDietaAluno;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_dieta_geral", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $idDietaGeral;
 
     /**
      * @var \DateTime
@@ -47,14 +38,23 @@ class DietaAluno extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Aluno
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
      * })
      */
     private $idAluno;
 
+    /**
+     * @var \Academia\Entity\DietaGeral
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\DietaGeral")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_dieta_geral", referencedColumnName="id_dieta_geral")
+     * })
+     */
+    private $idDietaGeral;
+
 
 }
+

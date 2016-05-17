@@ -4,9 +4,9 @@ $settings = array(
    // 'user_entity_class' => 'Academia\Entity\Login',
     'user_entity_class' => 'Academia\Entity\Login',
     'enable_default_entities' => false,
-    'enable_registration' => true,
+    'enable_registration' => false,
     'enable_username' => false,
-    'auth_adapters' => array( 100 => 'ZfcUser\Authentication\Adapter\Db' ),
+    //'auth_adapters' => array( 100 => 'ZfcUser\Authentication\Adapter\Db' ),
     'enable_display_name' => true,
     'auth_identity_fields' => array( 'email' ),
     'login_form_timeout' => 300,
@@ -21,9 +21,9 @@ $settings = array(
 );
 return array(
     'zfcuser' => $settings,
-    'service_manager' => array(
+   /* 'service_manager' => array(
         'aliases' => array(
             'zfcuser_zend_db_adapter' => (isset($settings['zend_db_adapter'])) ? $settings['zend_db_adapter']: 'Zend\Db\Adapter\Adapter',
         ),
-    ),
+    ),*/
 );

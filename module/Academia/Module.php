@@ -25,6 +25,8 @@ use Academia\Service\TreinoExercicioService;
 use Zend\ModuleManager\Feature\FormElementProviderInterface;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 
+use Zend\Validator\AbstractValidator;
+use Zend\I18n\Translator\Translator;
 
 class Module implements FormElementProviderInterface
 {
@@ -59,7 +61,24 @@ class Module implements FormElementProviderInterface
             //se nao estiver logado
         },99);
        */
-        
+        //Esse é o código para a tradução
+
+        //Pega o serviço translator definido no arquivo module.config.php (aliases)
+       // $translator = $e->getApplication()->getServiceManager()->get('translator');
+        $translator = new Translator();
+        //Define o local onde se encontra o arquivo de tradução de mensagens
+        $translator->addTranslationFile(
+        'phpArray',
+        '/vendor/zendframework/zendframework/resources/languages/pt_BR/Zend_Validate.php',
+        'default',
+        'pt_BR'
+       );
+        //Define o local (você também pode definir diretamente no método acima
+        $translator->setLocale('pt_BR');
+        //Define a tradução padrão do Validator
+       AbstractValidator::setDefaultTranslator(
+            new \Zend\Mvc\I18n\Translator($translator)
+        );
     }
 
     public function getConfig()
@@ -100,6 +119,7 @@ class Module implements FormElementProviderInterface
                 'TreinoExercicioForm' => 'Academia\Form\TreinoExercicioForm',
                 'FiltroTreinoExercicioForm' => 'Academia\Form\FiltroTreinoExercicioForm',
                 'FiltroTreinoAlunoForm' => 'Academia\Form\FiltroTreinoAlunoForm',
+                'FiltroAlunoForm' => 'Academia\Form\FiltroAlunoForm',
             ),
             'initializers' => array(
                 'ObjectManagerInitializer' => function ($element, $formElements) {

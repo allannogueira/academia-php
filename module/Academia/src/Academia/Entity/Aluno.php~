@@ -13,11 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Aluno extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_aluno", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idAluno;
 
@@ -57,11 +57,47 @@ class Aluno extends \Base\Entity\AbstractEntity
     private $dataNasc;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id_login", type="integer", nullable=true)
+     */
+    private $idLogin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cpf_aluno", type="string", length=11, nullable=false)
+     */
+    private $cpfAluno;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rg_aluno", type="string", length=45, nullable=true)
+     */
+    private $rgAluno;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email_aluno", type="string", length=255, nullable=true)
+     */
+    private $emailAluno;
+
+    /**
+     * @var \Academia\Entity\Finalidade
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Finalidade")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_finalidade", referencedColumnName="id_finalidade")
+     * })
+     */
+    private $idFinalidade;
+
+    /**
      * @var \Academia\Entity\Academia
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
      * })
@@ -71,38 +107,13 @@ class Aluno extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Endereco
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Endereco")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Endereco")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_endereco", referencedColumnName="id_endereco")
      * })
      */
     private $idEndereco;
 
-    /**
-     * @var \Academia\Entity\Finalidade
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Finalidade")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_finalidade", referencedColumnName="id_finalidade")
-     * })
-     */
-    private $idFinalidade;
-
-    /**
-     * @var \Academia\Entity\Login
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Login")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_login", referencedColumnName="id_login")
-     * })
-     */
-    private $idLogin;
-
 
 }
+

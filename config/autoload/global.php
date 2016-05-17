@@ -55,6 +55,9 @@ return array(
             'error/403' => __DIR__ . '/../../module/Academia/view/error/403.phtml',
         ),
     ),
+        'translator' => array(
+            'locale' => 'pt_BR'
+        ),
     ),
 
 );

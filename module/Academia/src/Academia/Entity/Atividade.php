@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Atividade extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_atividade", type="integer", nullable=false)
      * @ORM\Id
@@ -38,16 +38,23 @@ class Atividade extends \Base\Entity\AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="mes", type="string", length=2, nullable=true)
+     * @ORM\Column(name="competencia", type="string",  nullable=true)
      */
-    private $mes;
+    private $competencia;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="calorias", type="string",  nullable=true)
+     */
+    private $calorias;
 
     /**
      * @var \Academia\Entity\Aluno
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
      * })
@@ -59,7 +66,8 @@ class Atividade extends \Base\Entity\AbstractEntity
     /**
      * Set idAtividade
      *
-     * @param integer $idAtividade
+     * @param int $idAtividade
+     *
      * @return Atividade
      */
     public function setIdAtividade($idAtividade)
@@ -72,7 +80,7 @@ class Atividade extends \Base\Entity\AbstractEntity
     /**
      * Get idAtividade
      *
-     * @return integer 
+     * @return int
      */
     public function getIdAtividade()
     {
@@ -83,6 +91,7 @@ class Atividade extends \Base\Entity\AbstractEntity
      * Set tempo
      *
      * @param string $tempo
+     *
      * @return Atividade
      */
     public function setTempo($tempo)
@@ -95,7 +104,7 @@ class Atividade extends \Base\Entity\AbstractEntity
     /**
      * Get tempo
      *
-     * @return string 
+     * @return string
      */
     public function getTempo()
     {
@@ -106,6 +115,7 @@ class Atividade extends \Base\Entity\AbstractEntity
      * Set distancia
      *
      * @param string $distancia
+     *
      * @return Atividade
      */
     public function setDistancia($distancia)
@@ -118,40 +128,19 @@ class Atividade extends \Base\Entity\AbstractEntity
     /**
      * Get distancia
      *
-     * @return string 
+     * @return string
      */
     public function getDistancia()
     {
         return $this->distancia;
     }
 
-    /**
-     * Set mes
-     *
-     * @param string $mes
-     * @return Atividade
-     */
-    public function setMes($mes)
-    {
-        $this->mes = $mes;
-    
-        return $this;
-    }
-
-    /**
-     * Get mes
-     *
-     * @return string 
-     */
-    public function getMes()
-    {
-        return $this->mes;
-    }
 
     /**
      * Set idAluno
      *
      * @param \Academia\Entity\Aluno $idAluno
+     *
      * @return Atividade
      */
     public function setIdAluno(\Academia\Entity\Aluno $idAluno)
@@ -164,10 +153,28 @@ class Atividade extends \Base\Entity\AbstractEntity
     /**
      * Get idAluno
      *
-     * @return \Academia\Entity\Aluno 
+     * @return \Academia\Entity\Aluno
      */
     public function getIdAluno()
     {
         return $this->idAluno;
     }
+    
+    function getCompetencia() {
+        return $this->competencia;
+    }
+
+    function getCalorias() {
+        return $this->calorias;
+    }
+
+    function setCompetencia($competencia) {
+        $this->competencia = $competencia;
+    }
+
+    function setCalorias($calorias) {
+        $this->calorias = $calorias;
+    }
+
+
 }

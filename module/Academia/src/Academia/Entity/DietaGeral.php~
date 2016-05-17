@@ -13,11 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class DietaGeral extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_dieta_geral", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idDietaGeral;
 
@@ -31,9 +31,7 @@ class DietaGeral extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Academia
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
      * })
@@ -43,29 +41,13 @@ class DietaGeral extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Finalidade
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Finalidade")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Finalidade")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_finalidade", referencedColumnName="id_finalidade")
      * })
      */
     private $idFinalidade;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Academia\Entity\Alimento", inversedBy="idDietaGeral")
-     * @ORM\JoinTable(name="dieta_alimento",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="id_dieta_geral", referencedColumnName="id_dieta_geral")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="id_alimento", referencedColumnName="id_alimento")
-     *   }
-     * )
-     */
-    private $idAlimento;
-
 
 }
+

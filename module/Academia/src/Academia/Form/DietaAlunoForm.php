@@ -25,13 +25,37 @@ class DietaAlunoForm extends Form implements ObjectManagerAwareInterface
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new DietaAluno())
         ;
-        
+        $this->setAttribute('class', 'form-inline');
         $this->add([
            'name' => 'idDietaAluno',
            'type' => 'hidden'
        ]);
        
-         $this->add(array(
+       
+         
+          $this->add([
+           'name' => 'dataIniVig',
+           'type' => 'date',
+           'options' => [
+               'label' => 'Data Inicio',
+           ],
+            'attributes' => [
+                'required' => 'true'
+            ]
+       ]);
+          
+    /*    $this->add([
+           'name' => 'dataFimVig',
+           'type' => 'date',
+           'options' => [
+               'label' => 'Data Fim',
+           ],
+            'attributes' => [
+                'required' => 'true'
+            ]
+       ]);*/
+
+          $this->add(array(
              'type' => 'Academia\Form\AlunoFieldset'
          ));
          
@@ -39,22 +63,6 @@ class DietaAlunoForm extends Form implements ObjectManagerAwareInterface
              'type' => 'Academia\Form\DietaGeralFieldset'
          ));
          
-          $this->add([
-           'name' => 'dataIniVig',
-           'type' => 'date',
-           'options' => [
-               'label' => 'Data Inicio',
-           ]
-       ]);
-          
-        $this->add([
-           'name' => 'dataFimVig',
-           'type' => 'date',
-           'options' => [
-               'label' => 'Data Fim',
-           ]
-       ]);
-
        $this->add(array(
              'type' => 'Zend\Form\Element\Csrf',
              'name' => 'csrf',
@@ -65,6 +73,9 @@ class DietaAlunoForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

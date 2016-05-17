@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class TipoLogin extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="cod_tipo_login", type="integer", nullable=false)
      * @ORM\Id
@@ -33,7 +33,7 @@ class TipoLogin extends \Base\Entity\AbstractEntity
     /**
      * Get codTipoLogin
      *
-     * @return integer 
+     * @return int
      */
     public function getCodTipoLogin()
     {
@@ -44,6 +44,7 @@ class TipoLogin extends \Base\Entity\AbstractEntity
      * Set descTipoLogin
      *
      * @param string $descTipoLogin
+     *
      * @return TipoLogin
      */
     public function setDescTipoLogin($descTipoLogin)
@@ -56,7 +57,7 @@ class TipoLogin extends \Base\Entity\AbstractEntity
     /**
      * Get descTipoLogin
      *
-     * @return string 
+     * @return string
      */
     public function getDescTipoLogin()
     {

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Aparelho extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_aparelho", type="integer", nullable=false)
      * @ORM\Id
@@ -38,9 +38,7 @@ class Aparelho extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Academia
      *
-     * 
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
      * })
@@ -50,22 +48,9 @@ class Aparelho extends \Base\Entity\AbstractEntity
 
 
     /**
-     * Set idAparelho
-     *
-     * @param integer $idAparelho
-     * @return Aparelho
-     */
-    public function setIdAparelho($idAparelho)
-    {
-        $this->idAparelho = $idAparelho;
-    
-        return $this;
-    }
-
-    /**
      * Get idAparelho
      *
-     * @return integer 
+     * @return int
      */
     public function getIdAparelho()
     {
@@ -76,6 +61,7 @@ class Aparelho extends \Base\Entity\AbstractEntity
      * Set nomeAparelho
      *
      * @param string $nomeAparelho
+     *
      * @return Aparelho
      */
     public function setNomeAparelho($nomeAparelho)
@@ -88,7 +74,7 @@ class Aparelho extends \Base\Entity\AbstractEntity
     /**
      * Get nomeAparelho
      *
-     * @return string 
+     * @return string
      */
     public function getNomeAparelho()
     {
@@ -99,6 +85,7 @@ class Aparelho extends \Base\Entity\AbstractEntity
      * Set modelo
      *
      * @param string $modelo
+     *
      * @return Aparelho
      */
     public function setModelo($modelo)
@@ -111,7 +98,7 @@ class Aparelho extends \Base\Entity\AbstractEntity
     /**
      * Get modelo
      *
-     * @return string 
+     * @return string
      */
     public function getModelo()
     {
@@ -122,9 +109,10 @@ class Aparelho extends \Base\Entity\AbstractEntity
      * Set idAcademia
      *
      * @param \Academia\Entity\Academia $idAcademia
+     *
      * @return Aparelho
      */
-    public function setIdAcademia(\Academia\Entity\Academia $idAcademia)
+    public function setIdAcademia(\Academia\Entity\Academia $idAcademia = null)
     {
         $this->idAcademia = $idAcademia;
     
@@ -134,7 +122,7 @@ class Aparelho extends \Base\Entity\AbstractEntity
     /**
      * Get idAcademia
      *
-     * @return \Academia\Entity\Academia 
+     * @return \Academia\Entity\Academia
      */
     public function getIdAcademia()
     {

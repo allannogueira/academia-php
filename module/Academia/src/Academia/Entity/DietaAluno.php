@@ -7,29 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DietaAluno
  *
- * @ORM\Table(name="dieta_aluno", indexes={@ORM\Index(name="fk_dieta_geral_idx", columns={"id_dieta_geral"}), @ORM\Index(name="fk_aluno_idx", columns={"id_aluno"})})
+ * @ORM\Table(name="dieta_aluno", indexes={@ORM\Index(name="fk_aluno_idx", columns={"id_aluno"}), @ORM\Index(name="fk_dieta_geral_idx", columns={"id_dieta_geral"}), @ORM\Index(name="fk_dieta_aluno_idx", columns={"id_aluno"}), @ORM\Index(name="fk_aluno_idx1", columns={"id_aluno"})})
  * @ORM\Entity
  */
 class DietaAluno extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_dieta_aluno", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idDietaAluno;
-
-    /**
-     * @var integer
-     *
-     * @ORM\OneToOne(targetEntity="Academia\Entity\DietaGeral")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_dieta_geral", referencedColumnName="id_dieta_geral")
-     * })
-     */
-    private $idDietaGeral;
 
     /**
      * @var \DateTime
@@ -48,32 +38,29 @@ class DietaAluno extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Aluno
      *
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Aluno")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
      * })
      */
     private $idAluno;
 
-
-
     /**
-     * Set idDietaAluno
+     * @var \Academia\Entity\DietaGeral
      *
-     * @param integer $idDietaAluno
-     * @return DietaAluno
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\DietaGeral")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_dieta_geral", referencedColumnName="id_dieta_geral")
+     * })
      */
-    public function setIdDietaAluno($idDietaAluno)
-    {
-        $this->idDietaAluno = $idDietaAluno;
-    
-        return $this;
-    }
+    private $idDietaGeral;
+
+
 
     /**
      * Get idDietaAluno
      *
-     * @return integer 
+     * @return int
      */
     public function getIdDietaAluno()
     {
@@ -81,32 +68,10 @@ class DietaAluno extends \Base\Entity\AbstractEntity
     }
 
     /**
-     * Set idDietaGeral
-     *
-     * @param integer $idDietaGeral
-     * @return DietaAluno
-     */
-    public function setIdDietaGeral($idDietaGeral)
-    {
-        $this->idDietaGeral = $idDietaGeral;
-    
-        return $this;
-    }
-
-    /**
-     * Get idDietaGeral
-     *
-     * @return integer 
-     */
-    public function getIdDietaGeral()
-    {
-        return $this->idDietaGeral;
-    }
-
-    /**
      * Set dataIniVig
      *
      * @param \DateTime $dataIniVig
+     *
      * @return DietaAluno
      */
     public function setDataIniVig($dataIniVig)
@@ -119,7 +84,7 @@ class DietaAluno extends \Base\Entity\AbstractEntity
     /**
      * Get dataIniVig
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataIniVig()
     {
@@ -130,6 +95,7 @@ class DietaAluno extends \Base\Entity\AbstractEntity
      * Set dataFimVig
      *
      * @param \DateTime $dataFimVig
+     *
      * @return DietaAluno
      */
     public function setDataFimVig($dataFimVig)
@@ -142,7 +108,7 @@ class DietaAluno extends \Base\Entity\AbstractEntity
     /**
      * Get dataFimVig
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataFimVig()
     {
@@ -153,9 +119,10 @@ class DietaAluno extends \Base\Entity\AbstractEntity
      * Set idAluno
      *
      * @param \Academia\Entity\Aluno $idAluno
+     *
      * @return DietaAluno
      */
-    public function setIdAluno(\Academia\Entity\Aluno $idAluno)
+    public function setIdAluno(\Academia\Entity\Aluno $idAluno = null)
     {
         $this->idAluno = $idAluno;
     
@@ -165,10 +132,34 @@ class DietaAluno extends \Base\Entity\AbstractEntity
     /**
      * Get idAluno
      *
-     * @return \Academia\Entity\Aluno 
+     * @return \Academia\Entity\Aluno
      */
     public function getIdAluno()
     {
         return $this->idAluno;
+    }
+
+    /**
+     * Set idDietaGeral
+     *
+     * @param \Academia\Entity\DietaGeral $idDietaGeral
+     *
+     * @return DietaAluno
+     */
+    public function setIdDietaGeral(\Academia\Entity\DietaGeral $idDietaGeral = null)
+    {
+        $this->idDietaGeral = $idDietaGeral;
+    
+        return $this;
+    }
+
+    /**
+     * Get idDietaGeral
+     *
+     * @return \Academia\Entity\DietaGeral
+     */
+    public function getIdDietaGeral()
+    {
+        return $this->idDietaGeral;
     }
 }

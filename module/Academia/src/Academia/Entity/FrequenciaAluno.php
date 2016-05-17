@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class FrequenciaAluno extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_frequencia_aluno", type="integer", nullable=false)
      * @ORM\Id
@@ -31,9 +31,7 @@ class FrequenciaAluno extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Aluno
      *
-     * 
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
      * })
@@ -45,7 +43,8 @@ class FrequenciaAluno extends \Base\Entity\AbstractEntity
     /**
      * Set idFrequenciaAluno
      *
-     * @param integer $idFrequenciaAluno
+     * @param int $idFrequenciaAluno
+     *
      * @return FrequenciaAluno
      */
     public function setIdFrequenciaAluno($idFrequenciaAluno)
@@ -58,7 +57,7 @@ class FrequenciaAluno extends \Base\Entity\AbstractEntity
     /**
      * Get idFrequenciaAluno
      *
-     * @return integer 
+     * @return int
      */
     public function getIdFrequenciaAluno()
     {
@@ -69,6 +68,7 @@ class FrequenciaAluno extends \Base\Entity\AbstractEntity
      * Set dataPresenca
      *
      * @param \DateTime $dataPresenca
+     *
      * @return FrequenciaAluno
      */
     public function setDataPresenca($dataPresenca)
@@ -81,7 +81,7 @@ class FrequenciaAluno extends \Base\Entity\AbstractEntity
     /**
      * Get dataPresenca
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataPresenca()
     {
@@ -92,6 +92,7 @@ class FrequenciaAluno extends \Base\Entity\AbstractEntity
      * Set idAluno
      *
      * @param \Academia\Entity\Aluno $idAluno
+     *
      * @return FrequenciaAluno
      */
     public function setIdAluno(\Academia\Entity\Aluno $idAluno)
@@ -104,7 +105,7 @@ class FrequenciaAluno extends \Base\Entity\AbstractEntity
     /**
      * Get idAluno
      *
-     * @return \Academia\Entity\Aluno 
+     * @return \Academia\Entity\Aluno
      */
     public function getIdAluno()
     {

@@ -10,7 +10,6 @@ use Zend\Form\Form;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Academia\Entity\Academia;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 use DoctrineModule\Form\Element\ObjectSelect;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
@@ -27,19 +26,31 @@ class AcademiaForm extends Form implements ObjectManagerAwareInterface
           $this
              ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
              ->setObject(new Academia())                
-             ->setInputFilter(new AcademiaFilter())
+             ->setInputFilter(new \Academia\Validation\AcademiaFilter())
          ;
+        $this->setAttribute('class', 'form-inline');
         
         $this->add([
            'name' => 'idAcademia',
            'type' => 'hidden',           
        ]);
           
+        $this->add([
+           'name' => 'cnpj',
+           'type' => 'text',
+           'options' => [
+               'label' => 'Cnpj',
+           ]
+       ]);
+        
        $this->add([
            'name' => 'nome',
            'type' => 'text',
            'options' => [
                'label' => 'Nome',
+           ],
+           'attributes' => [
+               'required' => true
            ]
        ]);
        
@@ -48,6 +59,9 @@ class AcademiaForm extends Form implements ObjectManagerAwareInterface
            'type' => 'date',
            'options' => [
                'label' => 'Data de Cadastro',
+           ],
+           'attributes' => [
+               'required' => true
            ]
        ]);
        
@@ -56,6 +70,9 @@ class AcademiaForm extends Form implements ObjectManagerAwareInterface
            'type' => 'text',
            'options' => [
                'label' => 'Telefone Comercial',
+           ],
+           'attributes' => [
+               'required' => true
            ]
        ]);
        
@@ -73,6 +90,8 @@ class AcademiaForm extends Form implements ObjectManagerAwareInterface
                 'object_manager'     => $this->getObjectManager(),
                 'target_class'       => 'Academia\Entity\Academia',
                 'property' => 'nome',
+                 'allow_empty' => true,
+                     'required' => false,
                'empty_option' => 'selecione',
                 'is_method' => true,
                 'find_method'        => array(
@@ -81,11 +100,16 @@ class AcademiaForm extends Form implements ObjectManagerAwareInterface
                         'criteria'   => array(),
                         'orderBy'   => array("nome" => "ASC"),
                     ]
-                )            
+                ),
+                
+                
         ]);
         $this->add($matriz);
        
-        
+        $this->add(array(
+             'type' => 'Academia\Form\LoginFieldset'
+         ));
+
        $this->add(array(
              'type' => 'Academia\Form\EnderecoFieldset'
          ));
@@ -101,6 +125,9 @@ class AcademiaForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

@@ -35,8 +35,17 @@ class AlimentoFieldset extends Fieldset  implements ObjectManagerAwareInterface{
              ->setObject(new Alimento())
         ;
         
+        $session = new \Zend\Session\Container();
+        
+        if($session['idAcademia'] != ""){
+            $condicao = array("idAcademia" => $session['idAcademia']);
+        }else{
+            $condicao = array();
+        }
+        
+        $this->setLabel('Alimento');
         $select = new ObjectSelect("idAlimento");
-         $select->setLabel("Alimento")
+         $select->setLabel("")
                  ->setOptions([ 
                 'object_manager'     => $this->getObjectManager(),
                 'target_class'       => 'Academia\Entity\Alimento',
@@ -46,7 +55,7 @@ class AlimentoFieldset extends Fieldset  implements ObjectManagerAwareInterface{
                 'find_method'        => array(
                     'name'  => 'findBy',
                     'params' =>[
-                        'criteria'   => array(),
+                        'criteria'   => $condicao,
                         'orderBy'   => array("nomeAlimento" => "ASC"),
                     ]
                 )            

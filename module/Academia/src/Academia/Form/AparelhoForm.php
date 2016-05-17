@@ -25,15 +25,13 @@ class AparelhoForm extends Form implements ObjectManagerAwareInterface
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new Aparelho())
         ;
-        
+        $this->setAttribute('class', 'form-inline');
          $this->add([
            'name' => 'idAparelho',
            'type' => 'hidden'
        ]);
             
-       $this->add(array(
-             'type' => 'Academia\Form\AcademiaFieldset'
-         ));
+       
          
        $this->add([
            'name' => 'nomeAparelho',
@@ -52,6 +50,10 @@ class AparelhoForm extends Form implements ObjectManagerAwareInterface
        ]);
        
        $this->add(array(
+             'type' => 'Academia\Form\AcademiaFieldset'
+         ));
+       
+       $this->add(array(
              'type' => 'Zend\Form\Element\Csrf',
              'name' => 'csrf',
          ));
@@ -61,6 +63,9 @@ class AparelhoForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

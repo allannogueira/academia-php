@@ -41,7 +41,7 @@ class CepbrEnderecoFieldset extends Fieldset implements ObjectManagerAwareInterf
              ),
              'attributes' => array(
                  'required' => 'required',
-                // 'onBlur' => 'carregaCep()',
+                 'onBlur' => 'carregaCep()',
              ),
          ));
         

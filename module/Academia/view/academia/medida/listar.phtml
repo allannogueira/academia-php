@@ -1,26 +1,75 @@
+<?php
+    if(empty($this->zfcUserIdentity()->getIdAluno()->getIdAluno()) == true){
+        $form = $this->form;
+        $form->setAttribute('action',$this->url($this->route,['action'=>'listar']));
+        $form->prepare();//prepara o formulario
+
+        echo "<nav class='navbar navbar-default'>"
+        . "<div class=\"margin20\">";
+        echo $this->form()->openTag($form);//abre a tag form com o action
+        echo $this->formCollection($form);//monta o corpo do formulario
+        echo $this->form()->closeTag();//fecha formulario
+        echo "</div></nav>";
+    }
+?>
+
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">Medidas</div>
 
   <!-- Table -->
-  <table class="table">
+  <table class="table  display responsive nowrap">
       <thead>
       <tr>
+          <th>Data</th>
           <th>Aluno</th>
-          <th>Peso</th>
-          <th>Altura</th>
-          <th>Peitoral Maior</th>
-          <th>Peitoral Menor</th>
+          <th>Altura(cm)</th>
+          <th>Peso(cm)</th>          
+          <th>Braço D(cm)</th>
+          <th>Braço E(cm)</th>
+          <th>Anti-Braço D(cm)</th>
+          <th>Anti-Braço E(cm)</th>
+          <th>Coxa D(cm)</th>
+          <th>Coxa E(cm)</th>
+          <th>Panturrilha D(cm)</th>
+          <th>Panturrilha E(cm)</th>
+          <th>Peitoral Maior(cm)</th>
+          <th>Peitoral Menor(cm)</th>
+          <th>IMC</th>
+          <th>Gordura</th>
+          <th>Pressão</th>
+          <th>Bat Cardíaco</th>
+          <th>Abdomen</th>
+          <th>Costas</th>
+          <th>Quadril</th>
+          <th></th>   
       </tr>
       </thead>
-      <tbody
+      <tbody>
 <?php foreach ($this->data as $data): ?>
       <tr> 
+        <td><?php echo date_format($data->getDataIniVig(),'d/m/Y'); ?></td> 
         <td><?php echo $data->getIdAluno()->getNomeAluno(); ?></td>  
-        <td><?php echo $data->getPeso(); ?></td>  
-        <td><?php echo $data->getAltura(); ?></td>   
-        <td><?php echo $data->getPeitoralMaior(); ?></td>   
-        <td><?php echo $data->getPeitoralMenor(); ?></td> 
+        <td><?php echo $data->getAltura(); ?> cm</td>   
+        <td><?php echo $data->getPeso(); ?> kg</td>   
+        <td><?php echo $data->getBracoD(); ?> cm</td>   
+        <td><?php echo $data->getBracoE(); ?> cm</td>   
+        <td><?php echo $data->getAntiBracoD(); ?> cm</td>   
+        <td><?php echo $data->getAntiBracoE(); ?> cm</td>   
+        <td><?php echo $data->getCoxaD(); ?> cm</td>   
+        <td><?php echo $data->getCoxaE(); ?> cm</td>   
+        <td><?php echo $data->getPanturrilhaD(); ?> cm</td>   
+        <td><?php echo $data->getPanturrilhaE(); ?> cm</td>   
+        <td><?php echo $data->getPeitoralMaior(); ?> cm</td>   
+        <td><?php echo $data->getPeitoralMenor(); ?> cm</td>   
+        <td><?php echo $data->getIMC(); ?></td>   
+        <td><?php echo $data->getMassGordura(); ?> kg</td>   
+        <td><?php echo $data->getPressao(); ?> PUL/min</td>   
+        <td><?php echo $data->getBatCardiaco(); ?> bpm</td>   
+        <td><?php echo $data->getAbdomen(); ?> cm</td>   
+        <td><?php echo $data->getCostas(); ?> cm</td>   
+        <td><?php echo $data->getQuadril(); ?> cm</td>   
+        
         <td>
             <button type="button" onclick="javascript:window.location.href = '<?php echo $this->url('medida', ['action' => 'editar', 'id' => $data->getIdMedida()]); ?>'"class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

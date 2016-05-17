@@ -101,6 +101,7 @@ abstract class CgcAbstract extends AbstractValidator {
             $this->error(self::DIGIT, $value);
             return false;
         }
+        
         // Comparações Concluídas
         return true; // Todas Verificações Executadas
     }

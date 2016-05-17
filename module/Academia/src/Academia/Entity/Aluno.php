@@ -7,13 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Aluno
  *
- * @ORM\Table(name="aluno", indexes={@ORM\Index(name="fk_Aluno_Login1_idx", columns={"id_login"}), @ORM\Index(name="fk_Aluno_Academia1_idx", columns={"id_academia"}), @ORM\Index(name="fk_Aluno_Finalidade1_idx", columns={"id_finalidade"}), @ORM\Index(name="fk_Aluno_Endereco1_idx", columns={"id_endereco"})})
+ * @ORM\Table(name="aluno", indexes={@ORM\Index(name="fk_Aluno_Login", columns={"id_login"}), @ORM\Index(name="fk_Aluno_Academia1_idx", columns={"id_academia"}), @ORM\Index(name="fk_Aluno_Finalidade1_idx", columns={"id_finalidade"}), @ORM\Index(name="fk_Aluno_Endereco1_idx", columns={"id_endereco"})})
  * @ORM\Entity
  */
 class Aluno extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_aluno", type="integer", nullable=false)
      * @ORM\Id
@@ -55,32 +55,46 @@ class Aluno extends \Base\Entity\AbstractEntity
      * @ORM\Column(name="data_nasc", type="date", nullable=true)
      */
     private $dataNasc;
-    
+
      /**
-     * @var string
+     * @var \Academia\Entity\Login
      *
-     * @ORM\Column(name="cpf_aluno", type="string", nullable=true)
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Login", cascade={"all"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_login", referencedColumnName="id_login")
+     * })
      */
-    private $cpf;
-    
+    private $idLogin;
+
     /**
      * @var string
      *
-     * @ORM\Column(name="rg_aluno", type="string", nullable=true)
+     * @ORM\Column(name="cpf_aluno", type="string", length=11, nullable=false, unique=true)
      */
-    private $rg;
-    
+    private $cpfAluno;
+
     /**
      * @var string
      *
-     * @ORM\Column(name="email_aluno", type="string", nullable=true)
+     * @ORM\Column(name="rg_aluno", type="string", length=45, nullable=true)
      */
-    private $email;
+    private $rgAluno;
+
+
+    /**
+     * @var \Academia\Entity\Finalidade
+     *
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Finalidade")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_finalidade", referencedColumnName="id_finalidade")
+     * })
+     */
+    private $idFinalidade;
 
     /**
      * @var \Academia\Entity\Academia
      *
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Academia")
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Academia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_academia", referencedColumnName="id_academia")
      * })
@@ -90,9 +104,7 @@ class Aluno extends \Base\Entity\AbstractEntity
     /**
      * @var \Academia\Entity\Endereco
      *
-     * 
-     * 
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Endereco", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Academia\Entity\Endereco",cascade={"all"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_endereco", referencedColumnName="id_endereco")
      * })
@@ -100,46 +112,17 @@ class Aluno extends \Base\Entity\AbstractEntity
     private $idEndereco;
 
     /**
-     * @var \Academia\Entity\Finalidade
+     * @var string
      *
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Finalidade", cascade={"persist"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_finalidade", referencedColumnName="id_finalidade")
-     * })
+     * @ORM\Column(name="foto", type="blob", nullable=true)
      */
-    private $idFinalidade;
+    private $arquivo;
 
-    /**
-     * @var \Academia\Entity\Login
-     *
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Login", cascade={"all"},inversedBy="idAluno")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_login", referencedColumnName="id_login",nullable=false)
-     * })
-     */
-    private $idLogin;
-
-    
-
-
-
-    /**
-     * Set idAluno
-     *
-     * @param integer $idAluno
-     * @return Aluno
-     */
-    public function setIdAluno($idAluno)
-    {
-        $this->idAluno = $idAluno;
-    
-        return $this;
-    }
 
     /**
      * Get idAluno
      *
-     * @return integer 
+     * @return int
      */
     public function getIdAluno()
     {
@@ -150,6 +133,7 @@ class Aluno extends \Base\Entity\AbstractEntity
      * Set nomeAluno
      *
      * @param string $nomeAluno
+     *
      * @return Aluno
      */
     public function setNomeAluno($nomeAluno)
@@ -162,7 +146,7 @@ class Aluno extends \Base\Entity\AbstractEntity
     /**
      * Get nomeAluno
      *
-     * @return string 
+     * @return string
      */
     public function getNomeAluno()
     {
@@ -173,6 +157,7 @@ class Aluno extends \Base\Entity\AbstractEntity
      * Set sobrenomeAluno
      *
      * @param string $sobrenomeAluno
+     *
      * @return Aluno
      */
     public function setSobrenomeAluno($sobrenomeAluno)
@@ -185,7 +170,7 @@ class Aluno extends \Base\Entity\AbstractEntity
     /**
      * Get sobrenomeAluno
      *
-     * @return string 
+     * @return string
      */
     public function getSobrenomeAluno()
     {
@@ -196,6 +181,7 @@ class Aluno extends \Base\Entity\AbstractEntity
      * Set telefoneAluno
      *
      * @param string $telefoneAluno
+     *
      * @return Aluno
      */
     public function setTelefoneAluno($telefoneAluno)
@@ -208,7 +194,7 @@ class Aluno extends \Base\Entity\AbstractEntity
     /**
      * Get telefoneAluno
      *
-     * @return string 
+     * @return string
      */
     public function getTelefoneAluno()
     {
@@ -219,6 +205,7 @@ class Aluno extends \Base\Entity\AbstractEntity
      * Set celularAluno
      *
      * @param string $celularAluno
+     *
      * @return Aluno
      */
     public function setCelularAluno($celularAluno)
@@ -231,7 +218,7 @@ class Aluno extends \Base\Entity\AbstractEntity
     /**
      * Get celularAluno
      *
-     * @return string 
+     * @return string
      */
     public function getCelularAluno()
     {
@@ -242,6 +229,7 @@ class Aluno extends \Base\Entity\AbstractEntity
      * Set dataNasc
      *
      * @param \DateTime $dataNasc
+     *
      * @return Aluno
      */
     public function setDataNasc($dataNasc)
@@ -254,7 +242,7 @@ class Aluno extends \Base\Entity\AbstractEntity
     /**
      * Get dataNasc
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataNasc()
     {
@@ -262,12 +250,110 @@ class Aluno extends \Base\Entity\AbstractEntity
     }
 
     /**
+     * Set idLogin
+     *
+     * @param int $idLogin
+     *
+     * @return Aluno
+     */
+    public function setIdLogin($idLogin)
+    {
+        $this->idLogin = $idLogin;
+    
+        return $this;
+    }
+
+    /**
+     * Get idLogin
+     *
+     * @return int
+     */
+    public function getIdLogin()
+    {
+        return $this->idLogin;
+    }
+
+    /**
+     * Set cpfAluno
+     *
+     * @param string $cpfAluno
+     *
+     * @return Aluno
+     */
+    public function setCpfAluno($cpfAluno)
+    {
+        $this->cpfAluno = $cpfAluno;
+    
+        return $this;
+    }
+
+    /**
+     * Get cpfAluno
+     *
+     * @return string
+     */
+    public function getCpfAluno()
+    {
+        return $this->cpfAluno;
+    }
+
+    /**
+     * Set rgAluno
+     *
+     * @param string $rgAluno
+     *
+     * @return Aluno
+     */
+    public function setRgAluno($rgAluno)
+    {
+        $this->rgAluno = $rgAluno;
+    
+        return $this;
+    }
+
+    /**
+     * Get rgAluno
+     *
+     * @return string
+     */
+    public function getRgAluno()
+    {
+        return $this->rgAluno;
+    }
+
+ 
+    /**
+     * Set idFinalidade
+     *
+     * @param \Academia\Entity\Finalidade $idFinalidade
+     *
+     * @return Aluno
+     */
+    public function setIdFinalidade(\Academia\Entity\Finalidade $idFinalidade = null)
+    {
+        $this->idFinalidade = $idFinalidade;
+    
+        return $this;
+    }
+
+    /**
+     * Get idFinalidade
+     *
+     * @return \Academia\Entity\Finalidade
+     */
+    public function getIdFinalidade()
+    {
+        return $this->idFinalidade;
+    }
+
+    /**
      * Set idAcademia
      *
      * @param \Academia\Entity\Academia $idAcademia
+     *
      * @return Aluno
      */
-    public function setIdAcademia(\Academia\Entity\Academia $idAcademia)
+    public function setIdAcademia(\Academia\Entity\Academia $idAcademia = null)
     {
         $this->idAcademia = $idAcademia;
     
@@ -277,7 +363,7 @@ class Aluno extends \Base\Entity\AbstractEntity
     /**
      * Get idAcademia
      *
-     * @return \Academia\Entity\Academia 
+     * @return \Academia\Entity\Academia
      */
     public function getIdAcademia()
     {
@@ -288,9 +374,10 @@ class Aluno extends \Base\Entity\AbstractEntity
      * Set idEndereco
      *
      * @param \Academia\Entity\Endereco $idEndereco
+     *
      * @return Aluno
      */
-    public function setIdEndereco(\Academia\Entity\Endereco $idEndereco)
+    public function setIdEndereco(\Academia\Entity\Endereco $idEndereco = null)
     {
         $this->idEndereco = $idEndereco;
     
@@ -300,83 +387,20 @@ class Aluno extends \Base\Entity\AbstractEntity
     /**
      * Get idEndereco
      *
-     * @return \Academia\Entity\Endereco 
+     * @return \Academia\Entity\Endereco
      */
     public function getIdEndereco()
     {
         return $this->idEndereco;
     }
-
-    /**
-     * Set idFinalidade
-     *
-     * @param \Academia\Entity\Finalidade $idFinalidade
-     * @return Aluno
-     */
-    public function setIdFinalidade(\Academia\Entity\Finalidade $idFinalidade)
-    {
-        $this->idFinalidade = $idFinalidade;
     
-        return $this;
+    function getArquivo() {
+        return $this->arquivo;
     }
 
-    /**
-     * Get idFinalidade
-     *
-     * @return \Academia\Entity\Finalidade 
-     */
-    public function getIdFinalidade()
-    {
-        return $this->idFinalidade;
+    function setArquivo($arquivo) {
+        $this->arquivo = $arquivo;
     }
 
-    /**
-     * Set idLogin
-     *
-     * @param \Academia\Entity\Login $idLogin
-     * @return Aluno
-     */
-    public function setIdLogin(\Academia\Entity\Login $idLogin)
-    {
-        $this->idLogin = $idLogin;
     
-        return $this;
-    }
-
-    /**
-     * Get idLogin
-     *
-     * @return \Academia\Entity\Login 
-     */
-    public function getIdLogin()
-    {
-        return $this->idLogin;
-    }
-    
-    function getCpf() {
-        return $this->cpf;
-    }
-
-    function setCpf($cpf) {
-        $this->cpf = $cpf;
-    }
-
-    function getEmail() {
-        return $this->email;
-    }
-
-    function setEmail($email) {
-        $this->email = $email;
-    }
-    
-    function getRg() {
-        return $this->rg;
-    }
-
-    function setRg($rg) {
-        $this->rg = $rg;
-    }
-
-
-
 }

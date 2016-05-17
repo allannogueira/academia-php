@@ -25,7 +25,7 @@ class MusculoForm extends Form implements ObjectManagerAwareInterface
             ->setHydrator(new DoctrineHydrator($this->getObjectManager()))
             ->setObject(new Musculo())
         ;             
-        
+        $this->setAttribute('class', 'form-inline');
          $this->add([
            'name' => 'idMusculo',
            'type' => 'hidden'
@@ -50,6 +50,9 @@ class MusculoForm extends Form implements ObjectManagerAwareInterface
            'type' => 'submit',
            'options' => [
                'label' => 'Salvar',
+           ],
+           'attributes' => [
+               'class' => 'btn-primary'
            ]
        ]);
     }

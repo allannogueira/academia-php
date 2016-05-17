@@ -13,11 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Treino extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_treino", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idTreino;
 
@@ -36,22 +36,8 @@ class Treino extends \Base\Entity\AbstractEntity
     private $dataFimVig;
 
     /**
-     * @var \Academia\Entity\Aluno
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno", cascade={"all"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
-     * })
-     */
-    private $idAluno;
-
-    /**
      * @var \Academia\Entity\TreinoGeral
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="Academia\Entity\TreinoGeral")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_treino_geral", referencedColumnName="id_treino_geral")
@@ -59,12 +45,23 @@ class Treino extends \Base\Entity\AbstractEntity
      */
     private $idTreinoGeral;
 
+    /**
+     * @var \Academia\Entity\Aluno
+     *
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Aluno")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_aluno", referencedColumnName="id_aluno")
+     * })
+     */
+    private $idAluno;
+
 
 
     /**
      * Set idTreino
      *
-     * @param integer $idTreino
+     * @param int $idTreino
+     *
      * @return Treino
      */
     public function setIdTreino($idTreino)
@@ -77,7 +74,7 @@ class Treino extends \Base\Entity\AbstractEntity
     /**
      * Get idTreino
      *
-     * @return integer 
+     * @return int
      */
     public function getIdTreino()
     {
@@ -88,6 +85,7 @@ class Treino extends \Base\Entity\AbstractEntity
      * Set dataIniVig
      *
      * @param \DateTime $dataIniVig
+     *
      * @return Treino
      */
     public function setDataIniVig($dataIniVig)
@@ -100,7 +98,7 @@ class Treino extends \Base\Entity\AbstractEntity
     /**
      * Get dataIniVig
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataIniVig()
     {
@@ -111,6 +109,7 @@ class Treino extends \Base\Entity\AbstractEntity
      * Set dataFimVig
      *
      * @param \DateTime $dataFimVig
+     *
      * @return Treino
      */
     public function setDataFimVig($dataFimVig)
@@ -123,7 +122,7 @@ class Treino extends \Base\Entity\AbstractEntity
     /**
      * Get dataFimVig
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataFimVig()
     {
@@ -131,32 +130,10 @@ class Treino extends \Base\Entity\AbstractEntity
     }
 
     /**
-     * Set idAluno
-     *
-     * @param \Academia\Entity\Aluno $idAluno
-     * @return Treino
-     */
-    public function setIdAluno(\Academia\Entity\Aluno $idAluno)
-    {
-        $this->idAluno = $idAluno;
-    
-        return $this;
-    }
-
-    /**
-     * Get idAluno
-     *
-     * @return \Academia\Entity\Aluno 
-     */
-    public function getIdAluno()
-    {
-        return $this->idAluno;
-    }
-
-    /**
      * Set idTreinoGeral
      *
      * @param \Academia\Entity\TreinoGeral $idTreinoGeral
+     *
      * @return Treino
      */
     public function setIdTreinoGeral(\Academia\Entity\TreinoGeral $idTreinoGeral)
@@ -169,10 +146,34 @@ class Treino extends \Base\Entity\AbstractEntity
     /**
      * Get idTreinoGeral
      *
-     * @return \Academia\Entity\TreinoGeral 
+     * @return \Academia\Entity\TreinoGeral
      */
     public function getIdTreinoGeral()
     {
         return $this->idTreinoGeral;
+    }
+
+    /**
+     * Set idAluno
+     *
+     * @param \Academia\Entity\Aluno $idAluno
+     *
+     * @return Treino
+     */
+    public function setIdAluno(\Academia\Entity\Aluno $idAluno)
+    {
+        $this->idAluno = $idAluno;
+    
+        return $this;
+    }
+
+    /**
+     * Get idAluno
+     *
+     * @return \Academia\Entity\Aluno
+     */
+    public function getIdAluno()
+    {
+        return $this->idAluno;
     }
 }

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class RespostaAluno extends \Base\Entity\AbstractEntity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_resposta_aluno", type="integer", nullable=false)
      * @ORM\Id
@@ -62,7 +62,8 @@ class RespostaAluno extends \Base\Entity\AbstractEntity
     /**
      * Set idRespostaAluno
      *
-     * @param integer $idRespostaAluno
+     * @param int $idRespostaAluno
+     *
      * @return RespostaAluno
      */
     public function setIdRespostaAluno($idRespostaAluno)
@@ -75,7 +76,7 @@ class RespostaAluno extends \Base\Entity\AbstractEntity
     /**
      * Get idRespostaAluno
      *
-     * @return integer 
+     * @return int
      */
     public function getIdRespostaAluno()
     {
@@ -86,6 +87,7 @@ class RespostaAluno extends \Base\Entity\AbstractEntity
      * Set idAluno
      *
      * @param \Academia\Entity\Aluno $idAluno
+     *
      * @return RespostaAluno
      */
     public function setIdAluno(\Academia\Entity\Aluno $idAluno)
@@ -98,7 +100,7 @@ class RespostaAluno extends \Base\Entity\AbstractEntity
     /**
      * Get idAluno
      *
-     * @return \Academia\Entity\Aluno 
+     * @return \Academia\Entity\Aluno
      */
     public function getIdAluno()
     {
@@ -109,6 +111,7 @@ class RespostaAluno extends \Base\Entity\AbstractEntity
      * Set idPergunta
      *
      * @param \Academia\Entity\Pergunta $idPergunta
+     *
      * @return RespostaAluno
      */
     public function setIdPergunta(\Academia\Entity\Pergunta $idPergunta)
@@ -121,7 +124,7 @@ class RespostaAluno extends \Base\Entity\AbstractEntity
     /**
      * Get idPergunta
      *
-     * @return \Academia\Entity\Pergunta 
+     * @return \Academia\Entity\Pergunta
      */
     public function getIdPergunta()
     {
@@ -132,6 +135,7 @@ class RespostaAluno extends \Base\Entity\AbstractEntity
      * Set idResposta
      *
      * @param \Academia\Entity\Resposta $idResposta
+     *
      * @return RespostaAluno
      */
     public function setIdResposta(\Academia\Entity\Resposta $idResposta)
@@ -144,7 +148,7 @@ class RespostaAluno extends \Base\Entity\AbstractEntity
     /**
      * Get idResposta
      *
-     * @return \Academia\Entity\Resposta 
+     * @return \Academia\Entity\Resposta
      */
     public function getIdResposta()
     {
