@@ -46,7 +46,7 @@ class AlimentoForm extends Form
            'name' => 'descricao',
            'type' => 'textarea',
            'options' => [
-               'label' => 'Descricao',
+               'label' => 'Descrição',
            ]
        ]);
        

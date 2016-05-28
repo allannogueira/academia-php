@@ -35,7 +35,12 @@ class AbstractService {
             $hydrator = new DoctrineHydrator($this->getEm());
             $hydrator->hydrate($data, $entity);
         }else{
-           $entity = new $this->entity($data,$this->getEm());
+            try{
+            $entity = new $this->entity($data,$this->getEm());
+            }catch(Zend_Exception $e){
+                 echo "Caught exception: " . get_class($e) . "\n";
+    echo "Message: " . $e->getMessage() . "\n";exit;
+            }
         }
         
        // $this->em->persist($entity);

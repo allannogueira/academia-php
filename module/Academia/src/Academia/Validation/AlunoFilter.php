@@ -15,21 +15,44 @@ class AlunoFilter extends InputFilter{
     public function __construct($em){
         $nome = new Input('nomeAluno');
         $nome->setRequired(true);
-        /*
-             ->getFilterChain()->attach(new StringTrim())
-             ->attach(new StripTags());
-        $nome->getValidatorChain()->attach(new NotEmpty());*/
+        $nome->getFilterChain()
+          ->attachByName('StripTags')
+          ->attachByName('StringTrim');
         $this->add($nome);
-            
-//        $cpf = new Input('cpfAluno');
-//      //  echo var_dump($this->getRequest());
-//        $validadorCpf = new Cpf(['valid_if_empty' => true]);
-//        $cpf->getFilterChain()
-//                ->attach($validadorCpf);//pega classe que foi criada manualmente
-//        $cpf->setErrorMessage("Cpf inválido!");
-//        
-//        //echo var_dump($cpf);
-//        $this->add($cpf);
+        
+        $sobrenome = new Input('sobrenomeAluno');
+        $sobrenome->setRequired(true);
+        $sobrenome->getFilterChain()
+          ->attachByName('StripTags');
+        $this->add($sobrenome);
+        
+        $telAluno = new Input('telefoneAluno');
+        $telAluno->getFilterChain()
+          ->attachByName('StripTags');
+        $this->add($telAluno);
+        
+        $celularAluno = new Input('celularAluno');
+        $celularAluno->getFilterChain()
+          ->attachByName('StripTags');
+        $this->add($celularAluno);
+        
+        $dataNasc = new Input('dataNasc');
+        $dataNasc->getFilterChain()
+          ->attachByName('StripTags');
+        $this->add($dataNasc);
+        
+        $cpfAluno = new Input('cpfAluno');
+        $cpfAluno->setRequired(true);
+        $cpfAluno->getFilterChain()
+          ->attachByName('StripTags');
+        $this->add($cpfAluno);
+        
+        $rgAluno = new Input('rgAluno');
+        $rgAluno->setRequired(true);
+        $rgAluno->getFilterChain()
+          ->attachByName('StripTags');
+        $this->add($rgAluno);
+        
         
         $arquivo = new FileInput('arquivo');
         $arquivo->setRequired(false);

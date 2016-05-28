@@ -91,21 +91,33 @@ abstract class AbstractController extends AbstractActionController
             //echo var_dump($this->request->getPost());
             $post = $this->request->getPost()->toArray();
             $file = $this->request->getFiles()->toArray();
+            
+            
             $postData = array_merge_recursive($post,$file);
             $form->setData($postData);
             
             if($form->isValid()){
                 //se existir algum upload de arquivo, deixe com o nome de "arquivo" para padronizar
-                if($postData['fotoWebcan'] != ""){
-                    $postData['arquivo'] = $postData['fotoWebcan'];
+               if(isset($postData['fotoWebcan'])){
+                    if($postData['fotoWebcan'] != ""){
+                        $postData['arquivo'] = $postData['fotoWebcan'];
+                    }else{
+                         $postData['arquivo'] = "";
+                    }
                 }else if(isset($postData['arquivo'])){
                     $data = $form->getData();
                     $path = $data->getArquivo()['tmp_name'];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $postData['arquivo'] = file_get_contents($path);
-                    $postData['arquivo'] =  'data:image/' . $type . ';base64,' . base64_encode($postData['arquivo']);
+                    if(!empty($path)){
+                        $postData['arquivo'] = file_get_contents($path);
+                        $postData['arquivo'] =  'data:image/' . $type . ';base64, ' . base64_encode($postData['arquivo']);
+
+                    }
+                }else{
+                    $postData['arquivo'] = "";
                 }
                 $service = $this->getServiceLocator()->get($this->service);
+                
                 if($service->save($postData)){
                     $this->flashMessenger()->addSuccessMessage("Cadastrado com Sucesso!");
                 }else{
@@ -114,7 +126,7 @@ abstract class AbstractController extends AbstractActionController
                 return $this->redirect()->toRoute($this->route,['controller'=> $this->controller]);//redureciona para o controller que será indicado
             }
             else {
-                $this->flashMessenger()->addErrorMessage("formulario nao eh valido");
+                $this->flashMessenger()->addErrorMessage("formulário nao é valido");
                /* foreach ($form->getMessages() as $messageId => $message) {
                     foreach($message as $descricao)
                         echo "Validation failure '$messageId': $descricao\n";
@@ -170,20 +182,29 @@ abstract class AbstractController extends AbstractActionController
                 
                  $post = $this->request->getPost()->toArray();
                 $file = $this->request->getFiles()->toArray();
+                
                 $postData = array_merge_recursive($post,$file);
                 $form->setData($postData);
                 $postData['id'] = (int) $param;
-               // echo var_dump($postData);exit;
+                
                 if ($form->isValid()){
-                    if($postData['fotoWebcan'] != ""){
-                        $postData['arquivo'] = $postData['fotoWebcan'];
+                    if(isset($postData['fotoWebcan'])){
+                        if($postData['fotoWebcan'] != ""){
+                            $postData['arquivo'] = $postData['fotoWebcan'];
+                        }else{
+                             $postData['arquivo'] = "";
+                        }
                     }else if(isset($postData['arquivo'])){
                         $data = $form->getData();
                         $path = $data->getArquivo()['tmp_name'];
                         $type = pathinfo($path, PATHINFO_EXTENSION);
-                        $postData['arquivo'] = file_get_contents($path);
-                        $postData['arquivo'] =  'data:image/' . $type . ';base64, ' . base64_encode($postData['arquivo']);
-                        
+                        if(!empty($path)){
+                            $postData['arquivo'] = file_get_contents($path);
+                            $postData['arquivo'] =  'data:image/' . $type . ';base64, ' . base64_encode($postData['arquivo']);
+                      
+                        }
+                    }else{
+                        $postData['arquivo'] = "";
                     }
 
                     if($service->save($postData)){

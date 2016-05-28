@@ -257,7 +257,7 @@ class Login extends \Academia\Entity\Login implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setIdProfissional($idProfissional)
+    public function setIdProfissional(\Academia\Entity\Profissional $idProfissional = NULL)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdProfissional', array($idProfissional));

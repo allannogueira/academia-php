@@ -22,7 +22,7 @@ $idAluno = $this->zfcUserIdentity()->getIdAluno()->getIdAluno();
                         <li><a href="<?php echo $this->url('frequencia',array('action' => 'listar')) ?>"><?php echo $this->translate('Frequência nos Treinos') ?></a></li>
                         <li><a href="<?php echo $this->url('medida',array('action' => 'getPeso')) ?>"><?php echo $this->translate('Gordura Queimada') ?></a></li>
                         <li><a href="<?php echo $this->url('medida',array("action" => "getMediaCrescimento")) ?>"><?php echo $this->translate('Média de Crescimento Muscular') ?></a></li>
-                        <li><a href="<?php echo $this->url('medida',array('action' => 'getPeso')) ?>"><?php echo $this->translate('Calorias Queimadas') ?></a></li>
+                        <!-- <li><a href="<?php echo $this->url('medida',array('action' => 'getPeso')) ?>"><?php echo $this->translate('Calorias Queimadas') ?></a></li>-->
                         <li><a href="<?php echo $this->url('atividade',array('action' => 'listar', 'id' => "".$idAluno."")) ?>"><?php echo $this->translate('Distância Percorrida') ?></a></li>
 
                 </ul>

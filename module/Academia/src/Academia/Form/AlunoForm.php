@@ -85,7 +85,8 @@ class AlunoForm extends Form implements ObjectManagerAwareInterface
                'label' => 'Nome',
            ],
             'attributes' => [
-                'required' => 'required'
+                'required' => 'required',
+                 'maxlength' => 100
             ]
        ]);
        
@@ -93,27 +94,34 @@ class AlunoForm extends Form implements ObjectManagerAwareInterface
            'name' => 'sobrenomeAluno',
            'type' => 'text',
            'options' => [
-               'label' => 'Sobrenome',
+               'label' => 'Sobrenome'
            ],
             'attributes' => [
-                'required' => 'required'
+                'required' => 'required',
+                'maxlength' => 100
             ]
        ]);
        
        $this->add([
            'name' => 'telefoneAluno',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Telefone',
-           ]
+               'label' => 'Telefone'
+           ],
+            'attributes' => [                
+                'maxLength' => 15
+            ]
        ]);
        
        $this->add([
            'name' => 'celularAluno',
-           'type' => 'text',
+           'type' => 'number',
            'options' => [
-               'label' => 'Celular',
-           ]
+               'label' => 'Celular',                
+           ],
+            'attributes' => [                
+                'maxlength' => 15
+            ]
        ]);
        
        $this->add([
@@ -121,20 +129,22 @@ class AlunoForm extends Form implements ObjectManagerAwareInterface
            'type' => 'date',
            'options' => [
                'label' => 'Data de Nascimento',
+                
            ],
-            'attributes' => [
-                'required' => 'required'
+            'attributes' => [                
+                'maxlength' => 10
             ]
        ]);
        
         $this->add([
             'name' => 'cpfAluno',
-            'type' => 'text',
+            'type' => 'number',
             'options' => [
-                'label' => 'CPF',
+                'label' => 'CPF'
             ],
              'attributes' => [
-                 'required' => 'required'
+                 'required' => 'required',
+                 'maxlength' => 14
              ]
         ]);
        
@@ -143,11 +153,17 @@ class AlunoForm extends Form implements ObjectManagerAwareInterface
            'type' => 'text',
            'options' => [
                'label' => 'RG',
+                
            ],
             'attributes' => [
-                'required' => 'required'
+                'required' => 'required',
+                'maxlength' => 15
             ]
        ]);
+       
+       $this->add(array(
+             'type' => 'Academia\Form\PeriodoFieldset'
+         ));
        
         $this->add(array(
              'type' => 'Academia\Form\AcademiaFieldset'
@@ -208,6 +224,8 @@ class AlunoForm extends Form implements ObjectManagerAwareInterface
                  ->attach($validadorCpf)//pega classe que foi criada manualmente
                       ->attach($cpfUnique);
          
+           
+         
     }
     
     public function bind($object, $flags = 17){
@@ -216,12 +234,15 @@ class AlunoForm extends Form implements ObjectManagerAwareInterface
           //header("Content-Type: image/jpg");
         if($this->getObject()->getArquivo() != ""){
             $image =  stream_get_contents($this->getObject()->getArquivo());
-            //echo $image;
-            if($this->getObject()->getArquivo() != ""){
+            
+            if($image != ""){
                 $foto = str_replace("./public", "", $this->getObject()->getArquivo());
                 $this->getElements()['foto']->setAttribute("src","$image");
+            }else{
+                $this->getElements()['foto']->setAttribute("src","/img/sem-foto.png");
             }
         }
+        
         
     }
     

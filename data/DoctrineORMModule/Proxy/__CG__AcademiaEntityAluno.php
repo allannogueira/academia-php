@@ -64,10 +64,10 @@ class Aluno extends \Academia\Entity\Aluno implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'sobrenomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'telefoneAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'celularAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'dataNasc', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idLogin', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpfAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rgAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idFinalidade', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAcademia', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idEndereco', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'arquivo');
+            return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'sobrenomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'telefoneAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'celularAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'dataNasc', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idLogin', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpfAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rgAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idFinalidade', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAcademia', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idEndereco', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'arquivo', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idPeriodo');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'sobrenomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'telefoneAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'celularAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'dataNasc', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idLogin', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpfAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rgAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idFinalidade', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAcademia', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idEndereco', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'arquivo');
+        return array('__isInitialized__', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'nomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'sobrenomeAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'telefoneAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'celularAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'dataNasc', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idLogin', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'cpfAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'rgAluno', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idFinalidade', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idAcademia', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idEndereco', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'arquivo', '' . "\0" . 'Academia\\Entity\\Aluno' . "\0" . 'idPeriodo');
     }
 
     /**
@@ -450,6 +450,28 @@ class Aluno extends \Academia\Entity\Aluno implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setArquivo', array($arquivo));
 
         return parent::setArquivo($arquivo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIdPeriodo()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdPeriodo', array());
+
+        return parent::getIdPeriodo();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIdPeriodo(\Academia\Entity\Periodo $periodo = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIdPeriodo', array($periodo));
+
+        return parent::setIdPeriodo($periodo);
     }
 
     /**

@@ -24,8 +24,9 @@ class ProfissionalService extends AbstractService{
     
     public function save(Array $data = array()){
          $objetoProf = parent::preSave($data);
-        $idProf = $objetoProf->getId();
-        $objetoProf->getIdLogin()->setIdProfissional($idProf);
+         
+        $objetoProf->getIdLogin()->setIdProfissional($objetoProf);
+        
         parent::getEm()->persist($objetoProf);
        parent::getEm()->flush();
        return $objetoProf;

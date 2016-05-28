@@ -38,6 +38,13 @@ function carregaCidade(){
     })   
 }
 
+function confirmarExclusao(url){
+    confirma = confirm("Tem certeza que deseja excluir?");
+    if(confirma){
+        window.location.href = url;
+    }
+}
+
 $(document).ready(function(){
     $(".foto-perfil").removeClass("form-control");
     $(".form-inline").removeClass("form-horizontal");

@@ -157,11 +157,11 @@ class Login extends \Base\Entity\AbstractEntity
     /**
      * Set idProfissional
      *
-     * @param int $idProfissional
+     * @param \Academia\Entity\Profissional $idProfissional
      *
      * @return Login
      */
-    public function setIdProfissional($idProfissional)
+    public function setIdProfissional(\Academia\Entity\Profissional $idProfissional = null)
     {
         $this->idProfissional = $idProfissional;
     

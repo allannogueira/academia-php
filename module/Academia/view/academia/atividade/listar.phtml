@@ -1,18 +1,18 @@
 <?php //echo var_dump($retorno);?>
-
+<h1 class="text-center">Distância Percorrida</h1>
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">Atividade</div>
+  
 
   <!-- Table -->
   <table class="table">
       <thead>
       <tr>
           <th>Aluno</th>
-          <th>Tempo</th>
-          <th>Distância</th>
-          <th>Competencia</th>
-          <th>Calorias Gastas</th>
+          <th>Tempo (minutos)</th>
+          <th>Distância (metros)</th>
+          <th>Competência</th>
+          <th>Calorias Gastas (kcal)</th>
       </tr>
       </thead>
       <tbody>
@@ -23,7 +23,7 @@ foreach ($this->data as $data): ?>
         <td><?php echo $data->getIdAluno()->getNomeAluno(); ?></td>     
         <td><?php echo $data->getTempo(); ?></td> 
         <td><?php echo $data->getDistancia(); ?></td> 
-        <td><?php echo $data->getCompetencia(); ?></td> 
+        <td><?php echo date('d/m/Y',strtotime($data->getCompetencia())); ?></td> 
         <td><?php echo $data->getCalorias(); ?></td> 
       </tr>
 <?php endforeach; ?>

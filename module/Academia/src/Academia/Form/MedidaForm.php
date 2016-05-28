@@ -153,7 +153,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
            'name' => 'dataIniVig',
            'type' => 'date',
            'options' => [
-               'label' => 'Data Inicio Vigente',
+               'label' => 'Data Início Vigente',
            ]
        ]);
         

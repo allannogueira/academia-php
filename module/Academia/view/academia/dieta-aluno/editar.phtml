@@ -1,10 +1,10 @@
 <?php
 
- $title = 'Editar Profissional';
+ $title = 'Editar Dieta x Aluno';
  $this->headTitle($title);
-
+$form = $this->form;
  ?>
-<h1 class="text-center"><?php echo $this->escapeHtml($title); ?></h1>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
 <?php 
 //informa se existir erros no formulario
 $flash = $this->flashMessenger();
@@ -21,8 +21,9 @@ $flash = $this->flashMessenger();
  echo $flash->render('default', array('alert', 'alert-dismissible', 'alert-warning'));
  echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
  
- $form->setAttribute('action',$this->url('profissional',['action'=>'editar','id' => $this->id]));
-$form->prepare();
+//seta action, para onde o formulario será enviar o formulario
+$form->setAttribute('action',$this->url('dietaAluno',['action'=>'editar','id' => $this->id]));
+$form->prepare();//prepara o formulario
 echo $this->form()->openTag($form);//abre a tag form com o action
 echo $this->formCollection($form);//monta o corpo do formulario
 echo $this->form()->closeTag();//fecha formulario

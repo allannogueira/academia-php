@@ -117,6 +117,16 @@ class Aluno extends \Base\Entity\AbstractEntity
      * @ORM\Column(name="foto", type="blob", nullable=true)
      */
     private $arquivo;
+    
+      /**
+     * @var \Academia\Entity\Periodo
+     *
+     * @ORM\OneToOne(targetEntity="Academia\Entity\Periodo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_periodo", referencedColumnName="id_periodo")
+     * })
+     */
+    private $idPeriodo;
 
 
     /**
@@ -401,6 +411,23 @@ class Aluno extends \Base\Entity\AbstractEntity
     function setArquivo($arquivo) {
         $this->arquivo = $arquivo;
     }
+    
+    function getIdPeriodo() {
+        return $this->idPeriodo;
+    }
+
+    /**
+     * Set idPeriodo
+     *
+     * @param \Academia\Entity\Periodo $idPeriodo
+     *
+     * @return Periodo
+     */
+    function setIdPeriodo(\Academia\Entity\Periodo $periodo = null) {
+       // echo var_dump($periodo);
+        $this->idPeriodo = $periodo;
+    }
+
 
     
 }

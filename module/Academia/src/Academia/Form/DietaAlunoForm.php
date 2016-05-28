@@ -37,7 +37,7 @@ class DietaAlunoForm extends Form implements ObjectManagerAwareInterface
            'name' => 'dataIniVig',
            'type' => 'date',
            'options' => [
-               'label' => 'Data Inicio',
+               'label' => 'Data Início',
            ],
             'attributes' => [
                 'required' => 'true'
