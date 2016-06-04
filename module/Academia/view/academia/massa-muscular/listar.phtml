@@ -1,5 +1,6 @@
 <?php //echo var_dump($retorno);?>
 <h1 class="text-center">Massa Muscular</h1>
+<p class="text-center">Saiba o IMC (índice de massa muscular)</p>
 <div class="panel panel-default">
   <!-- Default panel contents -->
  
@@ -54,7 +55,6 @@ foreach ($this->data as $data): ?>
   
 </div>
 
-<br/>
     <br/>
     <div class="list-group">
         <a class="list-group-item active">Tabela de IMC</a>
@@ -67,7 +67,7 @@ foreach ($this->data as $data): ?>
         <a class="list-group-item"><strong>Acima de 40</strong> - Obesidade III (mórbida)</a>
     </div>
   </table>
-  <a href="http://portalsaude.saude.gov.br/index.php/o-ministerio/principal/portal-dcnt/noticias-portal-dcnt/6118-mais-da-metade-da-populacao-brasileira-tem-excesso-de-peso">fonte</a>
+  <a href="http://portalsaude.saude.gov.br/index.php/o-ministerio/principal/portal-dcnt/noticias-portal-dcnt/6118-mais-da-metade-da-populacao-brasileira-tem-excesso-de-peso">Fonte da tabela IMC</a>
 <div class="paging">
     <?php 
         $paging = $this->paginationHelper($this->data, $this->page, "/academia/listar/", $this->data->getDefaultItemCountPerPage()); 

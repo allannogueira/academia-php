@@ -17,6 +17,12 @@
 </style>
 <link href='http://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
 
+<?php if(!(empty($loginmsg))):?>
+<div class="alert alert-danger" role="alert"><?php echo $loginmsg;?></div>
+<?php endif; ?>
+ 
+ 
+
 <div class="container ">
     <div class="page-header">
         <h1 onclick="window.location.href='site'" class="logo">Workout <small> System</small></h1>
@@ -89,11 +95,25 @@
     <?php }else{
         //USUARIO LOGADO
         //
-        //
-        
-        $session = new Zend\Session\Container();
-        echo "Bem Vindo, ". $this->identity()->getEmail();
-        
-    } ?>
-    
+           if($this->zfcUserIdentity()){ 
+                if(!empty($this->zfcUserIdentity()->getIdAluno())){//se for login do aluno
+                    $usuario = $this->zfcUserIdentity()->getIdAluno()->getNomeAluno();
+                }else if(!empty($this->zfcUserIdentity()->getIdProfissional())){//se for login do profissional
+                    $usuario = $this->zfcUserIdentity()->getIdProfissional()->getNome();
+                }else if(!empty($this->zfcUserIdentity()->getIdAcademia())){//se for login da academia
+                    $usuario = $this->zfcUserIdentity()->getIdAcademia()->getNome();
+                }else if(!empty($this->zfcUserIdentity()->getIdAdministrador())){
+                    $usuario = "Administrador";
+                }
+           }?>
+            <br/>
+            <br/>
+            <h1 class="text-center">
+                Bem-Vindo <?php echo $usuario; ?>!
+
+            </h1>
+            <br/>
+            <br/>
+   <?php } ?>
+   
 </div>

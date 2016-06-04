@@ -30,10 +30,9 @@ class AlunoController extends AbstractController
 
     
     public function listarAction($where = ""){
-        $nome = $this->params()->fromPost("nome");
-        $cpf = $this->params()->fromPost("cpf");
+        $f = $this->params()->fromPost("pesquisar");
                 
-        $where = "where (t.nomeAluno like '%".$nome."%' or '".$nome."' = '') and (t.cpfAluno='".$cpf."' or '".$cpf."' = '')";
+        $where = "where (t.nomeAluno like '%".$f."%' or '".$f."' = '') or (t.cpfAluno like '%".$f."%' or '".$f."' = '') or (t.rgAluno like '%".$f."%' or '".$f."' = '') or (t.telefoneAluno like '%".$f."%' or '".$f."' = '')";
         
         
         return parent::listarAction($where);

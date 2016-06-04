@@ -25,6 +25,18 @@ class IndexController extends AbstractController
                     'action' => 'getPerfil'
                 ));
             }
+        }else{
+        
+           $session = new \Zend\Session\Container('loginmsg');
+
+           $loginmsg = strip_tags($session->loginmsg);
+
+           $session->getManager()->getStorage()->clear('loginmsg');
+
+
+           return new ViewModel(array(
+               'loginmsg' => $loginmsg,
+           ));
         }
        /* try {
             $this->getEm()->getConnection()->connect();

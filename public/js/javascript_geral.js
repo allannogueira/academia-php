@@ -46,6 +46,11 @@ function confirmarExclusao(url){
 }
 
 $(document).ready(function(){
+    //retirar require quando for salvar para resgatar todos os campos
+    $("button[type='submit']").click(function(){
+        $("input").attr("disabled",false);
+    });
+    
     $(".foto-perfil").removeClass("form-control");
     $(".form-inline").removeClass("form-horizontal");
     $(".table").dataTable({

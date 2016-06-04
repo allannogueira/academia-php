@@ -40,7 +40,7 @@
     <body>
         <?php
             
-            if($this->zfcUserIdentity()){ 
+            if(is_object($this->zfcUserIdentity())){ 
                 if(!empty($this->zfcUserIdentity()->getIdAluno())){//se for login do aluno
                     $menu = "menuAluno.php";
                     $usuario = "Aluno - ".$this->zfcUserIdentity()->getIdAluno()->getNomeAluno();

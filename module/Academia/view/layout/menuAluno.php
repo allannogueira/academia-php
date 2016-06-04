@@ -27,5 +27,5 @@ $idAluno = $this->zfcUserIdentity()->getIdAluno()->getIdAluno();
 
                 </ul>
         </li>
-    <li><a href="<?php  echo $this->url('login',array('action' => 'logout')) ?>"><?php echo $this->translate('Sair') ?></a></li>
+    <li><a href="<?php echo $this->url('zfcuser/logout') ?>"><?php echo $this->translate('Sair') ?></a></li>
 </ul>

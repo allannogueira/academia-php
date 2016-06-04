@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="login", indexes={@ORM\Index(name="fk_cod_tipo_login_idx", columns={"cod_tipo_login"}),@ORM\Index(name="fk_id_profissional", columns={"id_profissional"}), @ORM\Index(name="fk_id_aluno_idx", columns={"id_aluno"}), @ORM\Index(name="fk_id_profissional_idx", columns={"id_academia"})})
  * @ORM\Entity
  */
-class Login extends \Base\Entity\AbstractEntity
+class Login extends \Base\Entity\AbstractEntity implements  \ZfcRbac\Identity\IdentityInterface
 {
     /**
      * @var int
@@ -276,4 +276,9 @@ class Login extends \Base\Entity\AbstractEntity
     {
         return $this->codTipoLogin;
     }
+
+    public function getRoles() {
+        return 'admin';
+    }
+
 }
