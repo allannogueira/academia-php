@@ -4,6 +4,12 @@
 ?>
 <h1 class="text-center">Gordura Queimada</h1>
 <p class="text-center">Fique sabendo o quanto emagreceu ou engordou todos os meses.</p>
+
+<?php
+  $action = "getPeso";
+   include("filtroAluno.php");
+?>
+
 <div class="panel panel-default">
   <!-- Default panel contents -->
   
@@ -12,6 +18,9 @@
   <table class="table display responsive nowrap">
       <thead>
       <tr>
+          <?php if(empty($this->zfcUserIdentity()->getIdAluno()) == true): ?>
+            <th>Aluno</th>
+          <?php endif; ?>
           <th>Data</th>
           <th>Peso</th>
           <th>Em relação ao mês anterior, você perdeu/ganhou</th>     
@@ -38,6 +47,9 @@
         
 ?>
       <tr> 
+        <?php if(empty($this->zfcUserIdentity()->getIdAluno()) == true): ?>
+          <td><?php echo $data->getIdAluno()->getNomeAluno(); ?></td>  
+        <?php endif; ?>
         <td><?php echo $dataPeso; ?></td> 
         <td><?php echo $peso; ?> Kg</td>     
         <td><?php echo $resultado; ?> Kg</td>     
@@ -55,9 +67,10 @@
    </table>
 </div>
 <?php 
-        
+        if(isset($dados)){
         $json = json_encode($dados);
         $json = str_replace("\"","'",$json);
+      }
       /*  echo "<pre>";
         print_r($dados);
         echo "</pre>";*/

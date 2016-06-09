@@ -26,9 +26,6 @@ class AlunoController extends AbstractController
         $this->listarAction = "alunosAction";//nome da chamada no webservice
     }
     
- 
-
-    
     public function listarAction($where = ""){
         $f = $this->params()->fromPost("pesquisar");
                 
@@ -41,9 +38,11 @@ class AlunoController extends AbstractController
     
      public function getPerfilAction($where = ""){
         $id = $this->params()->fromRoute('id');
-        $where = "where (t.idAluno = '".$id."')";
-        
-        return parent::listarAction($where);        
+        $query = "select t from $this->entity t where t.idAluno = $id";        
+        $list = $this->getEm()->createQuery($query)->getResult();//faz o select no banco de dados
+
+        $view = new ViewModel(['data'=> $list]);//retorna para a pagina as paginas com a lista de paginas
+        return $view;
     }
     
     /*

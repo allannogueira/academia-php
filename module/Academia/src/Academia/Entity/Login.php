@@ -127,15 +127,17 @@ class Login extends \Base\Entity\AbstractEntity implements  \ZfcRbac\Identity\Id
      */
     public function setSenha($senha)
     {
-        $this->senha = md5($senha);
-    
+        if(!empty($senha)){
+            $this->senha = md5($senha);
+        }    
         return $this;
     }
     
     public function setPassword($senha)
     {
-        $this->senha = md5($senha);
-    
+        if(!empty($senha)){
+         $this->senha = md5($senha);
+        }
         return $this;
     }
 

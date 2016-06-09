@@ -9,7 +9,7 @@
                              <a href="#">Treino</a>
                              <ul>
                                 <li><a href="<?php echo $this->url('treinoGeral') ?>"><?php echo $this->translate('Treino Geral') ?></a></li>
-                                 <!--li><a href="<?php echo $this->url('musculo') ?>"><?php echo $this->translate('Musculo') ?></a></li-->
+                                 <li><a href="<?php echo $this->url('musculo') ?>"><?php echo $this->translate('Musculo') ?></a></li>
                                 <li><a href="<?php echo $this->url('exercicio') ?>"><?php echo $this->translate('Exercício') ?></a></li>
                                 <li><a href="<?php echo $this->url('treinoExercicio') ?>"><?php echo $this->translate('Treino x Exercício') ?></a></li>
                                 <li><a href="<?php echo $this->url('treino') ?>"><?php echo $this->translate('Treino x Aluno') ?></a></li>
@@ -41,14 +41,14 @@
                              <a href="#">Treino</a>
                              <ul>
                                     <li><a href="<?php echo $this->url('treinoGeral',array('action' => 'listar')) ?>"><?php echo $this->translate('Treino Geral') ?></a></li>
-                                     <!--li><a href="<?php echo $this->url('musculo',array('action' => 'listar')) ?>"><?php echo $this->translate('Musculo') ?></a></li-->
+                                     <li><a href="<?php echo $this->url('musculo',array('action' => 'listar')) ?>"><?php echo $this->translate('Musculo') ?></a></li>
                                     <li><a href="<?php echo $this->url('exercicio',array('action' => 'listar')) ?>"><?php echo $this->translate('Exercício') ?></a></li>
                                     <li><a href="<?php echo $this->url('treinoExercicio',array('action' => 'listar')) ?>"><?php echo $this->translate('Treino x Exercício') ?></a></li>
                                     <li><a href="<?php echo $this->url('treino',array('action' => 'listar')) ?>"><?php echo $this->translate('Treino x Aluno') ?></a></li>
                              </ul>
                           </li>
                               <li>
-                             <a href="#">Treino</a>
+                             <a href="#">Dieta</a>
                              <ul>        
                                     <li><a href="<?php echo $this->url('dietaGeral',array('action' => 'listar')) ?>"><?php echo $this->translate('Dieta Geral') ?></a></li>
                                     <li><a href="<?php echo $this->url('alimento',array('action' => 'listar')) ?>"><?php echo $this->translate('Alimento') ?></a></li>

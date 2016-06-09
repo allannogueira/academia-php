@@ -1,17 +1,8 @@
 <h1 class="text-center">Consultar Medidas</h1>
-<?php
-    if(empty($this->zfcUserIdentity()->getIdAluno()->getIdAluno()) == true){
-        $form = $this->form;
-        $form->setAttribute('action',$this->url($this->route,['action'=>'listar']));
-        $form->prepare();//prepara o formulario
 
-        echo "<nav class='navbar navbar-default'>"
-        . "<div class=\"margin20\">";
-        echo $this->form()->openTag($form);//abre a tag form com o action
-        echo $this->formCollection($form);//monta o corpo do formulario
-        echo $this->form()->closeTag();//fecha formulario
-        echo "</div></nav>";
-    }
+<?php
+  $action = "listar";
+   include("filtroAluno.php");
 ?>
 
 <div class="panel panel-default">

@@ -1,18 +1,21 @@
 <div class="backgroundTreino">
     
-<?php foreach ($this->data as $aluno): 
+<?php 
+
+foreach ($this->data as $aluno): 
     if($aluno->getArquivo() != null){
          $foto = stream_get_contents($aluno->getArquivo());
     }else{
-        $foto = "";
+        $foto = "/img/sem-foto.png";
     }
+
 ?>
 
 <div class="row">
     <div class="col-sm-4">
         <div class="box">
             <div class="foto text-center">
-                <img src="<?php echo $foto; ?>" width="150" height="150" style="border-radius: 50%">;
+                <img src="<?php echo $foto; ?>" width="150" height="150" style="border-radius: 50%">
             </div>
             <ul class="list-group  text-center">
                 <li class="list-group-item"><?php echo $aluno->getNomeAluno(); ?></li>
@@ -34,6 +37,12 @@
             <i class="glyphicon glyphicon-cutlery"></i>
             <h2>Dietas</h2>
         </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="box2 text-center" onclick="javascript:window.open('http://www.4shared.com/mobile/n7PRwdZrba/workout.html')">
+            <img width="100" src="/img/qr_code.jpg">
+            <h2>Baixe nosso aplicativo</h2>
+        </div>      
     </div>
 </div>       
 

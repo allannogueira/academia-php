@@ -3,6 +3,13 @@
    
 ?>
 <h1 class="text-center">Média de Crescimento Muscular</h1>
+
+<?php
+   $action = "getMediaCrescimento";
+   include("filtroAluno.php");
+?>
+
+
 <div class="panel panel-default">
   <!-- Default panel contents -->
   
@@ -11,6 +18,9 @@
   <table class="table display responsive nowrap">
       <thead>
       <tr>
+        <?php if(empty($this->zfcUserIdentity()->getIdAluno()) == true): ?>
+            <th>Aluno</th>
+        <?php endif; ?>
           <th>Data</th>
           <th>Peso Cresceu/Perdeu</th>
           <th>Peso (média)</th>
@@ -330,6 +340,9 @@
   
 ?>
       <tr> 
+        <?php if(empty($this->zfcUserIdentity()->getIdAluno()) == true): ?>
+          <td><?php echo $data->getIdAluno()->getNomeAluno(); ?></td>  
+        <?php endif; ?>
         <td><?php echo $periodo; ?></td>        
         
         <td><?php echo $resultadoPeso; ?> cm</td>        

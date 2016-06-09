@@ -119,7 +119,7 @@ return array(
             'objetivo' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/objetivo[/:action][/:id]',
+                     'route'    => '/objetivo[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -133,7 +133,7 @@ return array(
 		 'profissional' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/profissional[/:action][/:id]',
+                     'route'    => '/profissional[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -147,7 +147,7 @@ return array(
               'academia' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/academia[/:action][/:id]',
+                     'route'    => '/academia[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -161,7 +161,7 @@ return array(
              'musculo' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/musculo[/:action][/:id]',
+                     'route'    => '/musculo[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -175,7 +175,7 @@ return array(
              'exercicio' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/exercicio[/:action][/:id]',
+                     'route'    => '/exercicio[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -189,7 +189,7 @@ return array(
              'treino' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/treino[/:action][/:id]',
+                     'route'    => '/treino[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -203,7 +203,7 @@ return array(
              'treinoGeral' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/treinoGeral[/:action][/:id]',
+                     'route'    => '/treinoGeral[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -217,7 +217,7 @@ return array(
              'treinoExercicio' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/treinoExercicio[/:action][/:id]',
+                     'route'    => '/treinoExercicio[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -231,7 +231,7 @@ return array(
              'dietaGeral' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/dietaGeral[/:action][/:id]',
+                     'route'    => '/dietaGeral[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -245,7 +245,7 @@ return array(
              'dietaAlimento' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/dietaAlimento[/:action][/:id]',
+                     'route'    => '/dietaAlimento[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -259,7 +259,7 @@ return array(
              'dietaAluno' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/dietaAluno[/:action][/:id]',
+                     'route'    => '/dietaAluno[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -273,7 +273,7 @@ return array(
              'medida' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/medida[/:action][/:id]',
+                     'route'    => '/medida[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -287,7 +287,7 @@ return array(
              'alimento' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/alimento[/:action][/:id]',
+                     'route'    => '/alimento[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -302,7 +302,7 @@ return array(
              'frequencia' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/frequencia[/:action][/:id]',
+                     'route'    => '/frequencia[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -316,7 +316,7 @@ return array(
              'informativo' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/informativo[/:action][/:id]',
+                     'route'    => '/informativo[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -358,7 +358,7 @@ return array(
              'aparelho' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/aparelho[/:action][/:id]',
+                     'route'    => '/aparelho[/:action][/:id][/page/:page]',
                      'constraints' => array(
                          'nomePag'=> '[a-zA-Z][a-zA-Z0-9_-]*','action'=> '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',

@@ -45,9 +45,11 @@ div.container a.brand {
 {
     display:inline-block;
     padding:5px 10px;
-    border:1px solid #cccccc;
+    border:1px solid #000;
     border-radius: 3px;
     margin-right:5px;
+    color: #FFF;
+    background: #000;
 }
 
 .paging a:hover
@@ -55,6 +57,7 @@ div.container a.brand {
     background-color:#428bca;
     color:#ffffff;
     text-decoration: none;
+    border-color: #000;
 }
 
 .paging

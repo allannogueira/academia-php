@@ -26,13 +26,24 @@ class MedidaController extends AbstractController
         $this->listarAction = "medidasAction";//nome da chamada no webservice
     }
     
+    private function getIdAluno(){
+        if(method_exists($this->zfcUserAuthentication()->getIdentity()->getIdAluno(),"getIdAluno")){
+            $idAluno = $this->zfcUserAuthentication()->getIdentity()->getIdAluno()->getIdAluno();
+        }else{
+          $idAluno = $this->params()->fromPost("idAluno")["idAluno"];
+        }
+        return $idAluno;
+    }
+
     public function listarAction($where = ""){
-        $idAluno = $this->params()->fromPost("idAluno")["idAluno"];
-        
+        $idAluno = $this->getIdAluno();
+
         $forms = $this->getServiceLocator()->get('FormElementManager');
         $form = $forms->get("FiltroAlunoForm", array());
             
-        $where = "where (t.idAluno = '".$idAluno."' or '".$idAluno."' = '')";
+        if($where == ""){
+            $where = "where (t.idAluno = '".$idAluno."' or '".$idAluno."' = '')";
+        }
         $query = "select t from $this->entity t $where";
         
         $list = $this->getEm()->createQuery($query)->getResult();//faz o select no banco de dados
@@ -46,25 +57,15 @@ class MedidaController extends AbstractController
    }
     
    public function getMediaCrescimentoAction(){
-        $qb = $this->getEm()->createQueryBuilder();
-        $qb->select('m')
-             ->from('Academia\Entity\Medida', 'm');
-           //  ->join('Academia\Entity\Endereco', 'e','e.id = a.endereco_id');
-            // ->where('a.idAluno = 1');
-        $data = $qb->getQuery()->getResult();
-        $view = new ViewModel(["data"=> $data]);
-        return $view;
+        $idAluno = $this->getIdAluno();
+        $where = "where (t.idAluno = '".$idAluno."') order by t.dataIniVig asc";
+        return $this->listarAction($where);
    }
    
    public function getPesoAction(){
-        $qb = $this->getEm()->createQueryBuilder();
-        $qb->select('m')
-             ->from('Academia\Entity\Medida', 'm');
-           //  ->join('Academia\Entity\Endereco', 'e','e.id = a.endereco_id');
-            // ->where('a.idAluno = 1');
-        $data = $qb->getQuery()->getResult();
-        $view = new ViewModel(["data"=> $data]);
-        return $view;
+        $idAluno = $this->getIdAluno();
+        $where = "where (t.idAluno = '".$idAluno."') order by t.dataIniVig asc";
+        return $this->listarAction($where);
    }
    
    public function excluirAction(){

@@ -99,23 +99,23 @@ abstract class AbstractController extends AbstractActionController
             if($form->isValid()){
                 //se existir algum upload de arquivo, deixe com o nome de "arquivo" para padronizar
                if(isset($postData['fotoWebcan'])){
-                    if($postData['fotoWebcan'] != ""){
-                        $postData['arquivo'] = $postData['fotoWebcan'];
-                    }else{
-                         $postData['arquivo'] = "";
-                    }
-                }else if(isset($postData['arquivo'])){
-                    $data = $form->getData();
-                    $path = $data->getArquivo()['tmp_name'];
-                    $type = pathinfo($path, PATHINFO_EXTENSION);
-                    if(!empty($path)){
-                        $postData['arquivo'] = file_get_contents($path);
-                        $postData['arquivo'] =  'data:image/' . $type . ';base64, ' . base64_encode($postData['arquivo']);
-
-                    }
-                }else{
-                    $postData['arquivo'] = "";
-                }
+                        if($postData['fotoWebcan'] != ""){
+                            $postData['arquivo'] = $postData['fotoWebcan'];
+                        }else{
+                                  if(isset($postData['arquivo'])){
+                                        $data = $form->getData();
+                                        $path = $data->getArquivo()['tmp_name'];
+                                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                                        if(!empty($path)){
+                                            $postData['arquivo'] = file_get_contents($path);
+                                            $postData['arquivo'] =  'data:image/' . $type . ';base64, ' . base64_encode($postData['arquivo']);
+                                      
+                                }else{
+                                    $postData['arquivo'] = "";
+                                }
+                            
+                        }
+                    }}
                 $service = $this->getServiceLocator()->get($this->service);
                 
                 if($service->save($postData)){
@@ -192,20 +192,21 @@ abstract class AbstractController extends AbstractActionController
                         if($postData['fotoWebcan'] != ""){
                             $postData['arquivo'] = $postData['fotoWebcan'];
                         }else{
-                             $postData['arquivo'] = "";
+                                  if(isset($postData['arquivo'])){
+                                        $data = $form->getData();
+                                        $path = $data->getArquivo()['tmp_name'];
+                                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                                        if(!empty($path)){
+                                            $postData['arquivo'] = file_get_contents($path);
+                                            $postData['arquivo'] =  'data:image/' . $type . ';base64, ' . base64_encode($postData['arquivo']);
+                                      
+                                }else{
+                                    $postData['arquivo'] = "";
+                                }
+                            
                         }
-                    }else if(isset($postData['arquivo'])){
-                        $data = $form->getData();
-                        $path = $data->getArquivo()['tmp_name'];
-                        $type = pathinfo($path, PATHINFO_EXTENSION);
-                        if(!empty($path)){
-                            $postData['arquivo'] = file_get_contents($path);
-                            $postData['arquivo'] =  'data:image/' . $type . ';base64, ' . base64_encode($postData['arquivo']);
-                      
-                        }
-                    }else{
-                        $postData['arquivo'] = "";
-                    }
+                    }}
+                    
 
                     if($service->save($postData)){
                         $this->flashMessenger()->addSuccessMessage("Atualizado com Sucesso!");

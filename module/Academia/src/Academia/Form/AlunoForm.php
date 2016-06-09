@@ -52,7 +52,8 @@ class AlunoForm extends Form implements ObjectManagerAwareInterface
                 'width' => '100',
                 'border'=> '0',
                 'alt'   => '',
-                'class' => 'foto-perfil'
+                'class' => 'foto-perfil',
+                
             ),
         ));
 
@@ -65,16 +66,16 @@ class AlunoForm extends Form implements ObjectManagerAwareInterface
             'attributes' => [
                 "data-toggle" => "modal",
                 "data-target" => "#myModal",
-                "class" => "btn btn-primary"
-                
+                "class" => "btn btn-primary",
+                'style' => 'margin-top: 23px'
             ]
        ]);
-        
+        /*
         $arquivo = new File('arquivo');
         $arquivo->setLabel('Escolher Foto');
         $arquivo->setAttributes(["class" => "form-control"]);
         $this->add($arquivo);
-        
+        */
         
         
          

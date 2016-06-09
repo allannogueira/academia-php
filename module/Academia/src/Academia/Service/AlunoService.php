@@ -20,6 +20,7 @@ class AlunoService extends AbstractService{
     }
     
     public function save(Array $data = array()){
+       
         $objetoAluno = parent::preSave($data);
         
         $objetoAluno->getIdLogin()->setIdAluno($objetoAluno);

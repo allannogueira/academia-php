@@ -46,11 +46,23 @@ class MassaMuscularController extends AbstractController
     }
     
     public function listarAction($where = ""){
-        $query = "select t from $this->entity t";
-        $form = "";
+
+         if(method_exists($this->zfcUserAuthentication()->getIdentity()->getIdAluno(),"getIdAluno")){
+            $idAluno = $this->zfcUserAuthentication()->getIdentity()->getIdAluno()->getIdAluno();
+          
+        }else{
+            $idAluno = $this->params()->fromPost("idAluno")["idAluno"];
+        }
+        $where = "where (t.idAluno = '".$idAluno."' or '".$idAluno."' = '')";
+        $query = "select t from $this->entity t $where";
         $list = $this->getEm()->createQuery($query)->getResult();//faz o select no banco de dados
         $page = $this->params()->fromRoute('page');
         
+       
+
+        $forms = $this->getServiceLocator()->get('FormElementManager');
+        $form = $forms->get("FiltroAlunoForm", array());
+
         $paginator = new Paginator(new ArrayAdapter($list));//paginacao trazendo todos nosso resultado
         $paginator->setCurrentPageNumber($page)//seta a pagina atual que será paginada
                 ->setDefaultItemCountPerPage(10); //quantidade de paginas que será feito a busca

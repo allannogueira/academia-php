@@ -39,7 +39,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
         
        $this->add([
            'name' => 'altura',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Altura (cm)',
            ]
@@ -47,7 +47,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
        
         $this->add([
            'name' => 'peso',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Peso (kg)',
            ]
@@ -55,7 +55,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
         
          $this->add([
            'name' => 'bracoD',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Braço Direito (cm)',
            ]
@@ -63,7 +63,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
          
           $this->add([
            'name' => 'bracoE',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Braço Esquerdo (cm)',
            ]
@@ -71,7 +71,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
           
            $this->add([
            'name' => 'antiBracoD',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Anti-Braço Direito (cm)',
            ]
@@ -79,7 +79,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
            
         $this->add([
            'name' => 'antiBracoE',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Anti-Braço Esquerdo (cm)',
            ]
@@ -87,7 +87,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
        
          $this->add([
            'name' => 'coxaD',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Coxa Direita (cm)',
            ]
@@ -95,7 +95,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
          
           $this->add([
            'name' => 'coxaE',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Coxa Esquerda (cm)',
            ]
@@ -103,7 +103,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
           
            $this->add([
            'name' => 'panturrilhaD',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Panturrilha Direita (cm)',
            ]
@@ -111,7 +111,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
            
             $this->add([
            'name' => 'panturrilhaE',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Panturrilha Esquerda (cm)',
            ]
@@ -119,7 +119,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
             
              $this->add([
            'name' => 'peitoralMaior',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Peitoral Maior (cm)',
            ]
@@ -127,7 +127,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
              
         $this->add([
            'name' => 'peitoralMenor',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Peitoral Menor (cm)',
            ]
@@ -135,7 +135,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
         
          $this->add([
            'name' => 'imc',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'IMC'
            ]
@@ -143,7 +143,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
          
           $this->add([
            'name' => 'massGordura',
-           'type' => 'number',
+           'type' => 'text',
            'options' => [
                'label' => 'Massa Gordura (kg)',
            ]
@@ -160,7 +160,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
  
         $this->add([
             'name' => 'pressao',
-            'type' => 'number',
+            'type' => 'text',
             'options' => [
                 'label' => 'Pressão (PUL/min)',
             ]
@@ -168,7 +168,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
     
         $this->add([
             'name' => 'batCardiaco',
-            'type' => 'number',
+            'type' => 'text',
             'options' => [
                 'label' => 'Batimento Cardiaco (bpm)',
             ]
@@ -176,7 +176,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
 
         $this->add([
             'name' => 'abdomen',
-            'type' => 'number',
+            'type' => 'text',
             'options' => [
                 'label' => 'Abdomen (cm)',
             ]
@@ -184,7 +184,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
         
            $this->add([
         'name' => 'costas',
-        'type' => 'number',
+        'type' => 'text',
         'options' => [
             'label' => 'Costas (cm)',
         ]
@@ -192,7 +192,7 @@ class MedidaForm extends Form implements ObjectManagerAwareInterface
     
     $this->add([
         'name' => 'quadril',
-        'type' => 'number',
+        'type' => 'text',
         'options' => [
             'label' => 'Quadril (cm)',
         ]
